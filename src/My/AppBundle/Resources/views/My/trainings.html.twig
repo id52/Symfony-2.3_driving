@@ -1,0 +1,96 @@
+{% extends "AppBundle::layout_new.html.twig" %}
+
+{% block start_content %}
+
+{% include 'AppBundle::_pop_up.html.twig' %}
+
+<div class="modal helper" id="helper">
+    <div class="title">{{ 'help_title'|trans }}</div>
+
+    {{ help_btn|raw }}
+
+    <div class="bottom links"><span class="link bg-green check-link btn-close">Спасибо, все понятно</span></div>
+    <span class="close"></span>
+</div>
+{% endblock start_content %}
+
+{% block content %}
+<nav class="path">
+    <a href="{{ path('homepage') }}">{{ 'titles.homepage'|trans }}</a>
+    » <strong>{{ 'titles.trainings'|trans }}</strong>
+</nav>
+
+<div class="mainContent">
+    {% include 'AppBundle::_paid2_counter.html.twig' %}
+    {% include 'AppBundle::_owe_stage_paid.html.twig' %}
+
+    <div class="title">
+        <a class="rlink help-link simplebox" href="#helper">Помощник</a>
+        <h1>{{ 'titles.trainings'|trans }}</h1>
+    </div>
+
+    <section class="themes2">
+        {% for subject in subjects %}
+            {% set object = subject.object %}
+            {% set proc = 100 * subject.read_themes_cnt / subject.themes_cnt %}
+            <figure{{ subject.is_passed ? ' class="done"' : '' }}>
+                <div class="l">
+                    <div class="pic" style="background-image:url('{{ (object.image ? object.image.webPath : '/uploads/images/default.jpg')|imagine_filter('image_thumb_new') }}')">
+                        <div class="cover" style="height:{{ proc }}%">
+                            <div class="text{{ proc < 15 ? ' out' : '' }}">
+                                {% if subject.is_passed %}
+                                    Экзамен<br>сдан
+                                {% else %}
+                                    <div class="cell">{{ subject.read_themes_cnt }} <strong>/ {{ subject.themes_cnt }}</strong></div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    {{ object.briefDescription }}
+                </div>
+                <div class="cell">
+                    <h3><a href="{{ path('my_training', { id: object.id }) }}">{{ object.title }}</a></h3>
+                    {{ object.description|raw }}
+                </div>
+
+                {% if is_granted('ROLE_TESTER_TRAINING') %}
+                    <div class="checked-subject">
+                    {% if subject.is_passed %}
+                        <a href="{{ path('my_trainings_subject_reset', { id: object.id }) }}">{{ 'reset'|trans }}</a>
+                    {% else %}
+                        <a href="{{ path('my_trainings_subject_pass',{ id: object.id }) }}">{{ 'admin_pass'|trans }}</a>
+                    {% endif %}
+                    </div>
+                {% endif %}
+
+            </figure>
+        {% endfor %}
+    </section>
+
+    {% if is_passed %}
+        <a class="arr-link exam-link {{ is_passed_full ? 'done' : 'active' }}" href="{{ path('my_training_final_exam') }}">
+            {% if is_passed_full %}
+                <strong><span>Итоговый экзамен сдан</span></strong>
+            {% else %}
+                <strong><span>Итоговый экзамен</span></strong>
+                {{ training_final_exam_description|raw }}
+            {% endif %}
+        </a>
+        {% if not is_passed_full and is_granted('ROLE_TESTER_TRAINING') %}
+            <br><br><a href="{{ path('my_training_final_exam_pass') }}">{{ 'admin_pass'|trans }}</a>
+        {% endif %}
+    {% else %}
+        <div class="arr-link exam-link">
+            <strong><span>Итоговый экзамен</span></strong>
+                {% if training_final_exam_description is not empty  %}
+                    <span class="ind">{{ training_final_exam_description|raw }}</span>
+                {% else %}
+                    <span class="ind">Этот экзамен позволит Вам ещё раз проверить знания, а нам понять,</span>
+                    <span class="ind">что Вы полностью усвоили весь учебный материал. </span>
+                    <span class="ind">Вы можете приступить к Итоговому Экзамену.</span>
+                    <span class="ind">только после того, как сдадите экзамены по всем {{ subjects|length }} дисциплинам.</span>
+                {% endif %}
+        </div>
+    {% endif %}
+</div>
+{% endblock content %}

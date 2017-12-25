@@ -1,0 +1,548 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=1300" />
+    <title>{% block title %}{{ 'project.name'|trans }} — {{ 'project.slogan'|trans }}{% endblock %}</title>
+    <meta name="keywords" content="{% block meta_keywords '' %}" />
+    <meta name="description" content="{% block meta_description '' %}" />
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800,400italic,300italic,300&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
+    <link href="/v2/css/style.css" rel="stylesheet" type="text/css">
+    <link href="/v2/css/jquery-ui.css" rel="stylesheet" type="text/css">
+    <link href="https://cdn.jsdelivr.net/jquery.webui-popover/1.2.1/jquery.webui-popover.min.css" rel="stylesheet" type="text/css">
+    <link href="/v2/css/style-fix.css" rel="stylesheet" type="text/css">
+    {% if activeAutoCreatePromo is defined %}
+    <link href="/v2/css/style_ny_2016.css" rel="stylesheet" type="text/css">
+    {% endif %}
+    <!--[if lte IE 8]>
+    <link href="/v2/css/ie8.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="/v2/js/PIE.js"></script>
+    <script type="text/javascript" src="/v2/js/html5support.js"></script>
+    <![endif]-->
+    <script type="text/javascript" src="/v2/js/jquery.js"></script>
+    <script type="text/javascript" src="/v2/js/jquery-ui.js"></script>
+    <script src="https://cdn.jsdelivr.net/jquery.webui-popover/1.2.1/jquery.webui-popover.min.js"></script>
+    <script type="text/javascript" src="/v2/js/jquery.main.js"></script>
+</head>
+<body>
+
+{% include 'AppBundle::_server_label.html.twig' %}
+
+{% block start_content '' %}
+
+<div class="modal border-red reg-done" id="js_alert">
+    <div class="content"></div>
+    <div class="links"><span class="link bg-green btn-close">Закрыть</span></div>
+</div>
+
+{% if api_med_con_notify is defined %}
+<div class="modal border-red reg-done" id="api_med_con_notify">
+    <div class="content">{{ api_med_con_notify_message|raw }}</div>
+    <div class="links"><span class="link bg-green btn-close">Закрыть</span></div>
+</div>
+{% endif %}
+
+{% if not app.user %}
+<div class="modal border-green reg-done" id="modal01">
+    <div class="title">Новый пользователь создан</div>
+    На Ваш электронный адрес<br>
+    <strong></strong><br>
+    отправлено письмо. Перейдите по ссылке из письма, для подтверждения регистрации
+    <div class="links"><span class="link bg-green btn-close">Закрыть</span></div>
+</div>
+
+<div class="modal border-green reg-done" id="after_password_recovery_notify">
+    <div class="title"></div>
+    <div class="message"></div>
+    <div class="links"><span class="link bg-green btn-close">Закрыть</span></div>
+</div>
+
+{% include 'AppBundle::_form_auth.html.twig' %}
+{% endif %}
+
+{% if paid_notify is defined %}
+<div id="paid_notify_modal" class="modal border-red">
+    <div class="notice">
+        <div class="title">{{ paid_notify_title }}</div>
+        {{ paid_notify_body|raw }}
+        <div class="links">
+            <a href="{{ path('my_payments') }}" class="bg-green">{{ 'paid_notify.pay'|trans }}</a>
+        </div>
+    </div>
+    <span class="close"></span>
+</div>
+{% endif %}
+
+{% if discount_2_notify is defined %}
+<div id="discount_2_modal" class="modal border-green">
+    <div class="notice">
+        {{ discount_2_notify_message|raw }}
+    </div>
+    <div class="bottom links"><span class="link bg-green check-link btn-close">Спасибо, все понятно</span></div>
+</div>
+{% endif %}
+
+{% if primary_boosting is defined %}
+<div id="primary_boosting" class="modal border-red">
+    <div class="notice">
+        <div class="title">{{ primary_boosting_title }}</div>
+        {{ primary_boosting_body|raw }}
+    </div>
+    <div class="bottom links"><span class="link bg-green check-link btn-close">Спасибо, все понятно</span></div>
+</div>
+{% endif %}
+
+{% if user_not_paid_primary_boosting is defined %}
+    <div id="user_not_paid_primary_boosting" class="modal border-red">
+        <div class="notice">
+            <div class="title">{{ user_not_paid_primary_boosting_title }}</div>
+            {{ user_not_paid_primary_boosting_body|raw }}
+        </div>
+        <div class="bottom links"><span class="link bg-green check-link btn-close">Спасибо, все понятно</span></div>
+    </div>
+{% endif %}
+
+<div class="wrapper">
+    <div class="container">
+        <header class="header">
+            <div class="logo">
+                <a href="{{ path('homepage') }}"><img src="/v2/img/logo.png" width="824" height="230" alt="Автошкола онлайн"></a>
+                <span>Личный кабинет<br>ученика</span>
+            </div>
+
+            <a class="to-site" href="http://auto-online.ru/">На сайт автошколы</a>
+
+            <div class="r">
+                <div class="admin-link">
+                    {% if is_granted('ROLE_MOD') %}
+                        <a href="{{ path('admin') }}">в админку</a>
+                    {% endif %}
+                </div>
+
+                <div class="phone">
+                    <div class="bg">
+                        <a href="tel:+7495{{ contact_phone|replace({ '-': '' }) }}">
+                            <span>495</span>
+                            <strong>{{ contact_phone }}</strong>
+                        </a>
+                        <div>Многоканальный телефон</div>
+                    </div>
+                </div>
+
+                <div class="user-top">
+                {% if app.user %}
+                    <a class="name" href="{{ path('homepage') }}">{{ app.user.lastName~' '~app.user.firstName|slice(0,1)~'.' }}</a>
+                    <a class="exit" href="{{ path('fos_user_security_logout') }}">Выйти</a>
+                {% else %}
+                    <a class="auth-link">Личный кабинет</a>
+                {% endif %}
+                </div>
+            </div>
+
+            {% if menu_items %}
+                <nav class="bmenu">
+                    {% for menu_item in menu_items %}
+                        {% if (menu_item.topMenu and (app.user or not menu_item.private)) %}
+                    {# верхнее меню, скрытие ссылки для виртуальных филиалов #}
+                    {% if not (menu_item.url == 'dogovor-oferta' and app.user and app.user.region.filialNotExisting) %}
+                            <a href="{{ path('article_show', { id: menu_item.url }) }}">{{ menu_item.title }}</a>
+                    {% endif %}
+                        {% endif %}
+                    {% endfor %}
+                </nav>
+            {% endif %}
+        </header>
+
+        {% if activeAutoCreatePromo is not defined or not activeAutoCreatePromo %}
+        <div class="content">
+            {% block content '' %}
+
+            {% if app.user and app.request.get('_route') != 'fos_user_resetting_reset' %}
+                <div class="aside">
+                    {% if is_granted('ROLE_USER_PAID') %}
+                        {% include 'AppBundle::menu_new.html.twig' only %}
+                    {% endif %}
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="footer-place"></div>
+        {% endif %}
+    </div>
+    {% if activeAutoCreatePromo is defined and activeAutoCreatePromo %}
+        {% block content_autoCreatePromo '' %}
+    {% endif %}
+</div>
+
+<footer class="footer">
+    <div class="container">
+        {% if menu_items %}
+            <nav class="bmenu">
+                {% for menu_item in menu_items %}
+                    {% if (menu_item.bottomMenu and (app.user or not menu_item.private)) %}
+                        {# нижнее меню, скрытие ссылки для виртуальных филиалов #}
+                        {% if not (menu_item.url == 'dogovor-oferta' and app.user and app.user.region.filialNotExisting) %}
+                            <a href="{{ path('article_show', { id: menu_item.url }) }}">{{ menu_item.title }}</a>
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
+            </nav>
+        {% endif %}
+
+        <div class="logo">
+            <img src="/v2/img/logo.png" width="824" height="230" alt="Автошкола онлайн">
+            <span>Личный кабинет<br>ученика</span>
+        </div>
+
+        <div class="phone">
+            <div class="bg">
+                <a href="tel:+7495{{ contact_phone|replace({ '-': '' }) }}">
+                    <span>495</span>
+                    <strong>{{ contact_phone }}</strong>
+                </a>
+                <div><a href="mailto:{{ contact_email }}">auto-online.ru</a></div>
+            </div>
+        </div>
+
+        <div class="socials">
+            <a class="in" href="https://www.instagram.com/avtoschool_online/" target="_blank">Instagram</a>
+        </div>
+
+        <div class="copy">
+            © {{ 'now'|date('Y') }} Автошкола Онлайн
+            <div class="small">Все права защищены.</div>
+        </div>
+    </div>
+</footer>
+
+{% block end_content '' %}
+
+<script>
+function js_alert(content, success) {
+    var block = $('#js_alert');
+    $('.content', block).html(content);
+    if (success) {
+        block.removeClass('border-red').addClass('border-green');
+    }
+    $.simplebox('#js_alert');
+}
+</script>
+
+{% block js '' %}
+
+<script src="/v2/js/jquery.countdown.js"></script>
+<script src="/v2/js/jquery.countdown-ru.js"></script>
+<script src="/v2/js/inputmask.js"></script>
+<script src="/v2/js/jquery.inputmask.js"></script>
+<script>
+$(function () {
+    {% if not app.user %}
+        var auth01 = $('#auth01');
+
+        var phone = $('#js_reg_phone_mobile', auth01);
+        var send_phone_code = phone.closest('.input').find('.send-phone-code');
+        var phone_confirm = phone.closest('.input').find('.phone-confirm');
+        var send_again = phone.closest('.input').find('.send-again');
+        var change_phone = phone.closest('.input').find('.change-phone');
+        var check_phone_code = phone.closest('.input').find('.check-phone-code');
+        var phone_code = $('#deal_1_code', auth01);
+
+        phone.removeAttr('disabled');
+        phone_confirm.hide();
+
+        phone.inputmask('(999) 999-99-99', { clearMaskOnLostFocus: false });
+        phone.on('keypress', function() {
+            if (/^\(\d{3}\) \d{3}-\d{2}-\d{2}$/.test($(this).val())) {
+                send_phone_code.show();
+            } else {
+                send_phone_code.hide();
+            }
+        }).on('keydown', function(e) {
+            if (e.keyCode == 46 || e.keyCode == 8) {
+                phone.trigger('keypress');
+            }
+        }).trigger($.Event('keypress', { keyCode: 16 }));
+
+        var resend_timer;
+
+        send_phone_code.on('click', function() {
+            send_phone_code.attr('disabled', 'disabled');
+            $.post('{{ path('my_user_registration_check_phone_ajax') }}', { phone: phone.val() }, function(data) {
+                send_phone_code.removeAttr('disabled');
+                send_phone_code.hide();
+                phone_confirm.show();
+                phone_code.focus();
+                phone.attr('disabled', 'disabled');
+                send_again.hide();
+                clearTimeout(resend_timer);
+                resend_timer = setTimeout(function() {
+                    send_again.show();
+                }, data.seconds_left * 1000);
+            });
+        });
+
+        send_again.on('click', function(e) {
+            e.preventDefault();
+            $.post('{{ path('my_user_registration_check_phone_ajax') }}', { phone: phone.val() }, function(data) {
+                send_again.hide();
+                clearTimeout(resend_timer);
+                resend_timer = setTimeout(function() {
+                    send_again.show();
+                }, data.seconds_left * 1000);
+            });
+        });
+
+        change_phone.on('click', function(e) {
+            e.preventDefault();
+            phone_confirm.hide();
+            send_phone_code.show();
+            phone.removeAttr('disabled');
+            phone.focus();
+        });
+
+        check_phone_code.on('click', function() {
+            var code = phone_code.val();
+            var label = phone_code.closest('.form-control').find('label');
+            phone_code.removeClass('error');
+            label.hide();
+            if (code == '') {
+                phone_code.addClass('error');
+                label.show().html('Введите код!');
+            } else {
+                check_phone_code.attr('disabled', 'disabled');
+                $.post('{{ path('my_user_registration_check_phone_code_ajax') }}', { code: code }, function(data) {
+                    check_phone_code.removeAttr('disabled');
+                    if (data.success) {
+                        phone.addClass('valid');
+                        phone_confirm.hide();
+                    } else {
+                        phone_code.addClass('error');
+                        label.show().html('Неверный код!');
+                    }
+                });
+            }
+        });
+
+        {% if _server_type == 'prod' %}
+        auth01.find('a.tab[href=#tab2]').click(function() {
+            yaCounter1894867.reachGoal('REG_START');
+            ga('send', 'event', 'Online', 'REG_START', '', 0);
+        });
+        {% endif %}
+
+        $('.auth-link').click(function(e) {
+            e.preventDefault();
+            auth01.find('a.tab[href=#tab1]').click();
+            $.simplebox('#auth01');
+        });
+
+        var error = function(el, error) {
+            var input = el.closest('.input');
+            $('.err-text span', input).html(error);
+            $('input', input).addClass('error');
+            input.addClass('error');
+            $('.err-text', input).show();
+        };
+
+        $('form[action="{{ path('fos_user_security_check') }}"]', auth01).submit(function(e) {
+            e.preventDefault();
+
+            $('.input').removeClass('error');
+            $('.input input').removeClass('error');
+            $('.err-text').hide();
+
+            var username = $('#js_login_username');
+            var password = $('#js_login_password');
+
+            if (!username.val() || !password.val()) {
+                if (!username.val()) {
+                    error(username, 'Нужно указать e-mail');
+                }
+                if (!password.val()) {
+                    error(password, 'Нужно указать пароль');
+                }
+            } else {
+                $.post($(this).attr('action'), $(this).serialize(), function(data) {
+                    if (data.error) {
+//                        error(username, '');
+                        error(password, data.error);
+                    } else {
+                        location.assign('{{ path('homepage') }}');
+                    }
+                });
+            }
+        });
+
+        var discount_data = eval({{ discount_data|json_encode|raw }});
+
+        var reg_region = $('#reg-region');
+        var reg_category = $('#reg-category');
+
+        for (var region_id in discount_data) {
+            if (discount_data.hasOwnProperty(region_id)) {
+                var region = discount_data[region_id];
+                reg_region.append('<option value="' + region_id + '">' + region.name + '</option>');
+            }
+        }
+        reg_region.trigger('refresh');
+
+        var change_reg_region = function() {
+            reg_category.html('');
+            var region_id = reg_region.val();
+            var region = discount_data[region_id];
+            if (region) {
+                for (var category_id in region.categories) {
+                    if (region.categories.hasOwnProperty(category_id)) {
+                        var category = region.categories[category_id];
+                        reg_category.append('<option value="' + category_id + '" data-img="' + category.image + '">' + category.name + '</option>');
+                    }
+                }
+            }
+            reg_category.trigger('refresh');
+        };
+        reg_region.change(change_reg_region);
+        change_reg_region();
+
+        $('form[action="{{ path('fos_user_resetting_send_email') }}"]', auth01).submit(function(e) {
+            e.preventDefault();
+
+            $('.input').removeClass('error');
+            $('.input input').removeClass('error');
+            $('.err-text').hide();
+
+            $.post($(this).attr('action'), $(this).serialize(), function(data) {
+                if (data.errors) {
+                    for(var i in data.errors) {
+                        if (data.errors.hasOwnProperty(i)) {
+                            error($('#js_reset_' + i), data.errors[i]);
+                        }
+                    }
+                } else if (data.success) {
+                    var apr_notify = $('#after_password_recovery_notify');
+                    $('.title', apr_notify).html(data.title);
+                    $('.message', apr_notify).html(data.message);
+                    $.simplebox('#after_password_recovery_notify');
+                }
+            });
+        });
+
+        $('form[action="{{ path('fos_user_registration_register') }}"]', auth01).submit(function(e) {
+            e.preventDefault();
+
+            $('.input').removeClass('error');
+            $('.input input').removeClass('error');
+            $('.err-text').hide();
+
+            $.post($(this).attr('action'), $(this).serialize(), function(data) {
+                if (data.errors) {
+                    for(var i in data.errors) {
+                        if (data.errors.hasOwnProperty(i)) {
+                            error($('#js_reg_' + i), data.errors[i]);
+                        }
+                    }
+                    $('#js_reg_captcha').closest('.row').find('img').attr('src', '{{ path('innocead_captcha', {'random': '1' }) }}'+Math.round(Math.random(0)*10000000000));
+                } else {
+                    var email = $('#js_reg_email').val();
+                    $('#modal01').find('strong').html(email);
+                    $.simplebox('#modal01');
+                    {% if _server_type == 'prod' %}
+                    yaCounter1894867.reachGoal('REG_SUCCESS');
+                    ga('send', 'event', 'Online', 'Registration', '', 0);
+                    {% endif %}
+                }
+            });
+        });
+
+        $('.input input').on('keypress', function() {
+            var row = $(this).closest('.row');
+            $(this).removeClass('error');
+            $('.input', row).removeClass('error');
+            $('.err-text', row).hide();
+        });
+    {% endif %}
+
+    {% if paid_notify is defined %}
+        $('#paid_notify_modal').find('span.timeleft').countdown({
+            until: {{ paid_notify_end_time_seconds }},
+            format: 'Od',
+            layout: '{dn} {dl}'
+        });
+        $.simplebox('#paid_notify_modal');
+    {% endif %}
+
+    {% if api_med_con_notify is defined%}
+        $.simplebox('#api_med_con_notify');
+    {% endif %}
+
+    {% if discount_2_notify is defined %}
+        var discount_2_modal = $('#discount_2_modal');
+        $('.btn-close', discount_2_modal).on('click', function() {
+            {% set path = 'my_read_discount_2_'~discount_2_notify %}
+            $.get('{{ path(path) }}');
+        });
+
+        var discount_2_countdown = $('.discount_2_countdown');
+        discount_2_countdown.countdown({
+            until: discount_2_countdown.data('seconds-left'),
+            layout: '{d<} {dn} {dl} {d>} {hn} {hl} {mn} {ml}'
+        });
+
+        $.simplebox('#discount_2_modal');
+    {% endif %}
+
+    {% if discount_2_counter is defined %}
+        var discount_2_counter = $('.discount_2_counter');
+        discount_2_counter.countdown({
+            until: discount_2_counter.data('seconds-left'),
+            layout: '<span class="days">{dn}</span> <span class="hours">{hn}</span>:<span class="minutes">{mn}</span>:<span class="seconds">{sn}</span>'
+        });
+    {% endif %}
+
+    {% if primary_boosting is defined %}
+        var oweCountdown = $('.primary_boosting_countdown');
+        oweCountdown.countdown({
+            until: oweCountdown.data('seconds-left'),
+            layout: '{d<} {dn} {dl} {d>} {hn} {hl} {mn} {ml}'
+        });
+
+        $.simplebox('#primary_boosting');
+    {% endif %}
+
+    {% if user_not_paid_primary_boosting is defined %}
+        $.simplebox('#user_not_paid_primary_boosting');
+    {% endif %}
+
+    {% if last_stage is defined  %}
+    var owe_stage_countdown = $('.owe_stage_countdown');
+    owe_stage_countdown.countdown({
+        until: owe_stage_countdown.data('seconds-left'),
+        layout: '<span class="days">{dn}</span> <span class="hours">{hnn}</span>:<span class="minutes">{mnn}</span>:<span class="seconds">{snn}</span>',
+        onExpiry: function () {
+            location.reload();
+        }
+    });
+    {% endif %}
+
+    var webui = $('.side-menu .menu-item-disabled').webuiPopover({
+        placement: 'right',
+        content: function (data) {
+            return $(data.$element.data('content-selector')).html();
+        }
+    });
+    $(document).on('click', '.close-current-popover', function(e) {
+        e.preventDefault();
+        webui.webuiPopover('hide');
+    });
+
+    {% if _server_type == 'prod' and payment2_goal is defined %}
+        yaCounter1894867.reachGoal('PAYMENT2_PAY');
+        ga('send', 'event', 'Online', 'PAYMENT2_PAY', '', 0);
+    {% endif %}
+});
+</script>
+
+<!-- Yandex.Metrika counter --><script type="text/javascript"> (function (d, w, c) { (w[c] = w[c] || []).push(function() { try { w.yaCounter1894867 = new Ya.Metrika({ id:1894867, clickmap:true, trackLinks:true, accurateTrackBounce:true, webvisor:true }); } catch(e) { } }); var n = d.getElementsByTagName("script")[0], s = d.createElement("script"), f = function () { n.parentNode.insertBefore(s, n); }; s.type = "text/javascript"; s.async = true; s.src = "https://mc.yandex.ru/metrika/watch.js"; if (w.opera == "[object Opera]") { d.addEventListener("DOMContentLoaded", f, false); } else { f(); } })(document, window, "yandex_metrika_callbacks");</script><noscript><div><img src="https://mc.yandex.ru/watch/1894867" style="position:absolute; left:-9999px;" alt="" /></div></noscript><!-- /Yandex.Metrika counter -->
+<!-- Google.Analytics --><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create', 'UA-20996514-1', 'auto');ga('send', 'pageview');</script><!-- /Google.Analytics -->
+
+</body>
+</html>

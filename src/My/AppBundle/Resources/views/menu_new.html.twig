@@ -1,0 +1,221 @@
+{% set route = app.request.get('_route') %}
+
+{% if route != 'fos_user_security_login' and route != 'article_show' and route != 'my_payments_2' and route != 'robokassa_success' and route != 'robokassa_fail' and route != 'my_payments_pay' %}
+    <ul class="side-menu">
+        <li {{ route == 'my_profile' or route == 'my_profile_edit' or route == 'my_print' ? ' class="active"' : '' }}>
+            <a class="bg-prof" href="{{ path('my_profile') }}">{{ 'menu.profile'|trans }}</a>
+        </li>
+        <li {{ route == 'my_notifies' or route == 'my_notify_read' ? ' class="active"' : '' }}>
+            <a class="bg-not" href="{{ path('my_notifies') }}">
+                {% if app.user.notifiesCnt > 0 %}
+                    <span class="new">+{{ app.user.notifiesCnt }}</span>
+                {% endif %}
+                {{ 'menu.notifies'|trans }}
+            </a>
+        </li>
+        <li {{ route == 'my_payments' or route == 'my_payments_2' ? ' class="active"' : '' }}>
+            <a class="bg-pay" href="{{ path('my_payments') }}">{{ 'menu.payments'|trans }}</a>
+        </li>
+
+        {% if is_granted('ROLE_USER_PAID2') and not is_granted('ROLE_USER_FULL_PROFILE') %}
+            <li><span class="bg-stu menu-item-disabled" data-content-selector="#popover-trainings">{{ 'menu.training'|trans }}</span></li>
+        {% else %}
+            <li {{ route == 'my_trainings' or route == 'my_training' or route == 'my_training_theme'
+            or route == 'my_training_theme_test' or route == 'my_training_slice' or route == 'my_training_exam'
+            or route == 'my_training_final_exam' ? ' class="active"' : '' }}>
+                <a class="bg-stu" href="{{ path('my_trainings') }}">{{ 'menu.training'|trans }}</a>
+            </li>
+        {% endif %}
+
+        {% if route == 'my_test' or route == 'my_test_knowledge' or route == 'my_stat' %}
+            <li class="active"><span class="bg-test">{{ 'menu.test_general'|trans }}</span>
+                <ul>
+                    <li {{ route == 'my_test' ? ' class="active"' : '' }}>
+                        <a class="bg-tick" href="{{ path('my_test') }}">{{ 'menu.test'|trans }}</a>
+                    </li>
+                    <li {{ route == 'my_test_knowledge' ? ' class="active"' : '' }}>
+                        <a class="bg-the" href="{{ path('my_test_knowledge') }}">
+                            {{ 'menu.test_knowledge'|trans }}
+                        </a>
+                    </li>
+                    <li {{ route == 'my_stat' ? ' class="active"' : '' }}>
+                        <a class="bg-stat" href="{{ path('my_stat') }}">{{ 'menu.stat'|trans }}</a>
+                    </li>
+                </ul>
+            </li>
+        {% else %}
+            <li><a class="bg-test" href="{{ path('my_test') }}">{{ 'menu.test_general'|trans }}</a></li>
+        {% endif %}
+
+        <li {{ route == 'my_support_dialogs' ? ' class="active"' : '' }}>
+            <a class="bg-feed" href="{{ path('my_support_dialogs') }}">
+                {% if support_unread_dialogs_count > 0 %}
+                    <span class="new">+{{ support_unread_dialogs_count }}</span>
+                {% endif %}
+            {{ "feedback"|trans }}
+            </a>
+        </li>
+
+        {% if is_granted('ROLE_USER_PAID2') %}
+            <li {{ route == 'my_feedback_teacher' or route == 'my_feedback_teacher_success' ? ' class="active"' : '' }}>
+                <a class="bg-teac" href="{{ path('my_feedback_teacher') }}">{{ "feedbackTeacher"|trans }}</a>
+            </li>
+        {% else %}
+            <li><span class="bg-teac menu-item-disabled" data-content-selector="#popover-content-not-access">{{ "feedbackTeacher"|trans }}</span></li>
+        {% endif %}
+
+        <li><a class="bg-web" href="http://webinar.auto-online.ru/schedule" target="_blank">Вебинар</a></li>
+
+        {% if is_granted('ROLE_USER_PAID2') %}
+            <li><a class="bg-meeting" href="http://webinar.auto-online.ru/events/201" target="_blank">Организационное собрание</a></li>
+        {% else %}
+            <li><span class="bg-meeting menu-item-disabled" data-content-selector="#popover-content-not-access">Организационное собрание</span></li>
+        {% endif %}
+
+        <li><a class="bg-credit" href="http://www.auto-online.ru/info/gift/credit/" target="_blank">Кредит</a></li>
+
+        {% if is_granted('ROLE_USER_PAID2') %}
+            <li><span class="bg-zapis-vozhdenie menu-item-disabled" data-content-selector="#popover-zapis-vozhdenie">Запись на вождение</span></li>
+        {% else %}
+            <li><span class="bg-zapis-vozhdenie menu-item-disabled" data-content-selector="#popover-content-not-access">Запись на вождение</span></li>
+        {% endif %}
+
+        {% if app.user.region.filialNotExisting is defined and app.user.region.filialNotExisting and not app.user.checkPurchasedPackages and is_granted('ROLE_USER_PAID2') %}
+            <li><span class="bg-zapis-vozhdenie menu-item-disabled" data-content-selector="#popover-vozhdenie">Вождение</span></li>
+        {% elseif app.user.region.filialNotExisting is defined and app.user.region.filialNotExisting and is_granted('ROLE_USER_PAID2') %}
+            <li {{ route == 'my_drivings' or route == 'my_drivings_get_tickets' ? ' class="active"' : '' }}><a href="{{ path('my_drivings') }}" class="bg-zapis-vozhdenie" data-content-selector="#popover-zapis-vozhdenie">Вождение</a></li>
+        {% endif %}
+
+        {% if is_granted('ROLE_USER_PAID2') %}
+            <li {{ route == 'my_med' ? ' class="active"' : '' }}>
+                <a class="bg-med" href="{{ path('my_med') }}">Медкомиссия</a>
+            </li>
+        {% else %}
+            <li><span class="bg-med menu-item-disabled" data-content-selector="#popover-content-not-access">Медкомиссия</span></li>
+        {% endif %}
+
+        {% if is_granted('ROLE_USER_PAID2') %}
+        {#
+            <li {{ route == 'my_pass' ? ' class="active"' : '' }}>
+                <a href="{{ path('my_pass') }}" class="bg-propusk-filial">Пропуск на филиал</a>
+            </li>
+        #}
+        {% else %}
+            <li><span class="bg-propusk-filial menu-item-disabled" data-content-selector="#popover-content-not-access">Пропуск на филиал</span></li>
+        {% endif %}
+
+        {% if is_granted('ROLE_USER_PAID2') %}
+            <li><a class="bg-zayavka-nalvichet" href="http://www.auto-online.ru/info/gift/social/" target="_blank">Заявка на налоговый вычет</a></li>
+        {% else %}
+            <li><span class="bg-zayavka-nalvichet menu-item-disabled" data-content-selector="#popover-content-not-access">Заявка на налоговый вычет</span></li>
+        {% endif %}
+
+        {% if is_granted('ROLE_USER_PAID2') %}
+            {% if app.user.category == 'A' %}
+                <li><span class="bg-zapis-exam menu-item-disabled" data-content-selector="#popover-zapis-exam-vozhdenie">Запись на внутренний<br>экзамен по вождению</span></li>
+            {% else %}
+                 <li><a class="bg-zapis-exam" href="http://exam.auto-online.ru/" target="_blank">Запись на внутренний<br>экзамен по вождению</a></li>
+            {% endif %}
+        {% else %}
+            <li><span class="bg-zapis-exam menu-item-disabled" data-content-selector="#popover-content-not-access">Запись на внутренний<br>экзамен по вождению</span></li>
+        {% endif %}
+
+        {% if is_granted('ROLE_USER_PAID2') %}
+            <li><span class="bg-zapis-exam-gibdd menu-item-disabled" data-content-selector="#popover-zapis-exam-gibdd">Запись на экзамен ГИБДД</span></li>
+        {% else %}
+            <li><span class="bg-zapis-exam-gibdd menu-item-disabled" data-content-selector="#popover-content-not-access">Запись на экзамен ГИБДД</span></li>
+        {% endif %}
+
+        {% if (is_granted('ROLE_USER_PAID')) and not (is_granted('ROLE_USER_PAID2')) and not (is_granted('ROLE_USER_FULL_PROFILE')) %}
+            {#Заполните профиль ученика полностью</h3>#}
+            {#Ваш личный профиль не заполнен, для продолжения обучения Вам нужно заполнить личные данные.#}
+            <li><span class="bg-stu menu-item-disabled" data-content-selector="#popover-terms-and-conditions">Договоры и согласия<br></span></li>
+        {% elseif (is_granted('ROLE_USER_PAID')) and not (is_granted('ROLE_USER_PAID2')) and (is_granted('ROLE_USER_FULL_PROFILE')) %}
+            {#Оплатите Пакет документов ученика автошколы.#}
+            {#Вы получите доступ к этому разделу после оплаты Пакет документов ученика автошколы.#}
+            <li><span class="bg-stu menu-item-disabled" data-content-selector="#popover-terms-and-conditions-documents">Договоры и согласия</span></li>
+        {#{% elseif (is_granted('ROLE_USER_PAID')) and (is_granted('ROLE_USER_PAID2')) and (is_granted('ROLE_USER_FULL_PROFILE')) and app.user.agreement %}#}
+        {% elseif (is_granted('ROLE_USER_PAID')) and (is_granted('ROLE_USER_PAID2')) and (is_granted('ROLE_USER_FULL_PROFILE')) %}
+            {# Доступ к разделу договора и согласия #}
+            <li>
+                <a class="bg-stu" href="{{ path('my_terms_and_conditions') }}">
+                    <span class="bg-stu menu-item" data-content-selector="#popover-terms-and-conditions">Договоры и согласия</span>
+                </a>
+            </li>
+        {% else %}
+            {#Этот раздел для Вас недоступен#}
+            {#Данный раздел личного кабинета доступен только ученикам автошколы. Чтобы стать учеником, необходимо оплатить услугу «Пакет документов ученика». Перейти к оплате #}
+            {#<li><span class="bg-teac menu-item-disabled" data-content-selector="#popover-content-not-access">Договоры и согласия</span></li>#}
+            <li><span class="bg-teac menu-item-disabled" data-content-selector="#popover-terms-and-conditions">Договоры и согласия</span></li>
+        {% endif %}
+        <li>
+            <a class="bg-stu" href="{{ path('my_attemtps_package_stat') }}">
+                <span class="bg-stu menu-item" data-content-selector="#popover-terms-and-conditions">Статистика дополнительных пакетов сдачи экзаменов</span>
+            </a>
+        </li>
+    </ul>
+
+    <div style="display:none">
+        <div id="popover-zapis-vozhdenie">
+            <h3>Пройдите медкомиссию</h3>
+            <p>Перед тем, как получить возможность записываться на занятия по вождению, Вам необходимо пройти медкомиссию в нашем медцентре.</p>
+            <div class="links">
+                <a href="{{ path('my_med') }}" class="bg-green">Узнать о медкомиссии</a>
+                <a href="#" class="bg-grey close-current-popover">Закрыть</a>
+            </div>
+        </div>
+        <div id="popover-vozhdenie">
+            <h3>Вам необходимо приобрести талоны на вождение</h3>
+            <p>Перед тем, как Вы сможете расписать Ваши практические занятия и приступить к вождению, Вам необходимо приобрести талоны на вождение. Вы можете сделать это в разделе «Платежи»</p>
+            <div class="links">
+                <a href="#" class="bg-grey close-current-popover">Закрыть</a>
+            </div>
+        </div>
+        <div id="popover-zapis-exam-vozhdenie">
+            <h3>Пройдите медкомиссию</h3>
+            <p>Перед тем, как получить возможность записываться на занятия по вождению, Вам необходимо пройти медкомиссию в нашем медцентре.</p>
+            <div class="links">
+                <a href="#" class="bg-green close-current-popover">Спасибо понятно</a>
+            </div>
+        </div>
+        <div id="popover-zapis-exam-gibdd">
+            <h3>Сдайте комплексный итоговый экзамен</h3>
+            <p>Запись на экзамены в ГИБДД невозможна без предварительной сдачи внутренних экзаменов в автошколе. Данный раздел станет доступен, когда Ваш комплексный экзамен будет сдан.</p>
+            <div class="links">
+                <a href="#" class="bg-grey close-current-popover">Закрыть</a>
+            </div>
+        </div>
+        <div id="popover-content-not-access">
+            <h3>Этот раздел для Вас недоступен</h3>
+            <p>Данный раздел личного кабинета доступен только ученикам автошколы. Чтобы стать учеником, необходимо оплатить услугу «Пакет документов ученика». Перейти к оплате?</p>
+            <div class="links">
+                <a href="{{ path('my_payments_2') }}" class="bg-green">Да</a>
+                <a href="#" class="bg-grey close-current-popover">Нет</a>
+            </div>
+        </div>
+        <div id="popover-trainings">
+            <h3>Обучение недоступно</h3>
+            <p>Ваш личный профиль не заполнен, для продолжения обучения Вам нужно заполнить личные данные.</p>
+            <div class="links">
+                <a href="{{ path('my_profile_edit') }}" class="bg-green">Заполнить профиль</a>
+                <a href="#" class="bg-grey close-current-popover">Закрыть</a>
+            </div>
+        </div>
+        <div id="popover-terms-and-conditions">
+            <h3>Заполните профиль ученика полностью</h3>
+            <p>Ваш личный профиль не заполнен, для продолжения обучения Вам нужно заполнить личные данные.</p>
+            <div class="links">
+                <a href="{{ path('my_profile_edit') }}" class="bg-green">Заполнить профиль</a>
+                <a href="#" class="bg-grey close-current-popover">Закрыть</a>
+            </div>
+        </div>
+        <div id="popover-terms-and-conditions-documents">
+            <h3>Оплатите «Пакет документов ученика автошколы»</h3>
+            <p>Вы получите доступ к этому разделу после оплаты «Пакет документов ученика автошколы».<br> Для совершения оплаты нажмите кнопку Оплатить.</p>
+            <div class="links">
+                <a href="{{ path('my_payments') }}" class="bg-green">Оплатить</a>
+                <a href="#" class="bg-grey close-current-popover">Закрыть</a>
+            </div>
+        </div>
+    </div>
+{% endif %}

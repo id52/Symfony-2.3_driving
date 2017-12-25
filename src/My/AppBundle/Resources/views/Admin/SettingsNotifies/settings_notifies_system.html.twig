@@ -1,0 +1,120 @@
+{% extends "AppBundle:Admin/SettingsNotifies:_settings_notifies_layout.html.twig" %}
+
+{% block settings_notifies_content %}
+    <fieldset>
+        <legend>
+            {{ 'settings_notifies_landing'|trans }}
+            <a data-content="{{ 'settings_notifies_landing_help'|trans }}" href="#" data-toggle="popover"><i class="fa fa-question-circle"></i></a>
+        </legend>
+        {{ form_row(form.landing_title) }}
+        {{ form_row(form.landing_keywords) }}
+        {{ form_row(form.landing_description) }}
+    </fieldset>
+
+    <fieldset>
+        <legend>
+            {{ 'settings_notifies_contacts'|trans }}
+            <a data-content="{{ 'settings_notifies_contacts_help'|trans }}" href="#" data-toggle="popover"><i class="fa fa-question-circle"></i></a>
+        </legend>
+        {{ form_row(form.contact_email) }}
+        {{ form_row(form.contact_phone) }}
+    </fieldset>
+
+    <fieldset>
+        <legend>
+            {{ 'settings_notifies_socials'|trans }}
+            <a data-content="{{ 'settings_notifies_socials_help'|trans }}" href="#" data-toggle="popover"><i class="fa fa-question-circle"></i></a>
+        </legend>
+        {{ form_row(form.social_vk) }}
+        {{ form_row(form.social_facebook) }}
+        {{ form_row(form.social_twitter) }}
+    </fieldset>
+
+
+    <fieldset>
+        <legend>{{ 'settings_notifies_training_theme_test_messages'|trans }}:</legend>
+        {{ form_row(form.training_theme_test_success) }}
+        {{ form_row(form.training_theme_test_error) }}
+        {{ form_row(form.training_theme_test_timeout) }}
+        {{ form_row(form.training_theme_test_complete_next) }}
+        {{ form_row(form.training_theme_test_complete_list) }}
+        {{ form_row(form.training_theme_test_long_time) }}
+    </fieldset>
+
+    <fieldset>
+        <legend>{{ 'settings_notifies_training_slice_messages'|trans }}:</legend>
+        {{ form_row(form.training_slice_success) }}
+        {{ form_row(form.training_slice_error) }}
+        {{ form_row(form.training_slice_timeout) }}
+        {{ form_row(form.training_slice_complete) }}
+        {{ form_row(form.training_slice_long_time) }}
+        {{ form_row(form.training_slice_max_errors) }}
+    </fieldset>
+
+    <fieldset>
+        <legend>{{ 'settings_notifies_training_exam_messages'|trans }}:</legend>
+        {{ form_row(form.training_exam_success) }}
+        {{ form_row(form.training_exam_error) }}
+        {{ form_row(form.training_exam_timeout) }}
+        {{ form_row(form.training_exam_complete) }}
+        {{ form_row(form.training_exam_long_time) }}
+        {{ form_row(form.training_exam_max_errors) }}
+        {{ form_row(form.training_exam_retake) }}
+    </fieldset>
+
+    <fieldset>
+        <legend>{{ 'settings_notifies_training_final_exam_messages'|trans }}:</legend>
+        {{ form_row(form.training_final_exam_description, { attr: { class: 'ckeditor' }, help: 'settings_notifies_training_final_exam_description_help' }) }}
+        {{ form_row(form.training_final_exam_success) }}
+        {{ form_row(form.training_final_exam_error) }}
+        {{ form_row(form.training_final_exam_timeout) }}
+        {{ form_row(form.training_final_exam_complete, { attr: { class: 'ckeditor' } }) }}
+        {{ form_row(form.training_final_exam_long_time) }}
+        {{ form_row(form.training_final_exam_max_errors) }}
+        {{ form_row(form.training_final_exam_retake) }}
+        {{ form_row(form.training_final_exam_denied) }}
+        {{ form_row(form.training_final_exam_passed, { attr: { class: 'ckeditor' } }) }}
+    </fieldset>
+
+    <fieldset>
+        <legend>{{ 'settings_notifies_training_test_messages'|trans }}:</legend>
+        {{ form_row(form.training_test_success) }}
+        {{ form_row(form.training_test_error) }}
+        {{ form_row(form.training_test_timeout) }}
+        {{ form_row(form.training_test_complete) }}
+        {{ form_row(form.training_test_long_time) }}
+        {{ form_row(form.training_test_max_errors) }}
+    </fieldset>
+
+    <fieldset>
+        <legend>{{ 'settings_notifies_training_test_knowledge_messages'|trans }}:</legend>
+        {{ form_row(form.training_test_knowledge_success) }}
+        {{ form_row(form.training_test_knowledge_error) }}
+        {{ form_row(form.training_test_knowledge_timeout) }}
+        {{ form_row(form.training_test_knowledge_complete) }}
+        {{ form_row(form.training_test_knowledge_long_time) }}
+        {{ form_row(form.training_test_knowledge_max_errors) }}
+    </fieldset>
+
+    <fieldset>
+        <legend>{{ 'settings_notifies_profile_messages'|trans }}:</legend>
+        {{ form_row(form.profile_final_exam, { attr: { class: 'ckeditor' } }) }}
+    </fieldset>
+
+    <fieldset>
+        <legend>{{ 'settings_notifies_help_btns'|trans }}:</legend>
+        {{ form_row(form.trainings_help_btn, { attr: { class: 'ckeditor' } }) }}
+        {% for subject in subjects %}
+            <div class="control-group">
+                <label class="control-label" for="{{ attribute(form, 'training_'~subject.id~'_help_btn').vars.id }}">{{ 'settings_notifies_training_help_btn'|trans({ '%subject%': subject.title }) }}</label>
+                <div class="controls">
+                    {{ form_widget(attribute(form, 'training_'~subject.id~'_help_btn'), { attr: { class: 'ckeditor' } }) }}
+                    {{ form_errors(attribute(form, 'training_'~subject.id~'_help_btn')) }}
+                </div>
+            </div>
+        {% endfor %}
+        {{ form_row(form.theme_help_btn, { attr: { class: 'ckeditor' } }) }}
+        {{ form_row(form.question_help_btn, { attr: { class: 'ckeditor' } }) }}
+        {{ form_row(form.promo_help_btn, { attr: { class: 'ckeditor' } }) }}
+    </fieldset>
+{% endblock %}

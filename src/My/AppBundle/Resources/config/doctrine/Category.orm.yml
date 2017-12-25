@@ -1,0 +1,36 @@
+My\AppBundle\Entity\Category:
+    type: entity
+    table: categories
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        name:
+            type: string
+    oneToOne:
+        image:
+            targetEntity: Image
+            mappedBy: category
+            cascade: [ all ]
+    oneToMany:
+        place_prices:
+            targetEntity: RegionPlacePrice
+            mappedBy: category
+            cascade: [ all ]
+        regions_prices:
+            targetEntity: CategoryPrice
+            mappedBy: category
+            cascade: [ all ]
+        users:
+            targetEntity: User
+            mappedBy: category
+        training_versions:
+            targetEntity: TrainingVersion
+            mappedBy: category
+            cascade: [ all ]
+    manyToMany:
+        region_places:
+            targetEntity: RegionPlace
+            inversedBy: categories

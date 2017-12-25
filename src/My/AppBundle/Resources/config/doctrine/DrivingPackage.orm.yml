@@ -1,0 +1,38 @@
+My\AppBundle\Entity\DrivingPackage:
+    type: entity
+    table: driving_package
+    repositoryClass: My\AppBundle\Repository\DrivingPackageRepository
+    id:
+        number:
+            type: integer
+            unique: true
+    fields:
+        rezerv_at:
+            type: datetime
+            nullable: true
+        sale_at:
+            type: datetime
+            nullable: true
+        received_at:
+            type: datetime
+            nullable: true
+        status:
+            type: string
+            nullable: true
+    oneToMany:
+        tickets:
+            targetEntity: My\AppBundle\Entity\DrivingTicket
+            mappedBy: package
+        payment_logs:
+            targetEntity: My\PaymentBundle\Entity\Log
+            mappedBy: package
+    manyToOne:
+        condition:
+            targetEntity: My\AppBundle\Entity\DrivingConditions
+            inversedBy: packages
+        user:
+            targetEntity: User
+            inversedBy: packages
+        moderator:
+            targetEntity: User
+            inversedBy: mod_packages

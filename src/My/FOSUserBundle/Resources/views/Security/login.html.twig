@@ -1,0 +1,143 @@
+{% extends "FOSUserBundle::layout.html.twig" %}
+
+{% block fos_user_content %}
+{% if error %}
+    <div class="alert alert-error">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        {{ error|trans({}, 'FOSUserBundle')|raw }}
+    </div>
+{% endif %}
+
+<div id="auth_in" class="auth-modal" style="margin:0 auto;width:303px">
+    <div class="tabs" style="text-align:center">
+        <span class="tab" style="color:#a62320">ВХОД В ЛИЧНЫЙ КАБИНЕТ УЧЕНИКА</span>
+    </div>
+
+    <div id="tab1">
+        <div class="form">
+            <form action="{{ path('fos_user_security_check') }}" method="post">
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+                <div class="row">
+                    <div class="label">E-mail</div>
+                    <div class="input">
+                        <input id="js_in_login_username" name="_username" type="text" value="{{ last_username }}">
+                        <div class="err-text">
+                            <strong>Ошибка!</strong><br>
+                            <span></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="label">Пароль</div>
+                    <div class="input">
+                        <input id="js_in_login_password" name="_password" type="password">
+                        <div class="err-text">
+                            <strong>Ошибка!</strong><br>
+                            <span></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="check">
+                    <span class="pass-toggle">Восстановить пароль</span>
+                    <input name="_remember_me" class="customCheckbox" id="forgot" type="checkbox" checked="checked">
+                    <label for="forgot">Запомнить меня</label>
+                </div>
+                <div class="links">
+                <span class="link bg-green key-link">Войти в личный кабинет<input value="" type="submit"></span>
+                </div>
+            </form>
+        </div>
+
+        <div class="restore">
+            <form action="{{ path('fos_user_resetting_send_email') }}" method="post">
+                <div class="row">
+                    <div class="label">Укажите e-mail, который Вы использовали при регистрации в личном кабинете ученика</div>
+                    <div class="input">
+                        <input id="js_in_username" type="text" name="username">
+                        <div class="err-text">
+                            <strong>Ошибка!</strong><br>
+                            <span></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="links">
+                <span class="link bg-green">
+                    Восстановить пароль
+                    <input value="" type="submit">
+                </span>
+                </div>
+                <div class="close-toggle"><span>Я вспомнил(а) пароль</span></div>
+            </form>
+        </div>
+    </div>
+    <span class="close"></span>
+</div>
+{% endblock fos_user_content %}
+
+{% block js %}
+<script>
+$(function() {
+    var error_in = function(el, error) {
+        var input = el.closest('.input');
+        $('.err-text span', input).html(error);
+        $('input', input).addClass('error');
+        input.addClass('error');
+        $('.err-text', input).show();
+    };
+
+    var auth_in = $('#auth_in');
+
+    $('form[action="{{ path('fos_user_security_check') }}"]', auth_in).submit(function(e) {
+        e.preventDefault();
+
+        $('.input').removeClass('error');
+        $('.input input').removeClass('error');
+        $('.err-text').hide();
+
+        var username = $('#js_in_login_username');
+        var password = $('#js_in_login_password');
+
+        if (!username.val() || !password.val()) {
+            if (!username.val()) {
+                error_in(username, 'Нужно указать e-mail');
+            }
+            if (!password.val()) {
+                error_in(password, 'Нужно указать пароль');
+            }
+        } else {
+            $.post($(this).attr('action'), $(this).serialize(), function(data) {
+                if (data.error) {
+                    error_in(password, data.error);
+                } else {
+                    location.assign('{{ path('homepage') }}');
+                }
+            });
+        }
+    });
+
+    $('form[action="{{ path('fos_user_resetting_send_email') }}"]', auth_in).submit(function(e) {
+        e.preventDefault();
+
+        $('.input').removeClass('error');
+        $('.input input').removeClass('error');
+        $('.err-text').hide();
+
+        $.post($(this).attr('action'), $(this).serialize(), function(data) {
+            if (data.errors) {
+                for(var i in data.errors) {
+                    if (data.errors.hasOwnProperty(i)) {
+                        error_in($('#js_in_' + i), data.errors[i]);
+                    }
+                }
+            } else if (data.success) {
+                var apr_notify = $('#after_password_recovery_notify');
+                $('.title', apr_notify).html(data.title);
+                $('.message', apr_notify).html(data.message);
+                $.simplebox('#after_password_recovery_notify');
+                $('.restore', auth_in).hide();
+            }
+        });
+    });
+});
+</script>
+{% endblock js %}

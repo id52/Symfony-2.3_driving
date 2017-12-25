@@ -1,0 +1,60 @@
+{% extends "AppBundle::admin.html.twig" %}
+
+{% block content %}
+    <h1>Статистика дожима пользователей рассылками</h1>
+    <hr>
+    <a id="filter_link" href="#"><i class="fa fa-caret-down"></i> Фильтр</a>
+    <div id="filter">
+        {{ form_start(filter_form) }}
+        {{ form_widget(filter_form) }}
+        <div class="form-actions">
+            <button type="submit" class="btn btn-success pull-right">
+                <i class="fa fa-filter"></i>
+                <span>{{ 'buttons.filter'|trans }}</span>
+            </button>
+        </div>
+        {{ form_end(filter_form) }}
+    </div>
+    <br>
+    <br>
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th>Тип оплаты</th>
+            <th class="min_col">Количество человек</th>
+            <th class="min_col">Оплатившие в первые сутки</th>
+            <th class="min_col">Остальные</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for data in formData %}
+        <tr>
+            <td>{{ data['name'] }}</td>
+            {% for stat in data['result'] %}
+                <td class="min_col text-right">{{ stat|number_format(0, ',' , ' ') }}</td>
+            {% endfor %}
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock content %}
+
+
+{% block js %}
+    <script>
+        $(function () {
+            {% if app.request.queryString == '' %}
+            $('#filter').hide();
+            {% else %}
+            $('#filter_default').hide();
+            {% endif %}
+            $('#filter_link').click(function () {
+                $('#filter').toggle();
+                {% if app.request.queryString == '' %}
+                $('#filter_default').toggle();
+                {% endif %}
+                return false;
+            });
+        });
+    </script>
+{% endblock js %}

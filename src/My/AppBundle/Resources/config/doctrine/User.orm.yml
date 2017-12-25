@@ -1,0 +1,368 @@
+My\AppBundle\Entity\User:
+    type: entity
+    table: users
+    extends: \FOS\UserBundle\Entity\User
+    repositoryClass: My\AppBundle\Repository\UserRepository
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        certificate:
+            type: string
+            nullable: true
+        last_name:
+            type: string
+        first_name:
+            type: string
+        patronymic:
+            type: string
+        photo:
+            type: string
+            nullable: true
+        photo_coords:
+            type: array
+            nullable: true
+        sex:
+            type: enumsex
+            nullable: true
+        birthday:
+            type: date
+            nullable: true
+        birth_country:
+            type: string
+            nullable: true
+        birth_region:
+            type: string
+            nullable: true
+        birth_city:
+            type: string
+            nullable: true
+        foreign_passport:
+            type: boolean
+        foreign_passport_number:
+            type: string
+            nullable: true
+        passport_number:
+            type: string
+            nullable: true
+        passport_rovd:
+            type: string
+            nullable: true
+        passport_rovd_number:
+            type: string
+            nullable: true
+        passport_rovd_date:
+            type: date
+            nullable: true
+        not_registration:
+            type: boolean
+        registration_country:
+            type: string
+            nullable: true
+        registration_region:
+            type: string
+            nullable: true
+        registration_city:
+            type: string
+            nullable: true
+        registration_street:
+            type: string
+            nullable: true
+        registration_house:
+            type: string
+            nullable: true
+        registration_stroenie:
+            type: string
+            nullable: true
+        registration_korpus:
+            type: string
+            nullable: true
+        registration_apartament:
+            type: string
+            nullable: true
+        place_country:
+            type: string
+            nullable: true
+        place_region:
+            type: string
+            nullable: true
+        place_city:
+            type: string
+            nullable: true
+        place_street:
+            type: string
+            nullable: true
+        place_house:
+            type: string
+            nullable: true
+        place_stroenie:
+            type: string
+            nullable: true
+        place_korpus:
+            type: string
+            nullable: true
+        place_apartament:
+            type: string
+            nullable: true
+        work_place:
+            type: string
+            nullable: true
+        work_position:
+            type: string
+            nullable: true
+        phone_home:
+            type: string
+            nullable: true
+        phone_mobile:
+            type: string
+            nullable: true
+        phone_mobile_status:
+            type: enummobilestatus
+            nullable: true
+        phone_mobile_code:
+            type: string
+            nullable: true
+        notifies_cnt:
+            type: integer
+        paid_notified_at:
+            type: date
+        payment_1_paid:
+            type: date
+            nullable: true
+        payment_1_paid_not_notify:
+            type: boolean
+        payment_2_paid:
+            type: date
+            nullable: true
+        payment_2_paid_not_notify:
+            type: boolean
+        payment_2_paid_goal:
+            type: boolean
+        promo_used:
+            type: boolean
+            nullable: true
+        white_ips:
+            type: array
+        moderated:
+            type: boolean
+        paradox_id:
+            type: integer
+            nullable: true
+        discount_2_notify_first:
+            type: boolean
+        discount_2_notify_second:
+            type: boolean
+        mailing:
+            type: boolean
+        overdue_unsubscribed:
+            type: boolean
+        offline:
+            type: boolean
+        unsubscribed_x:
+            type: boolean
+        by_api:
+            type: boolean
+        by_api_comb:
+            type: boolean
+        by_api_expr:
+            type: boolean
+        api_med_form:
+            type: boolean
+            options: { default: false }
+        api_contract_sign:
+            type: boolean
+            options: { default: false }
+        api_med_con_notify_date:
+            type: date
+            nullable: true
+        api_profit:
+            type: boolean
+            options: { default: false }
+        hurry_is_send:
+            type: boolean
+        exam_attempts:
+            type: integer
+        drive_info:
+            type: array
+        final_doc_status:
+            type: string
+            nullable: true
+        final_doc_get_at:
+            type: date
+            nullable: true
+        driving_paid_at:
+            type: datetime
+            nullable: true
+        owe_stage_end: # конец стадии должника
+            type: datetime
+            nullable: true
+        terms_and_conditions:
+            type: boolean
+            options: { default: false }
+        treaty_on_non_disclosure:
+            type: boolean
+            options: { default: false }
+        agreement:
+            type: boolean
+            options: { default: false }
+        privacy:
+            type: boolean
+            options: { default: false }
+        is_old:
+            type: boolean
+            options: { default: false }
+        confirm_docs_is_send:
+            type: boolean
+        paid_primary_boosting_notify:
+            type: boolean
+        not_paid_primary_boosting_is_send:
+            type: boolean
+        not_paid_primary_boosting_notify:
+            type: boolean
+        created_at:
+            type: datetime
+            gedmo:
+                timestampable:
+                    on: create
+        updated_at:
+            type: datetime
+            gedmo:
+                timestampable:
+                    on: update
+        penalty_period:
+            type: datetime
+            nullable: true
+    oneToOne:
+        required_notify:
+            targetEntity: Notify
+            inversedBy: user_requiring
+        api_question_log:
+            targetEntity: ApiQuestionLog
+            mappedBy: user
+        user_stat:
+            targetEntity: UserStat
+            mappedBy: user
+    oneToMany:
+        reservist_stat:
+            targetEntity: My\AppBundle\Entity\ReservistStat
+            mappedBy: user
+        tried_enters:
+            targetEntity: My\AppBundle\Entity\TriedEnters
+            mappedBy: user
+        themes_tests_logs:
+            targetEntity: ThemeTestLog
+            mappedBy: user
+        slices_logs:
+            targetEntity: SliceLog
+            mappedBy: user
+        exams_logs:
+            targetEntity: ExamLog
+            mappedBy: user
+        final_exams_logs:
+            targetEntity: FinalExamLog
+            mappedBy: user
+        exam_attempt_logs:
+            targetEntity: ExamAttemptLog
+            mappedBy: user
+        notifies:
+            targetEntity: Notify
+            mappedBy: user
+        tests_logs:
+            targetEntity: TestLog
+            mappedBy: user
+        tests_knowledge_logs:
+            targetEntity: TestKnowledgeLog
+            mappedBy: user
+        old_mobile_phones:
+            targetEntity: UserOldMobilePhone
+            mappedBy: user
+        payment_logs:
+            targetEntity: \My\PaymentBundle\Entity\Log
+            mappedBy: user
+        confirmed_payment_logs:
+            targetEntity: \My\PaymentBundle\Entity\Log
+            mappedBy: admin
+        support_dialogs:
+            targetEntity: SupportDialog
+            mappedBy: user
+            cascade: ["persist", "remove"]
+        last_support_dialogs:
+            targetEntity: SupportDialog
+            mappedBy: last_moderator
+        support_messages:
+            targetEntity: SupportMessage
+            mappedBy: user
+            cascade: ["persist", "remove"]
+        user_confirmation:
+            targetEntity: \My\AppBundle\Entity\UserConfirmation
+            mappedBy: user
+        packages:
+            targetEntity: DrivingPackage
+            mappedBy: user
+            cascade: [ persist, remove ]
+        mod_packages:
+            targetEntity: DrivingPackage
+            mappedBy: moderator
+        documents:
+            targetEntity: Document
+            mappedBy: user
+            cascade: [ 'all' ]
+        owe_stages:
+            orderBy: { 'number_stage': 'ASC' }
+            targetEntity: OweStage
+            mappedBy: user
+        payment_revert_logs:
+            targetEntity: \My\PaymentBundle\Entity\RevertLog
+            mappedBy: moderator
+        moderated_users:
+            targetEntity: User
+            mappedBy: moderator
+        read_themes:
+            targetEntity: My\AppBundle\Entity\ThemeReader
+            mappedBy: reader
+    manyToOne:
+        category:
+            targetEntity: Category
+            inversedBy: users
+        region:
+            targetEntity: Region
+            inversedBy: users
+        region_place:
+            targetEntity: RegionPlace
+            inversedBy: users
+        webgroup:
+            targetEntity: Webgroup
+            inversedBy: users
+        moderator:
+            targetEntity: User
+            inversedBy: moderated_users
+            joinColumn: { onDelete: SET NULL, nullable: true }
+    manyToMany:
+        manager_regions:
+            targetEntity: My\AppBundle\Entity\Region
+            inversedBy: managers
+        moderated_support_categories:
+            targetEntity: SupportCategory
+            inversedBy: moderators
+            joinTable:
+              name: users_support_categories
+              joinColumns:
+                user_id:
+                  referencedColumnName: id
+              inverseJoinColumns:
+                category_id:
+                  referencedColumnName: id
+        final_doc_moderator:
+            targetEntity: User
+            inversedBy: student
+        student:
+            targetEntity: User
+            mappedBy: final_doc_moderator
+    lifecycleCallbacks:
+        prePersist: [ photoPreUpload ]
+        preUpdate: [ photoPreUpload ]
+        postPersist: [ photoUpload ]
+        postUpdate: [ photoUpload, photoRemoveUploadCache ]
+        postRemove: [ photoRemoveUpload, photoRemoveUploadCache ]

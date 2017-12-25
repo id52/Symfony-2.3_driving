@@ -1,0 +1,1977 @@
+project:
+    name: "Автошкола"
+    slogan: "мы научим вас управлять автомобилем"
+    admin: "Админка"
+
+signin_link: "Войти"
+register_link: "Зарегистрироваться"
+forgot_link: "Восстановить пароль"
+in_admin: "В админку"
+on_site: "На сайт"
+
+registration.flash.user_created: "Пользователь создан."
+resetting.flash.success: "Пароль успешно изменён"
+
+fos_user_registration_form_last_name: "Фамилия"
+fos_user_registration_form_first_name: "Имя"
+fos_user_registration_form_patronymic: "Отчество"
+fos_user_registration_form_phone_mobile: "Телефон"
+fos_user_registration_form_email: "E-mail"
+fos_user_registration_form_plainPassword_first: "Пароль"
+fos_user_registration_form_plainPassword_second: "Повторить пароль"
+fos_user_registration_form_region: "Регион"
+fos_user_resetting_form_new_first: "Пароль"
+fos_user_resetting_form_new_second: "Повторить пароль"
+fos_user_registration_form_promoKey: "Промокод"
+fos_user_registration_form_category: "Категория прав"
+fos_user_registration_form_captcha: "Каптча"
+
+photo_photoFile: "Фотография"
+photo_photoFile_btn: "Загрузить…"
+
+change_password_old_password: "Старый пароль"
+
+profile_registr_data: "Данные регистрации"
+profile_email: "E-mail"
+profile_last_name: "Фамилия"
+profile_first_name: "Имя"
+profile_full_name: "Ф.И.О."
+profile_patronymic: "Отчество"
+profile_region: "Регион"
+profile_passport_data: "Паспортные данные"
+profile_sex: "Пол"
+profile_birthday: "День рождения"
+profile_birth_place: "Место рождения"
+profile_birth_country: "Страна"
+profile_birth_region: "Регион"
+profile_birth_city: "Город"
+profile_foreign_passport: "Паспорт другой страны?"
+profile_foreign_passport_number: "Номер"
+profile_passport_number: "Серия и номер"
+profile_passport_number_ser: "Серия"
+profile_passport_number_num: "Номер"
+profile_passport_number: "Серия и номер"
+profile_passport_number_help: "Формат: 1234 567890"
+profile_passport_rovd: "Кем выдан"
+profile_passport_rovd_number: "Код подразделения"
+profile_passport_rovd_date: "Дата выдачи"
+profile_not_registration: "Нет прописки?"
+profile_registration_data: "Прописка"
+profile_registration_country: "Страна"
+profile_registration_region: "Регион"
+profile_registration_city: "Город"
+profile_registration_street: "Улица"
+profile_registration_house: "Дом"
+profile_registration_stroenie: "Строение"
+profile_registration_korpus: "Корпус"
+profile_registration_apartament: "Квартира"
+profile_place_data: "Регистрация по месту пребывания"
+profile_place_country: "Страна"
+profile_place_region: "Регион"
+profile_place_city: "Город"
+profile_place_street: "Улица"
+profile_place_house: "Дом"
+profile_place_stroenie: "Строение"
+profile_place_korpus: "Корпус"
+profile_place_apartament: "Квартира"
+profile_work: "Работа"
+profile_work_place: "Место"
+profile_work_position: "Должность"
+profile_phone_data: "Контактные телефоны"
+profile_phone_home: "Домашний телефон"
+profile_phone_home_help: "Формат: +7 1234567890"
+profile_phone_mobile: "Мобильный телефон"
+profile_phone_mobile_help: "Формат: +7 (123) 456-78-90"
+profile_old_mobile_phones: "Старые м.телефоны"
+profile_payments: "Платежи"
+profile_region_place: "Место вождения"
+profile_exams: "Экзамены"
+profile_additional_info: "Дополнительная информация"
+profile_category: "Категория прав"
+profile_paradox_id: "Код слушателя"
+profile_webgroup: "Веб-группа"
+profile_plain_password: "Пароль"
+profile_moderated: "Проверен?"
+profile_paids: "Оплаты"
+profile_support_dialogs: "Обратная связь"
+profile_terms_and_conditions: "Согласен с условиями договора на платные образовательные услуги"
+profile_treaty_on_non_disclosure: "Согласие на подписание договора по вождению"
+profile_agreement: "Согласен с договором - офертой"
+profile_privacy: "Согласен с условиями конфиденциальности"
+profile_owe_stage: "Статус оплаты вождения"
+profile_paid_driving: "Оплатил вождение"
+profile_owe_driving: "Должник"
+profile_paid_driving_save: "Сохранить"
+form_phone_mobile: "Мобильный телефон"
+
+simple_profile_email: "E-mail"
+simple_profile_last_name: "Фамилия"
+simple_profile_first_name: "Имя"
+simple_profile_patronymic: "Отчество"
+simple_profile_region: "Регион"
+simple_profile_moderated: "Проверен?"
+simple_profile_paids: "Оплаты"
+simple_profile_plain_password: "Пароль"
+simple_profile_phone_mobile: "Мобильный телефон"
+simple_profile_category: "Категория прав"
+
+exam_subject: "Предмет"
+exam_pass_date: "Дата сдачи"
+
+all: "Все"
+male: "Мужской"
+female: "Женский"
+
+for_admin: "Для админа:"
+
+menu:
+    profile: "Профиль"
+    change_password: "Смена пароля"
+    notifies: "Уведомления"
+    payments: "Платежи"
+    training: "Обучение"
+    test: "Тест по билетам"
+    test_general: "Тест как в ГИБДД"
+    test_knowledge: "Тест по темам"
+    stat: "Статистика"
+    admin_add_user: "Добавить"
+    admin_add_simple_user: "Добавить быстро"
+    admin_settings: "Настройки"
+    admin_settings_notifies: "Уведомления"
+    admin_training: "Обучение"
+    admin_training_versions: "Версии"
+    admin_subjects: "Предметы"
+    admin_themes: "Темы"
+    admin_flash: "Flash-блоки"
+    admin_questions: "Вопросы"
+    admin_slices: "Срезы"
+    admin_attempts: "Пакеты попыток"
+    admin_support: "Обратная связь"
+    admin_support_statistics: "Статистика"
+    admin_support_categories: "Категории"
+    admin_support_dialogs: "Диалоги"
+    admin_promos: "Промо-кампании"
+    admin_regions: "Регионы"
+    admin_regions_places: "Места вождения"
+    admin_services: "Услуги"
+    admin_categories: "Категории прав"
+    admin_class_services: "Класс обслуживания"
+    admin_driving_conditions: "Условия вождения"
+    admin_webgroups: "Веб-группы"
+    admin_users: "Пользователи"
+    admin_list_users: "Доступ"
+    admin_precheck_users: "Проверка"
+    admin_paradox_users: "В Paradox"
+    admin_faqs: "Вопросы-ответы"
+    admin_articles: "Статьи"
+    admin_feedbackEmails: "Обратная связь"
+    admin_feedbackTeacherEmails: "Преподаватели"
+    admin_mailing: "Рассылка"
+    admin_test_emails: "Контрольные E-mail"
+    admin_holidays: "Праздники"
+    admin_promo_keys_auto: "Авто-промо-ключи"
+    admin_overdue_statistics: "Стат.авторас-ки"
+    admin_reservist_stat: "Стат-ка дожима"
+    admin_check_regions_title: "Пр-ка регионов"
+
+    admin_check_regions_reg: "Зарег-лись"
+    admin_check_regions_first_paid: "Первая оплата"
+    admin_check_regions_second_paid: "Вторая оплата"
+    admin_check_regions_driving_paid: "Оплатили вождение"
+    admin_check_regions_load_document: "Загрузили док-ты"
+    admin_check_regions_driving_additional_paid: "Оплатил доп.вождения"
+    admin_check_regions_driving: "Вождение"
+    admin_check_regions_driving_additional: "Доп.вождение"
+    admin_check_regions_execute_documents: "Оформить док-ты "
+    admin_check_regions_get_documents: "Получить док-ты"
+    admin_check_regions_graduated: "Закончил обучение"
+    admin_check_regions_all: "Все"
+
+buttons:
+    add: "Добавить"
+    edit: "Редактировать"
+    change: "Сменить"
+    change_password: "Сменить пароль"
+    save: "Сохранить"
+    delete: "Удалить"
+    back: "Назад"
+    forward: "Далее"
+    complete: "Завершить"
+    back_to_training: "Вернуться к обучению"
+    answer: "Ответить"
+    continue: "Продолжить"
+    choose_another: "Выбрать другой вопрос"
+    choice: "Выбрать"
+    quit: "Прервать тест"
+    start: "Начать"
+    pay: "Оплатить"
+    confirm_mobile: "В профиль"
+    filter: "Отфильтровать"
+    send: "Отправить"
+    cancel: "Отменить"
+    class_service_add: "Добавить класс обслуживания"
+    driving_conditions_add: "Добавить условие вождения"
+    driving_package_add: "Добавить пакет"
+
+titles:
+    homepage: "Главная"
+    profile: "Профиль"
+    profile_edit: "Редактирование профиля"
+    notifies: "Уведомления"
+    payments: "Платежи"
+    trainings: "Обучение"
+    test: "Тест по билетам"
+    test_knowledge: "Тест по темам"
+    stat: "Статистика"
+    feedback: "Обратная связь"
+    feedback_teacher: "Связь с преподавателем"
+    unsubscribe_pre_check: "Отписаться от рассылок"
+    unsubscribe: "Вы отписались от рассылок"
+    drivings: "Вождение"
+    settings: "Настройки"
+    terms_and_conditions: "Пакет документов ученика автошколы"
+    attempts_package_stat: "Статистика дополнительных пакетов сдачи экзаменов"
+
+form:
+    choices:
+        closed: "Закрыто"
+        opened: "Открыто"
+
+flash:
+    photo_change: "Фотография успешно сменена."
+    photo_save: "Фотография успешно сохранена."
+    photo_delete: "Фотография успешно удалена."
+mailing: "Рассылка"
+mobile_status:
+    confirmed: "подтверждён"
+    not_confirmed: "не подтверждён"
+    sended: "ввести код"
+    nulled: "подтвердить"
+    resend: "повторно отправить смс"
+
+mobile_confirm_text: "Код подтверждения: %code%"
+
+training_version_category: "Категория"
+training_version_start_date: "Дата начала"
+
+subject_title: "Заголовок"
+subject_brief_description: "Краткое описание"
+subject_briefDescription: "Краткое описание"
+subject_description: "Описание"
+subject_version: "Версия"
+subject_versions: "Версии"
+
+theme_subject: "Предмет"
+theme_title: "Заголовок"
+theme_text: "Текст"
+theme_version: "Версия"
+theme_versions: "Версии"
+
+support_category_parent: "Родительская категория"
+support_category_name: "Название"
+support_category_type: "Тип"
+support_category_types:
+    category: "Категория"
+    teacher: "Преподаватель"
+
+support_dialog_created_at: "Создано"
+support_dialog_laste_message_time: "Последнее сообщение"
+support_dialog_parent_category_name: "Категория"
+support_dialog_category_name: "Подкатегория"
+support_dialog_user_fullname: "Пользователь"
+support_dialog_user_first_name: "Имя пользователя"
+support_dialog_user_last_name: "Фамилия пользователя"
+support_dialog_user_patronymic: "Отчество пользователя"
+support_dialog_user_email: "E-mail пользователя"
+support_dialog_answered: "Отвечено"
+support_dialog_last_moderator: "Модератор"
+
+holiday_name: "Название"
+holiday_day: "День месяца"
+holiday_month: "Номер месяца"
+holiday_date: "Дата"
+
+question_subject: "Предмет"
+question_theme: "Тема"
+question_num: "Номер"
+question_text: "Вопрос"
+question_description: "Описание"
+question_answers: "Ответы"
+question_is_pdd: "ПДД?"
+question_version: "Версия"
+question_versions: "Версии"
+question_question: "Вопрос"
+
+
+slice_subject: "Предмет"
+slice_after_theme: "После темы"
+slice_version: "Версия"
+slice_versions: "Версии"
+
+attempts_package_name: "Название пакета"
+attempts_package_number_of_attempts: "Количество попыток"
+attempts_package_numberOfAttempts: "Количество попыток"
+attempts_package_cost: "Стоимость пакета"
+
+region_name: "Название"
+region_services_prices: "Цены на услуги в регионе"
+region_categories_prices: "Цены категорий прав в регионе"
+region_discount_1: "Скидка для оплаты доступа к теоретическому курсу"
+region_discount_1_amount: "Сумма скидки"
+region_discount_1_date_from: "Начало действия"
+region_discount_1_date_to: "Окончание действия"
+region_discount_1_timer_period: "Период таймера"
+region_discount_2: "Скидка для оплаты доступа к регистрации в ГИБДД"
+region_discount_2_first_amount: "Сумма скидки для первого этапа"
+region_discount_2_first_days: "Количество дней для первого этапа"
+region_discount_2_second_amount: "Сумма скидки для второго этапа"
+region_discount_2_second_days: "Количество дней для второго этапа"
+region_discount_2_between_period_days: "Количество дней между первым и вторым этапом"
+
+region_place_name: "Название"
+region_place_region: "Регион"
+
+region:
+    empty_categories: "Внимание, создан новый Регион, добавьте \"Категории прав\" в этом регионе!"
+    zero_second_price: "Внимание, создан новый Регион, установите цену для \"Пакет регистрации в ГИБДД\" в этом регионе!"
+
+class_service_list_title: "Список классов обслуживания"
+class_service_name: "Класс обслуживания"
+class_service_add_title: "Добавление класса обслуживания"
+driving_conditions_list_title: "Условия вождения"
+driving_conditions_add_title: "Добавление условия вождения"
+driving_conditions_edit_title: "Редактирование условия вождения"
+driving_conditions_active: "Активно?"
+driving_conditions_name: "Название"
+driving_conditions_cond_code: "Код (уникальный)"
+driving_conditions_class_service: "Класс обслуживания"
+driving_conditions_with_at: "Автомат"
+driving_conditions_is_primary: "Тип"
+driving_conditions_description: "Описание"
+driving_conditions_number_tickets: "Кол-во. талонов"
+driving_conditions_condCode: "Код"
+driving_conditions_withAt:  "Автомат"
+driving_conditions_numberTickets: "Талонов"
+driving_conditions_countPackages: "Талонов создано"
+driving_conditions_countnotsoldPackages: "Талонов осталось"
+driving_package_add_title: "Добавление пакетов"
+package_condition: "Условие вождения"
+driving_conditions_isPrimary: "Основной/Доп-ый"
+not_confirm_docs_or_not_all: "Для начала практических занятий, Вам необходимо загрузить на сайт цветные сканы (фотокопии) заполненного договора, двух сторон паспорта (основная информация и прописка) и медицинской справки и дождаться их одобрения нашим сотрудником. Загрузить документы Вы можете в разделе «Профиль».<br> Если Вы видите этот текст — документы еще не были загружены или еще не одобрены."
+driving_conditions_userParadoxId: "Код слушателя"
+driving_package_add_title: "Добавление пакетов"
+
+service_name: "Название"
+service_type: "Тип услуги"
+service_prices_in_regions: "Цены в регионах"
+service_types:
+    empty_not_required: "Не требуется"
+    site_access: "Доступ к теоретическому курсу"
+    training: "ГИБДД"
+
+service_display: "Отображение"
+service_displays:
+    main: "Для всех"
+    expr: "Дистанционно"
+    comb: "Комбинированно"
+service_short_displays:
+    main: "Все"
+    expr: "Дист."
+    comb: "Комб."
+
+category_name: "Название"
+category_prices_in_regions: "Цены в регионах"
+
+category_error_cant_delete_users: "Нельзя удалить эту категорию прав, так как у некоторых пользователей она указана в профиле. Чтобы запретить регистрироваться с этой категорией, уберите галочки Активно в режиме её редактирования."
+
+faq_question: "Вопрос"
+faq_answer: "Ответ"
+faq_status: "Опубликован?"
+faq_number: "Стоит после"
+
+article_title: "Название"
+article_url: "ЧПУ (адрес)"
+article_url_help: "Используется для генерации адреса. Например, если создать статью с ЧПУ videorolik, то она будет доступна по адресу http://адрес-сайта/article/videorolik. Можно использовать латинский алфавит, цифры и дефис. "
+article_keywords: "Meta keywords"
+article_description: "Meta description"
+article_text: "Текст"
+article_topMenu: "Верхнее меню"
+article_bottomMenu: "Нижнее меню"
+article_private:  "Внутренняя"
+article_position: "Позиция"
+
+feedbackEmail_name: "Название"
+feedbackEmail_email: "E-mail"
+feedbackEmail_password: "Пароль"
+feedbackEmail_subject: "Тема письма"
+feedbackEmail_subjects: "Темы писем (каждая с новой строки)"
+
+feedbackTeacherEmail_name: "Преподаватель"
+feedbackTeacherEmail_email: "E-mail"
+feedbackTeacherEmail_password: "Пароль"
+
+user_id: "#"
+user_email: "E-mail"
+user_name: "Ф. И. О."
+user_category: "Категория прав"
+user_u_roles: "Права"
+user_with_roles: "С правами?"
+user_u_white_ips: "Разрешённые IP"
+user_u_white_ips_help: "Каждый IP с новой строки"
+user_created_at: "Дата регистрации"
+user_birthday: "День рождения"
+user_region: "Регион"
+user_paradox_id: "Код слушателя"
+user_webgroup: "Веб-группа"
+user_all: "Увидеть всех"
+user_paids: "Оплаты"
+user_additional_paids: "Оплаты дополнительных услуг"
+user_phone_home: "Домашний телефон"
+user_phone_mobile: "Мобильный телефон"
+user_passport_number: "Номер паспорта"
+user_last_name: "Фамилия"
+user_first_name: "Имя"
+user_patronymic: "Отчество"
+user_phone_mobile_confirmed: "Мобильный телефон подтверждён?"
+user_show_from: "Показывать от"
+user_show_to: "Показывать до"
+user_exams: "Сдал экзамены?"
+user_final_exam: "Сдал итоговый экзамен?"
+user_in_paradox: "В парадоксе?"
+user_status: "Статус"
+user_mailing: "Подписан на рассылки?"
+user_moderated_support_categories: "Категории поддержки для модерирования"
+user_manager_regions: "Регионы доступные Менеджеру"
+user_payment_1_from: "Первая оплата от"
+user_payment_1_to: "Первая оплата до"
+user_sex: "Пол"
+user_expired_owe_stage: "Просроченные должники"
+user_not_paid_driving: "Не оплатили вождение"
+user_exist_paid_driving: "Оплатившие должники"
+user_reg_offline: "Добавить"
+user_reg_offline_simple: "Добавить быстро"
+user_reg_api_paid_2: "АО с оплатой"
+user_reg_api_paid_1: "АО демо"
+user_reg_method: "Способ регистрации"
+user_any_paid: "Оплативший"
+
+paids:
+    nopaid: "Без оплат"
+    paid_1: "Первая оплата"
+    paid_2: "Вторая оплата"
+
+discount:
+    unpaid: "Не оплатили"
+    first: "Оплатили в период действия 1-го этапа скидки"
+    between_first_second: "Оплатили без скидки в период между 1-м и 2-м этапами действия скидки"
+    second: "Оплатили в период действия 2-го этапа скидки"
+    after_second: "Оплатили после 2-го этапа действия скидки"
+
+image_uploadFile: "Картинка"
+image_uploadFile_btn: "Загрузить…"
+
+payment_services: "Услуги"
+payment_categories: "Категории прав"
+payment_date: "Дата оплаты"
+payment_sum: "Сумма"
+payment_s_id: "Номер платежа"
+payment_at_the_office: "Оплата в офисе"
+
+webgroup_name: "Название"
+
+form_email: 'Email'
+form_plain_password: 'Пароль'
+form_last_name: 'Фамилия'
+form_first_name: 'Имя'
+form_patronymic: 'Отчество'
+form_region: 'Регион'
+form_category: 'Категория'
+form_paradox_id: 'Код слушателя'
+
+admin:
+    profile_user: "Просмотр профиля пользователя"
+    settings: "Настройки"
+    settings_notifies: "Настройки уведомлений"
+    training_version_list: "Версии"
+    training_version_add: "Добавить версию"
+    training_version_add_title: "Добавление версии"
+    training_version_edit_title: "Редактирование версии"
+    subject_list: "Предметы"
+    subject_add: "Добавить предмет"
+    subject_add_title: "Добавление предмета"
+    subject_edit_title: "Редактирование предмета"
+    theme_list: "Темы"
+    theme_add: "Добавить тему"
+    theme_add_title: "Добавление темы"
+    theme_edit_title: "Редактирование темы"
+    question_list: "Вопросы"
+    question_add: "Добавить вопрос"
+    question_add_title: "Добавление вопроса"
+    question_edit_title: "Редактирование вопроса"
+    slice_list: "Срезы"
+    slice_add: "Добавить срез"
+    slice_add_title: "Добавление среза"
+    slice_edit_title: "Редактирование среза"
+    attempts_package_list: "Пакеты попыток"
+    attempts_package_add: "Добавить пакет попыток"
+    attempts_package_add_title: "Добавление пакета попыток"
+    attempts_package_edit_title: "Редактирование пакета попыток"
+    promos: "Промо-кампании"
+    promo_add: "Добавить промо-кампанию"
+    promo_add_title: "Добавление промо-кампании"
+    promo_edit_title: "Редактирование промо-кампании"
+    promo_name: "Название"
+    promo_restricted: "Тип ограничения"
+    promo_key_count: "Кодов"
+    promo_keys: "Промо-ключи"
+    promo_keys_activated: "Активированные ключи"
+    promo_key_active: "Активен"
+    promo_key_search: "Найти промо-ключ"
+    promo_key_add: "Добавить промо-ключ"
+    promo_key_add_title: "Добавление промо-ключа"
+    promo_key_created: "Создан"
+    promo_key_activated: "Использован"
+    promo_key_tried: "Перв."
+    promo_key_discount: "Скидка"
+    promo_key_edit_title: "Редактирование промо-ключа"
+    promo_key_promo_name: "Промо-кампания"
+    promo_key_key: "Ключ"
+    promo_key_generate: "Сгенерировать промо-ключи"
+    promo_key_used: "Исп."
+    promo_key_type: "Тип оплаты"
+    promo_trieds_count: "Перв."
+    promo_not_paid: "Рез."
+    promo_logs_count: "Исп."
+    promo_key_user: "Пользователь"
+    promo_keys_auto: "Автоматически сгенерироанные ключи"
+    promo_key_valid_to: "Действителен до"
+    promo_not_data: "Нет данных"
+    region_list: "Регионы"
+    region_add: "Добавить регион"
+    region_add_title: "Добавление региона"
+    region_edit_title: "Редактирование региона"
+    check_regions_list: "Проверка регионов"
+    region_place_list: "Места вождения"
+    region_place_add: "Добавить место вождения"
+    region_place_add_title: "Добавление места вождения"
+    region_place_edit_title: "Редактирование места вождения"
+    service_list: "Услуги"
+    service_add: "Добавить услугу"
+    service_add_title: "Добавление услуги"
+    service_edit_title: "Редактирование услуги"
+    category_list: "Категории прав"
+    category_add: "Добавить категорию прав"
+    category_add_title: "Добавление категории прав"
+    category_edit_title: "Редактирование категории прав"
+    users: "Пользователи"
+    user_edit_title: "Редактирование пользователя"
+    faq_list: "Вопросы-ответы"
+    faq_add: "Добавить вопрос-ответ"
+    faq_add_title: "Добавление вопроса-ответа"
+    faq_edit_title: "Редактирование вопроса-ответа"
+    article_list: "Статьи"
+    article_add: "Добавить статью"
+    article_add_title: "Добавление статьи"
+    article_edit_title: "Редактирование статьи"
+    feedbackEmails: "Обратная связь"
+    feedbackEmail_add: "Добавить e-mail"
+    feedbackEmail_add_title: "Добавление e-mail"
+    feedbackEmail_edit_title: "Редактирование e-mail"
+    feedbackTeacherEmails: "Связь с преподавателем"
+    feedbackTeacherEmail_add: "Добавить преподавателя"
+    feedbackTeacherEmail_add_title: "Добавление преподавателя"
+    feedbackTeacherEmail_edit_title: "Редактирование преподавателя"
+    precheck_users: "Проверка данных пользователей"
+    precheck_user_view_title: "Проверка данных пользователя"
+    precheck_user_edit_title: "Редактирование данных пользователя"
+    paradox_users: "Перенос пользователей в Paradox"
+    paradox_user_set_title: "Перенос пользователя в Paradox"
+    send_email_title: "Отправление E-mail"
+    webgroup_list: "Веб-группы"
+    webgroup_add: "Добавить веб-группу"
+    webgroup_add_title: "Добавление веб-группы"
+    webgroup_edit_title: "Редактирование веб-группы"
+    mailing_list: "Рассылки"
+    mailing_add: "Добавить рассылку"
+    mailing_add_title: "Добавление рассылки"
+    mailing_edit_title: "Редактирование рассылки"
+    add_user_title: "Добавление пользователя"
+    add_old_user_title: "Добавление старого ученика"
+    add_simple_user_title: "Быстрое добавление пользователя"
+    test_email_list: "Cписок контрольных E-mail для рассылки"
+    test_email_add: "Добавить E-mail"
+    test_email_add_title: "Контрольный E-mail"
+    test_email_edit_title: "Контрольный E-mail"
+    test_email_email: "E-mail"
+    support_categories: "Категории обращений"
+    support_category_add: "Добавить категорию"
+    support_category_edit: "Редактировать категорию"
+    support_category_delete: "Удалить категорию"
+    support_category_add_title: "Добавление категории"
+    support_category_edit_title: "Редактирование категории"
+    support_dialogs: "Диалоги"
+    holidays: "Праздники"
+    overdue_statistics: "Статистика автоматического дожима пользователей"
+    flash_block_list: "Flash-блоки"
+    flash_block_add: "Добавить flash-блок"
+    flash_block_add_title: "Добавление flash-блока"
+    flash_block_edit_title: "Редактирование flash-блока"
+    flash_block_item_list: "Список элементов flash-блока «%name%»"
+    flash_block_item_add: "Добавить элемент в flash-блок"
+    flash_block_item_add_title: "Добавление элемента в flash-блок"
+    flash_block_item_edit_title: "Редактирование элемента в flash-блоке"
+    admin_check_regions_users: "Карточка ученика"
+    class_service_edit_title: "Редактирование класса обслуживания"
+    rever_money_user_card_title: "Карточка ученика"
+    reg_stat_users: "Статистика регистрацийДВА"
+    reg_stat_user_view_title: "Данные пользователя"
+
+    buttons:
+        save: "Сохранить"
+        delete: "Удалить"
+        back_to_list: "Вернуться к списку"
+        back_to_view: "Вернуться к просмотру"
+        back: "Назад"
+        moderate: "Отметить как проверенные"
+        edit: "Редактировать"
+        set: "Установить"
+        to_precheck: "Вернуть на проверку"
+        paradox_set: "Перенести в парадокс"
+        copy: "Скопировать"
+        send_email: "Отправить E-mail"
+        send: "Отправить"
+        create: "Создать"
+        lock: "Заблокировать"
+        unlock: "Разблокировать"
+        export_xml: "Экспортировать из Xml"
+
+errors:
+    server: "Ошибка сервера."
+    not_post: "Получен не POST-запрос."
+    image_not_found: "Картинка №%image_id% не найдена."
+    photo_not_found: "Фотография не найдена."
+
+undefined_error: "Неизвестная ошибка."
+
+you_sure: "Вы уверены?"
+no_data: "Нет данных"
+success_added: "Успешно добавлено."
+success_transferred: "Платеж отмечен как перенесенный"
+success_user_add_listener_code: "Пользователю добавлен код слушателя, теперь можно перенести платеж"
+success_edited: "Успешно отредактировано."
+success_deleted: "Успешно удалено."
+choose_option: " - Выберите - "
+choose_root:   " - Корень - "
+uploading: "Загружается…"
+yes: "Да"
+or: "или"
+no: "Нет"
+
+products:
+    distance_learning: "Дистанционное обучение"
+    queuing_traffic_police: "Постановка в очередь ГИБДД на сдачу ПДД"
+    medical_certificate: "Медицинская справка"
+    driving: "Вождение"
+
+purchase_of_products: "Оплата услуг"
+purchase_of_products_title: "Оплата услуг «Доступ к теоретическому курсу»"
+buy_products: "Оплатить"
+
+settings_theme_test: "Тесты тем"
+settings_theme_test_help: |
+     <b>Правильных ответов</b>: отображает какое количестов правильных ответов должен дать пользователь что-бы сдать тест<br><br>
+     <b>Подряд?</b>: Отображает в какой последовательности можно дать правильные ответы, Чекбокс отмечен - правильные ответы должны быть подряд один за одним, чекбокс не отмечен - нужно набрать количество правильных ответов.
+settings_theme_test_correct_answers: "Правильных ответов"
+settings_theme_test_correct_answers_in_row: "Подряд?"
+settings_theme_test_questions_method: "Повторная выдача вопросов"
+settings_theme_test_questions_method_same_order: "В том же порядке"
+settings_theme_test_questions_method_shuffle: "Вперемешку"
+settings_theme_test_time: "Время"
+settings_theme_test_shuffle_answers: "Перемешивать ответы?"
+
+settings_ticket_test_old_style_title: "Тесты по билетам"
+settings_ticket_test_old_style: "Старый стиль теста по билетам"
+
+settings_slice: "Срезы"
+settings_slice_help: |
+    <b>Количество билетов</b>: отображает сколько билетов будет сгенерированно для среза<br><br>
+    <b>Вопросов в билете</b>: Отображает сколько будет вопросов в каждом билете<br><br>
+    <b>Чекбокс “не повторять в разных билетах”</b> генерирует вопросы, так чтобы они не повторялись в разных билетах, те они становятся уникальными для данного среза.<br><br>
+    <b>Ошибки в билете</b>: Сколько можно допустить ошибок в билете<br><br>
+    <b>Время на билет</b>: количество времени отведенное для ответа на один билет<br><br>
+    <b>Перемешивать ответы?</b>: Чекбокс включен - система при повторном отображении вопроса перемешивает ответы на вопрос в случайном порядке.
+settings_slice_tickets: "Кол-во билетов"
+settings_slice_questions_in_ticket: "Вопросов в билете"
+settings_slice_not_repeat_questions_in_tickets: "Не повторять в разных билетах?"
+settings_slice_max_errors_in_ticket: "Ошибок в билете"
+settings_slice_ticket_time: "Время на билет"
+settings_slice_shuffle_answers: "Перемешивать ответы?"
+
+settings_exam: "Экзамены"
+settings_exam_help: |
+    <b>Количество билетов</b>: отображает сколько билетов в Экзамене по Теме<br><br>
+    <b>Перемешивать вопросы в билете?</b>: Выдает вопросы в билетах в случайном порядке.<br><br>
+    <b>Ошибок в билете</b>: отображает сколько ошибок можно допустить  в белете.<br><br>
+    <b>Время на билет</b>: время за которое пользователь должен ответить на все вопросы в билете.<br><br>
+    <b>Перемешивать ответы?</b>: Чекбокс включен - перемешивает ответы в билете в случайном порядке.<br><br>
+    <b>Время между пересдачами</b>: Интервал времени после которого пользователь может еще раз начать сдавать Экзамен. Время 0часов дает пользователю пересдавать экзамен сразу после провала,
+settings_exam_tickets: "Кол-во билетов"
+settings_exam_questions_in_ticket: "Вопросов в билете"
+settings_exam_not_repeat_questions_in_tickets: "Не повторять в разных билетах?"
+settings_exam_shuffle: "Перемешивать вопросы в билетах?"
+settings_exam_max_errors_in_ticket: "Ошибок в билете"
+settings_exam_ticket_time: "Время на билет"
+settings_exam_shuffle_answers: "Перемешивать ответы?"
+settings_exam_retake_time: "Время между пересдачами"
+
+settings_final_exam_1: "Итоговый экзамен (часть 1)"
+settings_final_exam_1_help: |
+    Экзамен по билетам ГИБДД<br><br>
+    <b>Кол-во билетов</b>: отображает какое количество билетов будет использоваться в Экзамене.<br><br>
+    <b>перемешивать вопросы в билетах?</b>: Вкл - перемешивает вопросы внутри билета в случайном порядке<br><br>
+    <b>Ошибок в билете</b>: максимальное количество ошибок в Одном билете при котором пользователь может сдать экзамен.<br><br>
+    <b>Время на билет</b>: отведенное время на сдачу одного билета<br><br>
+    <b>Перемешивать ответы?</b>: Вкл - перемешивает ответы в каждом вопросе.
+settings_final_exam_1_tickets: "Кол-во билетов"
+settings_final_exam_1_shuffle: "Перемешивать вопросы в билетах?"
+settings_final_exam_1_max_errors_in_ticket: "Ошибок в билете"
+settings_final_exam_1_ticket_time: "Время на билет"
+settings_final_exam_1_shuffle_answers: "Перемешивать ответы?"
+settings_final_exam_1_extra_time: "Добавочное время для блока"
+
+settings_final_exam_2: "Итоговый экзамен (часть 2)"
+settings_final_exam_2_help: |
+    экзамен по темам Медицина, устройство, безопасность.<br><br>
+    <b>Кол-во билетов</b>: отображает какое количество билетов будет использоваться в Экзамене.<br><br>
+    <b>Вопросов в билете</b>: Отображает сколько будет вопросов в каждом билете<br><br>
+    <b>Ошибок в билете</b>: максимальное количество ошибок в Одном билете при котором пользователь может сдать экзамен.<br><br>
+    <b>Время на билет</b>: отведенное время на сдачу одного билета<br><br>
+    <b>Перемешивать ответы?</b>: Чекбокс включен - перемешивает ответы в билете в случайном порядке.
+settings_final_exam_2_tickets: "Кол-во билетов"
+settings_final_exam_2_questions_in_ticket: "Вопросов в билете"
+settings_final_exam_2_not_repeat_questions_in_tickets: "Не повторять в разных билетах?"
+settings_final_exam_2_max_errors_in_ticket: "Ошибок в билете"
+settings_final_exam_2_ticket_time: "Время на билет"
+settings_final_exam_2_shuffle_answers: "Перемешивать ответы?"
+
+settings_access_time: "Время доступа к сайту"
+settings_access_time_help: |
+    Отображает временные интервалы в которые ученик может пользоваться обучением на сайте.<br><br>
+    <b>После первой оплаты</b>: количество дней когда ученик может пользоваться обучением на саейте сделав первую оплату, Ученику доступно обучение, но нет доступа к сдаче тестов, срезов и экзаменов, по истечению срока пользователю блокируется доступ к обучению.<br><br>
+    <b>После второй оплаты</b>: количество времени данное пользователю на обучение и сдачу всех Тестов, срезов и экзаменов, по истечению времени доступ к обучению будет закрыт<br><br>
+    <b>ВНИМАНИЕ!</b> пользователю который сдал Итоговый экзамен так же блокируется доступ к обучению.
+settings_access_time_after_1_payment: "После первой оплаты"
+settings_access_time_after_2_payment: "После второй оплаты"
+settings_access_time_after_2_payment_less: "Должно быть больше, чем после первой оплаты"
+
+settings_access_time_end_notify: "За сколько до окончания доступа высылать письма"
+settings_access_time_end_notify_help: |
+    <b>После первой оплаты</b>: устанавливаем график рассылки писем, система автоматически высылает письма ученикам которые сделали только первую оплату, напоминает что нужно произвести вторую оплату, иначе система заблокирует ученика.<br><br>
+    <b>После второй оплаты</b>: настраиваем график рассылки писем с предупреждением, что ученик должен пройти обучения до конца и сдать Итоговый экзамен, в противном случае система блокирует доступ к обучению.<br><br>
+    <b>ВНИМАНИЕ!</b> Временные интервалы блокировки доступа к обучению смотреть в “Время доступа к сайту”
+settings_access_time_end_notify_after_1_payment: "После первой оплаты"
+settings_access_time_end_notify_after_2_payment: "После второй оплаты"
+
+settings_no_payments_notify: "Напоминания об отсутствии оплат"
+settings_no_payments_notify_help: |
+    <b>После регистрации</b>: если пользователь не сделал ни одной оплаты, то высылаем ему письма через указанное число дней. Текст писем можно отредактировать в разделе "Уведомления".
+settings_no_payments: "Отправлять письмо через"
+settings_no_payments_promo_expiration: "Время действия купона (соот. № письма)"
+settings_no_payments_promo_discount: "Скидка купона (соот. № письма)"
+
+settings_support: "Обратная связь"
+settings_support_help: |
+    <b>Дней для ответа</b>: количество дней, которое отводится на ответ модераторам.
+settings_support_days_to_answer: "Дней для ответа"
+
+settings_attempts: "Покупка попыток"
+settings_attempts_days_of_retake: "Количество дней для пересдачи"
+settings_attempts_to_reset: "Количество попыток до сброса обучения"
+
+settings_notifies_signs: "Подписи"
+settings_notifies_signs_help: |
+    Используются для текстов в разделе "уведомления"
+settings_notifies_sign: "Текст подписи"
+
+settings_notifies_landing: "[Text] Лэндинг"
+settings_notifies_landing_help: |
+    метаданные для главной страницы
+settings_notifies_landing_title: "Title"
+settings_notifies_landing_keywords: "Meta keywords"
+settings_notifies_landing_description: "Meta description"
+
+settings_notifies_contacts: "[Text] Контакты"
+settings_notifies_contacts_help: |
+    контактные данные отображающиеся на главной странице
+settings_notifies_contact_email: "E-mail"
+settings_notifies_contact_phone: "Телефон (полностью)"
+
+settings_notifies_socials: "[Text] Ссылки на группы в соц. сетях"
+settings_notifies_socials_help: |
+    ссылки на соц сети  отображающиеся на главной странице
+settings_notifies_social_vk: "Вконтакте"
+settings_notifies_social_facebook: "Facebook"
+settings_notifies_social_twitter: "Twitter"
+
+settings_notifies_hurry_email: "[Email] Письмо дожим первичных и резервистов по промокоду"
+settings_notifies_hurry_email_title: "Заголовок"
+settings_notifies_hurry_email_text: "Текст"
+settings_notifies_hurry_email_text_help: |
+    {{ dear }} — «уважаемый/ая»<br>
+    {{ last_name }} — фамилия<br>
+    {{ first_name }} — имя<br>
+    {{ patronymic }} — отчество<br>
+    {{ sign_x }} — Подпись № X<br>
+    {{ promo_key }} — Промокод<br>
+    {{ price }} — Сумма оплаты без скидки<br>
+    {{ discount }} — Скидка по промокоду<br>
+    {{ new_price }} — Сумма оплаты со скидкой по промокоду<br>
+    {{ promo_expiration }} — Дата истечения срока действия промокода
+
+settings_notifies_confirmation_registration: "[Email] Подтверждение регистрации"
+settings_notifies_confirmation_registration_help: |
+    Текст письма которое приходит пользователю после регистрации в системе
+settings_notifies_confirmation_registration_enabled: "Включено?"
+settings_notifies_confirmation_registration_title: "Заголовок"
+settings_notifies_confirmation_registration_text: "Текст"
+settings_notifies_confirmation_registration_text_help: |
+    {{ link_confirm }} — ссылка подтверждения регистрации<br>
+    {{ dear }} — «уважаемый/ая»<br>
+    {{ last_name }} — фамилия<br>
+    {{ first_name }} — имя<br>
+    {{ patronymic }} — отчество<br>
+    {{ sign_x }} — Подпись № X
+
+settings_confirmation_sms_info: "Текст на странице подтверждения регистрации о высланном sms"
+settings_notifies_confirmation_sms_info_text: "Текст"
+settings_confirmation_sms_info_text_help: |
+    {{ phone }} — номер телефона пользователя<br>
+
+settings_confirmation_error_sms_info: "(Добавить быстро) Текст на странице подтверждения регистрации о том, что делать если sms не пришло"
+settings_notifies_confirmation_error_sms_info_text: "Текст"
+settings_confirmation_error_sms_info_text_help: |
+    {{ phone }} — номер телефона пользователя<br>
+
+settings_notifies_confirmed_registration_again: "[Text] На странице сообщения о повторной отправки подтверждения регистрации"
+settings_notifies_confirmed_registration_again_help: |
+    после повторного письма о регистрации , пользователь попадает на страницу с описанием дальнейших действий.
+settings_notifies_confirmed_registration_again_enabled: "Включено?"
+settings_notifies_confirmed_registration_again_title: "Заголовок"
+settings_notifies_confirmed_registration_again_text: "Текст"
+settings_notifies_confirmed_registration_again_text_help: |
+    {{ dear }} — «уважаемый/ая»<br>
+    {{ last_name }} — фамилия<br>
+    {{ first_name }} — имя<br>
+    {{ patronymic }} — отчество<br>
+    {{ sign_x }} — Подпись № X<br>
+    {{ email }} — e-mail
+
+settings_notifies_confirmed_registration: "[Text] Текст на странице после регистрации"
+settings_notifies_confirmed_registration_help: |
+    после регистрации переход по ссылке валидации из письма, пользователь попадает на страницу с описанием дальнейших действий.
+settings_notifies_confirmed_registration_title: "Заголовок"
+settings_notifies_confirmed_registration_text: "Текст"
+settings_notifies_confirmed_registration_text_help: |
+    {{sum}} — стоимость доступа к теор.к. без скидки<br>
+    {{sum_discount}} — со скидкой<br>
+    {{price}} — стоимость "Регистрации в ГИБДД" для региона<br>
+    {{promo_key}} — текущий автоматически создаваемый промо-ключ
+settings_notifies_resetting_password: "[Email] Сброс пароля"
+settings_notifies_resetting_password_help: |
+    текст письма, если пользователь забыл пароль.
+settings_notifies_resetting_password_enabled: "Включено?"
+settings_notifies_resetting_password_title: "Заголовок"
+settings_notifies_resetting_password_text: "Текст"
+settings_notifies_resetting_password_text_help: |
+    {{ dear }} — «уважаемый/ая»<br>
+    {{ last_name }} — фамилия<br>
+    {{ first_name }} — имя<br>
+    {{ patronymic }} — отчество<br>
+    {{ sign_x }} — Подпись № X<br>
+    {{ link_reset }} — ссылка для сброса пароля
+
+settings_notifies_no_payments: "[Email] Оповещение об отсутствии оплат"
+settings_notifies_no_payments_help: |
+    Письмо отправляется тем, кто не сделал ни одной оплаты через N дней. Количество дней указываетя в разделе "Настройки".
+settings_notifies_no_payments_enabled: "Включено?"
+settings_notifies_no_payments_title: "Заголовок"
+settings_notifies_no_payments_text: "Текст"
+settings_notifies_no_payments_text_help: |
+    {{ dear }} — «уважаемый/ая»<br>
+    {{ last_name }} — фамилия<br>
+    {{ first_name }} — имя<br>
+    {{ patronymic }} — отчество<br>
+    {{ sign_x }} — Подпись № X<br>
+    {{ price }} — Сумма первой оплаты без скидки<br>
+    {{ discount }} — Скидка по промокоду<br>
+    {{ new_price }} — Сумма первой оплаты со скидкой Промокода<br>
+    {{ region_new_price }} — Сумма первой оплаты со скидкой региона и со скидкой Промокода<br>
+    {{ promo_key }} — Промокод<br>
+    {{ promo_expiration }} — Дата истечения срока действия Промокода<br>
+    {{ unsubscribe_link }} — Ссылка (адрес) для отписки от автоматической рассылки
+
+settings_notifies_after_password_recovery: "[PopUp] после восстановления пароля"
+settings_notifies_after_password_recovery_help: |
+settings_notifies_after_password_recovery_title: "Заголовок"
+settings_notifies_after_password_recovery_text: "Текст"
+settings_notifies_after_password_recovery_text_help: |
+    {{ dear }} — «уважаемый/ая»<br>
+    {{ last_name }} — фамилия<br>
+    {{ first_name }} — имя<br>
+    {{ patronymic }} — отчество<br>
+    {{ sign_x }} — Подпись № X<br>
+    {{ email }} — e-mail
+
+settings_notifies_pay_now: "[Popup] Не оплачен второй платёж"
+settings_notifies_pay_now_help: |
+    Всплывающее окно, пользователь не оплативший второй платеж получает это сообщение каждый раз когда заходит на сайт.<br><br>
+    <b>Внимание!</b> настройки периода можно посмотреть в блоке <b>Время доступа к сайту</b>
+settings_notifies_pay_now_title: "Заголовок"
+settings_notifies_pay_now_text: "Текст"
+settings_notifies_pay_now_text_help: |
+    {{ timeleft }} — «Осталось времени»<br>
+
+settings_notifies_training_without_2_payment: "[Text] Не оплачен второй платёж"
+settings_notifies_training_without_2_payment_help: |
+    при нажатии на на кнопку сдачи тестов всплывает  окно предупреждение в период когда произведен первый платеж но не был произведен второй платеж.<br><br>
+    <b>Внимание!</b> настройки периода можно посмотреть в блоке <b>Время доступа к сайту</b>
+settings_notifies_training_without_2_payment_title: "Заголовок"
+settings_notifies_training_without_2_payment_text: "Текст"
+
+settings_notifies_first_payment: "[Text] Текст на странице первой оплаты"
+settings_notifies_first_payment_text: "Текст"
+settings_notifies_first_payment_text_help: |
+    {{sum}} — стоимости доступа к теор.к. без скидки<br>
+    {{sum_discount}} — со скидкой
+settings_notifies_first_payment_promo_discount_text: "Если есть скидка по промо-кампании"
+settings_notifies_first_payment_promo_discount_text_help: |
+    {{discount}} — для вставки скидки<br>
+    {{sum}} — стоимости доступа к теор.к. без скидки<br>
+    {{sum_discount}} — со скидкой
+
+settings_notifies_second_payment: "[Text] Текст на странице второго платежа"
+settings_notifies_second_payment_title: "Заголовок"
+settings_notifies_second_payment_text: "Текст"
+
+settings_notifies_payments_mobile_not_confirmed: "[Text] Номер мобильного телефона не подтверждён"
+settings_notifies_payments_mobile_not_confirmed_help: |
+    сообщение если пользователь хочет совершить вторую оплату, но его номер телефона не валедирован.
+settings_notifies_payments_mobile_not_confirmed_title: "Заголовок"
+settings_notifies_payments_mobile_not_confirmed_text: "Текст"
+
+settings_notifies_after_confirm_mobile: "[Notify] Подтверждения номера мобильного телефона"
+settings_notifies_after_confirm_mobile_help: |
+    это сообщение будет у пользователя в Уведомлениях после подтверждения мобильного телефона.
+settings_notifies_after_confirm_mobile_enabled: "Включено?"
+settings_notifies_after_confirm_mobile_title: "Заголовок"
+settings_notifies_after_confirm_mobile_text: "Текст"
+
+settings_notifies_after_confirm_mobile_email: "[Email] Подтверждения номера мобильного телефона"
+settings_notifies_after_confirm_mobile_email_help: |
+    это сообщение придет пользователю на почту после подтверждения мобильного телефона
+settings_notifies_after_confirm_mobile_email_enabled: "Включено?"
+settings_notifies_after_confirm_mobile_email_title: "Заголовок"
+settings_notifies_after_confirm_mobile_email_text: "Текст"
+settings_notifies_after_confirm_mobile_email_text_help: |
+    {{ dear }} — «уважаемый/ая»<br>
+    {{ last_name }} — фамилия<br>
+    {{ first_name }} — имя<br>
+    {{ patronymic }} — отчество<br>
+    {{ sign_x }} — Подпись № X
+
+settings_notifies_after_1_payment: "[Notify] После первой оплаты"
+settings_notifies_after_1_payment_help: |
+    после первой оплаты уведомление в личный кабинет
+settings_notifies_after_1_payment_enabled: "Включено?"
+settings_notifies_after_1_payment_title: "Заголовок"
+settings_notifies_after_1_payment_text: "Текст"
+
+settings_notifies_after_1_promo_payment: "[Notify] После первой оплаты с Промокодом"
+settings_notifies_after_1_promo_payment_help: |
+    после первой оплаты промокодом уведомление в линый кабинет.
+settings_notifies_after_1_promo_payment_enabled: "Включено?"
+settings_notifies_after_1_promo_payment_title: "Заголовок"
+settings_notifies_after_1_promo_payment_text: "Текст"
+
+settings_notifies_after_1_payment_email: "[Email] После первой оплаты"
+settings_notifies_after_1_payment_email_help: |
+    Письмо на почту после первой оплаты
+settings_notifies_after_1_payment_email_enabled: "Включено?"
+settings_notifies_after_1_payment_email_title: "Заголовок"
+settings_notifies_after_1_payment_email_text: "Текст"
+settings_notifies_after_1_payment_email_text_help: |
+    {{ dear }} — «уважаемый/ая»<br>
+    {{ last_name }} — фамилия<br>
+    {{ first_name }} — имя<br>
+    {{ patronymic }} — отчество<br>
+    {{ sign_x }} — Подпись № X
+
+settings_notifies_after_1_promo_payment_email: "[Email] После первой оплаты с Промокодом"
+settings_notifies_after_1_promo_payment_email_help: |
+    Письмо на почту после первой оплаты промокодом
+settings_notifies_after_1_promo_payment_email_enabled: "Включено?"
+settings_notifies_after_1_promo_payment_email_title: "Заголовок"
+settings_notifies_after_1_promo_payment_email_text: "Текст"
+settings_notifies_after_1_promo_payment_email_text_help: |
+    {{ dear }} — «уважаемый/ая»<br>
+    {{ last_name }} — фамилия<br>
+    {{ first_name }} — имя<br>
+    {{ patronymic }} — отчество<br>
+    {{ sign_x }} — Подпись № X
+
+settings_notifies_timelimit_after_1_payment: "[Text] Тестовый период закончился"
+settings_notifies_timelimit_after_1_payment_help: |
+    сообщение  выдается пользователям которые сделали первую оплату но просрочили вторую оплату.<br><br>
+    <b>Внимание!</b> настройки периода можно посмотреть в блоке <b>Время доступа к сайту</b>
+settings_notifies_timelimit_after_1_payment_title: "Заголовок"
+settings_notifies_timelimit_after_1_payment_text: "Текст"
+
+settings_notifies_after_2_payment: "[Notify] После второй оплаты"
+settings_notifies_after_2_payment_help: |
+    уведомление после второй оплаты в личный кабинет пользователя
+settings_notifies_after_2_payment_enabled: "Включено?"
+settings_notifies_after_2_payment_title: "Заголовок"
+settings_notifies_after_2_payment_text: "Текст"
+
+settings_notifies_after_2_promo_payment: "[Notify] После второй оплаты с Промокодом"
+settings_notifies_after_2_promo_payment_help: |
+    Уведомление в личный кабинет пользователя  после второй оплаты промокодом
+settings_notifies_after_2_promo_payment_enabled: "Включено?"
+settings_notifies_after_2_promo_payment_title: "Заголовок"
+settings_notifies_after_2_promo_payment_text: "Текст"
+
+settings_notifies_after_2_payment_email: "[Email] После второй оплаты"
+settings_notifies_after_2_payment_email_enabled: "Включено?"
+settings_notifies_after_2_payment_email_title: "Заголовок"
+settings_notifies_after_2_payment_email_text: "Текст"
+settings_notifies_after_2_payment_email_text_help: |
+    {{ dear }} — «уважаемый/ая»<br>
+    {{ last_name }} — фамилия<br>
+    {{ first_name }} — имя<br>
+    {{ patronymic }} — отчество<br>
+    {{ sign_x }} — Подпись № X
+
+settings_notifies_after_2_promo_payment_email: "[Email] После второй оплаты с Промокодом"
+settings_notifies_after_2_promo_payment_email_help: |
+    Сообщение на почту после второй оплаты с промокодом
+settings_notifies_after_2_promo_payment_email_enabled: "Включено?"
+settings_notifies_after_2_promo_payment_email_title: "Заголовок"
+settings_notifies_after_2_promo_payment_email_text: "Текст"
+settings_notifies_after_2_promo_payment_email_text_help: |
+    {{ dear }} — «уважаемый/ая»<br>
+    {{ last_name }} — фамилия<br>
+    {{ first_name }} — имя<br>
+    {{ patronymic }} — отчество<br>
+    {{ sign_x }} — Подпись № X
+
+settings_notifies_after_payment: "[Notify] После любой другой оплаты"
+settings_notifies_after_payment_help: |
+    Уведомление в линый кабинет пользователя после других оплат
+settings_notifies_after_payment_enabled: "Включено?"
+settings_notifies_after_payment_title: "Заголовок"
+settings_notifies_after_payment_text: "Текст"
+
+settings_notifies_after_promo_payment: "[Notify] После любой другой оплаты с Промокодом"
+settings_notifies_after_promo_payment_help: |
+    Уведомление в линый кабинет пользователя после других оплат с промокодом
+settings_notifies_after_promo_payment_enabled: "Включено?"
+settings_notifies_after_promo_payment_title: "Заголовок"
+settings_notifies_after_promo_payment_text: "Текст"
+
+settings_notifies_after_payment_email: "[Email] После любой другой оплаты"
+settings_notifies_after_payment_email_help: |
+    письмо на почту пользователя после любой другой оплаты
+settings_notifies_after_payment_email_enabled: "Включено?"
+settings_notifies_after_payment_email_title: "Заголовок"
+settings_notifies_after_payment_email_text: "Текст"
+settings_notifies_after_payment_email_text_help: |
+    {{ dear }} — «уважаемый/ая»<br>
+    {{ last_name }} — фамилия<br>
+    {{ first_name }} — имя<br>
+    {{ patronymic }} — отчество<br>
+    {{ sign_x }} — Подпись № X
+
+settings_notifies_after_promo_payment_email: "[Email] После любой другой оплаты с Промокодом"
+settings_notifies_after_promo_payment_email_help: |
+    письмо на почту пользователя после любой другой оплаты промокодом
+settings_notifies_after_promo_payment_email_enabled: "Включено?"
+settings_notifies_after_promo_payment_email_title: "Заголовок"
+settings_notifies_after_promo_payment_email_text: "Текст"
+settings_notifies_after_promo_payment_email_text_help: |
+    {{ dear }} — «уважаемый/ая»<br>
+    {{ last_name }} — фамилия<br>
+    {{ first_name }} — имя<br>
+    {{ patronymic }} — отчество<br>
+    {{ sign_x }} — Подпись № X
+
+settings_notifies_primary_boosting_not_paid_driving_popup: "[PopUp] Первичный дожим не оплативших практические занятия"
+settings_notifies_primary_boosting_not_paid_driving_popup_title: "Заголовок"
+settings_notifies_primary_boosting_not_paid_driving_popup_text: "Текст"
+settings_notifies_primary_boosting_not_paid_driving_popup_text_help: |
+    {{ countdown }} - обратный отчет<br>
+    {{ paid_to }} - оплатить до<br>
+    {{ sum_office }} - сумма в офисе<br>
+    {{ sum_online }} - сумма в онлайн<br>
+    {{ last_name }} — фамилия<br>
+    {{ first_name }} — имя<br>
+    {{ patronymic }} — отчество<br>
+
+settings_notifies_primary_boosting_not_paid_driving_email: "[E-mail] Первичный дожим не оплативших практические занятия"
+settings_notifies_primary_boosting_not_paid_driving_email_enabled: "Включено?"
+settings_notifies_primary_boosting_not_paid_driving_email_title: "Заголовок"
+settings_notifies_primary_boosting_not_paid_driving_email_text: "Текст"
+settings_notifies_primary_boosting_not_paid_driving_email_text_help: |
+    {{ paid_to }} - оплатить до<br>
+    {{ sum_office }} - сумма в офисе<br>
+    {{ sum_online }} - сумма в онлайн<br>
+    {{ last_name }} — фамилия<br>
+    {{ first_name }} — имя<br>
+    {{ patronymic }} — отчество<br>
+    {{ sign_x }} — Подпись № X
+
+settings_notifies_user_not_paid_primary_boosting_not_paid_driving_popup: " [PopUp] Пользователь не оплативший первичный дожим по практическим занятиям"
+settings_notifies_user_not_paid_primary_boosting_not_paid_driving_popup_title: "Заголовок"
+settings_notifies_user_not_paid_primary_boosting_not_paid_driving_popup_text: "Текст"
+settings_notifies_user_not_paid_primary_boosting_not_paid_driving_popup_text_help: |
+    {{ sum_office }} - сумма в офисе<br>
+    {{ sum_online }} - сумма в онлайн<br>
+    {{ last_name }} — фамилия<br>
+    {{ first_name }} — имя<br>
+    {{ patronymic }} — отчество<br>
+
+settings_notifies_user_not_paid_primary_boosting_not_paid_driving_email: "[E-mail] Пользователь не оплативший первичный дожим по практическим занятиям"
+settings_notifies_user_not_paid_primary_boosting_not_paid_driving_email_enabled: "Включено?"
+settings_notifies_user_not_paid_primary_boosting_not_paid_driving_email_title: "Заголовок"
+settings_notifies_user_not_paid_primary_boosting_not_paid_driving_email_text: "Текст"
+settings_notifies_user_not_paid_primary_boosting_not_paid_driving_email_text_help: |
+    {{ sum_office }} - сумма в офисе<br>
+    {{ sum_online }} - сумма в онлайн<br>
+    {{ last_name }} — фамилия<br>
+    {{ first_name }} — имя<br>
+    {{ patronymic }} — отчество<br>
+    {{ sign_x }} — Подпись № X
+
+settings_notifies_after_all_slices: "[Notify] После всех срезов по предмету «%subject%»"
+settings_notifies_after_all_slices_help: |
+    Уведомление в Личный кабинет пользователя о сдачи всех срезов по теме «%subject%»
+settings_notifies_after_all_slices_enabled: "Включено?"
+settings_notifies_after_all_slices_title: "Заголовок"
+settings_notifies_after_all_slices_text: "Текст"
+
+settings_notifies_after_all_slices_email: "[Email] После всех срезов по предмету «%subject%»"
+settings_notifies_after_all_slices_email_help: |
+    Сообщение на почту пользователя о сдачи всех срезов по теме «%subject%»"
+settings_notifies_after_all_slices_email_enabled: "Включено?"
+settings_notifies_after_all_slices_email_title: "Заголовок"
+settings_notifies_after_all_slices_email_text: "Текст"
+settings_notifies_after_all_slices_email_text_help: |
+    {{ dear }} — «уважаемый/ая»<br>
+    {{ last_name }} — фамилия<br>
+    {{ first_name }} — имя<br>
+    {{ patronymic }} — отчество<br>
+    {{ sign_x }} — Подпись № X
+
+settings_notifies_after_fail_exam: "[Notify] После провала экзамена по предмету «%subject%»"
+settings_notifies_after_fail_exam_help: |
+    Уведомление в линый кабинет пользователя после провала экзамена «%subject%»"
+settings_notifies_after_fail_exam_enabled: "Включено?"
+settings_notifies_after_fail_exam_title: "Заголовок"
+settings_notifies_after_fail_exam_text: "Текст"
+
+settings_notifies_after_fail_exam_email: "[Email] После провала экзамена по предмету «%subject%»"
+settings_notifies_after_fail_exam_email_help: |
+    Сообщение на почту пользователя после провала экзамена «%subject%»"
+settings_notifies_after_fail_exam_email_enabled: "Включено?"
+settings_notifies_after_fail_exam_email_title: "Заголовок"
+settings_notifies_after_fail_exam_email_text: "Текст"
+settings_notifies_after_fail_exam_email_text_help: |
+    {{ dear }} — «уважаемый/ая»<br>
+    {{ last_name }} — фамилия<br>
+    {{ first_name }} — имя<br>
+    {{ patronymic }} — отчество<br>
+    {{ sign_x }} — Подпись № X
+
+settings_notifies_after_exam: "[Notify] После экзамена по предмету «%subject%»"
+settings_notifies_after_exam_help: |
+    Уведомление в личный кабинет пользователя после экзамена по предмету «%subject%»"
+settings_notifies_after_exam_enabled: "Включено?"
+settings_notifies_after_exam_title: "Заголовок"
+settings_notifies_after_exam_text: "Текст"
+
+settings_notifies_after_exam_email: "[Email] После экзамена по предмету «%subject%»"
+settings_notifies_after_exam_email_help: |
+    сообщение на почту пользователя после сдачи экзамена «%subject%»"
+settings_notifies_after_exam_email_enabled: "Включено?"
+settings_notifies_after_exam_email_title: "Заголовок"
+settings_notifies_after_exam_email_text: "Текст"
+settings_notifies_after_exam_email_text_help: |
+    {{ dear }} — «уважаемый/ая»<br>
+    {{ last_name }} — фамилия<br>
+    {{ first_name }} — имя<br>
+    {{ patronymic }} — отчество<br>
+    {{ sign_x }} — Подпись № X
+
+settings_notifies_after_all_exams: "[Notify] После всех экзаменов по предметам"
+settings_notifies_after_all_exams_help: |
+    Уведомление в личный кабинет пользователя после всех экзаменов по предметам
+settings_notifies_after_all_exams_enabled: "Включено?"
+settings_notifies_after_all_exams_title: "Заголовок"
+settings_notifies_after_all_exams_text: "Текст"
+settings_notifies_after_all_exams_text_help: |
+    {{ days }} — количество дней блокировки сдачи экзамена
+
+settings_notifies_after_all_exams_email: "[Email] После всех экзаменов по предметам"
+settings_notifies_after_all_exams_email_help: |
+    Сообщение на почту пользователя после всех экзаменов по предметам.<br>
+settings_notifies_after_all_exams_email_enabled: "Включено?"
+settings_notifies_after_all_exams_email_title: "Заголовок"
+settings_notifies_after_all_exams_email_text: "Текст"
+settings_notifies_after_all_exams_email_text_help: |
+    {{ dear }} — «уважаемый/ая»<br>
+    {{ last_name }} — фамилия<br>
+    {{ first_name }} — имя<br>
+    {{ patronymic }} — отчество<br>
+    {{ sign_x }} — Подпись № X<br>
+    {{ days }} — количество дней блокировки сдачи экзамена
+
+settings_notifies_after_final_exam: "[Notify] После финального экзамена"
+settings_notifies_after_final_exam_help: |
+    Уведомление в личный кабинет пользователя после финального экзамена
+settings_notifies_after_final_exam_enabled: "Включено?"
+settings_notifies_after_final_exam_title: "Заголовок"
+settings_notifies_after_final_exam_text: "Текст"
+
+settings_notifies_after_final_exam_email: "[Email] После финального экзамена"
+settings_notifies_after_final_exam_email_help: |
+    Сообщение на почту пользователя после финального экзамена
+settings_notifies_after_final_exam_email_enabled: "Включено?"
+settings_notifies_after_final_exam_email_title: "Заголовок"
+settings_notifies_after_final_exam_email_text: "Текст"
+settings_notifies_after_final_exam_email_text_help: |
+    {{ dear }} — «уважаемый/ая»<br>
+    {{ last_name }} — фамилия<br>
+    {{ first_name }} — имя<br>
+    {{ patronymic }} — отчество<br>
+    {{ sign_x }} — Подпись № X
+
+settings_notifies_max_errors_questions: '[PopUp] Итоговый экзамен "Максимальное количество ошибок в основных вопросах"'
+settings_notifies_max_errors_questions_help: |
+settings_notifies_max_errors_questions_text: "Текст"
+
+settings_notifies_max_errors_questions_block: '[PopUp] Итоговый экзамен "Максимальное количество ошибок в основных вопросах в одном блоке"'
+settings_notifies_max_errors_questions_block_help: |
+settings_notifies_max_errors_questions_block_text: "Текст"
+
+settings_notifies_max_errors_additional_questions: '[PopUp] Итоговый экзамен "Максимальное количество ошибок в дополнительных вопросах"'
+settings_notifies_max_errors_additional_questions_help: |
+settings_notifies_max_errors_additional_questions_text: "Текст"
+
+settings_notifies_max_errors_ticket: '[PopUp] Итоговый экзамен дополнительный билет "Максимальное количество ошибок в билете"'
+settings_notifies_max_errors_ticket_help: |
+settings_notifies_max_errors_ticket_text: "Текст"
+
+settings_notifies_before_access_time_end_after_1_payment: "[Notify] До окончания периода после первой оплаты"
+settings_notifies_before_access_time_end_after_1_payment_help: |
+    Уведомление в личный кабинет пользователя до окончания периода после первой оплаты<br><br>
+    <b>ВНИМАНИЕ!</b> Настройка периода расслыки в блоке <b>Время доступа к сайту</b>
+settings_notifies_before_access_time_end_after_1_payment_enabled: "Включено?"
+settings_notifies_before_access_time_end_after_1_payment_title: "Заголовок"
+settings_notifies_before_access_time_end_after_1_payment_text: "Текст"
+
+settings_notifies_before_access_time_end_after_1_payment_email: "[Email] До окончания периода после первой оплаты"
+settings_notifies_before_access_time_end_after_1_payment_email_help: |
+    Сообщение на почту пользователя до окончания периода после первой оплаты
+settings_notifies_before_access_time_end_after_1_payment_email_enabled: "Включено?"
+settings_notifies_before_access_time_end_after_1_payment_email_title: "Заголовок"
+settings_notifies_before_access_time_end_after_1_payment_email_text: "Текст"
+settings_notifies_before_access_time_end_after_1_payment_email_text_help: |
+    {{ dear }} — «уважаемый/ая»<br>
+    {{ last_name }} — фамилия<br>
+    {{ first_name }} — имя<br>
+    {{ patronymic }} — отчество<br>
+    {{ sign_x }} — Подпись № X
+
+settings_notifies_after_access_time_end_after_1_payment: "[Email] После окончания периода после первой оплаты"
+settings_notifies_after_access_time_end_after_1_payment_help: |
+    Сообщение на почту пользователя после окончания периода после первой оплаты
+settings_notifies_after_access_time_end_after_1_payment_enabled: "Включено?"
+settings_notifies_after_access_time_end_after_1_payment_title: "Заголовок"
+settings_notifies_after_access_time_end_after_1_payment_text: "Текст"
+settings_notifies_after_access_time_end_after_1_payment_text_help: |
+    {{ dear }} — «уважаемый/ая»<br>
+    {{ last_name }} — фамилия<br>
+    {{ first_name }} — имя<br>
+    {{ patronymic }} — отчество<br>
+    {{ sign_x }} — Подпись № X
+
+settings_notifies_before_access_time_end_after_2_payment: "[Notify] До окончания периода после второй оплаты"
+settings_notifies_before_access_time_end_after_2_payment_help: |
+    Уведомление в личный кабинет пользователя до окончания периода после второй оплаты
+settings_notifies_before_access_time_end_after_2_payment_enabled: "Включено?"
+settings_notifies_before_access_time_end_after_2_payment_title: "Заголовок"
+settings_notifies_before_access_time_end_after_2_payment_text: "Текст"
+
+settings_notifies_before_access_time_end_after_2_payment_email: "[Email] До окончания периода после второй оплаты"
+settings_notifies_before_access_time_end_after_2_payment_email_help: |
+    Сообщение на почту пользователя до окончания периода после второй оплаты
+settings_notifies_before_access_time_end_after_2_payment_email_enabled: "Включено?"
+settings_notifies_before_access_time_end_after_2_payment_email_title: "Заголовок"
+settings_notifies_before_access_time_end_after_2_payment_email_text: "Текст"
+settings_notifies_before_access_time_end_after_2_payment_email_text_help: |
+    {{ dear }} — «уважаемый/ая»<br>
+    {{ last_name }} — фамилия<br>
+    {{ first_name }} — имя<br>
+    {{ patronymic }} — отчество<br>
+    {{ sign_x }} — Подпись № X
+
+settings_notifies_after_access_time_end_after_2_payment: "[Email] После окончания периода после второй оплаты"
+settings_notifies_after_access_time_end_after_2_payment_help: |
+    Сообщение на почту пользователя  после окончания периода после второй оплаты
+settings_notifies_after_access_time_end_after_2_payment_enabled: "Включено?"
+settings_notifies_after_access_time_end_after_2_payment_title: "Заголовок"
+settings_notifies_after_access_time_end_after_2_payment_text: "Текст"
+settings_notifies_after_access_time_end_after_2_payment_text_help: |
+    {{ dear }} — «уважаемый/ая»<br>
+    {{ last_name }} — фамилия<br>
+    {{ first_name }} — имя<br>
+    {{ patronymic }} — отчество<br>
+    {{ sign_x }} — Подпись № X
+
+settings_notifies_profile_messages: "Сообщения в профиле"
+settings_notifies_profile_final_exam: "Текст о сдаче финального экзамена с ссылкой (вставьте %certificate_link% для замены на адрес для скачивания)"
+
+settings_notifies_training_theme_test_messages: "Сообщения в тестировании после темы"
+settings_notifies_training_theme_test_success: "Верно ответили на вопрос"
+settings_notifies_training_theme_test_error: "Неверно ответили на вопрос"
+settings_notifies_training_theme_test_timeout: "Время закончилось"
+settings_notifies_training_theme_test_complete_next: "Тестирование завершено, но есть следующая тема"
+settings_notifies_training_theme_test_complete_list: "Тестирование завершено, но нет следующей темы"
+settings_notifies_training_theme_test_long_time: "Долго отсутствовал"
+
+settings_notifies_training_slice_messages: "Сообщения в срезах"
+settings_notifies_training_slice_success: "Верно ответили на вопрос"
+settings_notifies_training_slice_error: "Неверно ответили на вопрос"
+settings_notifies_training_slice_timeout: "Время закончилось"
+settings_notifies_training_slice_complete: "Срез завершён"
+settings_notifies_training_slice_long_time: "Долго отсутствовал"
+settings_notifies_training_slice_max_errors: "Много ошибок"
+
+settings_notifies_training_exam_messages: "Сообщения в экзаменах"
+settings_notifies_training_exam_success: "Верно ответили на вопрос"
+settings_notifies_training_exam_error: "Неверно ответили на вопрос"
+settings_notifies_training_exam_timeout: "Время закончилось"
+settings_notifies_training_exam_complete: "Экзамен завершён"
+settings_notifies_training_exam_long_time: "Долго отсутствовал"
+settings_notifies_training_exam_max_errors: "Много ошибок"
+settings_notifies_training_exam_retake: "Пересдача не возможна"
+
+settings_notifies_training_final_exam_messages: "Сообщения в финальном экзамене"
+settings_notifies_training_final_exam_description: "Описание"
+settings_notifies_training_final_exam_description_help: |
+    {{ exam }} — количество зкзаменов
+settings_notifies_training_final_exam_success: "Верно ответили на вопрос"
+settings_notifies_training_final_exam_error: "Неверно ответили на вопрос"
+settings_notifies_training_final_exam_timeout: "Время закончилось"
+settings_notifies_training_final_exam_complete: "Финальный экзамен завершён"
+settings_notifies_training_final_exam_long_time: "Долго отсутствовал"
+settings_notifies_training_final_exam_max_errors: "Много ошибок"
+settings_notifies_training_final_exam_retake: "Пересдача не возможна"
+settings_notifies_training_final_exam_denied: "Не доступен"
+settings_notifies_training_final_exam_passed: "Уже прошли (%certificate_link% заменится на адрес для скачивания сертификата)"
+
+settings_notifies_training_test_messages: "Сообщения в тесте как в ГИБДД по билетам"
+settings_notifies_training_test_success: "Верно ответили на вопрос"
+settings_notifies_training_test_error: "Неверно ответили на вопрос"
+settings_notifies_training_test_timeout: "Время закончилось"
+settings_notifies_training_test_complete: "Тестирование завершено"
+settings_notifies_training_test_long_time: "Долго отсутствовал"
+settings_notifies_training_test_max_errors: "Много ошибок"
+
+settings_notifies_training_test_knowledge_messages: "Сообщения в тесте как в ГИБДД по темам"
+settings_notifies_training_test_knowledge_success: "Верно ответили на вопрос"
+settings_notifies_training_test_knowledge_error: "Неверно ответили на вопрос"
+settings_notifies_training_test_knowledge_timeout: "Время закончилось"
+settings_notifies_training_test_knowledge_complete: "Тестирование завершено"
+settings_notifies_training_test_knowledge_long_time: "Долго отсутствовал"
+settings_notifies_training_test_knowledge_max_errors: "Много ошибок"
+
+settings_notifies_help_btns: "Кнопки помощи"
+settings_notifies_trainings_help_btn: "В обучении"
+settings_notifies_training_help_btn: "В предмете «%subject%»"
+settings_notifies_theme_help_btn: "В темах"
+settings_notifies_question_help_btn: "В вопросах"
+settings_notifies_promo_help_btn: "О Промокодах"
+
+settings_notifies_discount_2: "Скидки для регистрации в ГИБДД"
+settings_notifies_discount_2_help: |
+    Сообщения для блока скидок на оплату “Регистрации в ГИБДД”<br>
+    <b>Внимание!</b> настройки периода действия скидки смотреть в разделе <b>Регионы/Город</b>
+settings_notifies_discount_2_notify_first: "[Popup] В начале первого этапа"
+settings_notifies_discount_2_notify_first_help: |
+    {{ countdown }} — счётчик до завершения этапа<br>
+    {{ discount }} — сумма скидки<br>
+    {{ price }} — изначальная цена<br>
+    {{ new_price }} — цена с учётом скидки
+settings_notifies_discount_2_notify_second: "[Popup] В начале второго этапа"
+settings_notifies_discount_2_notify_second_help: |
+    {{ countdown }} — счётчик до завершения этапа<br>
+    {{ discount }} — сумма скидки<br>
+    {{ price }} — изначальная цена<br>
+    {{ new_price }} — цена с учётом скидки
+settings_notifies_discount_2_warning_sms_first: "[SMS] Перед завершением первого этапа"
+settings_notifies_discount_2_warning_sms_first_help: |
+    {{ timeout }} — время до завершения этапа
+settings_notifies_discount_2_missing_sms: "[SMS] В начале второго этапа"
+settings_notifies_discount_2_missing_sms_help: |
+    {{ timeout }} — время до завершения этапа
+settings_notifies_discount_2_warning_sms_second: "[SMS] Перед завершением второго этапа"
+settings_notifies_discount_2_warning_sms_second_help: |
+    {{ timeout }} — время до завершения этапа
+
+settings_notifies_discount_2_notify_first_email: "[E-mail] В начале первого этапа скидки для регистрации в ГИБДД"
+settings_notifies_discount_2_notify_first_email_title: "Заголовок"
+settings_notifies_discount_2_notify_first_email_text: "Текст"
+settings_notifies_discount_2_notify_first_email_text_help: |
+    {{ dear }} — «уважаемый/ая»<br>
+    {{ last_name }} — фамилия<br>
+    {{ first_name }} — имя<br>
+    {{ patronymic }} — отчество<br>
+    {{ sign_x }} — Подпись № X<br>
+    {{ end_time }} — дата и время завершения этапа<br>
+    {{ discount }} — сумма скидки<br>
+    {{ price }} — изначальная цена<br>
+    {{ new_price }} — цена с учётом скидки<br>
+
+settings_notifies_discount_2_warning_first_email: "[E-mail] Перед завершением первого этапа скидки для регистрации в ГИБДД"
+settings_notifies_discount_2_warning_first_email_title: "Заголовок"
+settings_notifies_discount_2_warning_first_email_text: "Текст"
+settings_notifies_discount_2_warning_first_email_text_help: |
+    {{ dear }} — «уважаемый/ая»<br>
+    {{ last_name }} — фамилия<br>
+    {{ first_name }} — имя<br>
+    {{ patronymic }} — отчество<br>
+    {{ sign_x }} — Подпись № X<br>
+    {{ end_time }} — дата и время завершения этапа<br>
+    {{ discount }} — сумма скидки<br>
+    {{ price }} — изначальная цена<br>
+    {{ new_price }} — цена с учётом скидки
+
+settings_notifies_discount_2_missing_email: "[E-mail] В начале второго этапа скидки для регистрации в ГИБДД"
+settings_notifies_discount_2_missing_email_title: "Заголовок"
+settings_notifies_discount_2_missing_email_text: "Текст"
+settings_notifies_discount_2_missing_email_text_help: |
+    {{ dear }} — «уважаемый/ая»<br>
+    {{ last_name }} — фамилия<br>
+    {{ first_name }} — имя<br>
+    {{ patronymic }} — отчество<br>
+    {{ sign_x }} — Подпись № X<br>
+    {{ end_time }} — дата и время завершения этапа<br>
+    {{ discount }} — сумма скидки<br>
+    {{ price }} — изначальная цена<br>
+    {{ new_price }} — цена с учётом скидки
+
+settings_notifies_discount_2_warning_second_email: "[E-mail] Перед завершением второго этапа скидки для регистрации в ГИБДД"
+settings_notifies_discount_2_warning_second_email_title: "Заголовок"
+settings_notifies_discount_2_warning_second_email_text: "Текст"
+settings_notifies_discount_2_warning_second_email_text_help: |
+    {{ dear }} — «уважаемый/ая»<br>
+    {{ last_name }} — фамилия<br>
+    {{ first_name }} — имя<br>
+    {{ patronymic }} — отчество<br>
+    {{ sign_x }} — Подпись № X<br>
+    {{ end_time }} — дата и время завершения этапа<br>
+    {{ discount }} — сумма скидки<br>
+    {{ price }} — изначальная цена<br>
+    {{ new_price }} — цена с учётом скидки
+
+settings_notifies_birthday_greeting: "[E-mail] Письмо поздравления с днем рождения"
+settings_notifies_birthday_greeting_help: |
+    В день рождение пользователю приходит письмо на почту с поздравлением и генерацией рендомного промокода
+settings_notifies_birthday_greeting_title: "Заголовок"
+settings_notifies_birthday_greeting_title_help: |
+    {{ last_name }} — фамилия<br>
+    {{ first_name }} — имя<br>
+    {{ patronymic }} — отчество<br>
+    {{ sign_x }} — Подпись № X
+settings_notifies_birthday_greeting_text: "Текст"
+settings_notifies_birthday_greeting_text_help: |
+    {{ dear }} — «уважаемый/ая»<br>
+    {{ last_name }} — фамилия<br>
+    {{ first_name }} — имя<br>
+    {{ patronymic }} — отчество<br>
+    {{ sign_x }} — Подпись № X<br>
+    {{ promo }} — Промокод<br>
+    {{ date }} — дата окончания действия Промокода
+
+settings_notifies_lock_unlock: "[Email] Письма о блокировке/разблокировке"
+settings_notifies_lock_unlock_help: "Высылаются, когда пользователя блокируют из панели администрациии."
+settings_notifies_lock_user_enabled: "Включено?"
+settings_notifies_lock_user_title: "Заголовок"
+settings_notifies_lock_user_text: "Текст"
+settings_notifies_lock_user_text_help: |
+    {{ dear }} — «уважаемый/ая»<br>
+    {{ last_name }} — фамилия<br>
+    {{ first_name }} — имя<br>
+    {{ patronymic }} — отчество<br>
+    {{ sign_x }} — Подпись № X
+settings_notifies_unlock_user_enabled: "Включено?"
+settings_notifies_unlock_user_title: "Заголовок"
+settings_notifies_unlock_user_text: "Текст"
+settings_notifies_unlock_user_text_help: |
+    {{ dear }} — «уважаемый/ая»<br>
+    {{ last_name }} — фамилия<br>
+    {{ first_name }} — имя<br>
+    {{ patronymic }} — отчество<br>
+    {{ sign_x }} — Подпись № X
+
+settings_notifies_errors: "Ошибки"
+settings_notifies_errors_help: "Редактирование различных оповещений об ошибках на сайте."
+settings_notifies_error_account_locked: "Для заблокированного пользователя"
+settings_notifies_error_account_locked_help: |
+    Отображается для заблокированного пользователя при попытке авторизации.<br>
+    {{ last_name }} — фамилия<br>
+    {{ first_name }} — имя<br>
+    {{ patronymic }} — отчество<br>
+
+settings_notifies_support_answered_email: "[Email] Оповещение об ответе"
+settings_notifies_support_answered_email_help: "Письмо-оповещение об ответе на запрос в службу поддержки."
+settings_notifies_support_answered_email_enabled: "Включено?"
+settings_notifies_support_answered_email_title: "Заголовок"
+settings_notifies_support_answered_email_text: "Текст"
+settings_notifies_support_answered_email_text_help: |
+    {{ dear }} — «уважаемый/ая»<br>
+    {{ last_name }} — фамилия<br>
+    {{ first_name }} — имя<br>
+    {{ patronymic }} — отчество<br>
+    {{ sign_x }} — Подпись № X
+
+settings_notifies_api_add_user_email: "[Email] для пользователей зарегестрированных через калькулятор АО"
+settings_notifies_api_add_user_email_title: "Заголовок"
+settings_notifies_api_add_user_email_text: "Текст"
+settings_notifies_api_add_user_email_text_help: |
+    {{ dear }} — «уважаемый/ая»<br>
+    {{ last_name }} — фамилия<br>
+    {{ first_name }} — имя<br>
+    {{ patronymic }} — отчество<br>
+    {{ sign_x }} — Подпись № X<br>
+    {{ email }} — e-mail<br>
+    {{ url }} — URL сайта ДО<br>
+    {{ password }} — пароль<br>
+    {{ pass }} - ссылка первичного входа в систему
+
+settings_notifies_after_changing_phone_number: "[Alert] После смены номера телефона"
+settings_notifies_after_changing_phone_number_text: "Текст"
+settings_notifies_after_changing_phone_number_text_help: |
+
+settings_notifies_info_attempts: "[Text] Уведомление о первой попытке сдачи экзамена"
+settings_notifies_info_attempts_title: "Заголовок"
+settings_notifies_info_attempts_text: "Текст"
+settings_notifies_info_attempts_text_help: |
+    {{ days }} — количество дней блокировки сдачи экзамена
+
+settings_notifies_attempts_buy: "[Text] Уведомление о повторной попытке сдачи экзамена и отсутствии купленных попыток"
+settings_notifies_attempts_buy_title: "Заголовок"
+settings_notifies_attempts_buy_text: "Текст"
+settings_notifies_attempts_buy_text_help: |
+    {{ date }} — дата окончания<br>
+    {{ time_left }} - счетчик обратноого отсчета до даты окончания
+
+settings_notifies_second_attempt: "[Text] Уведомление о повторной попытке сдачи экзамена и предложение воспользоваться купленными попытками"
+settings_notifies_second_attempt_title: "Заголовок"
+settings_notifies_second_attempt_text: "Текст"
+settings_notifies_second_attempt_text_help: |
+    {{ date }} — дата окончания<br>
+    {{ time_left }} - счетчик обратноого отсчета до даты окончания<br>
+    {{ try }} — количество доступных попыток<br>
+    {{ buy }} - количество купленных попыток<br>
+
+settings_notifies_attempts_reset_progress: "[Popup] уведомление пользователю о том, что его прогресс обучения сброшен"
+settings_notifies_attempts_reset_progress_title: "Заголовок"
+settings_notifies_attempts_reset_progress_text: "Текст"
+
+settings_notifies_tickets_is_sended: "[E-mail] Уведомление о том, что письмо с талонами было отправлено голубиной почтой"
+settings_notifies_tickets_is_sended_title: "Заголовок"
+settings_notifies_tickets_is_sended_text: "Текст"
+settings_notifies_tickets_is_sended_text_help: |
+
+settings_notifies_doc_is_done: "[E-mail] Уведомление о том, что для ученика были оформлены документы об окончании автошколы"
+settings_notifies_doc_is_done_title: "Заголовок"
+settings_notifies_doc_is_done_text: "Текст"
+settings_notifies_doc_is_done_text_help: |
+
+settings_notifies_doc_is_confirm: " [E-mail] Уведомление о том, что все документы были одобрены администратором филиала МО"
+settings_notifies_doc_is_confirm_title: "Заголовок"
+settings_notifies_doc_is_confirm_text: "Текст"
+settings_notifies_doc_is_confirm_text_help: |
+
+settings_notifies_doc_is_fail: "[E-mail] Уведомление о том, что не все документы были одобрены администратором филиала МО"
+settings_notifies_doc_is_fail_title: "Заголовок"
+settings_notifies_doc_is_fail_text: "Текст"
+settings_notifies_doc_is_fail_text_help: |
+
+settings_notifies_need_fill_profile: "[PopUp] Предупреждение ученика о том, что нужно заполнить Профиль"
+settings_notifies_need_fill_profile_title: "Заголовок"
+settings_notifies_need_fill_profile_text: "Текст"
+settings_notifies_need_fill_profile_text_help: |
+settings_notifies_need_fill_profile_button: "Текст на кнопке"
+
+settings_notifies_activation_add_user: "[E-mail] для учеников из Добавить и Добавить быстро"
+settings_notifies_activation_add_user_title: "Заголовок"
+settings_notifies_activation_add_user_text: "Текст"
+settings_notifies_activation_add_user_text_help: |
+    {{ link_confirm }} — ссылка подтверждения регистрации<br>
+    {{ dear }} — «уважаемый/ая»<br>
+    {{ last_name }} — фамилия<br>
+    {{ first_name }} — имя<br>
+    {{ patronymic }} — отчество<br>
+    {{ sign_x }} — Подпись № X<br>
+    {{ password }} — пароль<br>
+    {{ email }} — E-mail<br>
+
+settings_notifies_confirmation_code_was_sent_again: "[Alert] Код подтверждения был выслан повторно"
+settings_notifies_confirmation_code_was_sent_again_title: "Заголовок"
+settings_notifies_confirmation_code_was_sent_again_text: "Текст"
+settings_notifies_confirmation_code_was_sent_again_text_help: |
+
+settings_notifies_confirmation_code_time_to_resend: "[Text] Интервал повторной отправки кода подтверждения"
+settings_notifies_confirmation_code_time_to_resend_text: "Текст"
+settings_notifies_confirmation_code_time_to_resend_text_help: |
+    {{ timer_resending }} - количество минут, через которое возможна повторная отправка подтверждения<br>
+
+settings_notifies_api_med_form: "[Popup] Вы не оформили мед справку"
+settings_notifies_api_med_form_help: "Раз в сутки, ученикам пришедшим с сайта АО, у которого есть 2 оплаты"
+
+settings_notifies_api_contract_sign: "[Popup] Вы не подписали договор"
+settings_notifies_api_contract_sign_help: "Раз в сутки, ученикам пришедшим с сайта АО, у которого есть 2 оплаты"
+
+settings_notifies_api_med_con: "[Popup] Вы не оформили мед справку и не подписали договор"
+settings_notifies_api_med_con_help: "Раз в сутки, ученикам пришедшим с сайта АО, у которого есть 2 оплаты"
+
+settings_notifies_unpaid_driving_email: "[E-Mail] Напоминание о том, что нужно оплатить вождение"
+settings_notifies_unpaid_driving_email_enabled: "Включено?"
+settings_notifies_unpaid_driving_email_title: "Заголовок"
+settings_notifies_unpaid_driving_email_text: "Текст"
+settings_notifies_unpaid_driving_email_help: "[E-Mail] Через 45 дней после второй оплаты отправлять уведомление о том, что нужно оплатить вождение"
+settings_notifies_unpaid_driving_email_text_help: |
+    {{ dear }} — «уважаемый/ая»<br>
+    {{ last_name }} — фамилия<br>
+    {{ first_name }} — имя<br>
+    {{ patronymic }} — отчество<br>
+    {{ sign_x }} — Подпись № X<br>
+
+settings_notifies_unpaid_driving_sms: "[SMS] Напоминание о том, что нужно оплатить вождение"
+settings_notifies_unpaid_driving_sms_enabled: "Включено?"
+settings_notifies_unpaid_driving_sms_text: "Текст"
+settings_notifies_unpaid_driving_sms_help: "Через 45 дней после второй оплаты отправлять уведомление о том, что нужно оплатить вождение"
+settings_notifies_unpaid_driving_sms_text_help: |
+    {{ dear }} — «уважаемый/ая»<br>
+    {{ last_name }} — фамилия<br>
+    {{ first_name }} — имя<br>
+    {{ patronymic }} — отчество<br>
+    {{ sign_x }} — Подпись № X<br>
+
+settings_timer: "Таймер"
+settings_coset_owe_stage: "Оплата просрочки обучения"
+settings_cost_driving_payment_in_office: "Стоимость оплаты в офисе"
+
+theme_answer_questions: "Ответить на вопросы"
+slice_start: "Пройти срез"
+exam_start: "Пройти экзамен"
+
+ticket_num: "Билет №%ticket%"
+
+theme_test_title: "Тест"
+theme_test_timeout: "Время закончилось!"
+theme_test_timeout_repeat: "Пройти тестирование"
+theme_test_timeout_return: "Повторить материал"
+theme_test_complete: "Тестирование завершено!"
+theme_test_complete_next: "Перейти к следующей теме"
+theme_test_complete_list: "Перейти к списку тем"
+theme_test_comments: "Комментарии к неверным ответам?"
+theme_test_longtime: "Время закончилось!"
+
+theme_test_is_shuffle:
+    total: "Всего %n% вопрос.|Всего %n% вопроса.|Всего %n% вопросов."
+    success_in_row: "Отвечено правильно %times% на %n% вопрос.|Отвечено правильно %times% на %n% вопроса.|Отвечено правильно %times% на %n% вопросов."
+    success_in_row_title: "Отвечено правильно %times%|Отвечено правильно %times%|Отвечено правильно %times%"
+    success_this: "Правильных ответов на этот вопрос %n% из %need%."
+    success_this_in_row: "Правильных ответов на этот вопрос %n%. Из них %n_in_row% подряд из %need%."
+    remaining: "Осталось ответить на %n% вопрос.|Осталось ответить на %n% вопроса.|Осталось ответить на %n% вопросов."
+    times: "%n% раз|%n% раза|%n% раз"
+    in_row: "подряд"
+
+slice_title: "Срез"
+slice_timeout: "Время закончилось!"
+slice_max_errors: "Много ошибок!"
+slice_complete: "Поздравляем!"
+slice_list: "Перейти к списку тем"
+slice_longtime: "Время закончилось!"
+
+exam_title: "Экзамен"
+exam_timeout: "Время закончилось!"
+exam_max_errors: "Экзамен не сдан"
+exam_complete: "Поздравляем!"
+exam_retake: "Пересдача невозможна!"
+exam_list: "Перейти к списку тем"
+exam_start: "Приступить к экзамену"
+exam_back_to_trainings: "Перейти к дальнейшему обучению"
+exam_longtime: "Время закончилось!"
+
+final_exam: "Итоговый экзамен"
+
+training:
+    theme: "Тема"
+    slice: "Срез по предыдущим темам"
+    exam: "Экзамен"
+    final_exam:
+        denied: "Итоговый экзамен недоступен!"
+        passed: "Итоговый экзамен сдан"
+        max_errors: "Много ошибок!"
+        timeout: "Время закончилось!"
+        retake: "Пересдача невозможна!"
+        complete: "Поздравляем!"
+        back_to_list: "Вернуться к обучению"
+        longtime: "Время закончилось!"
+
+test:
+    max_errors: "Много ошибок!"
+    timeout: "Время закончилось!"
+    complete: "Поздравляем!"
+    longtime: "Время закончилось!"
+
+test_knowledge:
+    max_errors: "Много ошибок!"
+    timeout: "Время закончилось!"
+    complete: "Поздравляем!"
+    longtime: "Время закончилось!"
+
+RUB: "руб."
+minute: "мин."
+hours: "ч."
+days: "д."
+attempts: "п."
+
+reset: "Сбросить результаты"
+
+promo_active: "Активна"
+promo_name: "Название"
+promo_promo_key: "Промокод"
+promo_status: "Статус"
+promo_key_used: "Использован"
+promo_key_createdFrom: "Создан позже, чем"
+promo_key_createdTo: "Создан раньше, чем"
+promo_key_activatedFrom: "Исп. позже, чем"
+promo_key_activatedTo: "Исп. раньше, чем"
+promo_used_from: "Действует с"
+promo_used_to: "Действует до"
+promo_discount: "Размер скидки (в рублях)"
+promo_generateKeysCount: "Сегенерировать ключей (шт.)"
+promo_generateKeysCountHelp: "Только для типа ограничения 'По кол-ву ключей'. Ключи будут автоматически сгенерированы и привязаны к создаваемой кампании"
+promo_maxUsers: "Максимальное число пользователей"
+promo_maxUsersHelp: "Только для типа ограничения 'По кол-ву пользователей'"
+promo_restricted: "Ограничение по"
+promo_restricted_by_keys: "Количеству одноразовых ключей"
+promo_restricted_by_users: "Количеству пользователей (1 ключ)"
+promo_restricted_cant_change_maxusers_error: "Нельзя сменить тип промо-кампании, так как с ней связано более одного ключа"
+promo_type: "Применяется для оплаты"
+
+promo_error_cant_change: "Нельзя сменить тип промо-кампании, так как с ней связано более одного ключа"
+promo_error_cant_delete_logs: "По данной промо-кампании уже были оплаты и поэтому её нельзя удалить."
+
+promo_key_active: "Активен"
+promo_key_discount: "Скидка"
+promo_key_type: "Применяется для оплаты"
+promo_key_hashHelp: "Оставьте пустым, чтобы ключ сгенерировался автоматически"
+promo_key_hash: "Ключ"
+promo_key_promo: "Промо-кампания"
+promo_keys_generate_count_help: "За раз можно сгенерировать до 1000 ключей"
+promo_key_count: "Количество ключей"
+
+promo_key_error_closed: "Промо-кампания, связанная с данным промо-ключём уже завершена."
+promo_key_error_max_users: "По данной промо-кампании уже зарегистрировано максимальное число пользователей."
+promo_key_error_used: "По данному Промокоду кто-то уже зарегистрировался."
+promo_key_error_not_exist: "Такой промо-ключ не зарегистрирован."
+promo_key_error_cant_delete_users: "По данному промо-ключу уже зарегистрировались пользователи и поэтому его нельзя удалить."
+promo_key_error_cant_delete_logs: "Данный промо-ключ уже использовался и поэтому его нельзя удалить."
+
+test_tickets: "Выбор билета"
+test_comments: "Комментарии к неверным ответам?"
+test_time: "Учитывать время?"
+test_check_all: "Все билеты"
+test_return: "Пройти ещё раз"
+
+test_knowledge_themes: "Выбор тем"
+test_knowledge_comments: "Комментарии к неверным ответам?"
+test_knowledge_time: "Учитывать время?"
+test_knowledge_check_all: "Все темы"
+test_knowledge_return: "Пройти ещё раз"
+test_knowledge_questions_cnt: "(%cnt% вопрос)|(%cnt% вопроса)|(%cnt% вопросов)"
+test_knowledge_not_enough_questions: "Необходимо, чтобы в выбранных темах было 20 вопросов или больше."
+
+payments:
+    region_not_found: "Регион не определён"
+    region_not_found_description: "Для продолжения работы с платежами необходимо установить Ваш регион в профиле."
+    set_region: "Установить регион"
+    paid: "%sum% руб."
+    pay: "Оплатить <span class='sum'>%sum%</span>р."
+
+admin_pass: "Отметить как пройд."
+
+paid_notify:
+    pay: "Оплатить сейчас"
+    left: "Осталось"
+
+stat:
+    subject: "Предмет оценки"
+    theme_num: "Тема №%num%"
+    stat: "%proc%% (%correct% из %all%)"
+    status:
+        passed: "сдан"
+        not_passed: "не сдан"
+        aborted: "прерван"
+
+unsubscribe: "E-mail \"%email%\" успешно отписан от рассылки."
+unsubscribe_body_text: "Вы действительно желаете больше не получать письма от Автошколы Онлайн?"
+unsubscribe_button_yes: "Да"
+unsubscribe_button_no: "Нет"
+unsubscribe_done_title: "Отписаться от рассылок"
+unsubscribe_done: 'Пользователь "%userName%" отписан от всех рассылок'
+
+_btn_trainings: "Перейти к обучению"
+_btn_profile_edit: "Заполнить профиль"
+_btn_payments_2: "Оплатить"
+trainings_alert: "Уважаемый пользователь, начать сдавать тесты по темам Вы можете только поле 2-ой оплаты."
+help_title: "Помощь"
+
+ROLE_ADMIN: "Админ"
+ROLE_MOD_CONTENT: "Редактирование данных"
+ROLE_MOD_PRECHECK_USERS: "Проверка пользователей"
+ROLE_MOD_PARADOX_USERS: "Перенос в Paradox"
+ROLE_MOD_ADD_USER: "Добавление пользователей"
+ROLE_MOD_SUPPORT: "Система поддержки"
+ROLE_MOD_MAILING: "Рассылка"
+ROLE_MOD_FINANCE: "Финансовый аналитик"
+ROLE_MOD_REG_STAT: "Статистика регистраций"
+ROLE_MOD_API_STAT: "Статистика API"
+ROLE_MOD_MANAGER: "Менеджер"
+ROLE_MOD_ACCOUNTANT: "Возврат денег"
+ROLE_MOD_REPRESENTATIVE: "Представитель рыбинской автошколы"
+ROLE_TESTER_TRAINING: "Тестировщик обучения"
+
+feedback: "Обратная связь"
+feedback_error: "Извините, не получилось отправить сообщение. Попробуйте ещё раз."
+feedback_success: "Сообщение успешно отправлено."
+feedbackTeacher: "Связь с преподавателем"
+feedbackTeacher_error: "Извините, не получилось отправить сообщение. Попробуйте ещё раз."
+feedbackTeacher_success: "Сообщение успешно отправлено."
+form_destination: "Получатель"
+form_text: "Текст сообщения"
+form_from: "От"
+form_subject: "Тема письма"
+form_study_subject: "Предмет"
+form_study_theme: "Тема предмета"
+
+enter_access: "Я прочитал и согласен с <a href=\"%url%\" target=\"_blank\">условиями дороговора-оферты</a>"
+enter_privacy: "Я прочитал и согласен с <a href=\"%url%\" target=\"_blank\">условиями конфидециальности</a>"
+
+form.new_password: "Новый пароль"
+form.new_password_confirmation: "Ещё раз новый пароль"
+
+send_email_to: "Кому"
+send_email_subject: "Тема"
+send_email_message: "Сообщение"
+
+mailing_name: "Название рассылки"
+mailing_title: "Заголовок письма"
+mailing_message: "Сообщение"
+mailing_message_help: |
+        {{ dear }} — «уважаемый/ая»<br>
+        {{ last_name }} — фамилия<br>
+        {{ first_name }} — имя<br>
+        {{ patronymic }} — отчество<br>
+        {{ sign_x }} — Подпись № X<br>
+        {{ username }} — имя пользователя<br>
+        {{ unsubscribe_link }} — ссылка для отписки от рассылок
+unsubscribe_done_title: Отписаться от рассылок
+unsubscribe_done: Пользователь "%userName%" отписан от всех рассылок
+
+mailing_date: "Дата"
+mailing_filters: "Фильтры"
+mailing_users: "Пользователи"
+mailing_forceSending: "Отправить даже отписавшимся"
+
+unsubscribe_mailing: "Отписаться от рассылок"
+
+test_email_email: "E-mail"
+
+statistics_from: "От"
+statistics_to: "До"
+
+user_confirmation: "Для подтверждения регистрации на телефон \"%phone%\" отправлено СМС сообщение в котором указан 4-хзначный код, введите код для подтверждения регистрации в Автошкола Онлайн."
+user_confirmation_email_subject: "Регистрация нового пользователя в Автошкола Онлайн"
+user_confirmation_email_message: |
+        {{ email }}
+        {{ password }}
+        {{ url }}
+
+
+flash_block_item_category: Категория
+flash_block_item_parent: Родительский элемент
+flash_block_item_title: Заголовок
+flash_block_item_subtitle: Подзаголовок
+flash_block_item_text: Текст
+flash_block_placeholder: Код для вставки
+flash_block_key: Ключ
+flash_block_title: Заголовок
+flash_block_is_simple: Простой?
+
+api_radios:
+    want_pay: Если все понравится, готов оплатить и начать учиться
+    training_after: Даже если все понравится, начну обучение не ранее: x месяцев
+    not_going: В ближайшее время учиться не собираюсь, просто хочу посмотреть систему
+
+reg: "Зарегистрировались"
+first_paid: "Первая оплата"
+second_paid: "Вторая оплата"
+driving_paid: "Оплатили Вождение"
+load_document: "Загрузили документы"
+driving_additional_paid: "Оплатил доп вождения"
+driving: "Вождение"
+driving_additional: "Доп вождение"
+execute_documents: "Оформить документы "
+get_documents: "Получить документы"
+graduated: "Закончил обучение"
+all: "Все"
+filter_condition: "Выберите условие"
+user_card_user_documents: "Документы ученика на проверку"
+user_card_user_documents_checked: "Документы ученика прошедшие проверку"
+user_card_final_documents: "Документы о завершении обучения"
+user_card_user_document_name: "Тип документа"
+user_card_user_document_ico: "Изображение"
+user_card_user_document_status: "Состояние"
+user_card_user_document_comment: "Комментарий"
+user_card_user_driving_package: "Пакеты вождения"
+user_card_user_driving_package_tickets: "Талоны вождения"
+user_card_user_driving_condition_name: "Условие вождения"
+user_card_contract: "Данные контракта"
+user_card_passport: "Данные паспорта"
+user_card_medical_certificate: "Данные мед. справки"
+package_number: "Номер пакета"
+package_moderator: "Менеджер"
+ticket_driving_date: "Дата вождения"
+ticket_driving_instruktor_name: "Ф.И.О. ин-ра"
+ticket_driving_comment: "Коментарий"
+ticket_driving_rating: "Оценка"
+
+driving_conditions_number: "Номер пакета"
+driving_conditions_rezervAt: "Зарезервирован"
+driving_conditions_saleAt: "Продан"
+driving_conditions_fullNameUser: "Пользователь"
+driving_conditions_status: "Текущий статус"
+received: "Получен"
+sended: "Выслан"
+given_into_hands: "Вручен в руки"
+received_date: "Дата получения"
+success_revert_money: "Запрос на возврат средст отправлен."
+
+settings_medical_certificate_is_not_issued_and_the_agreement_is_not_signed: "Вы не оформили мед справку и не подписали договор"

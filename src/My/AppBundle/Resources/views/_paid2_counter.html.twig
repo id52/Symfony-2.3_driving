@@ -1,0 +1,15 @@
+{% if discount_2_counter is defined %}
+<div class="deal-info-head">
+    <div class="deal-period">
+        До окончания срока оплаты со скидкой
+        <br>(<strong class="new-price">{{ discount_2_counter_new_price|number_format(0, ',' , ' ') }} руб.</strong> вместо <strong><s>{{ discount_2_counter_price|number_format(0, ',' , ' ') }} руб.</s></strong>) осталось:
+    </div>
+    <div class="deal-countdown discount_2_counter" data-seconds-left="{{ discount_2_counter_seconds_left }}">
+        <span class="days"></span>
+        <span class="hours"></span>
+        :<span class="minutes"></span>
+        :<span class="seconds"></span>
+    </div>
+    <a class="deal-pay" href="{{ path('my_payments_2') }}">Оплатить</a>
+</div>
+{% endif %}

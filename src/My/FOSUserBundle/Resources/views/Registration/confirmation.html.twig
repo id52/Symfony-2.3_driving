@@ -1,0 +1,131 @@
+{% extends "FOSUserBundle::layout.html.twig" %}
+
+{% block fos_user_content %}
+<div class="mainContent full-page">
+    <div>
+        {{ confirm_sms|raw }}
+    </div>
+    <div class="form" id="form_confirmation">
+        {{ form_start(form) }}
+        <div class="row">
+            {{ form_widget(form.code) }}
+
+            <span class="links" style="margin-left: 3px">
+                <span class="link bg-green">
+                    Завершить регистрацию
+                    <input value="" type="submit">
+                </span>
+            </span>
+        </div>
+
+        <span class="error-fill-in">{{ form_errors(form.code) }}</span>
+
+        <div class="row" style="margin-top: 5px">
+            {{ error_sms|raw }}
+        </div>
+
+        <div id="btns" class="row">
+            <button id="repeat-sms" type="button" class="btn btn-default btn-sm" title="Повторная отправка кода возможна с интервалом 2 минуты" >Отправить код повторно</button>
+            <button id="change-phone-btn" type="button" class="btn btn-default">Изменить номер телефона</button>
+            <span id="change-phone-wrapper">
+                <input id="new-phone" type="text" class="form-control">
+                <button id="send-new-phone" class="btn btn-default" type="button">Изменить</button>
+            </span>
+            <span id="info" class="confirmation-change-phone"></span>
+        </div>
+
+        <div class="row">
+            <span id="confirmation_code_was_sent_again_text"></span>
+        </div>
+
+        {{ form_errors(form) }}
+        {{ form_end(form) }}
+    </div>
+</div>
+{% endblock fos_user_content %}
+
+{% block js %}
+<script>
+$(function() {
+    $('#confirmation_code').removeAttr('required');
+
+    var btns = $('#btns').find('button');
+
+    var timerFunc = function(e) {
+        var isClicked = e !== undefined;
+        $('#confirmation_code_was_sent_again_text').html('');
+        $.ajax({
+            type: "POST",
+            url: "{{ path('fos_user_confirmation_repeat_sms', {'hash': app.request.attributes.get('hash')}) }}",
+            data: {'isClicked': isClicked ? 1 : 0},
+            success: function(data) {
+                $('#confirmation_code_was_sent_again_text').html(data.message);
+
+                if (data.seconds_left > 0) {
+                    var msg = '{{ settings['confirmation_code_time_to_resend_text']
+                        |replace({'{{ timer_resending }}' : '<span id="timer"></span>'})
+                        |raw }}';
+
+                    if (!btns.is(':disabled')) {
+                        $('.row:last', '#form_confirmation').append('<span id="remain_timer">' + msg + '</span>');
+                    }
+
+                    btns.attr('disabled', 'disabled').addClass('disabled');
+
+                    $('#timer').countdown({
+                        until: data.seconds_left,
+                        layout: '{mn}{sep}{snn}',
+                        onExpiry: function () {
+                            btns.removeAttr('disabled').removeClass('disabled');
+                            $('#remain_timer').remove();
+                        }
+                    });
+                }
+            }
+        });
+    };
+    timerFunc();
+
+    $('#repeat-sms').on('click', timerFunc);
+
+    $('#new-phone').inputmask('+7 (999) 999-99-99', {clearMaskOnLostFocus: false});
+    $('#change-phone-wrapper').hide();
+    $('#change-phone-btn').on('click', function() {
+        $('#change-phone-wrapper').toggle();
+        $('#info').html('');
+    });
+
+    $('#send-new-phone').on('click', function() {
+        var phone_number = $('#new-phone').val();
+        btns.attr('disabled', 'disabled').addClass('disabled');
+        $('#info').html('');
+        $.ajax({
+            type: "POST",
+            url: "{{ path('fos_user_confirmation_change_phone', {'hash': app.request.attributes.get('hash')}) }}",
+            data: { phone: phone_number },
+            success: function(data) {
+                $('#change-phone-wrapper').hide();
+                btns.removeAttr('disabled').removeClass('disabled');
+                $('#info').css('display', 'block')
+                if (data.error) {
+                    $('#info').css('color', '#a00').html(data.error);
+                } else {
+                    $('#info').css('color', '#00aa00').html('{{ after_changing_phone_number_text|raw }}');
+                }
+            }
+        });
+    });
+    $('#form_confirmation').submit(function () {
+        var confirmCode = $('#confirmation_code', this);
+        $('.error-fill-in', this).remove();
+        $('.wrong_sms_code', this).remove();
+
+        if (confirmCode.val() == '') {
+            var fillInDiv = '<span class="error-fill-in">Введите проверочный код.</span>';
+            confirmCode.closest('.row').after(fillInDiv);
+            return false;
+        }
+    });
+});
+</script>
+{% endblock js %}

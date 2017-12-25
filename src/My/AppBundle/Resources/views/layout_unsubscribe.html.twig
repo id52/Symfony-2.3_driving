@@ -1,0 +1,174 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=1300" />
+    <title>{% block title %}{{ 'project.name'|trans }} — {{ 'project.slogan'|trans }}{% endblock %}</title>
+    <meta name="keywords" content="{% block meta_keywords '' %}" />
+    <meta name="description" content="{% block meta_description '' %}" />
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800,400italic,300italic,300&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
+    <link href="/v2/css/style.css" rel="stylesheet" type="text/css">
+    <link href="https://cdn.jsdelivr.net/jquery.webui-popover/1.2.1/jquery.webui-popover.min.css" rel="stylesheet" type="text/css">
+    <link href="/v2/css/style-fix.css" rel="stylesheet" type="text/css">
+    {% if ny_2016 is defined %}
+    <link href="/v2/css/style_ny_2016.css" rel="stylesheet" type="text/css">
+    {% endif %}
+    <!--[if lte IE 8]>
+    <link href="/v2/css/ie8.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="/v2/js/PIE.js"></script>
+    <script type="text/javascript" src="/v2/js/html5support.js"></script>
+    <![endif]-->
+    <script type="text/javascript" src="/v2/js/jquery.js"></script>
+    <script type="text/javascript" src="/v2/js/jquery-ui.js"></script>
+    <script src="https://cdn.jsdelivr.net/jquery.webui-popover/1.2.1/jquery.webui-popover.min.js"></script>
+    <script type="text/javascript" src="/v2/js/jquery.main.js"></script>
+</head>
+<body>
+
+{% include 'AppBundle::_server_label.html.twig' %}
+
+{% block start_content '' %}
+
+<div class="modal border-red reg-done" id="js_alert">
+    <div class="content"></div>
+    <div class="links"><span class="link bg-green btn-close">Закрыть</span></div>
+</div>
+
+<div class="wrapper">
+    <div class="container">
+        <header class="header">
+            <div class="logo">
+                <a href="{{ path('homepage') }}"><img src="/v2/img/logo.png" width="824" height="230" alt="Автошкола онлайн"></a>
+                <span>Личный кабинет<br>ученика</span>
+            </div>
+
+            <a class="to-site" href="http://auto-online.ru/">На сайт автошколы</a>
+
+            <div class="r">
+                <div class="admin-link">
+                    {% if is_granted('ROLE_MOD') %}
+                        <a href="{{ path('admin') }}">в админку</a>
+                    {% endif %}
+                </div>
+
+                <div class="phone">
+                    <div class="bg">
+                        <a href="tel:+7495{{ contact_phone|replace({ '-': '' }) }}">
+                            <span>495</span>
+                            <strong>{{ contact_phone }}</strong>
+                        </a>
+                        <div>Многоканальный телефон</div>
+                    </div>
+                </div>
+
+                <div class="user-top">
+                {% if app.user %}
+                    <a class="name" href="{{ path('homepage') }}">{{ app.user.lastName~' '~app.user.firstName|slice(0,1)~'.' }}</a>
+                    <a class="exit" href="{{ path('fos_user_security_logout') }}">Выйти</a>
+                {% else %}
+                    <a class="auth-link">Личный кабинет</a>
+                {% endif %}
+                </div>
+            </div>
+
+            {% if menu_items %}
+                <nav class="bmenu">
+                    {% for menu_item in menu_items %}
+                        {% if (menu_item.topMenu and (app.user or not menu_item.private)) %}
+                            <a href="{{ path('article_show', { id: menu_item.url }) }}">{{ menu_item.title }}</a>
+                        {% endif %}
+                    {% endfor %}
+                </nav>
+            {% endif %}
+        </header>
+
+        <div class="content">
+            {% block content '' %}
+
+        </div>
+
+        <div class="footer-place"></div>
+
+    </div>
+
+</div>
+
+<footer class="footer">
+    <div class="container">
+        {% if menu_items %}
+            <nav class="bmenu">
+                {% for menu_item in menu_items %}
+                    {% if (menu_item.bottomMenu and (app.user or not menu_item.private)) %}
+                        <a href="{{ path('article_show', { id: menu_item.url }) }}">{{ menu_item.title }}</a>
+                    {% endif %}
+                {% endfor %}
+            </nav>
+        {% endif %}
+
+        <div class="logo">
+            <img src="/v2/img/logo.png" width="824" height="230" alt="Автошкола онлайн">
+            <span>Личный кабинет<br>ученика</span>
+        </div>
+
+        <div class="phone">
+            <div class="bg">
+                <a href="tel:+7495{{ contact_phone|replace({ '-': '' }) }}">
+                    <span>495</span>
+                    <strong>{{ contact_phone }}</strong>
+                </a>
+                <div><a href="mailto:{{ contact_email }}">auto-online.ru</a></div>
+            </div>
+        </div>
+
+        <div class="socials">
+            {% if social_facebook %}<a class="fb" href="{{ social_facebook }}" target="_blank">Facebook</a>{% endif %}
+            {% if social_twitter %}<a class="tw" href="{{ social_twitter }}" target="_blank">Twitter</a>{% endif %}
+            {% if social_vk %}<a class="vk" href="{{ social_vk }}" target="_blank">Вконтакте</a>{% endif %}
+        </div>
+
+        <div class="copy">
+            © {{ 'now'|date('Y') }} Автошкола Онлайн
+            <div class="small">Все права защищены.</div>
+        </div>
+    </div>
+</footer>
+
+{% block end_content '' %}
+
+<script>
+function js_alert(content, success) {
+    var block = $('#js_alert');
+    $('.content', block).html(content);
+    if (success) {
+        block.removeClass('border-red').addClass('border-green');
+    }
+    $.simplebox('#js_alert');
+}
+</script>
+
+{% block js '' %}
+
+<script src="/v2/js/jquery.countdown.js"></script>
+<script src="/v2/js/jquery.countdown-ru.js"></script>
+<script src="/v2/js/inputmask.js"></script>
+<script src="/v2/js/jquery.inputmask.js"></script>
+<script>
+$(function () {
+    var webui = $('.side-menu .menu-item-disabled').webuiPopover({
+        placement: 'right',
+        content: function (data) {
+            return $(data.$element.data('content-selector')).html();
+        }
+    });
+    $(document).on('click', '.close-current-popover', function(e) {
+        e.preventDefault();
+        webui.webuiPopover('hide');
+    });
+});
+</script>
+
+<!-- Yandex.Metrika counter --><script type="text/javascript"> (function (d, w, c) { (w[c] = w[c] || []).push(function() { try { w.yaCounter1894867 = new Ya.Metrika({ id:1894867, clickmap:true, trackLinks:true, accurateTrackBounce:true, webvisor:true }); } catch(e) { } }); var n = d.getElementsByTagName("script")[0], s = d.createElement("script"), f = function () { n.parentNode.insertBefore(s, n); }; s.type = "text/javascript"; s.async = true; s.src = "https://mc.yandex.ru/metrika/watch.js"; if (w.opera == "[object Opera]") { d.addEventListener("DOMContentLoaded", f, false); } else { f(); } })(document, window, "yandex_metrika_callbacks");</script><noscript><div><img src="https://mc.yandex.ru/watch/1894867" style="position:absolute; left:-9999px;" alt="" /></div></noscript><!-- /Yandex.Metrika counter -->
+<!-- Google.Analytics --><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create', 'UA-20996514-1', 'auto');ga('send', 'pageview');</script><!-- /Google.Analytics -->
+
+</body>
+</html>

@@ -1,0 +1,101 @@
+{% extends "AppBundle:Admin/SettingsNotifies:_settings_notifies_layout.html.twig" %}
+{% block settings_notifies_content %}
+    <fieldset>
+        <legend>
+            {{ 'settings_notifies_timelimit_after_1_payment'|trans }}
+            <a data-content="{{ 'settings_notifies_timelimit_after_1_payment_help'|trans }}" href="#"
+               data-toggle="popover"><i class="fa fa-question-circle"></i></a>
+        </legend>
+        {{ form_row(form.timelimit_after_1_payment_title) }}
+        {{ form_row(form.timelimit_after_1_payment_text, { attr: { class: 'ckeditor' } }) }}
+    </fieldset>
+    <fieldset>
+        <legend>
+            {{ 'settings_notifies_before_access_time_end_after_1_payment'|trans }}
+            <a data-content="{{ 'settings_notifies_before_access_time_end_after_1_payment_help'|trans }}" href="#"
+               data-toggle="popover"><i class="fa fa-question-circle"></i></a>
+        </legend>
+        {{ form_row(form.before_access_time_end_after_1_payment_enabled) }}
+        {{ form_row(form.before_access_time_end_after_1_payment_title) }}
+        {{ form_row(form.before_access_time_end_after_1_payment_text, { attr: { class: 'ckeditor' } }) }}
+    </fieldset>
+
+    <fieldset>
+        <legend>
+            {{ 'settings_notifies_before_access_time_end_after_1_payment_email'|trans }}
+            <a data-content="{{ 'settings_notifies_before_access_time_end_after_1_payment_email_help'|trans }}" href="#"
+               data-toggle="popover"><i class="fa fa-question-circle"></i></a>
+        </legend>
+        {{ form_row(form.before_access_time_end_after_1_payment_email_enabled) }}
+        {{ form_row(form.before_access_time_end_after_1_payment_email_title) }}
+        {{ form_row(form.before_access_time_end_after_1_payment_email_text, {attr: { class: 'ckeditor' }, help: 'settings_notifies_before_access_time_end_after_1_payment_email_text_help'}) }}
+    </fieldset>
+
+    <fieldset>
+        <legend>
+            {{ 'settings_notifies_after_access_time_end_after_1_payment'|trans }}
+            <a data-content="{{ 'settings_notifies_after_access_time_end_after_1_payment_help'|trans }}" href="#"
+               data-toggle="popover"><i class="fa fa-question-circle"></i></a>
+        </legend>
+        {{ form_row(form.after_access_time_end_after_1_payment_enabled) }}
+        {{ form_row(form.after_access_time_end_after_1_payment_title) }}
+        {{ form_row(form.after_access_time_end_after_1_payment_text, { attr: { class: 'ckeditor'}, help: 'settings_notifies_after_access_time_end_after_1_payment_text_help' }) }}
+    </fieldset>
+
+    <fieldset>
+        <legend>
+            {{ 'settings_notifies_before_access_time_end_after_2_payment'|trans }}
+            <a data-content="{{ 'settings_notifies_before_access_time_end_after_2_payment_help'|trans }}" href="#"
+               data-toggle="popover"><i class="fa fa-question-circle"></i></a>
+        </legend>
+        {{ form_row(form.before_access_time_end_after_2_payment_enabled) }}
+        {{ form_row(form.before_access_time_end_after_2_payment_title) }}
+        {{ form_row(form.before_access_time_end_after_2_payment_text, { attr: { class: 'ckeditor' } }) }}
+    </fieldset>
+
+    <fieldset>
+        <legend>
+            {{ 'settings_notifies_before_access_time_end_after_2_payment_email'|trans }}
+            <a data-content="{{ 'settings_notifies_before_access_time_end_after_2_payment_email_help'|trans }}" href="#"
+               data-toggle="popover"><i class="fa fa-question-circle"></i></a>
+        </legend>
+        {{ form_row(form.before_access_time_end_after_2_payment_email_enabled) }}
+        {{ form_row(form.before_access_time_end_after_2_payment_email_title) }}
+        {{ form_row(form.before_access_time_end_after_2_payment_email_text, {attr: { class: 'ckeditor' }, help: 'settings_notifies_before_access_time_end_after_2_payment_email_text_help'}) }}
+    </fieldset>
+
+    <fieldset>
+        <legend>
+            {{ 'settings_notifies_after_access_time_end_after_2_payment'|trans }}
+            <a data-content="{{ 'settings_notifies_after_access_time_end_after_2_payment_help'|trans }}" href="#"
+               data-toggle="popover"><i class="fa fa-question-circle"></i></a>
+        </legend>
+        {{ form_row(form.after_access_time_end_after_2_payment_enabled) }}
+        {{ form_row(form.after_access_time_end_after_2_payment_title) }}
+        {{ form_row(form.after_access_time_end_after_2_payment_text, { attr: { class: 'ckeditor'}, help: 'settings_notifies_after_access_time_end_after_2_payment_text_help' }) }}
+    </fieldset>
+
+    <fieldset>
+        <legend>{{ 'settings_notifies_discount_2_notify_first_email'|trans }}:</legend>
+        {{ form_row(form.discount_2_notify_first_email_title) }}
+        {{ form_row(form.discount_2_notify_first_email_text, { attr: { class: 'ckeditor' }, help: 'settings_notifies_discount_2_notify_first_email_text_help' }) }}
+    </fieldset>
+
+    <fieldset>
+        <legend>{{ 'settings_notifies_discount_2_warning_first_email'|trans }}:</legend>
+        {{ form_row(form.discount_2_warning_first_email_title) }}
+        {{ form_row(form.discount_2_warning_first_email_text, { attr: { class: 'ckeditor' }, help: 'settings_notifies_discount_2_warning_first_email_text_help' }) }}
+    </fieldset>
+
+    <fieldset>
+        <legend>{{ 'settings_notifies_discount_2_missing_email'|trans }}:</legend>
+        {{ form_row(form.discount_2_missing_email_title) }}
+        {{ form_row(form.discount_2_missing_email_text, { attr: { class: 'ckeditor' }, help: 'settings_notifies_discount_2_missing_email_text_help' }) }}
+    </fieldset>
+
+    <fieldset>
+        <legend>{{ 'settings_notifies_discount_2_warning_second_email'|trans }}:</legend>
+        {{ form_row(form.discount_2_warning_second_email_title) }}
+        {{ form_row(form.discount_2_warning_second_email_text, { attr: { class: 'ckeditor' }, help: 'settings_notifies_discount_2_warning_second_email_text_help' }) }}
+    </fieldset>
+{% endblock %}

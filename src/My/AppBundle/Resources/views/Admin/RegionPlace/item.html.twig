@@ -1,0 +1,42 @@
+{% extends 'AppBundle::admin.html.twig' %}
+
+{% block content %}
+    <h3>{{ (app.request.get('_route') == router_item_edit ? ('admin.'~entity_name_s~'_edit_title') : ('admin.'~entity_name_s~'_add_title'))|trans({}, 'messages') }}</h3>
+    <hr>
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+
+    <div class="control-group">
+        <label class="control-label">Категории:</label>
+        <div class="controls">
+            {% for category in categories %}
+                <label class="checkbox">
+                    <input type="checkbox" {{ (select_categories[category.id] is defined) ? 'checked="checked"' : '' }} name="categories[{{ category.id }}]"/>
+                    {{ category }}
+                </label>
+            {% endfor %}
+        </div>
+    </div>
+
+     <div class="form-actions">
+            <button type="submit" class="btn btn-success">
+                <i class="fa fa-download"></i>
+                <span>{{ 'admin.buttons.save'|trans({}, 'messages') }}</span>
+            </button>
+            {% if app.request.get('_route') == router_item_edit %}
+                <a href="{{ path(router_item_delete, { id: entity.id }) }}" class="btn btn-danger" onclick="return confirm('{{ 'you_sure'|trans({}, 'messages') }}')">
+                    <i class="fa fa-trash-o"></i> <span>{{ 'admin.buttons.delete'|trans({}, 'messages') }}</span>
+                </a>
+            {% endif %}
+            <a class="btn pull-right" href="{{ path(router_list) }}"><i class="fa fa-arrow-left"></i> {{ 'admin.buttons.back_to_list'|trans({}, 'messages') }}</a>
+        </div>
+    {{ form_end(form) }}
+
+{% endblock content %}
+
+{% block js %}
+    {{ parent() }}
+    {% javascripts '@AppBundle/Resources/public/js/*'%}
+    <script type="text/javascript" src="{{ asset_url }}" ></script>
+    {% endjavascripts %}
+{% endblock %}

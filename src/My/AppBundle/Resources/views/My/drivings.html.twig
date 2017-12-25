@@ -1,0 +1,163 @@
+{% extends 'AppBundle::layout_new.html.twig' %}
+
+{% block content %}
+<nav class="path">
+    <a href="{{ path('homepage') }}">{{ 'titles.homepage'|trans }}</a>
+    » <strong>{{ 'titles.drivings'|trans }}</strong>
+</nav>
+
+<div class="mainContent">
+    {% include 'AppBundle::_owe_stage_paid.html.twig' %}
+    <div class="title">
+        <h1>{{ 'titles.drivings'|trans }}</h1>
+    </div>
+    <b> Вам необходимо заполнять эту форму после каждого занятия по вождению с инструктором. И после того, как все поля этой формы будут заполнены, мы сможем подготовить для Вас документы об окончании автошколы и торжественно вручить их Вам.</b>
+    <div class="tickets" {{ (confirmed_docs ? 'style="white-space: nowrap"' : '') }}>
+        {% for condition in conditions %}
+            {% for number, data_package in condition['packages'] %}
+                <h5 class="get-tickets-condition-name">{{ condition['name'] }}</h5>
+                {% if not confirmed_docs %}
+                    <div>{{ 'not_confirm_docs_or_not_all'|trans|raw }}</div>
+                {% endif %}
+                {% if data_package['tickets'] is defined and confirmed_docs %}
+                    <div class="get-tickets-link-disabled">Талоны получены</div>
+                {% elseif data_package['tickets'] is not defined and data_package['package_status'] != 'sended' and confirmed_docs %}
+                    <div class="get-tickets-link-disabled">Талоны еще не высланы</div>
+                {% elseif data_package['package_status'] == 'sended' and confirmed_docs %}
+                    <a href="{{ path('my_drivings_get_tickets', { number :number }) }}" class="bg-green btn get-tickets-link">Получил талоны</a>
+                {% endif %}
+                <br>
+                {% if data_package['tickets'] is defined %}
+                    {% for ticket in data_package['tickets'] %}
+                        <input class="drive-date {{ (not confirmed_docs ? 'ticket_disabled' : ticket.driveDate ? 'ticket_write' : '') }}" type="text" id="datepicker_{{ ticket.id }}" placeholder="Дата"
+                               value="{{ (ticket.driveDate ? ticket.driveDate|date('d.m.Y') : '') }}"
+                               {{ (ticket.driveDate or not confirmed_docs ? 'disabled="disabled"' : '') }}
+                        >
+                        <input class="driver_name {{ (not confirmed_docs ? 'ticket_disabled' : ticket.name ? 'ticket_write' : '') }}" type="text" id="name_{{ ticket.id }}" placeholder="Ф.И.О. инструктора"
+                               value="{{ ticket.name }}" {{ (ticket.name or not confirmed_docs ? 'disabled="disabled"' : '') }}
+                        >
+                        <input class="comment {{ (not confirmed_docs ? 'ticket_disabled' : ticket.comment ? 'ticket_write' : '') }}" type="text" id="comment_{{ ticket.id }}" placeholder="Тема занятия"
+                               value="{{ ticket.comment }}" {{ (ticket.comment or not confirmed_docs ? 'disabled="disabled"' : '') }}
+                               >
+                        <select class="rating {{ (not confirmed_docs ? 'ticket_disabled' : ticket.rating ? 'ticket_write' : 'raiting-placeholder') }}" id="rating_{{ ticket.id }}"
+                                {{ (ticket.rating or not confirmed_docs ? 'disabled="disabled"' : '') }}>
+                            {% if ticket.rating %}
+                                <option class="raiting-placeholder" value="{{ ticket.rating }}">{{ ticket.rating }}</option>
+                            {% endif %}
+                            <option  value="">Оценка</option>
+                            <option class="raiting-option" value="1">1</option>
+                            <option class="raiting-option" value="2">2</option>
+                            <option class="raiting-option" value="3">3</option>
+                            <option class="raiting-option" value="4">4</option>
+                            <option class="raiting-option" value="5">5</option>
+                        </select>
+                        {% if not ticket.driveDate and confirmed_docs %}
+                            <span id="save_{{ ticket.id }}" class="save">Сохранить</span>
+                        {% elseif confirmed_docs %}
+                            <span id="save_{{ ticket.id }}" class="bg-check"></span>
+                        {% endif %}
+                        <div id="ticket_info_{{ ticket.id }}" class="ticket_info"></div>
+                        <br>
+                    {% endfor %}
+                {% endif %}
+            {% endfor %}
+        {% endfor %}
+    </div>
+</div>
+{% endblock content %}
+
+{% block js %}
+<script src="/v2/js/datepicker.min.js"></script>
+<script src="/v2/js/datepicker-ru.js"></script>
+<script>
+    $(function() {
+        var infoFields = $('.ticket_info');
+        var info;
+
+        infoFields.html('');
+        infoFields.hide();
+
+        $(".rating").change(function () {
+            if($(this).val() != '') {
+                $(this).removeClass('raiting-placeholder');
+            } else {
+                $(this).addClass('raiting-placeholder');
+            }
+        });
+
+        {% for condition in conditions %}
+            {% for data_package in condition['packages'] %}
+                {% if data_package['tickets'] is defined %}
+                    {% for ticket in data_package['tickets'] %}
+                        $( "#datepicker_{{ ticket.id }}" ).datepicker({'maxDate': 0});
+                    {% endfor %}
+                {% endif %}
+            {% endfor %}
+        {% endfor %}
+
+        $('.save').on('click', saveTicket);
+
+        function saveTicket() {
+            var strId = $(this).attr('id');
+            var id = strId.split('_', 2)[1];
+
+            var date = $('#datepicker_' + id).val();
+            var name = $('#name_' + id).val();
+            var comment = $('#comment_' + id).val();
+            var rating = $('#rating_' + id).val();
+
+            $(this).removeClass('save');
+            $(this).addClass('ajax-load');
+
+            infoFields.html('');
+            infoFields.hide();
+            console.log(id, date, comment, rating);
+
+            $.post(
+                    "{{ path('my_ticket_save') }}",
+                    {
+                        date: date,
+                        name: name,
+                        comment: comment,
+                        rating: rating,
+                        id: id
+                    },
+                    saveSuccess
+            );
+        }
+
+        function saveSuccess(data) {
+            var save = $('#save_' + data.id);
+
+            if (data.success) {
+                var date = $('#datepicker_' + data.id);
+                var name = $('#name_' + data.id);
+                var comment = $('#comment_' + data.id);
+                var rating = $('#rating_' + data.id);
+
+                save.removeClass('save ajax-load');
+                save.text('');
+                save.off('click');
+                save.addClass('bg-check');
+
+                date.attr('disabled', 'disabled');
+                date.addClass('ticket_write');
+                name.attr('disabled', 'disabled');
+                name.addClass('ticket_write');
+                comment.attr('disabled', 'disabled');
+                comment.addClass('ticket_write');
+                rating.attr('disabled', 'disabled');
+                rating.addClass('ticket_write');
+            } else {
+                info = $('#ticket_info_' + data.id).html(data.message);
+                info.removeClass('ticket_info_error');
+                info.html(data.message);
+                info.show();
+                info.addClass('ticket_info_error');
+                save.removeClass('ajax-load');
+                save.addClass('save');
+            }
+        }
+    });
+</script>
+{% endblock js %}

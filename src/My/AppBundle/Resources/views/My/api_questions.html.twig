@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Анкета</title>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800,400italic,300italic,300&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="/v2/css/api_questions.css"/>
+</head>
+<body>
+
+<section style="margin:100px auto 0">
+    <div class="modal b_questionnaire_modal">
+        <div class="b_questionnaire_modal--inner">
+            <div class="b_questionnaire_modal--title">
+                <span>―</span> Расскажите о своих намерениях <span>―</span>
+            </div>
+            <form class="b_questionnaire_modal--content" method="post">
+                <div>
+                    <input type="radio" name="radio" id="radio1" class="e_radio" value="want_pay">
+                    <label class="e_label" for="radio1">Если все понравится, готов оплатить и начать учиться</label>
+                </div>
+
+                <div>
+                    <input type="radio" name="radio" id="radio2" class="e_radio" value="training_after">
+                    <label class="e_label" for="radio2">
+                        Даже если все понравится, начну обучение не ранее: <input id="inputMonth" type="text" name="training_after_months"> месяцев
+                    </label>
+                    <label class="b_questionnaire_modal--error" for="inputMonth">Вы указали некорректное число месяцев</label>
+                </div>
+
+                <div>
+                    <input type="radio" name="radio" id="radio3" class="e_radio" value="not_going">
+                    <label class="e_label" for="radio3">В ближайшее время учиться не собираюсь, просто хочу посмотреть систему</label>
+                </div>
+
+                <div>
+                    <button type="submit" class="b_questionnaire_modal--btn" disabled="disabled">Отправить ответ</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+
+<script src="/v2/js/jquery.js"></script>
+<script>
+$(function() {
+    var check = function() {
+        var error_cntr = $('.b_questionnaire_modal--error');
+        var val = $(':radio:checked').val();
+        var val_month = parseInt($('#inputMonth').val());
+        if (val && (val != 'training_after' || (val_month > 0 && val_month < 100))) {
+            $(':submit').prop('disabled', false);
+        } else {
+            $(':submit').prop('disabled', true);
+        }
+
+        error_cntr.toggle(val == 'training_after' && (!val_month || val_month <= 0 || val_month >= 100));
+    };
+    check();
+    $(':radio').change(check);
+    $('#inputMonth').keyup(check);
+});
+</script>
+
+</body>
+</html>

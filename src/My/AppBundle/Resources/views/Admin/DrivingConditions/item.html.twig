@@ -1,0 +1,147 @@
+{% extends 'AppBundle::admin.html.twig' %}
+{% trans_default_domain 'driving_conditions' %}
+
+{% block content %}
+    <h3>{{ (app.request.get('_route') == router_item_edit ? (entity_name_s~'_edit_title') : (entity_name_s~'_add_title'))|trans({}, 'messages') }}</h3>
+    <hr>
+    {{ form_start(form) }}
+        {{ form_row(form.active) }}
+        {{ form_row(form.name) }}
+        {{ form_row(form.cond_code) }}
+        {{ form_row(form.class_service) }}
+        {{ form_row(form.with_at) }}
+        {{ form_row(form.is_primary) }}
+        {{ form_row(form.description) }}
+
+        <div class="control-group">
+            {{ form_label(form.number_tickets) }}
+            <div class="controls">
+                <div class="input-append">
+                    {{ form_widget(form.number_tickets) }}
+                    <span class="add-on">кол-во.</span>
+                </div>
+                {{ form_errors(form.number_tickets) }}
+            </div>
+        </div>
+
+        <fieldset class="regions-fields">
+            <legend>Цена в регионах:</legend>
+            <div class="control-group">
+                <label for="driving_conditions_number_tickets" class="control-label">Стоимость:</label>
+                <div class="controls">
+                    <div class="input-append">
+                        <input value="{{ (start_prices['price'] is defined ? start_prices['price'] : 0) }}"
+                               type="text" class="span1 region_price" name="condition_price"
+                               id="condition_prices" {{ exist_packages ? 'disabled' : '' }}>
+                        <span class="add-on">руб.</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="control-group">
+                {% for region in regions %}
+                    {% set show_region = false %}
+                    {% for place in region.places %}
+                        {% for category in place.categories %}
+                            {% set show_region = true %}
+                        {% endfor %}
+                    {% endfor %}
+                    {% if show_region %}
+                        <a href="#" id="region_{{ region.id }}" class="regions region_label"><i class="fa fa-caret-down"></i> {{ region }}</a>
+                        <div id="content_{{ region.id }}" class="region_content">
+                            {% for place in region.places %}
+                                {% for category in place.categories %}
+                                    <div class="region_price_contener" style="display: inline-block">
+                                        <label class="control-label">{{ place }} - {{ category }}:</label>
+                                        <div class="controls" style="display: inline-block">
+                                            <label><input  class="region_active" {{ (start_prices[place.id][category.id]['active'] is defined ? (start_prices[place.id][category.id]['active'] ? 'checked' : '') : '') }} name="prices_active[{{ place.id }}][{{ category.id }}]" type="checkbox"  data-category="{{ category.id }}" data-region="{{ region.id }}"/> Активно?</label>
+                                        </div>
+                                        <br>
+                                    </div>
+                                {% endfor %}
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </fieldset>
+        <div class="form-actions">
+            <button type="submit" class="btn btn-success">
+                <i class="fa fa-download"></i>
+                <span>{{ 'admin.buttons.save'|trans({}, 'messages') }}</span>
+            </button>
+
+            {% if app.request.get('_route') == router_item_edit and not exist_packages %}
+                <a href="{{ path(router_item_delete, { id: entity.id }) }}" class="btn btn-danger" onclick="return confirm('{{ 'you_sure'|trans({}, 'messages') }}')">
+                    <i class="fa fa-trash-o"></i> <span>{{ 'admin.buttons.delete'|trans({}, 'messages') }}</span>
+                </a>
+            {% endif %}
+            <a class="btn pull-right" href="{{ path(router_list) }}"><i class="fa fa-arrow-left"></i> {{ 'admin.buttons.back_to_list'|trans({}, 'messages') }}</a>
+        </div>
+    {{ form_end(form) }}
+{% endblock content %}
+
+{% block js %}
+    <script src="/ckeditor/ckeditor.js"></script>
+<script>
+    $(function() {
+        $('.regions').on('click', showHideRegionContent);
+        $('#driving_conditions_category').on('change', showHideRegionsLabelAndContent);
+
+        function showHideRegionContent(e) {
+            e.preventDefault();
+            var id = $(this).attr('id');
+            var idArr = id.split('_');
+            var findId = idArr[1];
+            var content = $('#content_' + findId);
+
+            $(this).find('i').removeClass('fa-caret-down fa-caret-right').addClass(function() {
+                return content.is(':hidden') ? 'fa-caret-down' : 'fa-caret-right';
+            });
+            content.toggle();
+        }
+
+        function showHideRegionsLabelAndContent(e) {
+            var id = $(this).val();
+            var regionsLabels = $('.region_label');
+            var regionsContents = $('.region_content');
+
+            if (id) {
+                regionsContents.each(function () {
+                    var regionContent = this;
+                    var regionId = 0;
+                    var inputs = $(this).find('.region_active');
+                    var existCategory = false;
+
+                    inputs.each(function () {
+                        if ($(this).attr('data-category') != id) {
+                            $(this).closest('.region_price_contener').hide();
+                        } else {
+                            $(this).show();
+                            $(this).closest('.region_price_contener').show();
+                            existCategory = true;
+                        }
+                        regionId = $(this).attr('data-region');
+                    });
+
+                    var regionLabel = $('#region_' + regionId);
+                    if (!existCategory) {
+                        regionLabel.hide();
+                        $(regionContent).hide();
+                    } else {
+                        regionLabel.show();
+                        $(regionContent).show();
+                        regionLabel.find('i').removeClass('fa-caret-right').addClass('fa-caret-down');
+                    }
+                });
+            } else {
+                regionsLabels.show();
+                $('.region_price_contener').show();
+            }
+
+            regionsLabels.find('i').removeClass('fa-caret-down').addClass('fa-caret-right');
+        }
+    })
+</script>
+{% endblock js %}
+

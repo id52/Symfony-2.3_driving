@@ -1,0 +1,612 @@
+{% extends "AppBundle::layout_new.html.twig" %}
+
+{% block title %}{{ settings_notifies['landing_title'] }}{% endblock title %}
+{% block meta_keywords %}{{ settings_notifies['landing_keywords'] }}{% endblock meta_keywords %}
+{% block meta_description %}{{ settings_notifies['landing_description'] }}{% endblock meta_description %}
+
+{% block content_autoCreatePromo %}
+    <div class="stock_block">
+        <div class="stock_block_bg"></div>
+        <div class="container">
+            <div class="content">
+                <span class="stock_block_title">Акция</span>
+                <div class="stock_block_info">
+                    <span class="stock_info_title">%</span>
+                    <span class="stock_info_text1">Попробуй стать учеником прямо сейчас - <strong>бесплатно!</strong></span>
+                    <span class="stock_info_text2">Только до <strong>{{ endAutoCreatePromo|localizeddate('long', 'none') }}</strong> года Вы можете начать обучение в автошколе</span>
+                    <a href="#" class="stock_info_btn link-registr"><span>совершенно бесплатно!</span></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="content">
+            <div class="stock_timer">
+                <div class="stock_timer_left">
+                    <div class="block1">
+                        <span>0 руб. -</span>
+                        Совершенно<br>
+                        <strong>бесплатно!</strong>
+                    </div>
+                    <div class="block2">
+                        На доступ к теоретическому<br>
+                        курсу и в личный кабинет ученика!
+                    </div>
+                </div>
+                <div class="stock_timer_right">
+                    <div id="l-stock">
+                        <span class="stock_timer_title">До конца акции осталось:</span>
+                        <div class="action">
+                            <div class="timer">
+                                <div class="elem">
+                                    <div class="num">
+                                    </div>
+                                    Дни
+                                </div>
+                                <div class="dots">
+                                </div>
+                                <div class="elem">
+                                    <div class="num">
+                                    </div>
+                                    часы
+                                </div>
+                                <div class="dots">
+                                </div>
+                                <div class="elem">
+                                    <div class="num">
+                                    </div>
+                                    минуты
+                                </div>
+                                <div class="dots">
+                                </div>
+                                <div class="elem">
+                                    <div class="num sec">
+                                    </div>
+                                    секунды
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="start_learning">
+                <div class="start_learning_text">
+                    Теперь чтобы начать обучение, достаточно просто <a href="#" class="link-registr">зарегистрироваться</a><br>
+                    - это <strong>быстро</strong> и <strong>бесплатно!</strong>
+                </div>
+                <a href="#" class="start_learning_btn link-registr"><span>Начать обучение <strong>прямо сейчас!</strong></span></a>
+            </div>
+        </div>
+    </div>
+    <div class="type_training">
+        <div class="type_training_shape"></div>
+        <div class="container">
+            <div class="content">
+                <span class="type_training_title">
+                    <span>ЦЕЛЬ НА</span>
+                    РЕЗУЛЬТАТ!
+                </span>
+                <div class="type_training_text1">
+                    <strong class="heading">ТЕПЕРЬ НЕ ИМЕЕТ ЗНАЧЕНИЯ, КАК ПОСЕЩАТЬ ЗАНЯТИЯ</strong><br>
+                    Ходите на занятия в класс или смотрите вебинары онлайн в личном кабинете ученика
+                </div>
+                <div class="type_training_text1">
+                    <strong class="heading2">ГЛАВНОЕ - СДАТЬ ЗАЧЕТ ПО ЗАНЯТИЮ</strong><br>
+                    Форма посещения любого занятия (в классе или онлайн) не имеет значения!<br>
+                    Совмещайте очную форму и вебинары онлайн так, как удобно Вам - для каждого занятия!
+                </div>
+                <div class="form_study">
+                    <div class="form_study_block">
+                        <img src="/v2/img/ny_2016/classic.png" alt="">
+                        <span class="form_study_title">В классе</span>
+                        <p>
+                            с посещением лекций<br>
+                            в наших филиалах
+                        </p>
+                    </div>
+                    <div class="form_study_equally"></div>
+                    <div class="form_study_block form_study_block_orange">
+                        <img src="/v2/img/ny_2016/distance.png" alt="">
+                        <a href="#" class="form_study_title link-registr">На сайте</a>
+                        <p>
+                            с изучением материала в<br>
+                            личном кабинете ученика
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="content">
+            <div class="total-time">
+                <span>При своевременной оплате и <a href="#" class="link-registr">выполнении всех рекомендаций</a> автошколы</span>
+                <div class="big1">
+                    ВЕСЬ ПРОЦЕСС ЗАНИМАЕТ
+                </div>
+                <div class="big2">
+                    3 месяца
+                </div>
+            </div>
+            <div class="start_now">
+                <div class="start_now_title">
+                    <span>НАЧНИТЕ ОБУЧЕНИЕ</span>
+                    ПРЯМО СЕЙЧАС!
+                </div>
+                <div class="start_now_wrap">
+                    <div class="start_now_item">
+                        <div class="start_now_item_img">
+                            <span>
+                                <img src="/v2/img/ny_2016/start_ico1.png" alt="">
+                            </span>
+                        </div>
+                        <p>
+                            <a href="#" class="link-registr">Зарегистрируйтесь</a><br>
+                            в системе: это быстро<br>
+                            и бесплатно!
+                        </p>
+                    </div>
+                    <div class="start_now_sep"></div>
+                    <div class="start_now_item">
+                        <div class="start_now_item_img">
+                            <span>
+                                <img src="/v2/img/ny_2016/start_ico2.png" alt="">
+                            </span>
+                        </div>
+                        <p>
+                            Ходите на занятия в<br>
+                            класс или посещайте<br>
+                            вебинары
+                        </p>
+                    </div>
+                    <div class="start_now_sep"></div>
+                    <div class="start_now_item">
+                        <div class="start_now_item_img">
+                            <span>
+                                <img src="/v2/img/ny_2016/start_ico3.png" alt="">
+                            </span>
+                        </div>
+                        <p>
+                            Выполняйте<br>
+                            контрольные тесты<br>
+                            по темам
+                        </p>
+                    </div>
+                    <div class="start_now_sep"></div>
+                    <div class="start_now_item">
+                        <div class="start_now_item_img">
+                            <span>
+                                <img src="/v2/img/ny_2016/start_ico4.png" alt="">
+                            </span>
+                        </div>
+                        <p>
+                            Пройдите<br>
+                            практические занятия<br>
+                            с инструктором
+                        </p>
+                    </div>
+                    <div class="start_now_sep"></div>
+                    <div class="start_now_item">
+                        <div class="start_now_item_img">
+                            <span>
+                                <img src="/v2/img/ny_2016/start_ico5.png" alt="">
+                            </span>
+                        </div>
+                        <p>
+                            Сдайте итоговый<br>
+                            экзамен и получите<br>
+                            права!
+                        </p>
+                    </div>
+                </div>
+                <a href="#" class="start_now_btn link-registr">
+                    <span>Начать обучение <strong>прямо сейчас!</strong></span>
+                </a>
+            </div>
+            <div class="simple-steps">
+                <h3>ТРИ ПРОСТЫХ ШАГА</h3>
+                <span>Для получения долгожданных водительских прав</span>
+                <ul>
+                    <li>
+                        <strong>Первый</strong>
+                        Изучить теорию в классе или онлайн, сдать в личном кабинете ученика все тесты и итоговый экзамен
+                    </li>
+                    <li>
+                        <strong>Второй</strong>
+                        Пройти практику вождения и сдать внутренний экзамен автошколы на площадке и в городе
+                    </li>
+                    <li>
+                        <strong>Третий</strong>
+                        Прийти на экзамен в ГИБДД в<br> день, назначенный автошколой,<br> сдать его и получить<br> водительское удостоверение
+                    </li>
+                </ul>
+            </div>
+            <div class="program_learn">
+                <div class="program_learn_title">
+                    <span>ЧТО БУДЕТ В</span>
+                    ПРОГРАММЕ ОБУЧЕНИЯ?
+                </div>
+                <div class="program_learn_wrap">
+                    <div class="program_learn_item">
+                        <div class="program_item_img">
+                            <span>
+                                <img src="/v2/img/ny_2016/program_ico1.png" alt="">
+                            </span>
+                        </div>
+                        <div class="program_item_text">
+                            <div class="program_item_text_center">
+                                <span>7</span>
+                                <p>предметов</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="program_learn_item">
+                        <div class="program_item_img">
+                            <span>
+                                <img src="/v2/img/ny_2016/program_ico2.png" alt="">
+                            </span>
+                        </div>
+                        <div class="program_item_text">
+                            <div class="program_item_text_center">
+                                <span>56</span>
+                                <p>часов<br> вождения</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="program_learn_item">
+                        <div class="program_item_img">
+                            <span>
+                                <img src="/v2/img/ny_2016/program_ico3.png" alt="">
+                            </span>
+                        </div>
+                        <div class="program_item_text">
+                            <div class="program_item_text_center">
+                                <span>30</span>
+                                <p>практических<br> навыков</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="program_learn_item">
+                        <div class="program_item_img">
+                            <span>
+                                <img src="/v2/img/ny_2016/program_ico4.png" alt="">
+                            </span>
+                        </div>
+                        <div class="program_item_text">
+                            <div class="program_item_text_center">
+                                <span>10</span>
+                                <p>зачетов<br> и экзаменов</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="calc">
+        <div class="calc_bg"></div>
+        <div class="container">
+            <div class="content">
+                <form action="{{ path('fos_user_registration_register') }}" method="post">
+                    <h3><span>ХОЧУ НАЧАТЬ<br>
+                    <strong>УЧИТЬСЯ!</strong></span></h3>
+                    <div class="row">
+                        <div class="half">
+                            <div class="label">
+                                Регион:
+                            </div>
+                            <div class="nofloat">
+                                <select id="l-region" name="region" class="customSelect">
+                                </select>
+                            </div>
+                        </div>
+                        <div class="half">
+                            <div class="label">
+                                Категория:
+                            </div>
+                            <div class="nofloat">
+                                <select id="l-category" class="customSelect select-category">
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="l-discount">
+                        <div class="action">
+                            <div class="calc_text">
+                                <div class="calc_text_block1">
+                                    <span>Акция! Совершенно бесплатно!</span>
+                                    <strong>Доступ к теории и личному кабинету ученика!<br>
+                                    Начните учиться бесплатно - прямо сейчас!</strong>
+                                    <p>Только до {{ endAutoCreatePromo|localizeddate('long', 'none') }} мы дарим Вам промокод на скидку 100% (8 000 руб.!) на теоретическое обучение и доступ к личному кабинету ученика автошколы!</p>
+                                </div>
+                                <div class="calc_text_block2">
+                                    <i class="sale_icon"></i>
+                                    <div class="calc_text_block2_text"><span>8 000 руб.</span> БЕСПЛАТНО!</div>
+                                </div>
+                            </div>
+                            <div class="timer">
+                                <div class="timer_title">До конца акции осталось:</div>
+                                <div class="elem">
+                                    <div class="num">
+                                    </div>
+                                     Дни
+                                </div>
+                                <div class="dots">
+                                </div>
+                                <div class="elem">
+                                    <div class="num">
+                                    </div>
+                                     часы
+                                </div>
+                                <div class="dots">
+                                </div>
+                                <div class="elem">
+                                    <div class="num">
+                                    </div>
+                                     минуты
+                                </div>
+                                <div class="dots">
+                                </div>
+                                <div class="elem">
+                                    <div class="num sec">
+                                    </div>
+                                     секунды
+                                </div>
+                            </div>
+                        </div>
+                        <div class="calc_promo">
+                            <div class="calc_promo_info">
+                                <div class="calc_promo_code">{{ keyAutoCreatePromo }}</div>
+                                <p>Ваш промокод для<br><strong>бесплатной</strong> регистрации и входа</p>
+                            </div>
+                            <a href="#" class="calc_promo_btn link-registr">
+                                <span>Начинаю обучение <strong>прямо сейчас!</strong></span>
+                            </a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="content">
+            <div class="how">
+                <h3><span><span>КАК</span> ЗАНИМАТЬСЯ?</span></h3>
+                <ul>
+                    <li class="bg-look">
+                        <strong>Ходите на занятия или смотрите вебинары</strong>
+                        <p>
+                            каждый день что-то новое<br>
+                            это позволит выучить весь материал
+                        </p>
+                    </li>
+                    <li class="bg-qu">
+                        <strong>Обучайтесь в режиме контрольных вопросов</strong>
+                        <p>
+                            Это закрепит знания по каждой теме
+                        </p>
+                    </li>
+                    <li class="bg-pedal">
+                        <strong>Занимайтесь вождением с инструктором</strong>
+                        <p>
+                            На площадке и в городе
+                        </p>
+                    </li>
+                    <li class="bg-rep">
+                        <strong>Повторяйте изученные<br> ранее темы</strong>
+                        <p>
+                            Интерактивный учебник - к Вашим услугам в личном кабинете!
+                        </p>
+                    </li>
+                    <li class="bg-test">
+                        <strong>Решайте экзаменационные билеты, как в ГИБДД</strong>
+                        <p>
+                            Это гарантирует сдачу экзамена в реальных условиях!
+                        </p>
+                    </li>
+                    <li class="bg-ask">
+                        <strong>Задавайте вопросы преподавателям</strong>
+                        <p>
+                            Не ошибается только тот, кто ничего не делает!
+                        </p>
+                    </li>
+                </ul>
+            </div>
+            <div class="warranty">
+                <div class="big1">
+                    ГАРАНТИИ
+                </div>
+                <p>Если вы сдали итоговый экзамен в личном кабинете,</p>
+                <div class="big2">
+                    ВЫ СДАДИТЕ ЕГО В ГИБДД С ВЕРОЯТНОСТЬЮ
+                </div>
+                <div class="big3">
+                    100%
+                </div>
+            </div>
+            <div class="where_block">
+                <div class="where_block_title">
+                    Когда и где я смогу заниматься?
+                </div>
+                <div class="where_block_text1">
+                    В любое время, в любом месте, в классе или онлайн в личном кабинете!
+                </div>
+                <div class="where_block_wrap">
+                    <div class="where_item">
+                        <div class="where_item_img">
+                            <span><img src="/v2/img/ny_2016/where_ico1.png" alt=""></span>
+                        </div>
+                        <div class="where_item_text">
+                            <span>В классе</span>
+                            <p>
+                                Можете посещать занятия<br> очно
+                            </p>
+                        </div>
+                    </div>
+                    <div class="where_item">
+                        <div class="where_item_img">
+                            <span><img src="/v2/img/ny_2016/where_ico2.png" alt=""></span>
+                        </div>
+                        <div class="where_item_text">
+                            <span>Дистанционно<br> в Личном кабинете</span>
+                            <p>
+                                Изучайте интерактивный<br> учебник, смотрите лекции,<br> выполняйте задания и<br> сдавайте экзамены везде, где<br> есть Интернет!
+                            </p>
+                        </div>
+                    </div>
+                    <div class="where_item">
+                        <div class="where_item_img">
+                            <span><img src="/v2/img/ny_2016/where_ico3.png" alt=""></span>
+                        </div>
+                        <div class="where_item_text">
+                            <span>На компьютере</span>
+                            <p>
+                                Для занятий онлайн Вы<br> можете использовать свой<br> обычный компьютер
+                            </p>
+                        </div>
+                    </div>
+                    <div class="where_item">
+                        <div class="where_item_img">
+                            <span><img src="/v2/img/ny_2016/where_ico4.png" alt=""></span>
+                        </div>
+                        <div class="where_item_text">
+                            <span>На мобильном или планшете</span>
+                            <p>
+                                Везде, где есть мобильный<br> Интернет, Вы можете учиться<br> при помощи своего<br> мобильного устройства!
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <a href="#" class="where_btn link-registr">
+                    <span>Начать обучение <strong>прямо сейчас!</strong></span>
+                </a>
+            </div>
+            <div class="start_practic">
+                <img src="/v2/img/ny_2016/now.png" alt="">
+                <div class="start_practic_away">
+                    НАЧАТЬ ЗАНИМАТЬСЯ В АВТОШКОЛЕ ОНЛАЙН - <a href="#" class="link-registr">ЗДЕСЬ И СЕЙЧАС!</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-place"></div>
+    </div>
+{% endblock content_autoCreatePromo %}
+
+{% block js %}
+<script>
+$(function() {
+    var discount_data = eval({{ discount_data|json_encode|raw }});
+
+    var reg_region = $('#reg-region');
+    var reg_category = $('#reg-category');
+
+    var l_region = $('#l-region');
+    var l_category = $('#l-category');
+    var l_discount = $('#l-discount');
+
+    for (var region_id in discount_data) {
+        if (discount_data.hasOwnProperty(region_id)) {
+            var region = discount_data[region_id];
+            l_region.append('<option value="' + region_id + '">' + region.name + '</option>');
+        }
+    }
+    l_region.trigger('refresh');
+
+    var change_l_category = function() {
+        var region_id = l_region.val();
+        var category_id = l_category.val();
+        var region = discount_data[region_id];
+        var category = region['categories'][category_id];
+        if (category.discount) {
+            var action_block = $('.action', l_discount);
+            action_block.show();
+            $('#l-discount-discount').html(category.discount);
+            $('#l-discount-price').html(category.price);
+            $('#l-discount-price-with-discount').html(Math.max(category.price - category.discount, 0));
+        } else {
+            var price_block = $('.price', l_discount);
+            price_block.show();
+            $('span', price_block).html(category.price);
+        }
+
+        var time = {{ seconds_left is defined ? seconds_left : 0 }};
+        var days = (Math.floor(time/60/60/24)).toString();
+        var hours = (Math.floor(time/60/60) - days*24).toString();
+        var minutes = (Math.floor(time/60) - (days*24*60 + hours*60)).toString();
+        var seconds = (time - (days*24*60*60 + hours*60*60 + minutes*60)).toString();
+        if (days.length < 2) days = '0'+days;
+        if (hours.length < 2) hours = '0'+hours;
+        if (minutes.length < 2) minutes = '0'+minutes;
+        if (seconds.length < 2) seconds = '0'+seconds;
+        $('.timer').each(function() {
+            var nums = $('.num', $(this));
+            nums.eq(0).html(days);
+            nums.eq(1).html(hours);
+            nums.eq(2).html(minutes);
+            nums.eq(3).html(seconds);
+        });
+
+        /* hack clearing all timeouts */
+        var highestTimeoutId = setTimeout(' ', 10);
+        for (var i = 0; i < highestTimeoutId; i++) {
+            clearTimeout(i);
+        }
+        /* end hack */
+
+        initTimer();
+
+        reg_region.val(l_region.val());
+        reg_region.trigger('refresh');
+        reg_region.trigger('change');
+        reg_category.val(l_category.val());
+        reg_category.trigger('refresh');
+
+        l_region.customForm('destroy');
+        reg_region.customForm('destroy');
+        l_category.customForm('destroy');
+        reg_category.customForm('destroy');
+        $('form').customForm({
+            select: {
+                elements: 'select.customSelect',
+                structure: '<div class="selectArea"><div class="selectIn"><div class="selectText"></div></div></div>',
+                text: '.selectText',
+                btn: '.selectIn',
+                optStructure: '<div class="selectSub"><div class="customScroll"><ul></ul></div><div class="bind"></div></div>',
+                maxHeight: 406
+            },
+            radio: {
+                elements: 'input.customRadio'
+            },
+            checkbox: {
+                elements: 'input.customCheckbox'
+            }
+        });
+    };
+    var change_l_region = function() {
+        l_category.html('');
+//        $('.action', l_discount).hide();
+        $('.price', l_discount).hide();
+        var region_id = l_region.val();
+        var region = discount_data[region_id];
+        for (var category_id in region.categories) {
+            if (region.categories.hasOwnProperty(category_id)) {
+                var category = region.categories[category_id];
+                l_category.append('<option value="' + category_id + '" data-img="' + category.image + '">' + category.name + '</option>');
+            }
+        }
+        l_category.find('option:eq(0)').prop('selected', true);
+        l_category.trigger('refresh');
+        change_l_category();
+    };
+    l_category.change(change_l_category);
+    l_region.change(change_l_region);
+    change_l_region();
+
+    $('.link-registr').click(function(e) {
+        e.preventDefault();
+        $('#auth01').find('a.tab[href=#tab2]').click();
+        $.simplebox('#auth01');
+    });
+});
+</script>
+{% endblock js %}

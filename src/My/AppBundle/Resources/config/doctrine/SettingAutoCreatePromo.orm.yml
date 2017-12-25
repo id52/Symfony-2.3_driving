@@ -1,0 +1,12 @@
+My\AppBundle\Entity\SettingAutoCreatePromo:
+    type: entity
+    table: settings_auto_create_promo
+    repositoryClass: My\AppBundle\Repository\SettingAutoCreatePromoRepository
+    id:
+        _key:
+            type: string
+    fields:
+        value:
+            type: text
+        type:
+            type: string

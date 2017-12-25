@@ -1,0 +1,72 @@
+My\PaymentBundle\Entity\Log:
+    type: entity
+    table: payments_logs
+    repositoryClass: My\PaymentBundle\Repository\LogRepository
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        s_type:
+            type: enumpayment
+            nullable: true
+        s_id:
+            type: string
+            nullable: true
+        sum:
+            type: integer
+        paid:
+            type: boolean
+        comment:
+            type: text
+        created_at:
+            type: datetime
+            gedmo:
+                timestampable:
+                    on: create
+        updated_at:
+            type: datetime
+            gedmo:
+                timestampable:
+                    on: update
+        display:
+            type: enumdisplay
+            nullable: true
+        transferred_at:
+            type: datetime
+            nullable: true
+    oneToOne:
+        owe_stage:
+            targetEntity: \My\AppBundle\Entity\OweStage
+            inversedBy: log
+    oneToMany:
+        revert_logs:
+            targetEntity: RevertLog
+            mappedBy: payment_log
+    manyToOne:
+        user:
+            targetEntity: \My\AppBundle\Entity\User
+            inversedBy: payment_logs
+            joinColumn:
+                name: uid
+                referencedColumnName: id
+        admin:
+            targetEntity: \My\AppBundle\Entity\User
+            inversedBy: confirmed_payment_logs
+            joinColumn:
+                name: admin_id
+                referencedColumnName: id
+        promoKey:
+            targetEntity: \My\AppBundle\Entity\PromoKey
+            inversedBy: logs
+            joinColumn:
+                name: promo_key_id
+                referencedColumnName: id
+                nullable: true
+        package:
+            targetEntity: My\AppBundle\Entity\DrivingPackage
+            inversedBy: payment_logs
+            joinColumn:
+                name: p_number
+                referencedColumnName: number

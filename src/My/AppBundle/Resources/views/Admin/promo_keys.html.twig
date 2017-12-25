@@ -1,0 +1,99 @@
+{% extends "AppBundle::admin.html.twig" %}
+
+{% block content %}
+    <a href="{{ path('admin_promo_key_add') }}" class="btn pull-right btn-h1"><i class="fa fa-plus"></i> {{ 'admin.promo_key_add'|trans }}</a>
+    <a href="{{ path('admin_promo_key_generate') }}" class="btn pull-right btn-h1"><i class="fa fa-plus"></i> {{ 'admin.promo_key_generate'|trans }}</a>
+    <h1>{{ 'admin.promo_keys'|trans }}</h1>
+    {% if promo %}
+        <h2>{{ promo.name }}</h2>
+    {% endif %}
+    <hr>
+    <a id="filter_link" href="#"><i class="fa fa-caret-down"></i> Фильтр</a>
+    <div id="filter">
+        {{ form_start(filter_form) }}
+        {{ form_widget(filter_form) }}
+        <div class="form-actions">
+            <button type="submit" class="btn btn-success pull-right">
+                <i class="fa fa-filter"></i>
+                <span>{{ 'buttons.filter'|trans }}</span>
+            </button>
+        </div>
+        {{ form_end(filter_form) }}
+    </div>
+    <br>
+    {% if pagerfanta.currentPageResults|length %}
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th>{{ 'admin.promo_key_key'|trans }}</th>
+                <th>{{ 'admin.promo_key_type'|trans }}</th>
+                <th>{{ 'admin.promo_key_created'|trans }}</th>
+                <th>{{ 'admin.promo_key_discount'|trans }}</th>
+                <th>{{ 'admin.promo_key_active'|trans }}</th>
+                <th>{{ 'admin.promo_key_tried'|trans }}</th>
+                <th>Рез.</th>
+                <th>{{ 'admin.promo_key_used'|trans }}</th>
+                <th><span title="Последнее использование">{{ 'admin.promo_key_activated'|trans }}</span></th>
+                <th class="min_col"></th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for promo_key_row in pagerfanta.currentPageResults %}
+                {% set promo_key = promo_key_row[0] %}
+                <tr>
+                    <td>{{ promo_key.hash }}</td>
+                    <td>
+                        {% if promo_key.type == 'site_access' %}
+                            Доступ к теор. курсу
+                        {% elseif promo_key.type == 'training' %}
+                            Пакет рег. в ГИБДД
+                        {% endif %}
+                    </td>
+                    <td>{{ promo_key.created|date('d.m.Y H:i') }}</td>
+                    <td class="min_col text-right">{{ promo_key.discount }}</td>
+                    <td class="min_col"><i class="fa {{ promo_key.active ? 'fa-plus' : 'fa-minus' }}"></i></td>
+                    <td class="min_col text-right"><a href="{{path('admin_promo_keys_first', { id: promo_key.id })}}" title="Список первичных">{{ promo_key_row.tried_enter_count }}</a></td>
+                    <td class="min_col text-right"><a href="{{path('admin_promo_keys_reserved', { id: promo_key.id })}}" title="Список зарезервированных">{{ promo_key_row.no_paid_users_count }}</a></td>
+                    <td class="min_col text-right">
+                        {% if promo_key_row.paid_users_count > 0 and promo_key.promo.restricted == 'users' %}
+                            <a href="{{path('admin_promo_keys_activated', { id: promo_key.id })}}" title="Список использований">{{ promo_key_row.paid_users_count }}</a>
+                        {% elseif promo_key_row.paid_users_count > 0 and promo_key.promo.restricted == 'keys' %}
+                            <a href="{{ path('admin_paradox_user_view', { id: promo_key.paidUser.id }) }}" title="Список использований">{{ promo_key.paidUser.email }}</a>
+                        {% else %}
+                            <i class="fa fa-minus"></i>
+                        {% endif %}
+                    </td>
+                    <td><span title="Последнее использование">{{ promo_key.activated ? promo_key.activated|date('d.m.Y H:i') : '' }}</span></td>
+                    <td class="min_col">
+                        {% if promo_key_row.tried_enter_count == 0 and  promo_key_row.paid_users_count == 0 and promo_key_row.no_paid_users_count == 0 and not promo.autocreate %}
+                            <a href="{{ path('admin_promo_key_delete', { id: promo_key.id }) }}" class="nodecor text-error" onclick="return confirm('{{ 'you_sure'|trans }}')"><i class="fa fa-times"></i></a>
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        {% if pagerfanta.haveToPaginate %}
+            {{ pagerfanta(pagerfanta, 'twitter_bootstrap_translated', { prev_message: '←', next_message: '→' }) }}
+        {% endif %}
+    {% else %}
+        {{ 'no_data'|trans }}
+    {% endif %}
+    <div class="form-actions">
+        <a class="btn pull-right" href="{{ path('admin_promos') }}"><i class="fa fa-arrow-left"></i> Вернуться в список промокомпаний</a>
+    </div>
+{% endblock content %}
+
+{% block js %}
+<script>
+$(function() {
+    {% if app.request.queryString == '' %}
+    $('#filter').hide();
+    {% endif %}
+    $('#filter_link').click(function() {
+        $('#filter').toggle();
+        return false;
+    });
+});
+</script>
+{% endblock js %}

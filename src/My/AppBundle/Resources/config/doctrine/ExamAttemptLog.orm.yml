@@ -1,0 +1,47 @@
+My\AppBundle\Entity\ExamAttemptLog:
+    type: entity
+    table: exam_attempt_logs
+    repositoryClass: My\AppBundle\Repository\ExamAttemptLogRepository
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        created_at:
+            type: datetime
+            gedmo:
+                timestampable:
+                    on: create
+        amount:
+            type: integer
+            nullable: true
+        is_free:
+            type: boolean
+            nullable: false
+            options: { default: false }
+        is_passed:
+            type: boolean
+            nullable: false
+            options: { default: false }
+    manyToOne:
+        user:
+            targetEntity: User
+            inversedBy: exam_attempt_logs
+        subject:
+            targetEntity: Subject
+            inversedBy: exam_attempt_logs
+            joinColumn: { onDelete: SET NULL, nullable: true }
+        attempts_package:
+            targetEntity: AttemptsPackage
+            inversedBy: exam_attempt_logs
+            joinColumn: { onDelete: SET NULL, nullable: true }
+    oneToOne:
+        final_exam_log:
+            targetEntity: FinalExamLog
+            inversedBy: final_exam_attempt_log
+            joinColumn: { onDelete: SET NULL, nullable: true }
+        exam_log:
+            targetEntity: ExamLog
+            inversedBy: exam_attempt_log
+            joinColumn: { onDelete: SET NULL, nullable: true }

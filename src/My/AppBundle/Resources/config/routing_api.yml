@@ -1,0 +1,15 @@
+api_add_user:
+    path:  /add-user/
+    defaults: { _controller: AppBundle:Api:addUser, _format: json }
+
+api_payment2:
+    path:  /payment2/
+    defaults: { _controller: AppBundle:Api:payment2, _format: json }
+
+api_block_user:
+    path:  /block-user/
+    defaults: { _controller: AppBundle:Api:blockUser, _format: json }
+
+api_med_con:
+    path: /med-con/
+    defaults: { _controller: AppBundle:Api:medCon, _format: json }

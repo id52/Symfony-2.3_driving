@@ -1,0 +1,23 @@
+My\AppBundle\Entity\ApiQuestionLog:
+    type: entity
+    table: api_questions_logs
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        radio:
+            type: string
+        months:
+            type: integer
+            nullable: true
+        created_at:
+            type: datetime
+            gedmo:
+                timestampable:
+                    on: create
+    oneToOne:
+        user:
+            targetEntity: User
+            inversedBy: api_question_log

@@ -1,0 +1,39 @@
+My\AppBundle\Entity\Document:
+    type: entity
+    table: documents
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        file:
+            type: string
+            unique: true
+            nullable: true
+        type:
+            type: string
+            nullable: true
+        status:
+            type: string
+            nullable: true
+        re_sent:
+            type: boolean
+        comment:
+            type: string
+            nullable: true
+        updated_at:
+            type: datetime
+            gedmo:
+                timestampable:
+                    on: update
+    manyToOne:
+        user:
+            targetEntity: User
+            inversedBy: documents
+    lifecycleCallbacks:
+        prePersist: [ preUpload ]
+        preUpdate: [ preUpload ]
+        postPersist: [ upload ]
+        postUpdate: [ upload, removeUploadCache ]
+        postRemove: [ removeUpload, removeUploadCache ]

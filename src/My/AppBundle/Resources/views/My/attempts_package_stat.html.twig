@@ -1,0 +1,66 @@
+{% extends "AppBundle::layout_new.html.twig" %}
+
+{% block content %}
+<nav class="path">
+    <a href="{{ path('homepage') }}">{{ 'titles.homepage'|trans }}</a>
+    » <strong>{{ 'titles.attempts_package_stat'|trans }}</strong>
+</nav>
+
+<div class="mainContent attempts">
+    {% include 'AppBundle::_paid2_counter.html.twig' %}
+    {% include 'AppBundle::_owe_stage_paid.html.twig' %}
+
+    <div class="left">
+        <div class="title">
+            <h1>{{ 'titles.attempts_package_stat'|trans }}</h1>
+        </div>
+    </div>
+
+    <h2>Список купленных дополнительных пакетов сдачи экзаменов</h2>
+
+    <div class="pack">
+        <div class="bg"></div>
+        <table>
+            <tr>
+                <th class="w1 center">Дата время покупки дополнительного пакета</th>
+                <th class="w2 center">Название пакета</th>
+                <th class="w3 center">Количество попыток в пакете</th>
+            </tr>
+
+            {% for pack in packages %}
+                <tr>
+                    <td class="w1 center">{{ pack.created_at|localizeddate('long', 'short') }}</td>
+                    <td class="w2 center">{{ pack.name }}</td>
+                    <td class="w3 center">{{ pack.amount }}</td>
+                </tr>
+                {% if not loop.last %}<tr><td colspan="4" class="first"></td></tr>{% endif %}
+            {% endfor %}
+        </table>
+    </div>
+    <span class="sum"><strong>Куплено попыток: {{ sum_packages }}</strong></span>
+
+    <h2>Использованные попытки</h2>
+    <div class="pack">
+        <div class="bg"></div>
+        <table>
+            <tr>
+                <th class="w1 center">Дата время использования попытки</th>
+                <th class="w2 center">Название экзамена</th>
+            </tr>
+            {% for att in attempts %}
+                <tr>
+                    <td class="w1 center">{{ att.created_at|localizeddate('long', 'short') }}</td>
+                    <td class="w2 center">{{ att.title }}</td>
+                </tr>
+                {% if not loop.last %}<tr><td colspan="4" class="first"></td></tr>{% endif %}
+            {% endfor %}
+        </table>
+    </div>
+    <span class="sum"><strong>Использовано попыток: {{ sum_attempts }}</strong></span><br>
+    <br>
+    {% if paid_attempts_remain <= packages[0].amount %} {#if statements checks values for accident dubble buy attempts package #}
+        Количество оставшихся оплаченных попыток : <strong>{{ paid_attempts_remain }}</strong><br>
+    {% endif %}
+    До сброса прогресса обучения осталось попыток: <strong>{{ attempts_to_reset_remain }}</strong><br>
+</div>
+{% endblock content %}

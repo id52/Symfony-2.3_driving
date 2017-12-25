@@ -1,0 +1,26 @@
+{% extends "AppBundle:Admin/SettingsNotifies:_settings_notifies_layout.html.twig" %}
+{% block settings_notifies_content %}
+    <fieldset>
+        <legend>{{ 'settings_notifies_tickets_is_sended'|trans }}</legend>
+        {{ form_row(form.tickets_is_sended_title) }}
+        {{ form_row(form.tickets_is_sended_text, { attr: { class: 'ckeditor' }, help: 'settings_notifies_tickets_is_sended_text_help' }) }}
+    </fieldset>
+
+    <fieldset>
+        <legend>{{ 'settings_notifies_doc_is_done'|trans }}</legend>
+        {{ form_row(form.doc_is_done_title) }}
+        {{ form_row(form.doc_is_done_text, { attr: { class: 'ckeditor' }, help: 'settings_notifies_doc_is_done_text_help' }) }}
+    </fieldset>
+
+    <fieldset>
+        <legend>{{ 'settings_notifies_doc_is_confirm'|trans }}</legend>
+        {{ form_row(form.doc_is_confirm_title) }}
+        {{ form_row(form.doc_is_confirm_text, { attr: { class: 'ckeditor' }, help: 'settings_notifies_doc_is_confirm_text_help' }) }}
+    </fieldset>
+
+    <fieldset>
+        <legend>{{ 'settings_notifies_doc_is_fail'|trans }}</legend>
+        {{ form_row(form.doc_is_fail_title) }}
+        {{ form_row(form.doc_is_fail_text, { attr: { class: 'ckeditor' }, help: 'settings_notifies_doc_is_fail_text_help' }) }}
+    </fieldset>
+{% endblock %}

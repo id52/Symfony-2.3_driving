@@ -1,0 +1,330 @@
+{% extends 'AppBundle::layout_new.html.twig' %}
+
+{% block content %}
+    <div class="mainContent">
+        {% include 'AppBundle::_owe_stage_paid.html.twig' %}
+        <div class="title"><h1>Калькулятор условий вождения</h1></div>
+
+        {% if warning %}
+            <div class="wid">
+                <h4>К сожалению сейчас мы не можем предложить вам ни одного пакета вождения.</h4>
+            </div>
+        {% else %}
+
+            {% if errors['place'] is defined %}
+                <div class="alert alert-error"><button type="button" class="close" data-dismiss="alert">&times;</button>
+                    {{ errors['place'] }}
+                </div>
+            {% endif %}
+            {% if errors['class_service'] is defined %}
+                <div class="alert alert-error"><button type="button" class="close" data-dismiss="alert">&times;</button>
+                    {{ errors['class_service'] }}
+                </div>
+            {% endif %}
+            {% if errors['driving_condition'] is defined %}
+                <div class="alert alert-error"><button type="button" class="close" data-dismiss="alert">&times;</button>
+                    {{ errors['driving_condition'] }}
+                </div>
+            {% endif %}
+            {% if errors['driving_price'] is defined %}
+                <div class="alert alert-error"><button type="button" class="close" data-dismiss="alert">&times;</button>
+                    {{ errors['driving_price'] }}
+                </div>
+            {% endif %}
+
+            <form method="post" action="" class="form-horizontal">
+                {% if type_at == 0 %}
+                    <div class="control-group">
+                        <label for="driving_with_at" class="control-label">
+                            Автомат:
+                            <input type="checkbox" id="driving_with_at" name="driving[with_at]"/>
+                        </label>
+                    </div>
+                {% elseif type_at == 1 %}
+                    <div class="control-group">
+                        <label for="driving_with_at" class="control-label">
+                            Автомат:
+                            <input type="checkbox" id="driving_with_at" name="driving[with_at]" checked="checked" disabled="disabled"/>
+                        </label>
+                    </div>
+                {% elseif type_at == 2 %}
+                    <div class="control-group">
+                        <label for="driving_with_at" class="control-label">
+                            Автомат:
+                            <input type="checkbox" id="driving_with_at" name="driving[with_at]" disabled="disabled"/>
+                        </label>
+                    </div>
+                {%  endif %}
+                {% if default|length > 0 %}
+                    <div style="display: inline-block">
+                        <div class="control-group">
+                            <div class="controls">
+                                <select id="driving_place" name="driving[place]" class="calc-select">
+                                    <option value="{{ default['place']['id'] }}">{{ default['place']['name'] }}</option>
+                                    {% for place in places %}
+                                        {% if place.name != default['place']['name'] %}
+                                            <option value="{{ place.id }}">{{ place.name }}</option>
+                                        {% endif %}
+                                    {% endfor %}
+                                </select>
+                                <div id="driving_place_error" class="calc_errors"></div>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <div class="controls">
+                                <select id="driving_class_service" name="driving[class_service]" class="not-active calc-select">
+                                    <option value="{{ default['class_service']['id'] }}">{{ default['class_service']['name'] }}</option>
+                                    {% for id, name in default['class_service']['data'] %}
+                                        {% if name != default['class_service']['name'] %}
+                                            <option value="{{ id }}">{{ name }}</option>
+                                        {% endif %}
+                                    {% endfor %}
+                                </select>
+                                <div id="driving_class_service_error" class="calc_errors"></div>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <div class="controls">
+                                <select id="driving_condition" name="driving[driving_condition]" class="not-active calc-select">
+                                    <option value="{{ default['drive_condition']['id'] }}">{{ default['drive_condition']['name'] }}</option>
+                                    {% for id, name in default['drive_condition']['data'] %}
+                                        {% if name != default['drive_condition']['name'] %}
+                                            <option value="{{ id }}">{{ name }}</option>
+                                        {% endif %}
+                                    {% endfor %}
+                                </select>
+                                <div id="driving_condition_error" class="calc_errors"></div>
+                            </div>
+                        </div>
+                        <div id="drv_description" class="drv-description">{{ default['drive_condition']['description']|raw }}</div>
+                    </div>
+                {% else %}
+                    <div style="display: inline-block">
+                        <div class="control-group">
+                            <div class="controls">
+                                <select id="driving_place" name="driving[place]" class="calc-select">
+                                    <option value="">-- Выберите место вождения --</option>
+                                    {% for place in places %}
+                                        <option value="{{ place.id }}">{{ place.name }}</option>
+                                    {% endfor %}
+                                </select>
+                                <div id="driving_place_error" class="calc_errors"></div>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <div class="controls">
+                                <select id="driving_class_service" name="driving[class_service]" class="not-active calc-select">
+                                    <option value="0">-- Выберите класс обслуживания --</option>
+                                </select>
+                                <div id="driving_class_service_error" class="calc_errors"></div>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <div class="controls">
+                                <select id="driving_condition" name="driving[driving_condition]" class="not-active calc-select">
+                                    <option value="0">-- Выберите условие вождения --</option>
+                                </select>
+                                <div id="driving_condition_error" class="calc_errors"></div>
+                            </div>
+                        </div>
+                        <div id="drv_description" class="drv-description" style="display: none"></div>
+                    </div>
+                {% endif %}
+                <br>
+                <br>
+                <div class="form-actions">
+                    <button id="submit-button" type="submit" class="btn btn-success" style="{{ (default|length ? '' : 'display: none') }}">
+                        <i class="fa fa-download"></i><span>Оплатить <span id="sum_price">{{ (default|length ? default['price'] : 0) }}</span> руб.</span>
+                    </button>
+                    <span id="faike-submit-button" class="btn btn-success" style="background-color: #d5d5d5; {{ (default|length ? 'display: none' : '') }}">
+                        <i class="fa fa-download"></i><span>Оплатить <span id="sum_price">0</span> руб.</span>
+                    </span>
+                </div>
+            </form>
+        {% endif %}
+    </div>
+{% endblock content %}
+
+{% block js %}
+    <script>
+        $(function() {
+            var at = $('#driving_with_at');
+            var placeSelect = $('#driving_place');
+            var classService = $('#driving_class_service');
+            var drivingCondition = $('#driving_condition');
+            var discription = $('#drv_description');
+            var sumPriceField = $('#sum_price');
+            var submit = $('#submit-button');
+            var faikeSubmit = $('#faike-submit-button');
+
+            at.on('change', getPlace);
+            placeSelect.on('change', getDrivingClassService);
+            classService.on('change', getDrivingConditions);
+            drivingCondition.on('change', getDrivingPrice);
+            classService.attr('disabled', {{ (default|length ? 'false' : '"disabled"') }});
+            drivingCondition.attr('disabled', {{ (default|length ? 'false' : '"disabled"') }});
+
+            if ($('#driving_place' + ' option').size() == 1) {
+                placeSelect.attr('disabled', 'disabled');
+                placeSelect.addClass('not-active');
+            }
+
+            function getPlace() {
+                $('.calc_errors').html('');
+                submit.hide();
+                discription.hide();
+                faikeSubmit.show();
+                placeSelect.removeClass('not-active');
+                placeSelect.addClass('ajax-load');
+                placeSelect.attr('disabled', 'disabled');
+                placeSelect.html('<option value="">-- Выберите место вождения --</option>');
+
+                classService.attr('disabled', 'disabled');
+                classService.addClass('not-active');
+                classService.html('<option value="">-- Выберите класс обслуживания --</option>');
+
+                drivingCondition.attr('disabled', 'disabled');
+                drivingCondition.addClass('not-active');
+                drivingCondition.html('<option value="">-- Выберите условие вождения --</option>');
+                $.getJSON('{{ path('get_calc_places') }}', {
+                    catId: '{{ category.id }}',
+                    with_at: $('#driving_with_at').prop('checked')
+                }, function (data) {
+                    if (data.success && data.count > 0) {
+                        var places = data[0];
+
+                        placeSelect.removeAttr('disabled');
+                        placeSelect.removeClass('not-active');
+                        placeSelect.removeClass('ajax-load');
+                        placeSelect.html('');
+                        placeSelect.html('<option value="">-- Выберите место вождения --</option>');
+                        for (var key in places) {
+                            if (places.hasOwnProperty(key)) {
+                                placeSelect.append('<option value="' + key + '">' + places[key] + '</option>');
+                            }
+                        }
+                    } else {
+                        placeSelect.addClass('not-active');
+                        placeSelect.removeClass('ajax-load');
+                        $('#theory_category_error').html('<div style="color: darkred">'
+                                + 'К сожалению для данной категории нет площадок, измените данные.</div>');
+                    }
+                })
+            }
+
+            function getDrivingClassService() {
+                $('.calc_errors').html('');
+                submit.hide();
+                discription.hide();
+                faikeSubmit.show();
+                classService.removeClass('not-active');
+                classService.addClass('ajax-load');
+                classService.attr('disabled', 'disabled');
+                classService.html('<option value="">-- Выберите класс обслуживания --</option>');
+
+                drivingCondition.attr('disabled', 'disabled');
+                drivingCondition.addClass('not-active');
+                drivingCondition.html('<option value="">-- Выберите условие вождения --</option>');
+                $.getJSON('{{ path('get_calc_services') }}', {
+                    catId: '{{ category.id }}',
+                    with_at: $('#driving_with_at').prop('checked'),
+                    place: placeSelect.val()
+                }, function (data) {
+                    if (data.success && data.count > 0) {
+                        var services = data[0];
+
+                        classService.removeAttr('disabled');
+                        classService.removeClass('not-active');
+                        classService.removeClass('ajax-load');
+                        classService.html('');
+                        classService.html('<option value="">-- Выберите класс обслуживания --</option>');
+                        for (var key in services) {
+                            if (services.hasOwnProperty(key)) {
+                                classService.append('<option value="' + key + '">' + services[key] + '</option>');
+                            }
+                        }
+                    } else {
+                        classService.addClass('not-active');
+                        classService.removeClass('ajax-load');
+                        placeSelect.val('');
+                        $('#driving_place_error').html('<div style="color: darkred">'
+                                + 'К сожалению не удалось получить данные по классам вождения, измените данные.</div>');
+                    }
+                })
+            }
+
+            function getDrivingConditions() {
+                $('.calc_errors').html('');
+                submit.hide();
+                discription.hide();
+                faikeSubmit.show();
+                drivingCondition.removeClass('not-active');
+                drivingCondition.addClass('ajax-load');
+                drivingCondition.attr('disabled', 'disabled');
+                drivingCondition.html('<option value="">-- Выберите условие вождения --</option>');
+
+                $.getJSON('{{ path('get_calc_conditions') }}', {
+                    catId: '{{ category.id }}',
+                    with_at: $('#driving_with_at').prop('checked'),
+                    place: placeSelect.val(),
+                    service: classService.val()
+                }, function (data) {
+                    if (data.success && data.count > 0) {
+                        var conditions = data[0];
+
+                        drivingCondition.removeAttr('disabled');
+                        drivingCondition.removeClass('not-active');
+                        drivingCondition.removeClass('ajax-load');
+                        drivingCondition.html('');
+                        drivingCondition.html('<option value="">-- Выберите условие вождения --</option>');
+
+                        for (var key in conditions) {
+                            if (conditions.hasOwnProperty(key)) {
+                                drivingCondition.append('<option value="' + key + '">' + conditions[key] + '</option>');
+                            }
+                        }
+                    } else {
+                        drivingCondition.addClass('not-active');
+                        drivingCondition.removeClass('ajax-load');
+
+                        classService.val('');
+                        $('#driving_class_service_error').html('<div style="color: darkred">'
+                                + 'К сожалению не удалось получить данные по условиям вождения, измените данные.</div>');
+                    }
+                })
+            }
+
+            function getDrivingPrice() {
+                submit.hide();
+                discription.hide();
+                faikeSubmit.show();
+                $('.calc_errors').html('');
+                faikeSubmit.addClass('ajax-load');
+                $.getJSON('{{ path('get_calc_price') }}', {
+                    catId: '{{ category.id }}',
+                    with_at: $('#driving_with_at').prop('checked'),
+                    place: placeSelect.val(),
+                    condition: drivingCondition.val()
+                }, function (data) {
+                    if (data.success) {
+                        discription.show();
+                        discription.html(data.discription);
+                        faikeSubmit.removeClass('ajax-load');
+                        sumPriceField.html(data[0]);
+                        submit.show();
+                        faikeSubmit.hide();
+                    } else {
+                        submit.hide();
+                        discription.hide();
+                        faikeSubmit.removeClass('ajax-load');
+                        faikeSubmit.show();
+                        sumPriceField.html(0);
+                        drivingCondition.val('');
+                        $('#driving_condition_error').html('<div style="color: darkred">'
+                                + 'К сожалению для данного условия нет ценников, измените данные.</div>');
+                    }
+                })
+            }
+        });
+    </script>
+{% endblock js %}

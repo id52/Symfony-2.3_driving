@@ -1,0 +1,64 @@
+* {
+    border: 0;
+    margin: 0;
+    padding: 0
+}
+
+html {
+    color: #000;
+    background: #fff;
+    font-family: "Times New Roman", serif;
+    -ms-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+    font-size: 100%
+}
+
+body {
+    font-size: 10px
+}
+
+table {
+    border-collapse: collapse;
+    border-width: 5pt;
+}
+
+.container {
+    font-size: 10pt;
+    margin: 0 auto;
+    text-align: justify;
+    width: 500pt
+}
+
+h1, h2, h3 {
+    font-size: 11pt;
+    margin: 0;
+    text-align: center
+}
+
+.list tr > td:first-of-type {
+    padding-right: 5pt;
+    vertical-align: top;
+    width: 1pt
+}
+
+.requisites {
+    collapse: collapse;
+    width: 100%
+}
+
+.requisites td {
+    padding: 5pt;
+    text-align: left;
+    vertical-align: top;
+    width: 50%
+}
+
+.requisites tr:last-of-type td span {
+    border-bottom: solid 1pt black;
+    display: block;
+    text-align: right
+}
+
+.container ul {
+    list-style-position: inside;
+}

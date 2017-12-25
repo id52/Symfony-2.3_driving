@@ -1,0 +1,109 @@
+{% extends "AppBundle::admin.html.twig" %}
+{% trans_default_domain 'transfer_payment' %}
+
+{% block content %}
+    <h1>Перенос оплаты 1 и 2 в Paradox</h1>
+    <hr>
+    <a id="filter_link" href="#"><i class="fa fa-caret-down"></i> Фильтр</a>
+    <div id="filter">
+        {{ form_start(filter_form) }}
+        {{ form_widget(filter_form) }}
+        <div class="form-actions">
+            <button type="submit" class="btn btn-success pull-right">
+                <i class="fa fa-filter"></i>
+                <span>Отфильтровать</span>
+            </button>
+        </div>
+        {{ form_end(filter_form) }}
+    </div>
+    <br>
+    {% if pagerfanta.currentPageResults|length %}
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th class="min_col">{{ 'createdAt'|trans }}</th>
+                    <th class="min_col">{{ 's_type'|trans }}</th>
+                    <th class="min_col">{{ 's_id'|trans }}</th>
+                    <th class="min_col">{{ 'Тип услуги' }}</th>
+                    <th class="min_col">{{ 'sum'|trans }}</th>
+                    <th class="min_col">{{ 'user_full_name'|trans }}</th>
+                    <th class="min_col">{{ 'code_listener'|trans }}</th>
+                    <th class="min_col">{{ 'region'|trans }}</th>
+                    <th class="min_col"></th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for entity in transactions_transfer %}
+                <tr>
+                    <td class="min_col">
+                        {{ entity.created_at|date("d.m.Y H:i") }}
+                    </td>
+                    <td class="min_col">
+                        {{ entity.s_type|trans }}
+                    </td>
+                    <td class="min_col">
+                        {{ entity.s_id }}
+                    </td>
+                    <td class="min_col">
+                        {{ entity.service_type }}
+                    </td>
+                    <td class="min_col">
+                        {{ entity.sum|number_format(0, ',' , ' ') }} руб.
+                    </td>
+
+                    <td class="min_col">
+                        {{ entity.user_full_name }}
+                    </td>
+                    <td class="min_col">
+                        {{ entity.paradox_id }}
+                    </td>
+                    <td class="min_col">
+                        {{ entity.region }}
+                    </td>
+                    <td class="min_col">
+                         {% if not entity.moderated %}
+                            <a href="{{ path('admin_precheck_user_view', { id: entity.user_id }) }}" class="text-success"><i class="fa fa-wheelchair-alt" title="Проверка ученика"></i></a>
+                         {% else %}
+                            <i class="fa fa-wheelchair muted" title="Проверка ученика"></i>
+                        {% endif %}
+                    </td>
+                    <td class="min_col">
+                        {% if entity.moderated and not entity.paradox_id %}
+                            <a href="{{ path('admin_paradox_user_view', { id: entity.user_id }) }}" class="text-success"><i class="fa fa-universal-access" title="Перенести ученика в Paradox"></i></a>
+                        {% else %}
+                            <i class="fa fa-universal-access muted" title="Перенести ученика в Paradox"></i>
+                        {% endif %}
+                    </td>
+                    <td class="min_col">
+                        {% if entity.moderated and entity.paradox_id %}
+                            <a href="{{ path('admin_item_transfer_payment_in_one_two_paradox', { log_id: entity.log_id }) }}" class="text-success"><i class="fa fa-share" title="Перенос оплаты 1 и 2 в Paradox"></i></a>
+                        {% else %}
+                            <i class="fa fa-share muted" title="Перенос оплаты 1 и 2 в Paradox"></i>
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <hr>
+
+        {% if pagerfanta.haveToPaginate %}
+            {{ pagerfanta(pagerfanta, 'twitter_bootstrap_translated', { prev_message: '←', next_message: '→' }) }}
+        {% endif %}
+        Всего: {{ pagerfanta.count }}, на сумму {{ all_sum|number_format(0, ',' , ' ') }} руб.
+    {% else %}
+        Нет Данных
+    {% endif %}
+{% endblock content %}
+
+{% block js %}
+<script>
+$(function() {
+    $('#filter').hide();
+    $('#filter_link').click(function() {
+        $('#filter').toggle();
+        return false;
+    });
+});
+</script>
+{% endblock js %}

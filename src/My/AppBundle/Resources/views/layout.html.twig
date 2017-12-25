@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="{{ app.request.locale }}">
+<head>
+    <title>{% block title %}{{ 'project.name'|trans }} — {{ 'project.slogan'|trans }}{% endblock %}</title>
+    <meta charset="{{ _charset }}">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel="icon" href="/favicon.ico">
+    <link href="/bundles/app/css/main.css" rel="stylesheet">
+    {% block css '' %}
+</head>
+<body>
+<div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container">
+            <a class="brand" href="{{ path('homepage') }}">
+                <i class="fa fa-road"></i>
+                {{ 'project.name'|trans }}
+            </a>
+            <div class="pull-right auth">
+                {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                    {{ app.user.lastName~' '~app.user.firstName~' '~app.user.patronymic }}
+                    {% if is_granted('ROLE_MOD') %}
+                    | <a href="{{ path('admin') }}">{{ 'in_admin'|trans }}</a>
+                    {% endif %}
+                    | <a href="{{ path('fos_user_security_logout') }}">{{ 'layout.logout'|trans({}, 'FOSUserBundle') }}</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    {% if is_granted('ROLE_USER_PAID') %}
+    <div class="row">
+        <div class="span2">
+            {% include 'AppBundle::menu.html.twig' only %}
+        </div>
+        <div class="span10">
+    {% endif %}
+
+    {% for key, messages in app.session.flashbag.all() %}
+        {% for message in messages %}
+            <div class="alert alert-{{ key }}">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                {{ message|trans }}
+            </div>
+        {% endfor %}
+    {% endfor %}
+
+    {% block content '' %}
+
+    {% if is_granted('ROLE_USER_PAID') %}
+        </div>
+    </div>
+    {% endif %}
+    <hr>
+    <footer>
+        © {{ 'project.name'|trans }} {{ 'now'|date('Y') }}
+    </footer>
+</div>
+
+{% if paid_notify is defined %}
+<div class="modal fade" id="paid_notify" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">{{ paid_notify_title }}</h4>
+            </div>
+            <div class="modal-body">
+                {{ paid_notify_body|raw }}
+            </div>
+            <div class="modal-footer">
+                <a href="{{ path('my_payments') }}" class="btn btn-success">{{ 'paid_notify.pay'|trans }}</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+<script src="/bundles/app/js/main.js"></script>
+<!--[if lt IE 9]>
+<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+{% block js '' %}
+
+{% if paid_notify is defined %}
+<script>
+$(function () {
+    var paid_notify = $('#paid_notify');
+    paid_notify.find('.modal-body span.timeleft').countdown({
+        until: {{ paid_notify_end_time_seconds }},
+        format: 'Od',
+        layout: '{dn} {dl}',
+        labels: ['годов', 'месяцев', 'недель', 'дней', 'часов', 'минут', 'секунд'],
+        labels1: ['года', 'месяца', 'недели', 'дня', 'часа', 'минуты', 'секунды'],
+        labels2: ['годов', 'месяцев', 'недель', 'дней', 'часов', 'минут', 'секунд']
+    });
+    paid_notify.modal('show');
+});
+</script>
+{% endif %}
+
+</body>
+</html>

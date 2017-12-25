@@ -1,0 +1,99 @@
+{% extends "AppBundle::admin.html.twig" %}
+
+{% block content %}
+    <h1>Отчётность по платежам</h1>
+    <hr>
+    <a id="filter_link" href="#"><i class="fa fa-caret-down"></i> Фильтр</a>
+    <div id="filter">
+        {{ form_start(filter_form) }}
+        {{ form_widget(filter_form) }}
+        <div class="form-actions">
+            <button type="submit" class="btn btn-success pull-right">
+                <i class="fa fa-filter"></i>
+                <span>Сформировать отчёт</span>
+            </button>
+        </div>
+        {{ form_end(filter_form) }}
+    </div>
+    <hr>
+    {% if app.request.queryString != '' %}
+        <div class="pay_rep_summa">
+            Отчёт
+            {% if info['show_from'] is defined %}
+                с {{ info['show_from']|date("d.m.y H:i") }}
+            {% endif %}
+
+            {% if info['show_to'] is defined %}
+                по {{ info['show_to']|date("d.m.y H:i") }}
+            {% endif %}
+
+            {% if info['paradox_id'] is defined and info['paradox_id'] is not empty %}                 | Код слушателя: {{ info['paradox_id'] }}        {% endif %}
+            {% if info['service_type'] is defined and info['service_type'] is not empty %}             | {{ info['service_type']|split(' ')|first }}          {% endif %}
+            {% if info['transaction_amount'] is defined and info['transaction_amount'] is not empty %} | Транзакций:  {{ info['transaction_amount']|number_format(0, ',', ' ') }}  {% endif %}
+            {% if info['transaction_sum'] is defined %} | Сумма:       {{ info['transaction_sum']|number_format(0, ',', ' ') }} руб.             {% endif %}
+        </div>
+
+    <hr>
+        {% for date, statistic in statistics %}
+            <div class="pay_rep_podsumma">
+                {{ date|date("d.m.y") }}
+                {% if statistic['transaction_amount'] is defined %} | Транзакций: {{ statistic['transaction_amount'] }} | {% endif %}
+                Сумма: {{ statistic['transaction_sum']|number_format(0, ',', ' ') }} руб.
+            </div>
+            <br><br>
+
+            <table class="table table-hover">
+                <th class="min_col text-left">Время</th>
+                <th class="min_col text-right">Код транзакции</th>
+                <th class="min_col text-left">Эквайринг</th>
+                <th class="text-left">ФИО ученика</th>
+                <th class="min_col text-right">Код слушателя</th>
+                <th class="min_col text-right">Код услуги</th>
+                <th class="min_col text-right">Сумма, руб.</th>
+                {% for transaction in statistic['transactions'] %}
+                    <tr>
+                        <td class="min_col text-right">{{ transaction.updated_at|date("d.m.y H:i") }}</td>
+                        <td class="min_col text-right">{{ transaction.s_id }}</td>
+                        <td class="min_col text-right">
+                            {% if transaction.s_type == 'robokassa' %}ДО Робокасса{% endif %}
+                            {% if transaction.s_type == 'psb' %}ДО ПСБ{% endif %}
+                            {% if transaction.s_type == 'api' %}АО ПСБ{% endif %}
+                        </td>
+                        <td class="text-left">{{ transaction.last_name }} {{ transaction.first_name }} {{ transaction.patronymic }}</td>
+                        <td class="min_col text-right">{{ transaction.paradox_id }}</td>
+                        <td class="min_col text-right">
+                            {% if transaction.service_type is defined %} {{ transaction.service_type }} {% endif %}
+                        </td>
+                        <td class="min_col text-right">{{ transaction.sum|number_format(0, ',', ' ') }}</td>
+                    </tr>
+                {% endfor %}
+
+            </table>
+            <hr>
+        {% endfor %}
+    {% endif %}
+    {% if pagerfanta %}
+        {% if pagerfanta.haveToPaginate %}
+            {{ pagerfanta(pagerfanta, 'twitter_bootstrap_translated', { prev_message: '←', next_message: '→' }) }}
+        {% endif %}
+    {% endif %}
+{% endblock content %}
+
+{% block js %}
+<script>
+$(function() {
+    {% if app.request.queryString != '' %}
+    $('#filter').hide();
+    {% else %}
+    $('#filter_default').hide();
+    {% endif %}
+    $('#filter_link').click(function() {
+        $('#filter').toggle();
+        {% if app.request.queryString == '' %}
+        $('#filter_default').toggle();
+        {% endif %}
+        return false;
+    });
+});
+</script>
+{% endblock js %}

@@ -1,0 +1,67 @@
+{% extends 'AppBundle::admin.html.twig' %}
+{% trans_default_domain 'check_payment' %}
+
+{% block content %}
+    <h3>{{ 'payment_information'|trans() }}</h3>
+    <hr>
+    <div class="mainContent">
+        <table class="table-condensed">
+            <tr style="font-size:18px">
+                <th class="text-right min_col">Ф.И.О. ученика:</th>
+                <td>{{ log.user.fullName }}</td>
+            </tr>
+            <tr style="font-size:18px">
+                <th class="text-right min_col">Код слушателя:</th>
+                <td>{{ log.user.paradoxId }}</td>
+            </tr>
+            <tr>
+                <th class="text-right min_col">Пакет вождения:</th>
+                <td>{{ log.package.condition.name }}</td>
+            </tr>
+            <tr>
+                <th class="text-right min_col">Регион:</th>
+                <td>{{ log.user.region }}</td>
+            </tr>
+            <tr>
+                <th class="text-right min_col">Дата и время оплаты вождения:</th>
+                <td>{{ log.createdAt|localizeddate('medium') }}</td>
+            </tr>
+            <tr>
+                <th class="text-right min_col">Платежная система:</th>
+                <td>{{ (log.sType == 'psb' ? 'ПСБ банк' : 'Робокасса') }}</td>
+            </tr>
+            <tr>
+                <th class="text-right min_col">Номер транзакции:</th>
+                <td>{{ log.sId }}</td>
+            </tr>
+            <tr>
+                <th class="text-right min_col">Тип пакета:</th>
+                <td>{{ (log.package.condition.isPrimary ? 'Основной' : 'Дополнительный') }}</td>
+            </tr>
+            <tr>
+                <th class="text-right min_col">Код пакета:</th>
+                <td>{{ log.package.condition.condCode }}</td>
+            </tr>
+            <tr>
+                <th class="text-right min_col">Кол-во занятий:</th>
+                <td>{{ log.package.condition.numberTickets }}</td>
+            </tr>
+            <tr>
+                <th class="text-right min_col">Стоимость:</th>
+                <td>{{ log.sum|number_format(0, ',' , ' ') }} руб.</td>
+            </tr>
+            <tr>
+                <th class="text-right min_col">Дата и время переноса платежа в Paradox:</th>
+                <td>{{ log.transferredAt|localizeddate('medium') }}</td>
+            </tr>
+            <tr>
+                <th class="text-right min_col">Платеж перенес в Paradox:</th>
+                <td>{{ log.admin.fullName }}</td>
+            </tr>
+        </table>
+        <hr>
+        <a class="btn pull-right" href="{{ list_route }}"><i class="fa fa-arrow-left"></i> Назад</a>
+    </div>
+{% endblock content %}
+
+

@@ -1,0 +1,28 @@
+My\AppBundle\Entity\DrivingTicket:
+    type: entity
+    table: driving_ticket
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        drive_date:
+            type: datetime
+            nullable: true
+        name:
+            type: text
+            nullable: true
+        comment:
+            type: text
+            nullable: true
+        rating:
+            type: integer
+            nullable: true
+    manyToOne:
+        package:
+            targetEntity: My\AppBundle\Entity\DrivingPackage
+            inversedBy: tickets
+            joinColumn:
+                name: p_number
+                referencedColumnName: number

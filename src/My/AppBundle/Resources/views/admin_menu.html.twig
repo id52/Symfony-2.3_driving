@@ -1,0 +1,349 @@
+{% set route = app.request.get('_route') %}
+{% if is_granted('ROLE_MOD') %}
+{%
+    set menu = [
+    {
+        roles: ['ROLE_ADMIN'],
+        name: 'Настройки',
+        routes: ['admin_settings'],
+    },
+    {
+        roles: ['ROLE_ADMIN'],
+        divider: true,
+    },
+    {
+        roles: ['ROLE_ADMIN'],
+        name: 'Уведомления',
+        children: [
+            {
+                name: 'Регистрация',
+                routes: ['admin_settings_notifies_registration'],
+            },
+            {
+                name: 'Периоды действия',
+                routes: ['admin_settings_notifies_validity_periods'],
+            },
+            {
+                name: 'Экзамены',
+                routes: ['admin_settings_notifies_exams'],
+            },
+            {
+                name: 'Оплаты',
+                routes: ['admin_settings_notifies_payments'],
+            },
+            {
+                name: 'Системные',
+                routes: ['admin_settings_notifies_system'],
+            },
+            {
+                name: 'Уведомления пользователю',
+                routes: ['admin_settings_notifies_user_notifies'],
+            },
+            {
+                name: 'Доп. попытки',
+                routes: ['admin_settings_notifies_additional_attempts'],
+            },
+            {
+                name: 'Филиалы МО',
+                routes: ['admin_settings_notifies_moscow_filials'],
+            },
+        ],
+    },
+    {
+        roles: ['ROLE_ADMIN'],
+        divider: true,
+    },
+    {
+        roles: ['ROLE_ADMIN'],
+        name: 'Обратная связь',
+        routes: ['admin_feedbackEmails', 'admin_feedbackEmail_add', 'admin_feedbackEmail_edit'],
+    },
+    {
+        roles: ['ROLE_ADMIN'],
+        name: 'Преподаватели',
+        routes: ['admin_feedbackTeacherEmails', 'admin_feedbackTeacherEmail_add', 'admin_feedbackTeacherEmail_edit'],
+    },
+    {
+        roles: ['ROLE_ADMIN'],
+        divider: true,
+    },
+    {
+        roles: ['ROLE_MOD_CONTENT'],
+        name: 'Обучение',
+        children: [
+            {
+                name:  'Версии',
+                routes: ['admin_training_versions', 'admin_trainig_version_add', 'admin_training_version_edit']
+            },
+            {
+                name:  'Предметы',
+                routes: ['admin_subjects', 'admin_subject_add', 'admin_subject_edit']
+            },
+            {
+                name:  'Темы',
+                routes: ['admin_themes', 'admin_theme_add', 'admin_theme_edit']
+            },
+            {
+                name:  'Flash-блоки',
+                routes: ['admin_flash_blocks', 'admin_flash_block_add', 'admin_flash_block_edit', 'admin_flash_block_items', 'admin_flash_block_item_add', 'admin_flash_block_item_edit']
+            },
+
+            {
+                name:  'Вопросы',
+                routes: ['admin_questions', 'admin_question_add', 'admin_question_edit']
+            },
+            {
+                name:  'Срезы',
+                routes: ['admin_slices', 'admin_slice_add', 'admin_slice_edit']
+            },
+            {
+                roles: ['ROLE_ADMIN'],
+                name:  'Пакеты попыток',
+                routes: ['admin_attempts_packages', 'admin_attempts_package_add', 'admin_attempts_package_edit']
+            },
+
+        ],
+
+    },
+    {
+        roles: ['ROLE_MOD_CONTENT'],
+        divider: true,
+    },
+    {
+        roles: ['ROLE_MOD_CONTENT'],
+        name:  'Статьи',
+        routes: ['admin_articles']
+    },
+    {
+        roles: ['ROLE_MOD_CONTENT'],
+        name:  'Вопросы-ответы',
+        routes: ['admin_faqs', 'admin_faq_add', 'admin_faq_edit']
+    },
+    {
+        roles: ['ROLE_ADMIN'],
+        name:  'Промо-компании',
+        routes: ['admin_promos', 'admin_promo_add', 'admin_promo_edit', 'admin_promo_keys', 'admin_promo_key_add', 'admin_promo_key_edit', 'admin_promo_key_generate', 'admin_promo_keys_activated']
+    },
+    {
+        roles: ['ROLE_ADMIN'],
+        name:  'Авто-промо-компании',
+        routes: ['admin_promo_keys_auto']
+    },
+    {
+        roles: ['ROLE_ADMIN'],
+        name:  'Регионы',
+        routes: ['admin_regions']
+    },
+    {
+        roles: ['ROLE_ADMIN'],
+        name:  'Места вождения',
+        routes: ['admin_region_places', 'admin_region_place_add', 'admin_region_place_edit']
+    },
+    {
+        roles: ['ROLE_ADMIN'],
+        name:  'Категории прав',
+        routes: ['admin_categories', 'admin_category_add', 'admin_category_edit']
+    },
+
+    {
+        roles: ['ROLE_ADMIN'],
+        name:  'Класс обслуживания',
+        routes: ['admin_class_services', 'admin_class_service_add', 'admin_class_service_edit']
+    },
+    {
+        roles: ['ROLE_ADMIN'],
+        name:  'Условия вождения',
+        routes: ['admin_driving_conditions', 'admin_driving_conditions_add', 'admin_driving_conditions_edit', 'admin_driving_conditions_delete', 'admin_driving_package_add', 'admin_driving_conditions_packages']
+    },
+    {
+        roles: ['ROLE_ADMIN'],
+        name:  'Услуги',
+        routes: ['admin_services', 'admin_service_add', 'admin_service_edit']
+    },
+    {
+        roles: ['ROLE_ADMIN'],
+        name:  'Веб-группы',
+        routes: ['admin_webgroups', 'admin_webgroup_add', 'admin_webgroup_edit']
+    },
+    {
+        roles: ['ROLE_ADMIN'],
+        divider: true,
+    },
+    {
+        roles: ['ROLE_MOD_PARADOX_USERS', 'ROLE_MOD_ADD_USER', 'ROLE_ADMIN', 'ROLE_MOD_PRECHECK_USERS', 'ROLE_MOD_REPRESENTATIVE'],
+        name: 'Пользователи',
+        children: [
+            {
+                roles: ['ROLE_ADMIN'],
+                name:  'Доступ',
+                routes: ['admin_users', 'admin_user_edit']
+            },
+            {
+                roles: ['ROLE_MOD_PRECHECK_USERS', 'ROLE_MOD_REPRESENTATIVE'],
+                name:  'Проверка',
+                routes: ['admin_precheck_users', 'admin_precheck_user_view', 'admin_precheck_user_edit']
+            },
+            {
+                roles: ['ROLE_MOD_PARADOX_USERS'],
+                name:  'В Paradox',
+                routes: ['admin_paradox_users', 'admin_paradox_user_view', 'admin_paradox_user_set']
+            },
+
+        ],
+    },
+    {
+        roles: ['ROLE_MOD_PARADOX_USERS', 'ROLE_MOD_ADD_USER', 'ROLE_ADMIN', 'ROLE_MOD_PRECHECK_USERS'],
+        divider: true,
+    },
+    {
+        roles: ['ROLE_MOD_SUPPORT', 'ROLE_MOD_REPRESENTATIVE'],
+        name: 'Обратная связь',
+        children: [
+            {
+                roles: ['ROLE_ADMIN', 'ROLE_MOD_REPRESENTATIVE', 'ROLE_MOD_SUPPORT'],
+                name:  'Диалоги',
+                routes: ['admin_support_dialogs', 'admin_support_dialog_edit']
+            },
+            {
+                roles: ['ROLE_ADMIN'],
+                name:  'Статистика',
+                routes: ['admin_support_statistics']
+            },
+            {
+                roles: ['ROLE_ADMIN'],
+                name:  'Категории',
+                routes: ['admin_support_categories', 'admin_support_category_add', 'admin_support_category_edit']
+            },
+            {
+                roles: ['ROLE_ADMIN'],
+                name:  'Праздники',
+                routes: ['admin_holidays']
+            },
+
+        ],
+    },
+    {
+        roles: ['ROLE_MOD_SUPPORT'],
+        divider: true,
+    },
+    {
+        roles: ['ROLE_MOD_MAILING'],
+        name:  'Рассылка',
+        routes: ['admin_mailing', 'admin_mailing_add', 'admin_mailing_create', 'admin_mailing_edit']
+    },
+    {
+        roles: ['ROLE_MOD_MAILING'],
+        name:  'Контрольные E-mail',
+        routes: ['admin_test_emails', 'admin_test_email_add', 'admin_test_email_edit']
+    },
+    {
+        roles: ['ROLE_MOD_MAILING'],
+        divider: true,
+    },
+    {
+        roles: ['ROLE_MOD_FINANCE', 'ROLE_MOD_REG_STAT', 'ROLE_MOD_API_STAT', 'ROLE_ADMIN'],
+        name: 'Статистика',
+        children: [
+            {
+                roles: ['ROLE_MOD_FINANCE'],
+                name:  'Автоматический дожим',
+                routes: ['admin_overdue_statistics']
+            },
+            {
+                roles: ['ROLE_MOD_REG_STAT'],
+                name:  'Регистраций',
+                routes:  ['admin_reg_stat']
+            },
+            {
+                roles: ['ROLE_MOD_REG_STAT'],
+                name:  'РегистрацийДВА',
+                routes:  ['admin_reg_stat_users']
+            },
+            {
+                roles: ['ROLE_MOD_API_STAT'],
+                name:  'Опрос пользователей',
+                routes: ['admin_api_stat']
+            },
+            {
+                roles: ['ROLE_ADMIN'],
+                name:  'Дожим рассылками',
+                routes: ['admin_reservist_stat']
+            },
+        ],
+    },
+    {
+        roles: ['ROLE_MOD_FINANCE', 'ROLE_MOD_REG_STAT', 'ROLE_MOD_API_STAT', 'ROLE_ADMIN'],
+        divider: true,
+    },
+    {
+        roles: ['ROLE_MOD_MANAGER'],
+        name: 'Виртуальные регионы',
+        routes: ['admin_check_regions', 'admin_check_regions_user_card']
+    },
+    {
+        roles: ['ROLE_MOD_MANAGER'],
+        divider: true,
+    },
+    {
+        roles: ['ROLE_MOD_ACCOUNTANT'],
+        name: 'Возврат средств',
+        routes: ['admin_revert_money_user_list', 'admin_revert_money_user_card', 'admin_revert_money_revert', 'psb_info_revert'],
+    },
+    {
+        roles: ['ROLE_MOD_ACCOUNTANT'],
+        name: 'Перенос оплаты за вождение',
+        routes: ['admin_list_transfer_payment_in_paradox', 'admin_item_transfer_payment_in_paradox'],
+    },
+    {
+        roles: ['ROLE_MOD_ACCOUNTANT'],
+        name: 'Проверка платежей за вождение',
+        routes: ['admin_list_check_payment_in_paradox', 'admin_item_check_payment_in_paradox'],
+    },
+    {
+        roles: ['ROLE_MOD_ACCOUNTANT'],
+        name: 'Перенос оплаты 1 и 2',
+        routes: ['admin_list_transfer_payment_one_two_in_paradox', 'admin_item_transfer_payment_in_one_two_paradox'],
+    },
+    {
+        roles: ['ROLE_MOD_ACCOUNTANT'],
+        name: 'Проверка оплаты 1 и 2',
+        routes: ['admin_list_check_payment_one_two_in_paradox', 'admin_item_check_payment_one_two_in_paradox'],
+    },
+    {
+        roles: ['ROLE_MOD_ACCOUNTANT'],
+        name: 'Отчётность по платежам',
+        routes: [ 'admin_payment_report'],
+    },
+]
+%}
+
+{% macro menu(route, els, num = '') %}
+    {% import _self as this %}
+    {% for el in els %}
+        {% set cur_num = num ? (num~'.'~loop.index) : loop.index %}
+        {% if el.roles is not defined or is_granted(el.roles) %}
+            {% if el.divider is defined %}
+                <li class="divider"></li>
+            {% else %}
+                {% if el.children is defined %}
+                    <li>
+                        <span data-num="{{ cur_num }}"><i class="fa fa-caret-down"></i> {{ el.name }}</span>
+                        <ul>{{ this.menu(route, el.children, cur_num) }}</ul>
+                    </li>
+                {% else %}
+                    <li{{ route in el.routes ? ' class="active"' : '' }}><a href="{{ path(el.routes[0]) }}"><i class="fa fa-angle-double-right"></i> {{ el.name }}</a></li>
+                {% endif %}
+            {% endif %}
+        {% endif %}
+    {% endfor %}
+{% endmacro %}
+
+
+<div class="span3" style="margin:0;padding:0">
+    <ul id="menu" class="nav nav-list well menu">
+        {% import _self as this %}
+        {{ this.menu(route, menu) }}
+    </ul>
+</div>
+
+{% endif %}

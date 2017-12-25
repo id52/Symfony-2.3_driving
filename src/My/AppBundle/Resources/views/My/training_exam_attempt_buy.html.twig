@@ -1,0 +1,35 @@
+{% extends "AppBundle::layout_new.html.twig" %}
+
+{% block content %}
+<nav class="path">
+    <a href="{{ path('homepage') }}">{{ 'titles.homepage'|trans }}</a>
+    » <a href="{{ path('my_trainings') }}">{{ 'titles.trainings'|trans }}</a>
+    » <a href="{{ path('my_training', { id: subject.id }) }}">{{ subject.title }}</a>
+    » <strong>{{ 'exam_title'|trans }}</strong>
+</nav>
+
+<div class="mainContent">
+    {% include 'AppBundle::_paid2_counter.html.twig' %}
+    {% include 'AppBundle::_owe_stage_paid.html.twig' %}
+
+    <div class="title"><h1>{{ settings_notifies['attempts_buy_title']|raw }}</h1></div>
+    <div class="text">{{ message|raw }}</div>
+    <div class="links">
+        <a class="bg-green" href="{{ path('buy_attempts', {'subject_id' : subject.id}) }}">Купить пакет попыток</a>
+        <a class="bg-green" href="{{ path('my_training', { id: subject.id }) }}">{{ 'exam_list'|trans }}</a>
+    </div>
+
+</div>
+{% endblock content %}
+
+{% block js %}
+<script>
+    $(function () {
+        var retake_countdown = $('.retake_countdown');
+        retake_countdown.countdown({
+            until: retake_countdown.data('seconds-left'),
+            layout: '{d<}{dn} {dl} {d>} {hn} {hl} {mn} {ml} {sn} {sl}'
+        });
+    })
+</script>
+{% endblock %}

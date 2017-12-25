@@ -1,0 +1,81 @@
+app:
+    resource: "@AppBundle/Resources/config/routing.yml"
+    prefix:   /
+
+app_admin:
+    resource: "@AppBundle/Resources/config/routing_admin.yml"
+    prefix:   /admin/
+
+app_training:
+    resource: "@AppBundle/Resources/config/routing_training.yml"
+    prefix:   /my/trainings/
+
+payment:
+    resource: "@PaymentBundle/Resources/config/routing.yml"
+    prefix:   /payments
+
+fos_user_security:
+    resource: "@FOSUserBundle/Resources/config/routing/security.xml"
+
+fos_user_register:
+    resource: "@FOSUserBundle/Resources/config/routing/registration.xml"
+    prefix: /register
+
+fos_user_resetting:
+    resource: "@FOSUserBundle/Resources/config/routing/resetting.xml"
+    prefix: /resetting
+
+terms_and_conditions_show:
+    path: /register/terms-and-conditions-agreement/
+    defaults: { _controller: AppBundle:Default:termsAndConditions }
+
+terms_and_conditions_education_service_show:
+    path: /register/terms_and_conditions_education_service/
+    defaults: { _controller: AppBundle:Default:termsAndConditionsEducationService }
+
+treaty_on_non_disclosure_show:
+    path: /register/treaty-on-non-disclosure/
+    defaults: { _controller: AppBundle:Default:treatyOnNonDisclosure }
+
+print_treaty_on_non_disclosure:
+    path: /register/print/
+    defaults: { _controller: AppBundle:Default:print }
+
+fos_user_register_resend:
+    pattern:  /register/resend/{token}/
+    defaults: { _controller: MyFOSUserBundle:Registration:resend }
+
+fos_user_confirmation:
+    pattern: /confirmation/{hash}/
+    defaults: { _controller: MyFOSUserBundle:Registration:userConfirmation }
+
+fos_user_confirmation_change_phone:
+    pattern: /confirmation/change_phone/{hash}/
+    defaults: { _controller: MyFOSUserBundle:Registration:userConfirmationChangePhone }
+
+fos_user_confirmation_repeat_sms:
+    pattern: /confirmation/repeat_sms/{hash}/
+    defaults: { _controller: MyFOSUserBundle:Registration:userConfirmationRepeatSms }
+
+fos_user_change_email:
+    pattern: /register/change_email/{token}/
+    defaults: { _controller: MyFOSUserBundle:Registration:changeEmail }
+
+my_user_registration_check_phone_ajax:
+    pattern: /register/check_phone_ajax/
+    defaults: { _controller: MyFOSUserBundle:Registration:checkPhoneAjax }
+
+my_user_registration_check_phone_code_ajax:
+    pattern: /register/check_phone_code_ajax/
+    defaults: { _controller: MyFOSUserBundle:Registration:checkPhoneCodeAjax }
+
+_imagine:
+    resource: .
+    type: imagine
+
+innocead_captcha:
+    resource: "@InnoceadCaptchaBundle/Resources/config/routing.yml"
+
+api:
+    resource: "@AppBundle/Resources/config/routing_api.yml"
+    prefix:   /api/

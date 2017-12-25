@@ -1,0 +1,80 @@
+{% extends 'AppBundle::admin.html.twig' %}
+
+{% block content %}
+    <h1>Пакеты для условия вождения</h1>
+<table class="table table-hover">
+    <thead>
+    <tr>
+        {% for field in condition_list_fields %}
+            <th>{{ (entity_name_s~'_'~field)|trans({}, 'messages') }}</th>
+        {% endfor %}
+        <th class="min_col">Стоимость</th>
+        <th class="min_col">Кол-во занятий</th>
+        <th class="min_col"></th>
+    </tr>
+    </thead>
+    <tbody>
+        <tr>
+            {% set entity = package[0] %}
+            {% for field in condition_list_fields %}
+                {% if field == 'withAt' %}
+                    <td><i class="fa fa-plus {{ entity.withAt ? 'fa-plus' : 'fa-minus' }}"></i></td>
+                {% elseif field == 'countPackages' %}
+                    <td>
+                        {{ attribute(entity, field) }}
+                    </td>
+                {% elseif field == 'isPrimary' %}
+                    <td><i class="fa fa-plus {{ entity.isPrimary ? 'fa-plus' : 'fa-minus' }}"></i></td>
+                {% else %}
+                    <td>{{ attribute(entity, field) }}</td>
+                {% endif %}
+            {% endfor %}
+            <td class="min_col text-right">{{ package['price']|number_format(0, ',' , ' ') }}</td>
+            <td class="min_col text-right">{{ entity.numberTickets|number_format(0, ',' , ' ') }}</td>
+        </tr>
+    </tbody>
+</table>
+    <hr>
+
+    {% if pagerfanta.currentPageResults|length %}
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                {% for field in package_list_fields %}
+                    <th>{{ (entity_name_s~'_'~field)|trans({}, 'messages') }}</th>
+                {% endfor %}
+                <th class="min_col"></th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for entity in pagerfanta.currentPageResults %}
+                <tr>
+                    {% for field in package_list_fields %}
+                        {% if field == 'rezervAt' %}
+                            <td>{{ attribute(entity, field) ? attribute(entity, field)|localizeddate('long', 'none') : '---'}}</td>
+                        {% elseif field == 'saleAt' %}
+                            <td>{{ attribute(entity, field) ? attribute(entity, field)|localizeddate('long', 'none') : '---'}}</td>
+                        {% elseif field == 'status' %}
+                            <td>{{ attribute(entity, field)|trans }}</td>
+                        {% elseif field == 'fullNameUser'%}
+                            <td>{{ attribute(entity, field) ?: '---' }}</td>
+                        {% elseif field == 'userParadoxId'%}
+                            <td>{{ attribute(entity, field) ?: '---' }}</td>
+                        {% else %}
+                            <td>{{ attribute(entity, field) }}</td>
+                        {% endif %}
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        {{ 'no_data'|trans }}
+    {% endif %}
+
+    <a class="btn pull-right" href="{{ path('admin_driving_conditions') }}"><i class="fa fa-arrow-left"></i> {{ 'admin.buttons.back_to_list'|trans }}</a>
+
+    {% if pagerfanta.haveToPaginate %}
+        {{ pagerfanta(pagerfanta, 'twitter_bootstrap_translated', { prev_message: '←', next_message: '→' }) }}
+    {% endif %}
+{% endblock content %}

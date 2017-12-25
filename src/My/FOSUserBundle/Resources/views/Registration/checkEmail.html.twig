@@ -1,0 +1,8 @@
+{% extends "FOSUserBundle::layout.html.twig" %}
+
+{% block fos_user_content %}
+<section class="reg-info">
+    <div class="title"><h1>{{ settings_notifies['confirmed_registration_again_title'] }}</h1></div>
+    <div class="wid">{{ message|raw }}</div>
+</section>
+{% endblock fos_user_content %}

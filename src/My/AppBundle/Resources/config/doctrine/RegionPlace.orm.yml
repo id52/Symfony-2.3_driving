@@ -1,0 +1,27 @@
+My\AppBundle\Entity\RegionPlace:
+    type: entity
+    table: regions_places
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        name:
+            type: string
+    oneToMany:
+        users:
+            targetEntity: User
+            mappedBy: region_place
+        place_prices:
+            targetEntity: RegionPlacePrice
+            mappedBy: place
+            cascade: [ all ]
+    manyToOne:
+        region:
+            targetEntity: Region
+            inversedBy: places
+    manyToMany:
+        categories:
+            targetEntity: Category
+            mappedBy: region_places

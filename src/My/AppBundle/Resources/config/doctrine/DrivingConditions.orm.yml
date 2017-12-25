@@ -1,0 +1,41 @@
+My\AppBundle\Entity\DrivingConditions:
+    type: entity
+    table: driving_conditions
+    repositoryClass: My\AppBundle\Repository\DrivingConditionsRepository
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        active:
+            type: boolean
+        name:
+            type: string
+        cond_code:
+            type: string
+            unique: true
+        with_at:
+            type: boolean
+        is_primary:
+            type: boolean
+        description:
+            type: text
+        number_tickets:
+            type: integer
+        position:
+            type: integer
+            gedmo:
+                - sortablePosition
+    oneToMany:
+        region_prices:
+            targetEntity: RegionPlacePrice
+            mappedBy: condition
+            cascade: [ 'all' ]
+        packages:
+            targetEntity: DrivingPackage
+            mappedBy: condition
+    manyToOne:
+         class_service:
+            targetEntity: ClassService
+            inversedBy: conditions

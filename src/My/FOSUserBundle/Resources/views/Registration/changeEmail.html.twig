@@ -1,0 +1,25 @@
+{% extends "FOSUserBundle::layout.html.twig" %}
+
+{% block fos_user_content %}
+    <div class="mainContent mainContent_100">
+        <div class="alert alert-success">
+            Введите новый email, на который будет отправлено письмо. Перейдите по ссылке из письма, для подтверждения регистрации.
+        </div>
+        <div class="form">
+            {{ form_start(form) }}
+            <div class="row">
+                {{ form_widget(form.email) }}
+                {{ form_errors(form.email) }}
+            </div>
+
+            <div class="links bottom">
+                <span class="link bg-green">
+                    Изменить
+                    <input value="" type="submit">
+                </span>
+            </div>
+            {{ form_errors(form) }}
+            {{ form_end(form) }}
+        </div>
+    </div>
+{% endblock fos_user_content %}

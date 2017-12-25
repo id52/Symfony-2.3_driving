@@ -1,0 +1,23 @@
+My\AppBundle\Entity\SecondPaymentPost:
+    type: entity
+    table: second_payment_posts
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        user_id:
+            type: integer
+        log_id:
+            type: integer
+        created_at:
+            type: datetime
+            gedmo:
+                timestampable:
+                    on: create
+        sended_at:
+            type: datetime
+        arrived_at:
+            type: datetime
+            nullable: true

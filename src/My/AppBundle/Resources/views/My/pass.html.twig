@@ -1,0 +1,23 @@
+{% extends "AppBundle::layout_new.html.twig" %}
+
+{% block content %}
+<nav class="path">
+    <a href="{{ path('homepage') }}">{{ 'titles.homepage'|trans }}</a>
+    » <strong>Пропуск на филиал</strong>
+</nav>
+
+<div class="mainContent">
+    {% include 'AppBundle::_paid2_counter.html.twig' %}
+    {% include 'AppBundle::_owe_stage_paid.html.twig' %}
+
+    <section>
+        <div class="title"><h1>Пропуск на филиал</h1></div>
+
+        Если Вы захотите посещать занятия по теоретическим дисциплинам не онлайн, а в классе,<br>
+        Вы можете <a href="http://www.auto-online.ru/branch/" target="_blank">выбрать интересующий Вас филиал на карте</a>, определить дату и время<br>
+        первого (организационного) занятия и забронировать место в группе.
+        <br><br>
+        До встречи на занятиях!
+    </section>
+</div>
+{% endblock content %}

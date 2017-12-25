@@ -1,0 +1,13 @@
+{% if app.session.flashbag.get('attempts_reset_progress') %}
+    <div class="modal border-red" id="attempts_reset_progress">
+        <div class="title">{{ settings['attempts_reset_progress_title'] }}</div>
+        <div class="content">{{ settings['attempts_reset_progress_text'] | raw }}</div>
+        <div class="links"><span class="link bg-red btn-close">Закрыть</span></div>
+    </div>
+
+    <script>
+    $(function () {
+        $.simplebox('#attempts_reset_progress');
+    });
+    </script>
+{% endif %}

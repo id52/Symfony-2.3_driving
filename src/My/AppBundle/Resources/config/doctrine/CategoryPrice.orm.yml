@@ -1,0 +1,21 @@
+My\AppBundle\Entity\CategoryPrice:
+    type: entity
+    table: category_prices
+    repositoryClass: My\AppBundle\Repository\CategoryPriceRepository
+    id:
+        category:
+            associationKey: true
+        region:
+            associationKey: true
+    fields:
+        price:
+            type: integer
+        active:
+            type: boolean
+    manyToOne:
+        category:
+            targetEntity: Category
+            inversedBy: regions_prices
+        region:
+            targetEntity: Region
+            inversedBy: categories_prices

@@ -1,0 +1,626 @@
+{% extends "AppBundle::admin.html.twig" %}
+
+{% block content %}
+    <h3>{{ 'admin.settings'|trans }}</h3>
+    <hr>
+    {{ form_start(form) }}
+        {{ form_errors(form) }}
+
+    <fieldset>
+        <legend>
+            {{ 'settings_medical_certificate_is_not_issued_and_the_agreement_is_not_signed'|trans }}
+        </legend>
+        {{ form_row(form.medical_certificate_is_not_issued_and_the_agreement_is_not_signed) }}
+    </fieldset>
+
+        <fieldset>
+            <legend>
+                {{ 'settings_theme_test'|trans }}
+                <a data-content="{{ 'settings_theme_test_help'|trans }}" href="#" data-toggle="popover"><i class="fa fa-question-circle"></i></a>
+            </legend>
+            <div class="control-group">
+                {{ form_label(form.theme_test_correct_answers) }}
+                <div class="controls">
+                    {{ form_widget(form.theme_test_correct_answers) }}
+                    <span class="embedded">
+                        {{ form_widget(form.theme_test_correct_answers_in_row) }}
+                        {{ form_label(form.theme_test_correct_answers_in_row, null, { unpointed: true }) }}
+                    </span>
+                    {{ form_errors(form.theme_test_correct_answers) }}
+                </div>
+            </div>
+            {{ form_row(form.theme_test_questions_method) }}
+            <div class="control-group">
+                {{ form_label(form.theme_test_time) }}
+                <div class="controls">
+                    <div class="input-append">
+                        {{ form_widget(form.theme_test_time) }}
+                        <span class="add-on">{{ 'minute'|trans }}</span>
+                    </div>
+                    {{ form_errors(form.theme_test_time) }}
+                </div>
+            </div>
+            {{ form_row(form.theme_test_shuffle_answers) }}
+        </fieldset>
+
+    <fieldset>
+        <legend>
+            {{ 'settings_ticket_test_old_style_title'|trans }}
+        </legend>
+        {{ form_row(form.ticket_test_old_style) }}
+    </fieldset>
+
+        <fieldset>
+            <legend>
+                {{ 'settings_slice'|trans }}
+                <a data-content="{{ 'settings_slice_help'|trans }}" href="#" data-toggle="popover"><i class="fa fa-question-circle"></i></a>
+            </legend>
+            {{ form_row(form.slice_tickets) }}
+            <div class="control-group">
+                {{ form_label(form.slice_questions_in_ticket) }}
+                <div class="controls">
+                    {{ form_widget(form.slice_questions_in_ticket) }}
+                    <span class="embedded">
+                    {{ form_widget(form.slice_not_repeat_questions_in_tickets) }}
+                        {{ form_label(form.slice_not_repeat_questions_in_tickets, null, { unpointed: true }) }}
+                    </span>
+                    {{ form_errors(form.slice_questions_in_ticket) }}
+                </div>
+            </div>
+            {{ form_row(form.slice_max_errors_in_ticket) }}
+            <div class="control-group">
+                {{ form_label(form.slice_ticket_time) }}
+                <div class="controls">
+                    <div class="input-append">
+                        {{ form_widget(form.slice_ticket_time) }}
+                        <span class="add-on">{{ 'minute'|trans }}</span>
+                    </div>
+                    {{ form_errors(form.slice_ticket_time) }}
+                </div>
+            </div>
+            {{ form_row(form.slice_shuffle_answers) }}
+        </fieldset>
+
+        <fieldset>
+            <legend>
+                {{ 'settings_exam'|trans }}
+                <a data-content="{{ 'settings_exam_help'|trans }}" href="#" data-toggle="popover"><i class="fa fa-question-circle"></i></a>
+            </legend>
+            {{ form_row(form.exam_tickets) }}
+            <div class="control-group">
+                {{ form_label(form.exam_questions_in_ticket) }}
+                <div class="controls">
+                    {{ form_widget(form.exam_questions_in_ticket) }}
+                    <span class="embedded">
+                    {{ form_widget(form.exam_not_repeat_questions_in_tickets) }}
+                        {{ form_label(form.exam_not_repeat_questions_in_tickets, null, { unpointed: true }) }}
+                    </span>
+                    {{ form_errors(form.exam_questions_in_ticket) }}
+                </div>
+            </div>
+            {{ form_row(form.exam_shuffle) }}
+            {{ form_row(form.exam_max_errors_in_ticket) }}
+            <div class="control-group">
+                {{ form_label(form.exam_ticket_time) }}
+                <div class="controls">
+                    <div class="input-append">
+                        {{ form_widget(form.exam_ticket_time) }}
+                        <span class="add-on">{{ 'minute'|trans }}</span>
+                    </div>
+                    {{ form_errors(form.exam_ticket_time) }}
+                </div>
+            </div>
+            {{ form_row(form.exam_shuffle_answers) }}
+            <div class="control-group">
+                {{ form_label(form.exam_retake_time) }}
+                <div class="controls">
+                    <div class="input-append">
+                        {{ form_widget(form.exam_retake_time) }}
+                        <span class="add-on">{{ 'hours'|trans }}</span>
+                    </div>
+                    {{ form_errors(form.exam_retake_time) }}
+                </div>
+            </div>
+        </fieldset>
+
+        <fieldset>
+            <legend>
+                {{ 'settings_final_exam_1'|trans }}
+                <a data-content="{{ 'settings_final_exam_1_help'|trans }}" href="#" data-toggle="popover"><i class="fa fa-question-circle"></i></a>
+            </legend>
+            {{ form_row(form.final_exam_1_tickets) }}
+            {{ form_row(form.final_exam_1_shuffle) }}
+            <div class="control-group">
+                {{ form_label(form.final_exam_1_ticket_time) }}
+                <div class="controls">
+                    <div class="input-append">
+                        {{ form_widget(form.final_exam_1_ticket_time) }}
+                        <span class="add-on">{{ 'minute'|trans }}</span>
+                    </div>
+                    {{ form_errors(form.final_exam_1_ticket_time) }}
+                </div>
+            </div>
+            {{ form_row(form.final_exam_1_shuffle_answers) }}
+            <div class="control-group">
+                {{ form_label(form.final_exam_1_extra_time) }}
+                <div class="controls">
+                    <div class="input-append">
+                        {{ form_widget(form.final_exam_1_extra_time) }}
+                        <span class="add-on">{{ 'minute'|trans }}</span>
+                    </div>
+                    {{ form_errors(form.final_exam_1_extra_time) }}
+                </div>
+            </div>
+        </fieldset>
+
+        <fieldset>
+            <legend>
+                {{ 'settings_final_exam_2'|trans }}
+                <a data-content="{{ 'settings_final_exam_2_help'|trans }}" href="#" data-toggle="popover"><i class="fa fa-question-circle"></i></a>
+            </legend>
+            {{ form_row(form.final_exam_2_tickets) }}
+            <div class="control-group">
+                {{ form_label(form.final_exam_2_questions_in_ticket) }}
+                <div class="controls">
+                    {{ form_widget(form.final_exam_2_questions_in_ticket) }}
+                    <span class="embedded">
+                        {{ form_widget(form.final_exam_2_not_repeat_questions_in_tickets) }}
+                        {{ form_label(form.final_exam_2_not_repeat_questions_in_tickets, null, { unpointed: true }) }}
+                    </span>
+                    {{ form_errors(form.final_exam_2_questions_in_ticket) }}
+                </div>
+            </div>
+            {{ form_row(form.final_exam_2_max_errors_in_ticket) }}
+            <div class="control-group">
+                {{ form_label(form.final_exam_2_ticket_time) }}
+                <div class="controls">
+                    <div class="input-append">
+                        {{ form_widget(form.final_exam_2_ticket_time) }}
+                        <span class="add-on">{{ 'minute'|trans }}</span>
+                    </div>
+                    {{ form_errors(form.final_exam_2_ticket_time) }}
+                </div>
+            </div>
+            {{ form_row(form.final_exam_2_shuffle_answers) }}
+        </fieldset>
+
+        <fieldset>
+            <legend>
+                {{ 'settings_access_time'|trans }}
+                <a data-content="{{ 'settings_access_time_help'|trans }}" href="#" data-toggle="popover"><i class="fa fa-question-circle"></i></a>
+            </legend>
+            <div class="control-group">
+                {{ form_label(form.access_time_after_1_payment) }}
+                <div class="controls">
+                    <div class="input-append">
+                        {{ form_widget(form.access_time_after_1_payment) }}
+                        <span class="add-on">{{ 'days'|trans }}</span>
+                    </div>
+                    {{ form_errors(form.access_time_after_1_payment) }}
+                </div>
+            </div>
+            <div class="control-group{% if form.access_time_after_2_payment.vars.errors|length > 0 %} error{% endif %}">
+                {{ form_label(form.access_time_after_2_payment) }}
+                <div class="controls">
+                    <div class="input-append">
+                        {{ form_widget(form.access_time_after_2_payment) }}
+                        <span class="add-on">{{ 'days'|trans }}</span>
+                    </div>
+                    {{ form_errors(form.access_time_after_2_payment) }}
+                </div>
+            </div>
+        </fieldset>
+
+        <fieldset>
+            <legend>
+                {{ 'settings_access_time_end_notify'|trans }}
+                <a data-content="{{ 'settings_access_time_end_notify_help'|trans }}" href="#" data-toggle="popover"><i class="fa fa-question-circle"></i></a>
+            </legend>
+            <div class="control-group">
+                <label class="control-label">{{ 'settings_access_time_end_notify_after_1_payment'|trans }}:</label>
+                <div class="controls">
+                    <div class="input-append">
+                        {{ form_widget(form.access_time_end_notify_after_1_payment_1) }}
+                        <span class="add-on">{{ 'days'|trans }}</span>
+                    </div>
+                    <div class="input-append">
+                        {{ form_widget(form.access_time_end_notify_after_1_payment_2) }}
+                        <span class="add-on">{{ 'days'|trans }}</span>
+                    </div>
+                    <div class="input-append">
+                        {{ form_widget(form.access_time_end_notify_after_1_payment_3) }}
+                        <span class="add-on">{{ 'days'|trans }}</span>
+                    </div>
+                    <div class="input-append">
+                        {{ form_widget(form.access_time_end_notify_after_1_payment_4) }}
+                        <span class="add-on">{{ 'days'|trans }}</span>
+                    </div>
+                    <div class="input-append">
+                        {{ form_widget(form.access_time_end_notify_after_1_payment_5) }}
+                        <span class="add-on">{{ 'days'|trans }}</span>
+                    </div>
+                    <div class="input-append">
+                        {{ form_widget(form.access_time_end_notify_after_1_payment_6) }}
+                        <span class="add-on">{{ 'days'|trans }}</span>
+                    </div>
+                    <div class="input-append">
+                        {{ form_widget(form.access_time_end_notify_after_1_payment_7) }}
+                        <span class="add-on">{{ 'days'|trans }}</span>
+                    </div>
+                    <div class="input-append">
+                        {{ form_widget(form.access_time_end_notify_after_1_payment_8) }}
+                        <span class="add-on">{{ 'days'|trans }}</span>
+                    </div>
+                    <div class="input-append">
+                        {{ form_widget(form.access_time_end_notify_after_1_payment_9) }}
+                        <span class="add-on">{{ 'days'|trans }}</span>
+                    </div>
+                    <div class="input-append">
+                        {{ form_widget(form.access_time_end_notify_after_1_payment_10) }}
+                        <span class="add-on">{{ 'days'|trans }}</span>
+                    </div>
+                    <div class="input-append">
+                        {{ form_widget(form.access_time_end_notify_after_1_payment_11) }}
+                        <span class="add-on">{{ 'days'|trans }}</span>
+                    </div>
+                    <div class="input-append">
+                        {{ form_widget(form.access_time_end_notify_after_1_payment_12) }}
+                        <span class="add-on">{{ 'days'|trans }}</span>
+                    </div>
+                    <div class="input-append">
+                        {{ form_widget(form.access_time_end_notify_after_1_payment_13) }}
+                        <span class="add-on">{{ 'days'|trans }}</span>
+                    </div>
+                    <div class="input-append">
+                        {{ form_widget(form.access_time_end_notify_after_1_payment_14) }}
+                        <span class="add-on">{{ 'days'|trans }}</span>
+                    </div>
+                    <div class="input-append">
+                        {{ form_widget(form.access_time_end_notify_after_1_payment_15) }}
+                        <span class="add-on">{{ 'days'|trans }}</span>
+                    </div>
+                    <div class="input-append">
+                        {{ form_widget(form.access_time_end_notify_after_1_payment_16) }}
+                        <span class="add-on">{{ 'days'|trans }}</span>
+                    </div>
+                    {{ form_errors(form.access_time_end_notify_after_1_payment_1) }}
+                    {{ form_errors(form.access_time_end_notify_after_1_payment_2) }}
+                    {{ form_errors(form.access_time_end_notify_after_1_payment_3) }}
+                    {{ form_errors(form.access_time_end_notify_after_1_payment_4) }}
+                    {{ form_errors(form.access_time_end_notify_after_1_payment_5) }}
+                    {{ form_errors(form.access_time_end_notify_after_1_payment_6) }}
+                    {{ form_errors(form.access_time_end_notify_after_1_payment_7) }}
+                    {{ form_errors(form.access_time_end_notify_after_1_payment_8) }}
+                    {{ form_errors(form.access_time_end_notify_after_1_payment_9) }}
+                    {{ form_errors(form.access_time_end_notify_after_1_payment_10) }}
+                    {{ form_errors(form.access_time_end_notify_after_1_payment_11) }}
+                    {{ form_errors(form.access_time_end_notify_after_1_payment_12) }}
+                    {{ form_errors(form.access_time_end_notify_after_1_payment_13) }}
+                    {{ form_errors(form.access_time_end_notify_after_1_payment_14) }}
+                    {{ form_errors(form.access_time_end_notify_after_1_payment_15) }}
+                    {{ form_errors(form.access_time_end_notify_after_1_payment_16) }}
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label">{{ 'settings_access_time_end_notify_after_2_payment'|trans }}:</label>
+                <div class="controls">
+                    <div class="input-append">
+                        {{ form_widget(form.access_time_end_notify_after_2_payment_1) }}
+                        <span class="add-on">{{ 'days'|trans }}</span>
+                    </div>
+                    <div class="input-append">
+                        {{ form_widget(form.access_time_end_notify_after_2_payment_2) }}
+                        <span class="add-on">{{ 'days'|trans }}</span>
+                    </div>
+                    <div class="input-append">
+                        {{ form_widget(form.access_time_end_notify_after_2_payment_3) }}
+                        <span class="add-on">{{ 'days'|trans }}</span>
+                    </div>
+                    <div class="input-append">
+                        {{ form_widget(form.access_time_end_notify_after_2_payment_4) }}
+                        <span class="add-on">{{ 'days'|trans }}</span>
+                    </div>
+                    <div class="input-append">
+                        {{ form_widget(form.access_time_end_notify_after_2_payment_5) }}
+                        <span class="add-on">{{ 'days'|trans }}</span>
+                    </div>
+                    <div class="input-append">
+                        {{ form_widget(form.access_time_end_notify_after_2_payment_6) }}
+                        <span class="add-on">{{ 'days'|trans }}</span>
+                    </div>
+                    <div class="input-append">
+                        {{ form_widget(form.access_time_end_notify_after_2_payment_7) }}
+                        <span class="add-on">{{ 'days'|trans }}</span>
+                    </div>
+                    <div class="input-append">
+                        {{ form_widget(form.access_time_end_notify_after_2_payment_8) }}
+                        <span class="add-on">{{ 'days'|trans }}</span>
+                    </div>
+                    <div class="input-append">
+                        {{ form_widget(form.access_time_end_notify_after_2_payment_9) }}
+                        <span class="add-on">{{ 'days'|trans }}</span>
+                    </div>
+                    <div class="input-append">
+                        {{ form_widget(form.access_time_end_notify_after_2_payment_10) }}
+                        <span class="add-on">{{ 'days'|trans }}</span>
+                    </div>
+                    <div class="input-append">
+                        {{ form_widget(form.access_time_end_notify_after_2_payment_11) }}
+                        <span class="add-on">{{ 'days'|trans }}</span>
+                    </div>
+                    <div class="input-append">
+                        {{ form_widget(form.access_time_end_notify_after_2_payment_12) }}
+                        <span class="add-on">{{ 'days'|trans }}</span>
+                    </div>
+                    <div class="input-append">
+                        {{ form_widget(form.access_time_end_notify_after_2_payment_13) }}
+                        <span class="add-on">{{ 'days'|trans }}</span>
+                    </div>
+                    <div class="input-append">
+                        {{ form_widget(form.access_time_end_notify_after_2_payment_14) }}
+                        <span class="add-on">{{ 'days'|trans }}</span>
+                    </div>
+                    <div class="input-append">
+                        {{ form_widget(form.access_time_end_notify_after_2_payment_15) }}
+                        <span class="add-on">{{ 'days'|trans }}</span>
+                    </div>
+                    <div class="input-append">
+                        {{ form_widget(form.access_time_end_notify_after_2_payment_16) }}
+                        <span class="add-on">{{ 'days'|trans }}</span>
+                    </div>
+                    {{ form_errors(form.access_time_end_notify_after_2_payment_1) }}
+                    {{ form_errors(form.access_time_end_notify_after_2_payment_2) }}
+                    {{ form_errors(form.access_time_end_notify_after_2_payment_3) }}
+                    {{ form_errors(form.access_time_end_notify_after_2_payment_4) }}
+                    {{ form_errors(form.access_time_end_notify_after_2_payment_5) }}
+                    {{ form_errors(form.access_time_end_notify_after_2_payment_6) }}
+                    {{ form_errors(form.access_time_end_notify_after_2_payment_7) }}
+                    {{ form_errors(form.access_time_end_notify_after_2_payment_8) }}
+                    {{ form_errors(form.access_time_end_notify_after_2_payment_9) }}
+                    {{ form_errors(form.access_time_end_notify_after_2_payment_10) }}
+                    {{ form_errors(form.access_time_end_notify_after_2_payment_11) }}
+                    {{ form_errors(form.access_time_end_notify_after_2_payment_12) }}
+                    {{ form_errors(form.access_time_end_notify_after_2_payment_13) }}
+                    {{ form_errors(form.access_time_end_notify_after_2_payment_14) }}
+                    {{ form_errors(form.access_time_end_notify_after_2_payment_15) }}
+                    {{ form_errors(form.access_time_end_notify_after_2_payment_16) }}
+                </div>
+            </div>
+        </fieldset>
+
+        <fieldset>
+            <legend>
+                {{ 'settings_no_payments_notify'|trans }}
+                <a data-content="{{ 'settings_no_payments_notify_help'|trans }}" href="#" data-toggle="popover"><i class="fa fa-question-circle"></i></a>
+            </legend>
+
+            <div class="control-group">
+                <label class="control-label">{{ 'settings_no_payments'|trans }}:</label>
+                <div class="controls">
+                    <div class="input-append">
+                        {{ form_widget(form.notify_no_payments_1) }}
+                        <span class="add-on">{{ 'days'|trans }}</span>
+                    </div>
+                    <div class="input-append">
+                        {{ form_widget(form.notify_no_payments_2) }}
+                        <span class="add-on">{{ 'days'|trans }}</span>
+                    </div>
+                    <div class="input-append">
+                        {{ form_widget(form.notify_no_payments_3) }}
+                        <span class="add-on">{{ 'days'|trans }}</span>
+                    </div>
+                    <div class="input-append">
+                        {{ form_widget(form.notify_no_payments_4) }}
+                        <span class="add-on">{{ 'days'|trans }}</span>
+                    </div>
+                    <div class="input-append">
+                        {{ form_widget(form.notify_no_payments_5) }}
+                        <span class="add-on">{{ 'days'|trans }}</span>
+                    </div>
+                    {{ form_errors(form.notify_no_payments_1) }}
+                    {{ form_errors(form.notify_no_payments_2) }}
+                    {{ form_errors(form.notify_no_payments_3) }}
+                    {{ form_errors(form.notify_no_payments_4) }}
+                    {{ form_errors(form.notify_no_payments_5) }}
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label">{{ 'settings_no_payments_promo_expiration'|trans }}:</label>
+                <div class="controls">
+                    <div class="input-append">
+                        {{ form_widget(form.notify_no_payments_promo_expiration_1) }}
+                        <span class="add-on">{{ 'days'|trans }}</span>
+                    </div>
+                    <div class="input-append">
+                        {{ form_widget(form.notify_no_payments_promo_expiration_2) }}
+                        <span class="add-on">{{ 'days'|trans }}</span>
+                    </div>
+                    <div class="input-append">
+                        {{ form_widget(form.notify_no_payments_promo_expiration_3) }}
+                        <span class="add-on">{{ 'days'|trans }}</span>
+                    </div>
+                    <div class="input-append">
+                        {{ form_widget(form.notify_no_payments_promo_expiration_4) }}
+                        <span class="add-on">{{ 'days'|trans }}</span>
+                    </div>
+                    <div class="input-append">
+                        {{ form_widget(form.notify_no_payments_promo_expiration_5) }}
+                        <span class="add-on">{{ 'days'|trans }}</span>
+                    </div>
+                    {{ form_errors(form.notify_no_payments_promo_expiration_1) }}
+                    {{ form_errors(form.notify_no_payments_promo_expiration_2) }}
+                    {{ form_errors(form.notify_no_payments_promo_expiration_3) }}
+                    {{ form_errors(form.notify_no_payments_promo_expiration_4) }}
+                    {{ form_errors(form.notify_no_payments_promo_expiration_5) }}
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label">{{ 'settings_no_payments_promo_discount'|trans }}:</label>
+                <div class="controls">
+                    <div class="input-append">
+                        {{ form_widget(form.notify_no_payments_promo_discount_1) }}
+                        <span class="add-on">{{ 'RUB'|trans }}</span>
+                    </div>
+                    <div class="input-append">
+                        {{ form_widget(form.notify_no_payments_promo_discount_2) }}
+                        <span class="add-on">{{ 'RUB'|trans }}</span>
+                    </div>
+                    <div class="input-append">
+                        {{ form_widget(form.notify_no_payments_promo_discount_3) }}
+                        <span class="add-on">{{ 'RUB'|trans }}</span>
+                    </div>
+                    <div class="input-append">
+                        {{ form_widget(form.notify_no_payments_promo_discount_4) }}
+                        <span class="add-on">{{ 'RUB'|trans }}</span>
+                    </div>
+                    <div class="input-append">
+                        {{ form_widget(form.notify_no_payments_promo_discount_5) }}
+                        <span class="add-on">{{ 'RUB'|trans }}</span>
+                    </div>
+                    {{ form_errors(form.notify_no_payments_promo_discount_1) }}
+                    {{ form_errors(form.notify_no_payments_promo_discount_2) }}
+                    {{ form_errors(form.notify_no_payments_promo_discount_3) }}
+                    {{ form_errors(form.notify_no_payments_promo_discount_4) }}
+                    {{ form_errors(form.notify_no_payments_promo_discount_5) }}
+                </div>
+            </div>
+        </fieldset>
+
+        <fieldset>
+            <legend>
+                {{ 'settings_support'|trans }}
+                <a data-content="{{ 'settings_support_help'|trans }}" href="#" data-toggle="popover"><i class="fa fa-question-circle"></i></a>
+            </legend>
+
+            <div class="control-group">
+                <label class="control-label">{{ 'settings_support_days_to_answer'|trans }}:</label>
+                <div class="controls">
+                    <div class="input-append">
+                        {{ form_widget(form.support_days_to_answer) }}
+                        <span class="add-on">{{ 'days'|trans }}</span>
+                    </div>
+                    {{ form_errors(form.support_days_to_answer) }}
+                </div>
+            </div>
+        </fieldset>
+
+    <fieldset>
+        <legend>{{ 'settings_attempts'|trans }}</legend>
+        <div class="control-group">
+            {{ form_label(form.attempts_days_of_retake) }}
+            <div class="controls">
+                <div class="input-append">
+                    {{ form_widget(form.attempts_days_of_retake) }}
+                    <span class="add-on">{{ 'days'|trans }}</span>
+                </div>
+                {{ form_errors(form.attempts_days_of_retake) }}
+            </div>
+        </div>
+        <div class="control-group">
+            {{ form_label(form.attempts_to_reset) }}
+            <div class="controls">
+                <div class="input-append">
+                    {{ form_widget(form.attempts_to_reset) }}
+                    <span class="add-on">{{ 'attempts'|trans }}</span>
+                </div>
+                {{ form_errors(form.attempts_to_reset) }}
+            </div>
+        </div>
+    </fieldset>
+
+    <fieldset>
+        <legend>
+            {{ 'settings_coset_owe_stage'|trans }}
+            <a data-content="{{ 'settings_theme_test_help'|trans }}" href="#" data-toggle="popover"><i class="fa fa-question-circle"></i></a>
+        </legend>
+
+        <div id="office_driving_payment">
+            <div class="control-group">
+                {{ form_label(form.cost_driving_payment_in_office) }}
+                <div class="controls">
+                    <div class="input-append">
+                        {{ form_widget(form.cost_driving_payment_in_office) }}
+                        <span class="add-on">руб.</span>
+                    </div>
+                    {{ form_errors(form.cost_driving_payment_in_office) }}
+                </div>
+            </div>
+        </div>
+        {% set i = 0 %}
+
+        <div id="online_driving_payment">
+        {% if online_driving_payment|length %}
+            {% for line in online_driving_payment %}
+            <div class="control-group">
+                <label class="control-label">{{ 'Стоимость оплаты Онлайн '~(i+1) }}:</label>
+                <div class="controls">
+                    <div class="input-append">
+                        <input type="number" name="cost_online_driving_payment[{{ 'cost_'~(i+1) }}]" required="required" class="span1" value="{{ line['cost'] }}">
+                        <span class="add-on">руб.</span>
+                    </div>
+                    <div class="input-append">
+                        <input type="number" name="timer_online_driving_payment[{{ 'timer_'~(i+1) }}]" required="required" class="span1" value="{{ line['timer'] }}">
+                        <span class="add-on">д.</span>
+                    </div>
+                </div>
+                {% if owe_errors[i] is defined %}
+                    {% for error in owe_errors[i] %}
+                        <div class="controls text-error">
+                                {{ error }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+            {% set i = i + 1 %}
+            {% endfor %}
+        {% endif %}
+            <div id="count_online_paids" style="display: none">{{ i }}</div>
+        </div>
+
+        <div class="control-group">
+            <div class="controls">
+                <div id="add_online_paid_button" class="btn">Добавить</div>
+            </div>
+        </div>
+    </fieldset>
+
+        <div class="form-actions">
+            <button type="submit" class="btn btn-success">
+                <i class="fa fa-download"></i>
+                <span>{{ 'admin.buttons.save'|trans }}</span>
+            </button>
+        </div>
+    {{ form_end(form) }}
+{% endblock content %}
+
+{% block js %}
+<script>
+$(function() {
+    var onlineDrivingPayment = $('#online_driving_payment');
+    var addButton = $('#add_online_paid_button');
+
+    addButton.on('click', function () {
+        var count = (+$('#count_online_paids').html()) + 1;
+        var contenet = '<div class="control-group"><label class="control-label">Стоимость оплаты Онлайн '+count+
+                ':</label><div class="controls"><div class="input-append"><input type="number" ' +
+                'name="cost_online_driving_payment[cost_'+count+']" required="required" class="span1">' +
+                '<span class="add-on">руб.</span></div><div class="input-append" style="margin-left: 4px">' +
+                '<input type="number" name="timer_online_driving_payment[timer_'+count+']" required="required" ' +
+                'class="span1"><span class="add-on">д.</span></div></div></div>';
+
+        onlineDrivingPayment.append(contenet);
+        $('#count_online_paids').html(count);
+    });
+
+
+    $('a').filter(function() {
+        return $(this).data('toggle') == 'popover';
+    })
+    .popover({ trigger: 'focus', html: true })
+    .click(function(e) {
+        e.preventDefault();
+        $(this).focus();
+    });
+});
+</script>
+{% endblock js %}

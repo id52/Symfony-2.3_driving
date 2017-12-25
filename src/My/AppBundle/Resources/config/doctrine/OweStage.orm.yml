@@ -1,0 +1,30 @@
+My\AppBundle\Entity\OweStage:
+    type: entity
+    table: owe_stages
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        number_stage:
+            type: integer
+        sum:
+            type: integer
+        paid:
+            type: boolean
+        start:
+            type: datetime
+            gedmo:
+                timestampable:
+                    on: create
+        end:
+            type: datetime
+    oneToOne:
+        log:
+            targetEntity: My\PaymentBundle\Entity\Log
+            mappedBy: owe_stage
+    manyToOne:
+        user:
+            targetEntity: User
+            inversedBy: owe_stages

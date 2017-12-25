@@ -1,0 +1,84 @@
+{% extends "AppBundle::admin.html.twig" %}
+
+{% block content %}
+    <h1>Статистика опроса пользователей</h1>
+    <hr>
+    <a id="filter_link" href="#"><i class="fa fa-caret-down"></i> Фильтр</a>
+    <div id="filter">
+        {{ form_start(filter_form) }}
+        {{ form_widget(filter_form) }}
+        <div class="form-actions">
+            <button type="submit" class="btn btn-success pull-right">
+                <i class="fa fa-filter"></i>
+                <span>{{ 'buttons.filter'|trans }}</span>
+            </button>
+        </div>
+        {{ form_end(filter_form) }}
+    </div>
+    <br>
+    <br>
+    <table class="table table-hover">
+        <tbody>
+            <tr>
+                <td>{{ 'api_radios.want_pay'|trans }}</td>
+                <td class="min_col text-right">{{ odata['want_pay'] }}</td>
+            </tr>
+            <tr>
+                <td>{{ 'api_radios.training_after'|trans }}</td>
+                <td class="min_col text-right">{{ odata['training_after'] }}</td>
+            </tr>
+            <tr>
+                <td>{{ 'api_radios.not_going'|trans }}</td>
+                <td class="min_col text-right">{{ odata['not_going'] }}</td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <th>Всего</th>
+                <th class="min_col text-right">{{ odata['all'] }}</th>
+            </tr>
+        </tfoot>
+    </table>
+
+    <canvas id="chart" width="800" height="500" style="margin:15px auto;display:block"></canvas>
+{% endblock content %}
+
+{% block js %}
+<script>
+$(function() {
+    {% if app.request.queryString == '' %}
+    $('#filter').hide();
+    {% else %}
+    $('#filter_default').hide();
+    {% endif %}
+    $('#filter_link').click(function() {
+        $('#filter').toggle();
+        {% if app.request.queryString == '' %}
+        $('#filter_default').toggle();
+        {% endif %}
+        return false;
+    });
+
+    new Chart(document.getElementById('chart').getContext('2d')).Pie([
+        {
+            value: {{ odata['want_pay'] }},
+            color: '#0146F6',
+            highlight: '#ccc',
+            label: '{{ 'api_radios.want_pay'|trans }}'
+        },
+        {
+            value: {{ odata['training_after'] }},
+            color: '#f64601',
+            highlight: '#ccc',
+            label: '{{ 'api_radios.training_after'|trans }}'
+        },
+        {
+            value: {{ odata['not_going'] }},
+            color: '#00E22B',
+            highlight: '#ccc',
+            label: '{{ 'api_radios.not_going'|trans }}'
+        }
+    ], {});
+});
+</script>
+{% endblock js %}

@@ -1,0 +1,26 @@
+{% extends "AppBundle::layout_new.html.twig" %}
+
+{% block content %}
+<nav class="path">
+    <a href="{{ path('homepage') }}">{{ 'titles.homepage'|trans }}</a>
+    » <strong>{{ 'titles.stat'|trans }}</strong>
+</nav>
+
+<div class="mainContent">
+    {% include 'AppBundle::_paid2_counter.html.twig' %}
+    {% include 'AppBundle::_owe_stage_paid.html.twig' %}
+
+    <section class="stat2">
+        <div class="title">
+            <h1>{{ 'titles.stat'|trans }}</h1>
+        </div>
+
+        {% if themes_stat|length > 0 %}
+            {% include 'AppBundle:My:_stat.html.twig' %}
+        {% else %}
+            Пока у нас нет данных о Ваших результатах. <br>
+            Они появятся здесь, когда Вы в первый раз пройдете <b>«Тест как в ГИБДД»</b>
+        {% endif %}
+    </section>
+</div>
+{% endblock content %}

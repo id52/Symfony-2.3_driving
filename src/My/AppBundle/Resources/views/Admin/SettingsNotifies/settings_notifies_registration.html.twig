@@ -1,0 +1,85 @@
+{% extends "AppBundle:Admin/SettingsNotifies:_settings_notifies_layout.html.twig" %}
+{% block settings_notifies_content %}
+    <fieldset>
+        <legend>
+            {{ 'settings_notifies_confirmation_registration'|trans }}
+            <a data-content="{{ 'settings_notifies_confirmation_registration_help'|trans }}" href="#"
+               data-toggle="popover"><i class="fa fa-question-circle"></i></a>
+        </legend>
+        {{ form_row(form.confirmation_registration_enabled) }}
+        {{ form_row(form.confirmation_registration_title) }}
+        {{ form_row(form.confirmation_registration_text, {attr: { class: 'ckeditor' }, help: 'settings_notifies_confirmation_registration_text_help'}) }}
+    </fieldset>
+
+    <fieldset>
+        <legend>
+            {{ 'settings_confirmation_sms_info'|trans }}
+        </legend>
+        {{ form_row(form.confirmation_sms_info_text, {attr: { class: 'ckeditor' }, help: 'settings_confirmation_sms_info_text_help'}) }}
+    </fieldset>
+
+    <fieldset>
+        <legend>
+            {{ 'settings_confirmation_error_sms_info'|trans }}
+        </legend>
+        {{ form_row(form.confirmation_error_sms_info_text, {attr: { class: 'ckeditor' }, help: 'settings_confirmation_error_sms_info_text_help'}) }}
+    </fieldset>
+
+    <fieldset>
+        <legend>
+            {{ 'settings_notifies_confirmed_registration'|trans }}
+            <a data-content="{{ 'settings_notifies_confirmed_registration_help'|trans }}" href="#"
+               data-toggle="popover"><i class="fa fa-question-circle"></i></a>
+        </legend>
+        {{ form_row(form.confirmed_registration_title) }}
+        {{ form_row(form.confirmed_registration_text, { attr: { class: 'ckeditor' }, help: 'settings_notifies_confirmed_registration_text_help' }) }}
+    </fieldset>
+
+    <fieldset>
+        <legend>
+            {{ 'settings_notifies_confirmed_registration_again'|trans }}
+            <a data-content="{{ 'settings_notifies_confirmed_registration_again_help'|trans }}" href="#"
+               data-toggle="popover"><i class="fa fa-question-circle"></i></a>
+        </legend>
+        {{ form_row(form.confirmed_registration_again_title) }}
+        {{ form_row(form.confirmed_registration_again_text, {attr: { class: 'ckeditor' }, help: 'settings_notifies_confirmed_registration_again_text_help'}) }}
+    </fieldset>
+
+    <fieldset>
+        <legend>{{ 'settings_notifies_api_add_user_email'|trans }}</legend>
+        {{ form_row(form.api_add_user_email_title) }}
+        {{ form_row(form.api_add_user_email_text, { attr: { class: 'ckeditor' }, help: 'settings_notifies_api_add_user_email_text_help' }) }}
+    </fieldset>
+
+    <fieldset>
+        <legend>{{ 'settings_notifies_confirmation_code_was_sent_again'|trans }}:</legend>
+        {{ form_row(form.confirmation_code_was_sent_again_text, { attr: { class: 'ckeditor' } }) }}
+    </fieldset>
+
+    <fieldset>
+        <legend>{{ 'settings_notifies_confirmation_code_time_to_resend'|trans }}:</legend>
+        {{ form_row(form.confirmation_code_time_to_resend_text, { attr: { class: 'ckeditor'}, help: 'settings_notifies_confirmation_code_time_to_resend_text_help' }) }}
+    </fieldset>
+
+    <fieldset>
+        <legend>{{ 'settings_notifies_after_changing_phone_number'|trans }}</legend>
+        {{ form_row(form.after_changing_phone_number_text, { attr: { class: 'ckeditor' }, help: 'settings_notifies_after_changing_phone_number_text_help' }) }}
+    </fieldset>
+
+    <fieldset>
+        <legend>{{ 'settings_notifies_activation_add_user'|trans }}:</legend>
+        {{ form_row(form.activation_add_user_title) }}
+        {{ form_row(form.activation_add_user_text, { attr: { class: 'ckeditor' }, help: 'settings_notifies_activation_add_user_text_help' }) }}
+    </fieldset>
+
+    <fieldset>
+        <legend>
+            {{ 'settings_notifies_need_fill_profile'|trans }}
+        </legend>
+        {{ form_row(form.need_fill_profile_title) }}
+        {{ form_row(form.need_fill_profile_text, {attr: { class: 'ckeditor' }, help: 'settings_notifies_need_fill_profile_text_help'}) }}
+        {{ form_row(form.need_fill_profile_button) }}
+    </fieldset>
+
+{% endblock %}
+

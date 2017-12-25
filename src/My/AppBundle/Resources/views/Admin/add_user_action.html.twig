@@ -1,0 +1,270 @@
+{% extends "AppBundle::admin.html.twig" %}
+
+{% block content %}
+    <h3>{{ 'admin.add_user_title'|trans }}</h3>
+    <hr>
+
+    {{ form_start(form) }}
+
+        {{ form_errors(form) }}
+
+        <fieldset>
+            <legend>{{ 'profile_registr_data'|trans }}:</legend>
+            {{ form_row(form.email) }}
+            {{ form_row(form.plain_password) }}
+            {{ form_row(form.moderated) }}
+            {{ form_row(form.paids) }}
+        </fieldset>
+
+        <fieldset>
+            <legend>{{ 'profile_registr_data'|trans }}:</legend>
+            {{ form_row(form.last_name) }}
+            {{ form_row(form.first_name) }}
+            {{ form_row(form.patronymic) }}
+        </fieldset>
+
+        <fieldset>
+            <legend>{{ 'profile_passport_data'|trans }}:</legend>
+            {{ form_row(form.foreign_passport) }}
+            {{ form_row(form.sex) }}
+            {{ form_row(form.birthday) }}
+            {{ form_row(form.foreign_passport_number) }}
+            {{ form_row(form.passport_number) }}
+            {{ form_row(form.passport_rovd) }}
+            {{ form_row(form.passport_rovd_number) }}
+            {{ form_row(form.passport_rovd_date) }}
+        </fieldset>
+
+        <fieldset>
+            <legend>{{ 'profile_birth_place'|trans }}:</legend>
+            {{ form_row(form.birth_country) }}
+            {{ form_row(form.birth_region) }}
+            {{ form_row(form.birth_city) }}
+        </fieldset>
+
+        <fieldset>
+            <legend></legend>
+            {{ form_row(form.not_registration) }}
+        </fieldset>
+
+        <fieldset id="registration_data">
+            <legend>{{ 'profile_registration_data'|trans }}:</legend>
+            {{ form_row(form.registration_country) }}
+            {{ form_row(form.registration_region) }}
+            {{ form_row(form.registration_city) }}
+            {{ form_row(form.registration_street) }}
+            {{ form_row(form.registration_house) }}
+            {{ form_row(form.registration_stroenie) }}
+            {{ form_row(form.registration_korpus) }}
+            {{ form_row(form.registration_apartament) }}
+        </fieldset>
+
+        <fieldset id="place_data">
+            <legend>{{ 'profile_place_data'|trans }}:</legend>
+            {{ form_row(form.place_country) }}
+            {{ form_row(form.place_region) }}
+            {{ form_row(form.place_city) }}
+            {{ form_row(form.place_street) }}
+            {{ form_row(form.place_house) }}
+            {{ form_row(form.place_stroenie) }}
+            {{ form_row(form.place_korpus) }}
+            {{ form_row(form.place_apartament) }}
+        </fieldset>
+
+        <fieldset id="work">
+            <legend>{{ 'profile_work'|trans }}:</legend>
+            {{ form_row(form.work_place) }}
+            {{ form_row(form.work_position) }}
+        </fieldset>
+
+        <fieldset>
+            <legend>{{ 'profile_phone_data'|trans }}:</legend>
+            <div class="control-group{% if form.phone_mobile.vars.errors|length > 0 %} error{% endif %}">
+                {{ form_label(form.phone_mobile) }}
+                <div class="controls">
+                    <div class="input-prepend">
+                        <span class="add-on">+7</span>
+                        {{ form_widget(form.phone_mobile, { attr: { class: 'span2' }}) }}
+                    </div>
+                    {{ form_errors(form.phone_mobile) }}
+                </div>
+            </div>
+        </fieldset>
+
+        <fieldset>
+            <legend>{{ 'profile_additional_info'|trans }}:</legend>
+            {{ form_row(form.region) }}
+            {{ form_row(form.category) }}
+            {{ form_row(form.region_place) }}
+            {% if form.paradox_id is defined %}
+                {{ form_row(form.paradox_id) }}
+            {% endif %}
+            {{ form_row(form.webgroup) }}
+        </fieldset>
+
+        <div class="form-actions">
+            <div class="alert alert-info" role="alert" id="pay-amount-info">
+            </div>
+            <button type="submit" class="btn btn-success"><i class="fa fa-download"></i> {{ 'admin.buttons.create'|trans }}</button>
+            {% if user is defined %}
+                <a class="btn pull-right" href="{{ path('admin_precheck_user_view', { id: user.id }) }}"><i class="fa fa-arrow-left"></i> {{ 'admin.buttons.back_to_view'|trans }}</a>
+            {% endif %}
+        </div>
+    {{ form_end(form) }}
+{% endblock content %}
+
+{% block js %}
+<script>
+$(function() {
+    var phoneMobile = $('#profile_phone_mobile');
+    phoneMobile.removeAttr('required');
+    phoneMobile.attr('pattern', '\\(\\d{3}\\) \\d{3}-\\d{2}-\\d{2}');
+    phoneMobile.inputmask('(999) 999-99-99', { clearMaskOnLostFocus: false, removeMaskOnSubmit:true });
+
+    var show_registration = function() {
+        $('#place_data').hide();
+        $('#profile_place_country').removeAttr('required');
+        $('#profile_place_region').removeAttr('required');
+        $('#profile_place_city').removeAttr('required');
+        $('#profile_place_street').removeAttr('required');
+        $('#profile_place_house').removeAttr('required');
+        $('#profile_place_apartament').removeAttr('required');
+        $('#profile_registration_country').attr('required', 'required');
+        $('#profile_registration_region').attr('required', 'required');
+        $('#profile_registration_city').attr('required', 'required');
+        $('#profile_registration_street').attr('required', 'required');
+        $('#profile_registration_house').attr('required', 'required');
+        $('#profile_registration_apartament').attr('required', 'required');
+        $('#registration_data').show();
+    };
+
+    var show_place = function() {
+        $('#registration_data').hide();
+        $('#profile_registration_country').removeAttr('required');
+        $('#profile_registration_region').removeAttr('required');
+        $('#profile_registration_city').removeAttr('required');
+        $('#profile_registration_street').removeAttr('required');
+        $('#profile_registration_house').removeAttr('required');
+        $('#profile_registration_apartament').removeAttr('required');
+        $('#profile_place_country').attr('required', 'required');
+        $('#profile_place_region').attr('required', 'required');
+        $('#profile_place_city').attr('required', 'required');
+        $('#profile_place_street').attr('required', 'required');
+        $('#profile_place_house').attr('required', 'required');
+        $('#profile_place_apartament').attr('required', 'required');
+        $('#place_data').show();
+    };
+
+    var not_registration = $('#profile_not_registration');
+
+    not_registration.change(function() {
+        if ($(this).is(':checked')) {
+            show_place();
+        } else {
+            show_registration();
+        }
+    });
+
+    if (not_registration.is(':checked')) {
+        show_place();
+    } else {
+        show_registration();
+    }
+
+    var foreign_passport = $('#profile_foreign_passport');
+    var foreign_passport_change = function() {
+        var passport_number = $('#profile_passport_number_number');
+        var foreign_passport_number = $('#profile_foreign_passport_number');
+        if (foreign_passport.is(':checked')) {
+            passport_number.closest('.control-group').hide();
+            passport_number.removeAttr('required');
+            $('#profile_passport_number_series').removeAttr('required');
+            foreign_passport_number.attr('required', 'required');
+            foreign_passport_number.closest('.control-group').show();
+        } else {
+            foreign_passport_number.closest('.control-group').hide();
+            foreign_passport_number.removeAttr('required');
+            passport_number.attr('required', 'required');
+            $('#profile_passport_number_series').attr('required', 'required');
+            passport_number.closest('.control-group').show();
+        }
+    };
+    foreign_passport.change(foreign_passport_change);
+    foreign_passport_change();
+
+    var regionTree = {{ region_tree|json_encode|raw }};
+
+    var regionElement = $('#profile_region');
+    var categoryElement = $('#profile_category');
+    var placeElement = $('#profile_region_place');
+
+    var updateCategories = function() {
+        var region = regionElement.val();
+        $('option', categoryElement).each(function() {
+            var isSetCat = Boolean(
+                regionTree[region]
+                && regionTree[region]['cats'].hasOwnProperty(this.value)
+            );
+            $(this).toggle(this.value == '' || isSetCat);
+        });
+    };
+    updateCategories();
+
+    var updatePlaces = function () {
+        var region = regionElement.val();
+        var category = categoryElement.val();
+        $('option', placeElement).each(function() {
+            var isSetPlace = Boolean(
+                regionTree[region]
+                && regionTree[region]['cats'].hasOwnProperty(category)
+                && regionTree[region]['cats'][category]['places'].hasOwnProperty(this.value)
+            );
+            $(this).toggle(this.value == '' || isSetPlace);
+        });
+    };
+    updatePlaces();
+
+    categoryElement.change(function () {
+        placeElement.val('');
+        updatePlaces();
+    });
+
+    regionElement.change(function() {
+        categoryElement.val('');
+        placeElement.val('');
+        updateCategories();
+        updatePlaces();
+    });
+
+    $('#profile_region, #profile_category, #profile_paids').on('change', function() {
+        var region_id = regionElement.val();
+        var category_id = categoryElement.val();
+        var paids = $('#profile_paids').val();
+        if (region_id && category_id) {
+            var pay_amount_info = $('#pay-amount-info');
+            $.ajax({
+                type: "GET",
+                url: "{{ path('admin_calc_pay_amount') }}",
+                data: {
+                    region_id: regionElement.val(),
+                    category_id: categoryElement.val(),
+                    paids: paids
+                },
+                success: function(data) {
+                    pay_amount_info.html('').show();
+                    if (typeof(data.categories_price_sum) !== "undefined") {
+                        pay_amount_info.append('<div>{{ 'paids.paid_1'|trans }}: '+data.categories_price_sum+'</div>')
+                    } else {
+                        pay_amount_info.hide();
+                    }
+                    if (typeof(data.services_price_sum) !== "undefined") {
+                        pay_amount_info.append('<div>{{ 'paids.paid_2'|trans }}: '+data.services_price_sum+'</div>')
+                    }
+                }
+            });
+        }
+    });
+
+});
+</script>
+{% endblock js %}

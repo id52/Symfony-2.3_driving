@@ -1,0 +1,11 @@
+{%- set is_api = false -%}
+{%- for row in exception.toarray[0]['trace'] -%}
+{%- if row['short_class'] == 'ApiController' -%}
+{%- set is_api = true -%}
+{%- endif -%}
+{%- endfor -%}
+{%- if is_api -%}
+{{ { 'error': exception.message }|json_encode|raw }}
+{%- else -%}
+{{ { 'error': { 'code': status_code, 'message': status_text } }|json_encode|raw }}
+{%- endif -%}

@@ -1,0 +1,130 @@
+{% extends "AppBundle::admin.html.twig" %}
+
+{% block content %}
+    <h3>{{ 'admin.user_edit_title'|trans }}</h3>
+    <hr>
+    <dl class="dl-horizontal">
+        <dt>{{ 'user_email'|trans }}:</dt>
+        <dd>{{ user.email }}</dd>
+        <dt>{{ 'user_name'|trans }}:</dt>
+        <dd>{{ user.lastName }} {{ user.firstName }} {{ user.patronymic }}</dd>
+    </dl>
+
+    {{ form_start(form) }}
+
+    <div class="control-group">
+        {{ form_label(form.u_roles) }}
+        <div class="controls">
+            <table class="table-condensed">
+                {% for key, u_role in form.u_roles %}
+                    <tr>
+                        <td>
+                            <label>
+                                {{ form_widget(form.u_roles[key]) }}
+                                &nbsp;
+                                {{ (form.u_roles[key].vars['label'])|trans }}
+                            </label>
+                        </td>
+                        <td style="font-size: 18px">
+                            <a data-content="{{ u_role_tips[u_role.vars.value] }}" href="#" data-toggle="popover">
+                                <i class="fa fa-question-circle"></i>
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+            {{ form_errors(form.u_roles) }}
+        </div>
+    </div>
+
+    {{ form_row(form.u_white_ips) }}
+    {{ form_row(form.moderated_support_categories) }}
+    <div id="manager_regions" style="display: none">
+        <div class="controls">
+            <label class="checkbox"><input type="checkbox" id="not_virtual_filials_mo" value="" />
+                Филиалы МО
+            </label>
+            <label class="checkbox"><input type="checkbox" id="virtual_filials_mo" value="" />
+                Виртуальные филиалы МО
+            </label>
+        </div>
+        {{ form_row(form.manager_regions) }}
+    </div>
+        <div class="form-actions">
+            <button type="submit" class="btn btn-success">
+                <i class="fa fa-download"></i>
+                <span>{{ 'admin.buttons.save'|trans }}</span>
+            </button>
+            <a class="btn pull-right" href="{{ path('admin_users') }}"><i class="fa fa-arrow-left"></i> {{ 'admin.buttons.back_to_list'|trans }}</a>
+        </div>
+    {{ form_end(form) }}
+{% endblock content %}
+
+{% block js %}
+<script>
+$(function() {
+    var managerRole = $('#user_u_roles_10');
+    var managerRegions = $('#manager_regions');
+    var notVirtSelect = $('#not_virtual_filials_mo');
+    var virtSelect = $('#virtual_filials_mo');
+    var notVirtFilials = {{ not_virt_filials|raw }};
+    var virtFilials = {{ virt_filials|raw }};
+
+    managerRole.on('change', function () {
+        managerRegions.toggle(managerRole.prop('checked'));
+    });
+
+    notVirtSelect.on('change', function () {
+        var regionInputs = $('input[type="checkbox"][name="user[manager_regions][]"]');
+        var condition = $(this).prop('checked');
+        regionInputs.each(function () {
+           var val = +$(this).attr('value');
+            if ($.inArray(val, notVirtFilials) != -1) {
+                $(this).prop('checked', condition);
+            }
+        });
+    });
+
+    virtSelect.on('change', function () {
+        var regionInputs = $('input[type="checkbox"][name="user[manager_regions][]"]');
+        var condition = $(this).prop('checked');
+        regionInputs.each(function () {
+            var val = +$(this).attr('value');
+            if ($.inArray(val, virtFilials) != -1) {
+                $(this).prop('checked', condition);
+            }
+        });
+    });
+
+    $('a').filter(function() {
+        return $(this).data('toggle') == 'popover';
+    })
+        .popover({ trigger: 'focus', html: true })
+        .click(function(e) {
+            e.preventDefault();
+            $(this).focus();
+        });
+
+    var checkboxes = $('input[name="user[moderated_support_categories][]"]');
+
+    checkboxes.first().closest('.controls').prepend(
+        '<label class="checkbox"> '
+        + '<input id="user_moderated_support_categories_all" name="all" value="" type="checkbox">'
+        + '<b>Выделить все / Снять все</b>'
+        + '</label>'
+    );
+
+    $('#user_moderated_support_categories_all').on('change', function() {
+        checkboxes.prop('checked', $(this).prop('checked'));
+    });
+
+    var checkboxesChange = function() {
+        $('#user_moderated_support_categories_all').prop('checked', checkboxes.length == checkboxes.filter(':checked').length);
+    };
+
+    checkboxes.on('change', checkboxesChange);
+    checkboxesChange();
+});
+
+</script>
+{% endblock js %}

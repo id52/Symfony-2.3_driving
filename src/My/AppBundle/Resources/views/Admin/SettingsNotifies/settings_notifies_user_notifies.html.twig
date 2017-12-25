@@ -1,0 +1,189 @@
+{% extends "AppBundle:Admin/SettingsNotifies:_settings_notifies_layout.html.twig" %}
+{% block settings_notifies_content %}
+    <fieldset>
+        <legend>
+            {{ 'settings_notifies_resetting_password'|trans }}
+            <a data-content="{{ 'settings_notifies_resetting_password_help'|trans }}" href="#" data-toggle="popover"><i
+                        class="fa fa-question-circle"></i></a>
+        </legend>
+        {{ form_row(form.resetting_password_enabled) }}
+        {{ form_row(form.resetting_password_title) }}
+        {{ form_row(form.resetting_password_text, {attr: { class: 'ckeditor' }, help: 'settings_notifies_resetting_password_text_help'}) }}
+    </fieldset>
+
+    <fieldset>
+        <legend>
+            {{ 'settings_notifies_after_password_recovery'|trans }}
+            <a data-content="{{ 'settings_notifies_after_password_recovery_help'|trans }}" href="#" data-toggle="popover"><i
+                        class="fa fa-question-circle"></i></a>
+        </legend>
+        {{ form_row(form.after_password_recovery_title) }}
+        {{ form_row(form.after_password_recovery_text, {attr: { class: 'ckeditor' }, help: 'settings_notifies_after_password_recovery_text_help'}) }}
+    </fieldset>
+
+    <fieldset>
+        <legend>
+            {{ 'settings_notifies_payments_mobile_not_confirmed'|trans }}
+            <a data-content="{{ 'settings_notifies_payments_mobile_not_confirmed_help'|trans }}" href="#"
+               data-toggle="popover"><i class="fa fa-question-circle"></i></a>
+        </legend>
+        {{ form_row(form.payments_mobile_not_confirmed_title) }}
+        {{ form_row(form.payments_mobile_not_confirmed_text, { attr: { class: 'ckeditor' } }) }}
+    </fieldset>
+
+    <fieldset>
+        <legend>
+            {{ 'settings_notifies_after_confirm_mobile'|trans }}
+            <a data-content="{{ 'settings_notifies_after_confirm_mobile_help'|trans }}" href="#"
+               data-toggle="popover"><i class="fa fa-question-circle"></i></a>
+        </legend>
+        {{ form_row(form.after_confirm_mobile_enabled) }}
+        {{ form_row(form.after_confirm_mobile_title) }}
+        {{ form_row(form.after_confirm_mobile_text, { attr: { class: 'ckeditor' } }) }}
+    </fieldset>
+
+    <fieldset>
+        <legend>
+            {{ 'settings_notifies_after_confirm_mobile_email'|trans }}
+            <a data-content="{{ 'settings_notifies_after_confirm_mobile_email_help'|trans }}" href="#"
+               data-toggle="popover"><i class="fa fa-question-circle"></i></a>
+        </legend>
+        {{ form_row(form.after_confirm_mobile_email_enabled) }}
+        {{ form_row(form.after_confirm_mobile_email_title) }}
+        {{ form_row(form.after_confirm_mobile_email_text, {attr: { class: 'ckeditor' }, help: 'settings_notifies_after_confirm_mobile_email_text_help'}) }}
+    </fieldset>
+
+    <fieldset>
+        <legend>
+            {{ 'settings_notifies_after_1_payment'|trans }}
+            <a data-content="{{ 'settings_notifies_after_1_payment_help'|trans }}" href="#" data-toggle="popover"><i
+                        class="fa fa-question-circle"></i></a>
+        </legend>
+        {{ form_row(form.after_1_payment_enabled) }}
+        {{ form_row(form.after_1_payment_title) }}
+        {{ form_row(form.after_1_payment_text, { attr: { class: 'ckeditor' } }) }}
+    </fieldset>
+
+    <fieldset>
+        <legend>
+            {{ 'settings_notifies_after_1_promo_payment'|trans }}
+            <a data-content="{{ 'settings_notifies_after_1_promo_payment_help'|trans }}" href="#" data-toggle="popover"><i
+                        class="fa fa-question-circle"></i></a>
+        </legend>
+        {{ form_row(form.after_1_promo_payment_enabled) }}
+        {{ form_row(form.after_1_promo_payment_title) }}
+        {{ form_row(form.after_1_promo_payment_text, { attr: { class: 'ckeditor' } }) }}
+    </fieldset>
+
+    <fieldset>
+        <legend>
+            {{ 'settings_notifies_birthday_greeting'|trans }}
+            <a data-content="{{ 'settings_notifies_birthday_greeting_help'|trans }}" href="#" data-toggle="popover"><i
+                        class="fa fa-question-circle"></i></a>
+        </legend>
+        {{ form_row(form.birthday_greeting_title, { help: 'settings_notifies_birthday_greeting_title_help' }) }}
+        {{ form_row(form.birthday_greeting_text, { attr: { class: 'ckeditor' }, help: 'settings_notifies_birthday_greeting_text_help' }) }}
+    </fieldset>
+
+    <fieldset>
+        <legend>
+            {{ 'settings_notifies_signs'|trans }}
+            <a data-content="{{ 'settings_notifies_signs_help'|trans }}" href="#" data-toggle="popover"><i
+                        class="fa fa-question-circle"></i></a>
+        </legend>
+        {% for i in 1..5 %}
+            <div class="control-group">
+                <label class="control-label">{{ 'settings_notifies_sign'|trans }}:</label>
+                <div class="controls">
+                    <div class="input-append">
+                        {{ form_widget(attribute(form, 'sign_'~i)) }}
+                    </div>
+                    {{ form_errors(attribute(form, 'sign_'~i)) }}
+                </div>
+            </div>
+        {% endfor %}
+    </fieldset>
+
+    <fieldset>
+        <legend>
+            {{ 'settings_notifies_lock_unlock'|trans }}
+            <a data-content="{{ 'settings_notifies_lock_unlock_help'|trans }}" href="#" data-toggle="popover"><i
+                        class="fa fa-question-circle"></i></a>
+        </legend>
+        {{ form_row(form.lock_user_enabled) }}
+        {{ form_row(form.lock_user_title) }}
+        {{ form_row(form.lock_user_text, { attr: { class: 'ckeditor' }, help: 'settings_notifies_lock_user_text_help' }) }}
+
+        {{ form_row(form.unlock_user_enabled) }}
+        {{ form_row(form.unlock_user_title) }}
+        {{ form_row(form.unlock_user_text, { attr: { class: 'ckeditor' }, help: 'settings_notifies_unlock_user_text_help' }) }}
+    </fieldset>
+
+    <fieldset>
+        <legend>
+            {{ 'settings_notifies_errors'|trans }}
+            <a data-content="{{ 'settings_notifies_errors_help'|trans }}" href="#" data-toggle="popover"><i
+                        class="fa fa-question-circle"></i></a>
+        </legend>
+        {{ form_row(form.error_account_locked, {help: 'settings_notifies_error_account_locked_help'}) }}
+    </fieldset>
+
+    <fieldset>
+        <legend>
+            {{ 'settings_notifies_support_answered_email'|trans }}
+            <a data-content="{{ 'settings_notifies_support_answered_email_help'|trans }}" href="#"
+               data-toggle="popover"><i class="fa fa-question-circle"></i></a>
+        </legend>
+        {{ form_row(form.support_answered_email_enabled) }}
+        {{ form_row(form.support_answered_email_title) }}
+        {{ form_row(form.support_answered_email_text, { attr: { class: 'ckeditor' }, help: 'settings_notifies_support_answered_email_text_help' }) }}
+    </fieldset>
+
+    <fieldset>
+        <legend>
+            {{ 'settings_notifies_api_med_form'|trans }}
+            <a data-content="{{ 'settings_notifies_api_med_form_help'|trans }}" href="#"
+               data-toggle="popover"><i class="fa fa-question-circle"></i></a>
+        </legend>
+        {{ form_row(form.api_med_form, { attr: { class: 'ckeditor' } }) }}
+    </fieldset>
+
+    <fieldset>
+        <legend>
+            {{ 'settings_notifies_api_contract_sign'|trans }}
+            <a data-content="{{ 'settings_notifies_api_contract_sign_help'|trans }}" href="#"
+               data-toggle="popover"><i class="fa fa-question-circle"></i></a>
+        </legend>
+        {{ form_row(form.api_contract_sign, { attr: { class: 'ckeditor' } }) }}
+    </fieldset>
+
+    <fieldset>
+        <legend>
+            {{ 'settings_notifies_api_med_con'|trans }}
+            <a data-content="{{ 'settings_notifies_api_med_con_help'|trans }}" href="#"
+               data-toggle="popover"><i class="fa fa-question-circle"></i></a>
+        </legend>
+        {{ form_row(form.api_med_con, { attr: { class: 'ckeditor' } }) }}
+    </fieldset>
+
+    <fieldset>
+        <legend>
+            {{ 'settings_notifies_unpaid_driving_email'|trans }}
+            <a data-content="{{ 'settings_notifies_unpaid_driving_email_help'|trans }}" href="#"
+               data-toggle="popover"><i class="fa fa-question-circle"></i></a>
+        </legend>
+        {{ form_row(form.unpaid_driving_email_enabled) }}
+        {{ form_row(form.unpaid_driving_email_title) }}
+        {{ form_row(form.unpaid_driving_email_text, { attr: { class: 'ckeditor' }, help: 'settings_notifies_unpaid_driving_email_text_help' }) }}
+    </fieldset>
+    
+    <fieldset>
+        <legend>
+            {{ 'settings_notifies_unpaid_driving_sms'|trans }}
+            <a data-content="{{ 'settings_notifies_unpaid_driving_sms_help'|trans }}" href="#"
+               data-toggle="popover"><i class="fa fa-question-circle"></i></a>
+        </legend>
+        {{ form_row(form.unpaid_driving_sms_enabled) }}
+        {{ form_row(form.unpaid_driving_sms_text, { help: 'settings_notifies_unpaid_driving_sms_text_help' }) }}
+    </fieldset>
+{% endblock %}

@@ -1,0 +1,20 @@
+My\AppBundle\Entity\ClassService:
+    type: entity
+    table: class_service
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        name:
+            type: string
+        position:
+            type: integer
+            gedmo:
+                - sortablePosition
+    oneToMany:
+         conditions:
+            targetEntity: DrivingConditions
+            mappedBy: class_service
+            cascade: [ all ]

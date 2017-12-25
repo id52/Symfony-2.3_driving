@@ -1,0 +1,261 @@
+{% extends "AppBundle:Admin/SettingsNotifies:_settings_notifies_layout.html.twig" %}
+{% block settings_notifies_content %}
+    <fieldset>
+        <legend>
+            {{ 'settings_notifies_hurry_email'|trans }}
+        </legend>
+        {{ form_row(form.hurry_email_title) }}
+        {{ form_row(form.hurry_email_text, {attr: { class: 'ckeditor' }, help: 'settings_notifies_hurry_email_text_help'}) }}
+    </fieldset>
+
+
+    <fieldset>
+        <legend>
+            {{ 'settings_notifies_no_payments'|trans }}
+            <a data-content="{{ 'settings_notifies_no_payments_help'|trans }}" href="#" data-toggle="popover"><i
+                        class="fa fa-question-circle"></i></a>
+        </legend>
+        {{ form_row(form.no_payments_enabled) }}
+        {{ form_row(form.no_payments_title) }}
+        {{ form_row(form.no_payments_text, { attr: { class: 'ckeditor' }, help: 'settings_notifies_no_payments_text_help' }) }}
+    </fieldset>
+
+    <fieldset>
+        <legend>
+            {{ 'settings_notifies_pay_now'|trans }}
+            <a data-content="{{ 'settings_notifies_pay_now_help'|trans }}" href="#" data-toggle="popover"><i
+                        class="fa fa-question-circle"></i></a>
+        </legend>
+        {{ form_row(form.pay_now_title) }}
+        {{ form_row(form.pay_now_text, { attr: { class: 'ckeditor' }, help: 'settings_notifies_pay_now_text_help' }) }}
+    </fieldset>
+
+    <fieldset>
+        <legend>
+            {{ 'settings_notifies_training_without_2_payment'|trans }}
+            <a data-content="{{ 'settings_notifies_training_without_2_payment_help'|trans }}" href="#"
+               data-toggle="popover"><i class="fa fa-question-circle"></i></a>
+        </legend>
+        {{ form_row(form.training_without_2_payment_title) }}
+        {{ form_row(form.training_without_2_payment_text, { attr: { class: 'ckeditor' } }) }}
+    </fieldset>
+
+    <fieldset>
+        <legend>{{ 'settings_notifies_first_payment'|trans }}:</legend>
+        {{ form_row(form.first_payment_text, { attr: { class: 'ckeditor' }, help: 'settings_notifies_first_payment_text_help' }) }}
+        {{ form_row(form.first_payment_promo_discount_text, { attr: { class: 'ckeditor' }, help: 'settings_notifies_first_payment_promo_discount_text_help' }) }}
+    </fieldset>
+
+    <fieldset>
+        <legend>{{ 'settings_notifies_second_payment'|trans }}:</legend>
+        {{ form_row(form.second_payment_title) }}
+        {{ form_row(form.second_payment_text, { attr: { class: 'ckeditor' } }) }}
+    </fieldset>
+
+    <fieldset>
+        <legend>
+            {{ 'settings_notifies_payments_mobile_not_confirmed'|trans }}
+            <a data-content="{{ 'settings_notifies_payments_mobile_not_confirmed_help'|trans }}" href="#"
+               data-toggle="popover"><i class="fa fa-question-circle"></i></a>
+        </legend>
+        {{ form_row(form.payments_mobile_not_confirmed_title) }}
+        {{ form_row(form.payments_mobile_not_confirmed_text, { attr: { class: 'ckeditor' } }) }}
+    </fieldset>
+
+    <fieldset>
+        <legend>
+            {{ 'settings_notifies_after_confirm_mobile'|trans }}
+            <a data-content="{{ 'settings_notifies_after_confirm_mobile_help'|trans }}" href="#"
+               data-toggle="popover"><i class="fa fa-question-circle"></i></a>
+        </legend>
+        {{ form_row(form.after_confirm_mobile_enabled) }}
+        {{ form_row(form.after_confirm_mobile_title) }}
+        {{ form_row(form.after_confirm_mobile_text, { attr: { class: 'ckeditor' } }) }}
+    </fieldset>
+
+    <fieldset>
+        <legend>
+            {{ 'settings_notifies_after_confirm_mobile_email'|trans }}
+            <a data-content="{{ 'settings_notifies_after_confirm_mobile_email_help'|trans }}" href="#"
+               data-toggle="popover"><i class="fa fa-question-circle"></i></a>
+        </legend>
+        {{ form_row(form.after_confirm_mobile_email_enabled) }}
+        {{ form_row(form.after_confirm_mobile_email_title) }}
+        {{ form_row(form.after_confirm_mobile_email_text, {attr: { class: 'ckeditor' }, help: 'settings_notifies_after_confirm_mobile_email_text_help'}) }}
+    </fieldset>
+
+    <fieldset>
+        <legend>
+            {{ 'settings_notifies_after_1_payment'|trans }}
+            <a data-content="{{ 'settings_notifies_after_1_payment_help'|trans }}" href="#" data-toggle="popover"><i
+                        class="fa fa-question-circle"></i></a>
+        </legend>
+        {{ form_row(form.after_1_payment_enabled) }}
+        {{ form_row(form.after_1_payment_title) }}
+        {{ form_row(form.after_1_payment_text, { attr: { class: 'ckeditor' } }) }}
+    </fieldset>
+
+    <fieldset>
+        <legend>
+            {{ 'settings_notifies_after_1_promo_payment'|trans }}
+            <a data-content="{{ 'settings_notifies_after_1_promo_payment_help'|trans }}" href="#" data-toggle="popover"><i
+                        class="fa fa-question-circle"></i></a>
+        </legend>
+        {{ form_row(form.after_1_promo_payment_enabled) }}
+        {{ form_row(form.after_1_promo_payment_title) }}
+        {{ form_row(form.after_1_promo_payment_text, { attr: { class: 'ckeditor' } }) }}
+    </fieldset>
+
+    <fieldset>
+        <legend>
+            {{ 'settings_notifies_after_1_payment_email'|trans }}
+            <a data-content="{{ 'settings_notifies_after_1_payment_email_help'|trans }}" href="#" data-toggle="popover"><i
+                        class="fa fa-question-circle"></i></a>
+        </legend>
+        {{ form_row(form.after_1_payment_email_enabled) }}
+        {{ form_row(form.after_1_payment_email_title) }}
+        {{ form_row(form.after_1_payment_email_text, {attr: { class: 'ckeditor' }, help: 'settings_notifies_after_1_payment_email_text_help'}) }}
+    </fieldset>
+
+    <fieldset>
+        <legend>
+            {{ 'settings_notifies_after_1_promo_payment_email'|trans }}
+            <a data-content="{{ 'settings_notifies_after_1_promo_payment_email_help'|trans }}" href="#"
+               data-toggle="popover"><i class="fa fa-question-circle"></i></a>
+        </legend>
+        {{ form_row(form.after_1_promo_payment_email_enabled) }}
+        {{ form_row(form.after_1_promo_payment_email_title) }}
+        {{ form_row(form.after_1_promo_payment_email_text, {attr: { class: 'ckeditor' }, help: 'settings_notifies_after_1_promo_payment_email_text_help'}) }}
+    </fieldset>
+
+    <fieldset>
+        <legend>
+            {{ 'settings_notifies_discount_2'|trans }}
+            <a data-content="{{ 'settings_notifies_discount_2_help'|trans }}" href="#" data-toggle="popover"><i
+                        class="fa fa-question-circle"></i></a>
+        </legend>
+        {{ form_row(form.discount_2_notify_first, { attr: { class: 'ckeditor' }, help: 'settings_notifies_discount_2_notify_first_help' }) }}
+        {{ form_row(form.discount_2_notify_second, { attr: { class: 'ckeditor' }, help: 'settings_notifies_discount_2_notify_second_help' }) }}
+        {{ form_row(form.discount_2_warning_sms_first, { help: 'settings_notifies_discount_2_warning_sms_first_help' }) }}
+        {{ form_row(form.discount_2_missing_sms, { help: 'settings_notifies_discount_2_missing_sms_help' }) }}
+        {{ form_row(form.discount_2_warning_sms_second, { help: 'settings_notifies_discount_2_warning_sms_second_help' }) }}
+    </fieldset>
+
+    <fieldset>
+        <legend>
+            {{ 'settings_notifies_after_2_payment'|trans }}
+            <a data-content="{{ 'settings_notifies_after_2_payment_help'|trans }}" href="#" data-toggle="popover"><i
+                        class="fa fa-question-circle"></i></a>
+        </legend>
+        {{ form_row(form.after_2_payment_enabled) }}
+        {{ form_row(form.after_2_payment_title) }}
+        {{ form_row(form.after_2_payment_text, { attr: { class: 'ckeditor' } }) }}
+    </fieldset>
+
+    <fieldset>
+        <legend>
+            {{ 'settings_notifies_after_2_promo_payment'|trans }}
+            <a data-content="{{ 'settings_notifies_after_2_promo_payment_help'|trans }}" href="#" data-toggle="popover"><i
+                        class="fa fa-question-circle"></i></a>
+        </legend>
+        {{ form_row(form.after_2_promo_payment_enabled) }}
+        {{ form_row(form.after_2_promo_payment_title) }}
+        {{ form_row(form.after_2_promo_payment_text, { attr: { class: 'ckeditor' } }) }}
+    </fieldset>
+
+    <fieldset>
+        <legend>{{ 'settings_notifies_after_2_payment_email'|trans }}:</legend>
+        {{ form_row(form.after_2_payment_email_enabled) }}
+        {{ form_row(form.after_2_payment_email_title) }}
+        {{ form_row(form.after_2_payment_email_text, {attr: { class: 'ckeditor' }, help: 'settings_notifies_after_2_payment_email_text_help'}) }}
+    </fieldset>
+
+    <fieldset>
+        <legend>
+            {{ 'settings_notifies_after_2_promo_payment_email'|trans }}
+            <a data-content="{{ 'settings_notifies_after_2_promo_payment_email_help'|trans }}" href="#"
+               data-toggle="popover"><i class="fa fa-question-circle"></i></a>
+        </legend>
+        {{ form_row(form.after_2_promo_payment_email_enabled) }}
+        {{ form_row(form.after_2_promo_payment_email_title) }}
+        {{ form_row(form.after_2_promo_payment_email_text, {attr: { class: 'ckeditor' }, help: 'settings_notifies_after_2_promo_payment_email_text_help'}) }}
+    </fieldset>
+
+    <fieldset>
+        <legend>
+            {{ 'settings_notifies_after_payment'|trans }}
+            <a data-content="{{ 'settings_notifies_after_payment_help'|trans }}" href="#" data-toggle="popover"><i
+                        class="fa fa-question-circle"></i></a>
+        </legend>
+        {{ form_row(form.after_payment_enabled) }}
+        {{ form_row(form.after_payment_title) }}
+        {{ form_row(form.after_payment_text, { attr: { class: 'ckeditor' } }) }}
+    </fieldset>
+
+    <fieldset>
+        <legend>
+            {{ 'settings_notifies_after_promo_payment'|trans }}
+            <a data-content="{{ 'settings_notifies_after_promo_payment_help'|trans }}" href="#" data-toggle="popover"><i
+                        class="fa fa-question-circle"></i></a>
+        </legend>
+        {{ form_row(form.after_promo_payment_enabled) }}
+        {{ form_row(form.after_promo_payment_title) }}
+        {{ form_row(form.after_promo_payment_text, { attr: { class: 'ckeditor' } }) }}
+    </fieldset>
+
+    <fieldset>
+        <legend>
+            {{ 'settings_notifies_after_payment_email'|trans }}
+            <a data-content="{{ 'settings_notifies_after_payment_email_help'|trans }}" href="#" data-toggle="popover"><i
+                        class="fa fa-question-circle"></i></a>
+        </legend>
+        {{ form_row(form.after_payment_email_enabled) }}
+        {{ form_row(form.after_payment_email_title) }}
+        {{ form_row(form.after_payment_email_text, {attr: { class: 'ckeditor' }, help: 'settings_notifies_after_payment_email_text_help'}) }}
+    </fieldset>
+
+    <fieldset>
+        <legend>
+            {{ 'settings_notifies_after_promo_payment_email'|trans }}
+            <a data-content="{{ 'settings_notifies_after_promo_payment_email_help'|trans }}" href="#"
+               data-toggle="popover"><i class="fa fa-question-circle"></i></a>
+        </legend>
+        {{ form_row(form.after_promo_payment_email_enabled) }}
+        {{ form_row(form.after_promo_payment_email_title) }}
+        {{ form_row(form.after_promo_payment_email_text, {attr: { class: 'ckeditor' }, help: 'settings_notifies_after_promo_payment_email_text_help'}) }}
+    </fieldset>
+
+    <fieldset>
+        <legend>
+            {{ 'settings_notifies_primary_boosting_not_paid_driving_popup'|trans }}
+        </legend>
+        {{ form_row(form.primary_boosting_not_paid_driving_popup_title) }}
+        {{ form_row(form.primary_boosting_not_paid_driving_popup_text, {attr: { class: 'ckeditor' }, help: 'settings_notifies_primary_boosting_not_paid_driving_popup_text_help'}) }}
+    </fieldset>
+
+    <fieldset>
+        <legend>
+            {{ 'settings_notifies_primary_boosting_not_paid_driving_email'|trans }}
+        </legend>
+        {{ form_row(form.primary_boosting_not_paid_driving_email_enabled) }}
+        {{ form_row(form.primary_boosting_not_paid_driving_email_title) }}
+        {{ form_row(form.primary_boosting_not_paid_driving_email_text, {attr: { class: 'ckeditor' }, help: 'settings_notifies_primary_boosting_not_paid_driving_email_text_help'}) }}
+    </fieldset>
+
+    <fieldset>
+        <legend>
+            {{ 'settings_notifies_user_not_paid_primary_boosting_not_paid_driving_popup'|trans }}
+        </legend>
+        {{ form_row(form.user_not_paid_primary_boosting_not_paid_driving_popup_title) }}
+        {{ form_row(form.user_not_paid_primary_boosting_not_paid_driving_popup_text, {attr: { class: 'ckeditor' }, help: 'settings_notifies_user_not_paid_primary_boosting_not_paid_driving_popup_text_help'}) }}
+    </fieldset>
+
+    <fieldset>
+        <legend>
+            {{ 'settings_notifies_user_not_paid_primary_boosting_not_paid_driving_email'|trans }}
+        </legend>
+        {{ form_row(form.user_not_paid_primary_boosting_not_paid_driving_email_enabled) }}
+        {{ form_row(form.user_not_paid_primary_boosting_not_paid_driving_email_title) }}
+        {{ form_row(form.user_not_paid_primary_boosting_not_paid_driving_email_text, {attr: { class: 'ckeditor' }, help: 'settings_notifies_user_not_paid_primary_boosting_not_paid_driving_email_text_help'}) }}
+    </fieldset>
+{% endblock %}

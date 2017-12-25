@@ -1,0 +1,50 @@
+{% extends "AppBundle::admin.html.twig" %}
+
+{% block content %}
+    <h1>Резервации ключей</h1>
+    <hr>
+    <br>
+    <h2>{{ key.promo.name }} &ndash; {{ key.hash }}</h2>
+    <dl>
+        <dt>{{ 'admin.promo_key_type'|trans }}</dt>
+        <dd>
+            {% if key.type == 'site_access' %}
+                Доступ к теор. курсу
+            {% elseif key.type == 'training' %}
+                Пакет рег. в ГИБДД
+            {% endif %}
+        </dd>
+
+        <dt>{{ 'admin.promo_key_discount'|trans }}</dt>
+        <dd>{{ key.discount }} {{ 'RUB'|trans}}</dd>
+
+        <dt>{{ 'admin.promo_key_active'|trans }}</dt>
+        <dd><i class="fa {{ key.active ? 'fa-plus' : 'fa-minus' }}"></i></dd>
+    </dl>
+    {% if pagerfanta.currentPageResults|length %}
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th class="min_col">Зарезервирован</th>
+                <th>Пользователь</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for log in pagerfanta.currentPageResults %}
+                <tr>
+                    <td class="min_col">{{ log.createdAt|date('d.m.Y H:i') }}</td>
+                    <td><a href="{{ path('admin_paradox_user_view', {id: log.user.id}) }}">{{ log.user.email }}</a></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        {% if pagerfanta.haveToPaginate %}
+            {{ pagerfanta(pagerfanta, 'twitter_bootstrap_translated', { prev_message: '←', next_message: '→' }) }}
+        {% endif %}
+    {% else %}
+        {{ 'no_data'|trans }}
+    {% endif %}
+    <div class="form-actions">
+        <a class="btn pull-right" href="{{ path('admin_promo_keys', { id: key.promo.id }) }}"><i class="fa fa-arrow-left"></i> Вернуться в список промоключей</a>
+    </div>
+{% endblock content %}

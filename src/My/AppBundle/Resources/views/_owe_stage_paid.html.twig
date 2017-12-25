@@ -1,0 +1,14 @@
+{% if app.user.oweStages|length and app.user.drivingPaidAt is null and app.user.oweStageEnd > date() %}
+<div class="deal-info-head">
+    <div class="deal-period">
+        До окончания срока оплаты <br> дополнительных административных расходов осталось:
+    </div>
+    <div class="deal-countdown owe_stage_countdown" data-seconds-left="{{ last_stage.allSecondsLeft ?? 0 }}">
+        <span class="days"></span>
+        <span class="hours"></span>
+        :<span class="minutes"></span>
+        :<span class="seconds"></span>
+    </div>
+    <a class="deal-pay" href="{{ path('my_prepare_owe_paid') }}">Оплатить</a>
+</div>
+{% endif %}

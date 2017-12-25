@@ -1,0 +1,21 @@
+{% extends 'AppBundle::admin.html.twig' %}
+
+{% block content %}
+    <div class="mainContent">
+        <section class="unsubscribe">
+            <div class="title"><h1>{{ 'unsubscribe_done_title'|trans }}</h1></div>
+        </section>
+        <section class="unsubscribe_body">
+            <div class="title">{{ 'unsubscribe_done'|trans({ '%userName%': userName }) }}</div>
+        </section>
+
+        <div class="form-actions">
+            <a class="btn pull-right" href="{{ app.request.headers.get('referer') }}">
+                <i class="fa fa-arrow-left">
+                </i>
+                Назад
+            </a>
+        </div>
+
+    </div>
+{% endblock content %}

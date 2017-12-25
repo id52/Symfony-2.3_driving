@@ -1,0 +1,20 @@
+#!/bin/sh
+
+sudo echo ""
+
+git checkout .
+git pull
+
+composer install --optimize-autoloader
+
+./console doctrine:database:drop --force
+./console doctrine:database:create
+./console doctrine:migrations:migrate --no-interaction
+
+sudo setfacl -R -m u:www-data:rwx -m u:`whoami`:rwx app/cache app/logs web/cache web/uploads/photos web/uploads/images web/uploads/docs web/pdw_file_browser/cache web/uploads/wysiwyg web/certificates
+sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx app/cache app/logs web/cache web/uploads/photos web/uploads/images web/uploads/docs web/pdw_file_browser/cache web/uploads/wysiwyg web/certificates
+sudo rm -rf app/cache/* app/logs/* web/cache/* web/pdw_file_browser/cache/*
+
+git checkout .
+
+echo "Installed!"

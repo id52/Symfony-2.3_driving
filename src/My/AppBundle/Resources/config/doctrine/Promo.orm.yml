@@ -1,0 +1,36 @@
+My\AppBundle\Entity\Promo:
+    type: entity
+    table: promo
+    repositoryClass: My\AppBundle\Repository\Promo
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        name:
+            type: string
+            length: 256
+        created:
+            type: datetime
+            gedmo:
+                timestampable:
+                  on: create
+        used_from:
+            type: datetime
+        used_to:
+            type: datetime
+        active:
+            type: boolean
+        restricted:
+            type: enumpromorestricted
+        maxUsers:
+            type: integer
+            nullable: true
+        autoCreate:
+            type: boolean
+    oneToMany:
+        keys:
+            targetEntity: PromoKey
+            mappedBy: promo
+            cascade: ["persist", "remove"]

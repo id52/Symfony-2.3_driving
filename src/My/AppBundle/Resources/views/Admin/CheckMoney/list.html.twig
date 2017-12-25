@@ -1,0 +1,122 @@
+{% extends "AppBundle::admin.html.twig" %}
+{% trans_default_domain 'check_payment' %}
+
+{% block content %}
+    <h1>Проверка платежей за вождение перенесенных в Paradox</h1>
+    <hr>
+    <a id="filter_link" href="#"><i class="fa fa-caret-down"></i> Фильтр</a>
+    <div id="filter">
+        {{ form_start(filter_form) }}
+        {{ form_widget(filter_form) }}
+        <div class="form-actions">
+            <button type="submit" class="btn btn-success pull-right">
+                <i class="fa fa-filter"></i>
+                <span>Отфильтровать</span>
+            </button>
+        </div>
+        {{ form_end(filter_form) }}
+    </div>
+    <br>
+    {% if pays_by_date|length %}
+        <h4>
+            {% if total['date_from'] and total['date_to'] %}
+                Период с {{ total['date_from']|localizeddate('medium', 'none') }} по {{ total['date_to']|localizeddate('medium','none') }}
+            {% elseif total['date_from'] %}
+                Период с {{ total['date_from']|localizeddate('medium', 'none') }}
+            {% elseif total['date_to'] %}
+                Период по {{ total['date_to']|localizeddate('medium', 'none') }}
+            {% else %}
+                За весь период
+            {% endif %}
+            | Транзакций: {{ total['count'] }} | на сумму: {{ total['all_sum']|number_format(0, ',' , ' ') }} руб.
+        </h4>
+        <br>
+        {% for date, info in pays_by_date %}
+            <table class="table table-hover">
+            <thead>
+            <tr>
+                <th class="min_col" colspan="10" style="text-align: left">
+                    {{ date|localizeddate('medium', 'none') }} | Транзакций: {{ info['subcount'] }} | на
+                    сумму: {{ info['subsum']|number_format(0, ',' , ' ') }} руб
+                </th>
+            </tr>
+            <tr> {# If change number of columns, you should change colspan number in previous <th> tag! #}
+                <th class="min_col">{{ 'transferred_at'|trans }}</th>
+                <th class="min_col">{{ 'package_number'|trans }}</th>
+                <th class="min_col">{{ 'condition_type'|trans }}</th>
+                <th class="min_col">{{ 's_id'|trans }}</th>
+                <th class="min_col">{{ 's_type'|trans }}</th>
+                <th class="min_col">{{ 'sum'|trans }}</th>
+                <th class="min_col">{{ 'code_listener'|trans }}</th>
+                <th class="min_col">{{ 'user_full_name'|trans }}</th>
+                <th class="min_col">{{ 'region'|trans }}</th>
+                <th class="min_col"></th>
+            </tr>
+            </thead>
+            <tbody>
+
+            {% for log in info['logs'] %}
+                <tr>
+                    <td class="min_col">
+                        {{ log.getTransferredAt|date("d.m.Y H:i") }}
+                    </td>
+                    <td class="min_col">
+                        {{ log.package.number }}
+                    </td>
+                    <td class="min_col">
+                        {{ (log.package.condition.isPrimary ? 'ВОСН' : 'ВДОП') }}
+                    </td>
+                    <td class="min_col">
+                        {{ log.getSId }}
+                    </td>
+                    <td class="min_col">
+                        {{ log.getSType|trans }}
+                    </td>
+                    <td class="min_col">
+                        {{ log.sum|number_format(0, ',' , ' ') }} руб.
+                    </td>
+                    <td class="min_col">
+                        {{ log.user.paradoxId }}
+                    </td>
+                    <td class="min_col">
+                        {{ log.user.fullName }}
+                    </td>
+                    <td class="min_col">
+                        {{ log.user.region }}
+                    </td>
+                    <td class="min_col">
+                        <a href="{{ path('admin_item_check_payment_in_paradox', { log_id: log.id }) }}"
+                           class="text-success"><i class="fa fa-eye" title="Просмотр"></i></a>
+                    </td>
+                </tr>
+            {% endfor %}
+        {% endfor %}
+
+        </tbody>
+        </table>
+        <hr>
+        {% if pagerfanta.haveToPaginate %}
+            {{ pagerfanta(pagerfanta, 'twitter_bootstrap_translated', { prev_message: '←', next_message: '→' }) }}
+        {% endif %}
+
+    {% else %}
+        Нет Данных
+    {% endif %}
+{% endblock content %}
+
+{% block js %}
+<script>
+$(function () {
+    $('#filter').hide();
+
+    {% if is_filter_form_errors %}
+    $('#filter').show();
+    {% endif %}
+
+    $('#filter_link').click(function () {
+        $('#filter').toggle();
+        return false;
+    });
+});
+</script>
+{% endblock js %}

@@ -1,0 +1,17 @@
+{% extends "AppBundle::layout_new.html.twig" %}
+
+{% block title %}{{ article.title }} | {{ 'project.name'|trans }}{% endblock title %}
+{% block meta_keywords %}{{ article.keywords }}{% endblock meta_keywords %}
+{% block meta_description %}{{ article.description }}{% endblock meta_description %}
+
+{% block content %}
+<nav class="path">
+    <a href="{{ path('homepage') }}">{{ 'titles.homepage'|trans }}</a>
+    » <strong>{{ article.title }}</strong>
+</nav>
+
+<section>
+    <div class="title"><h1>{{ article.title }}</h1></div>
+    <div class="wid">{{ article.text |raw }}</div>
+</section>
+{% endblock content %}

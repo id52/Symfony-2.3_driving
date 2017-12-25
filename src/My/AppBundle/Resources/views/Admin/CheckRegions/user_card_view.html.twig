@@ -1,0 +1,483 @@
+{% extends "AppBundle::admin.html.twig" %}
+
+{% block content %}
+    {% if user.locked %}
+        <h4>Заблокирован</h4>
+    {% endif %}
+    {% if user.photo %}
+    <dl class="dl-horizontal">
+        <dt>{{ 'photo_photoFile'|trans }}:</dt><dd><img class="img-polaroid" src="{{ user.photoWebPath|imagine_filter('photo_small_new') }}?t={{ 'now'|date('U') }}" alt="" /></dd>
+    </dl>
+    {% endif %}
+
+    <legend>{{ 'profile_registr_data'|trans }}:</legend>
+    <dl class="dl-horizontal">
+        <dt>{{ 'profile_email'|trans }}:</dt>
+        <dd>{{ user.email }}</dd>
+        <dt>{{ 'profile_last_name'|trans }}:</dt>
+        <dd class="copy_row_with_btn copy_name">
+            <span>{{ user.lastName }}</span>
+            <button id="copy_name" class="btn btn-mini btn-copy" data-content="{{ user.lastName~' '~user.firstName~' '~user.patronymic }}">
+                <i class="fa fa-copy"></i>
+                {{ 'admin.buttons.copy'|trans }}
+            </button>
+        </dd>
+        <dt>{{ 'profile_first_name'|trans }}:</dt>
+        <dd class="copy_row copy_name">
+            <span>{{ user.firstName }}</span>
+        </dd>
+        <dt>{{ 'profile_patronymic'|trans }}:</dt>
+        <dd class="copy_row copy_name">
+            <span>{{ user.patronymic }}</span>
+        </dd>
+        <dt>{{ 'profile_region'|trans }}:</dt>
+        <dd>{{ user.region }}</dd>
+    </dl>
+
+    {% if user.sex %}
+    <legend>{{ 'profile_passport_data'|trans }}:</legend>
+    <dl class="dl-horizontal">
+        <dt>{{ 'profile_sex'|trans }}:</dt>
+        <dd>{{ user.sex|trans }}</dd>
+        <dt>{{ 'profile_birthday'|trans }}:</dt>
+        <dd class="copy_row_with_btn copy_birthday">
+            <span>{{ user.birthday|date('d.m.Y') }}</span>
+            <button id="copy_birthday" class="btn btn-mini btn-copy" data-content="{{ user.birthday|date('d.m.Y') }}">
+                <i class="fa fa-copy"></i>
+                {{ 'admin.buttons.copy'|trans }}
+            </button>
+        </dd>
+        {% if user.foreignPassport %}
+        <dt>{{ 'profile_foreign_passport_number'|trans }}:</dt>
+        <dd class="copy_row_with_btn copy_foreign_passport_number">
+            <span>{{ user.foreignPassportNumber }}</span>
+            <button id="copy_foreign_passport_number" class="btn btn-mini btn-copy" data-content="{{ user.foreignPassportNumber }}">
+                <i class="fa fa-copy"></i>
+                {{ 'admin.buttons.copy'|trans }}
+            </button>
+        </dd>
+        {% else %}
+        {% set attrs = user.passportNumber|split(' ') %}
+        <dt>{{ 'profile_passport_number_ser'|trans }}:</dt>
+        <dd class="copy_row_with_btn copy_passport_number_ser">
+            <span>{{ attrs[0] }}</span>
+            <button id="copy_passport_number_ser" class="btn btn-mini btn-copy" data-content="{{ attrs[0] }}">
+                <i class="fa fa-copy"></i>
+                {{ 'admin.buttons.copy'|trans }}
+            </button>
+        </dd>
+        <dt>{{ 'profile_passport_number_num'|trans }}:</dt>
+        <dd class="copy_row_with_btn copy_passport_number_num">
+            <span>{{ attrs[1] }}</span>
+            <button id="copy_passport_number_num" class="btn btn-mini btn-copy" data-content="{{ attrs[1] }}">
+                <i class="fa fa-copy"></i>
+                {{ 'admin.buttons.copy'|trans }}
+            </button>
+        </dd>
+        {% endif %}
+        <dt>{{ 'profile_passport_rovd'|trans }}:</dt>
+        <dd class="copy_row_with_btn copy_passport_rovd">
+            <span>{{ user.passportRovd }}</span>
+            <button id="copy_passport_rovd" class="btn btn-mini btn-copy" data-content="{{ user.passportRovd }}">
+                <i class="fa fa-copy"></i>
+                {{ 'admin.buttons.copy'|trans }}
+            </button>
+        </dd>
+        <dt>{{ 'profile_passport_rovd_number'|trans }}:</dt>
+        <dd>{{ user.passportRovdNumber }}</dd>
+        <dt>{{ 'profile_passport_rovd_date'|trans }}:</dt>
+        <dd class="copy_row_with_btn copy_passport_rovd_date">
+            <span>{{ user.passportRovdDate|date('d.m.Y') }}</span>
+            <button id="copy_passport_rovd_date" class="btn btn-mini btn-copy" data-content="{{ user.passportRovdDate|date('d.m.Y') }}">
+                <i class="fa fa-copy"></i>
+                {{ 'admin.buttons.copy'|trans }}
+            </button>
+        </dd>
+    </dl>
+    {% endif %}
+
+    {% if user.phoneMobile %}
+    <legend>{{ 'profile_phone_data'|trans }}:</legend>
+    <dl class="dl-horizontal">
+        {% if user.phoneHome %}
+        <dt>{{ 'profile_phone_home'|trans }}:</dt>
+        <dd>{{ user.phoneHome }}</dd>
+        {% endif %}
+        <dt>{{ 'profile_phone_mobile'|trans }}:</dt>
+        <dd class="copy_row_with_btn copy_phone_mobile">
+            <span>
+                +7 {{ user.phoneMobile }}
+                <span id="mobile_status">
+                    {% if 'confirmed' == user.phoneMobileStatus %}
+                    <span class="text-success">{{ 'mobile_status.confirmed'|trans }}</span>
+                    {% else %}
+                    <span class="text-error">{{ 'mobile_status.not_confirmed'|trans }}</span>
+                    {% endif %}
+                </span>
+            </span>
+            <button id="copy_phone_mobile" class="btn btn-mini btn-copy" data-content="+7 {{ user.phoneMobile }}">
+                <i class="fa fa-copy"></i>
+                {{ 'admin.buttons.copy'|trans }}
+            </button>
+        </dd>
+        {% if user.oldMobilePhones|length %}
+        <dt>{{ 'profile_old_mobile_phones'|trans }}:</dt>
+        <dd>
+            {% for phone in user.oldMobilePhones %}
+            +7 {{ phone.phone }} <span id="mobile_status"><span class="text-success">{{ 'mobile_status.confirmed'|trans }}</span></span><br>
+            {% endfor %}
+        </dd>
+        {% endif %}
+    </dl>
+    {% endif %}
+
+    {% if is_passed and final_driving %}
+        <legend>{{ 'user_card_final_documents'|trans }}:</legend>
+        <dl class="dl-horizontal">
+            {% if user.finalDocStatus == 'doc_is_picked' %}
+                <dt>Статус документов:</dt>
+                <dd>Выданы</dd>
+                <dt>Дата выдачи:</dt>
+                <dd>{{ user.finalDocGetAt|localizeddate('long', 'none') }}</dd>
+                <dt>Кто выдал:</dt>
+                <dd>{{ user.finalDocModerator[0] is not null ? user.finalDocModerator[0].fullName : '---'}}</dd>
+            {% else %}
+            <dt>Статус документов:</dt>
+            <dd>
+                <form action="{{ path('admin_check_regions_user_card', { id :user.id }) }}" method="post">
+                    <select id="final_document_status" name="final_document_status[0]">
+                        {% if user.finalDocStatus != 'doc_is_done' and user.finalDocStatus != 'doc_is_picked' %}
+                            <option value="" selected="selected">Выберите статус</option>
+                            <option value="doc_is_done">Документы оформлены</option>
+                        {% elseif user.finalDocStatus == 'doc_is_done' %}
+                            <option value="doc_is_done">Документы оформлены</option>
+                            <option value="doc_is_picked">Документы забрал</option>
+                        {% elseif user.finalDocStatus == 'doc_is_picked' %}
+                            <option value="doc_is_picked">Документы забрал</option>
+                        {% else %}
+                            <option value="" selected="selected">Неизвестный статус</option>
+                        {% endif %}
+                    </select>
+                    {% if user.finalDocStatus != 'doc_is_picked' %}
+                        <input id="btn-save-final-docs" class="btn" type="submit" value="Сохранить">
+                    {% endif %}
+                </form>
+            </dd>
+            {% endif %}
+        </dl>
+    {% endif %}
+
+    {% if confirmed_med_docs and confirmed_contract_docs and confirmed_med_docs %}
+        {% set confirmed_docs = true %}
+    {% else %}
+        {% set confirmed_docs = false %}
+    {% endif %}
+
+    {% if docs_for_check %}
+        <legend>{{ 'user_card_user_documents'|trans }}:</legend>
+
+        <form action="{{ path('admin_check_regions_user_card', { id :user.id }) }}" method="post">
+            <table class="table table-striped">
+                <tr>
+                    <th>{{ 'user_card_user_document_name'|trans }}</th>
+                    <th class="min_col">{{ 'user_card_user_document_ico'|trans }}</th>
+                    <th class="min_col">{{ 'user_card_user_document_status'|trans }}</th>
+                    <th class="min_col">{{ 'user_card_user_document_comment'|trans }}</th>
+                    <th class="min_col"></th>
+                </tr>
+                {% for doc in user_docs %}
+                    {% if doc.status not in ['confirm', 'fail'] or doc.reSent %}
+                        {% if doc.status in ['confirm'] and doc.reSent %}
+                            <tr class="info upload_docs_container">
+                        {% else %}
+                            <tr class="info upload_docs_container">
+                        {% endif %}
+                            <td>{{ ('user_card_'~doc.type)|trans }}</td>
+                            <td class="min_col">
+                                <a href="{{ doc.webPath }}" target="_blank" class="upload_docs">
+                                    <img data-id="{{ doc.id }}" src="{{ doc.webPath|imagine_filter('image_small') }}" class="img-thumbnail" alt="">
+                                </a>
+                                <br>
+                            </td>
+                            <td class="min_col">
+                                <select style="margin-top: 12px" id="document_status" name="document_status[{{ doc.id }}][{{ doc.type }}]" {{ doc.status == 'confirm'  ? 'disabled' : ''}}>
+                                    {% if doc.status != 'confirm' and doc.status != 'fail' %}
+                                        <option value="" selected="selected">Выберите статус</option>
+                                        <option value="confirm">Одобрено</option>
+                                        <option value="fail">Отклонено</option>
+                                    {% elseif doc.status == 'confirm' %}
+                                        <option value="confirm">Одобрено</option>
+                                    {% elseif doc.status == 'fail' %}
+                                        <option value="fail">Отклонено</option>
+                                        <option value="confirm">Одобрено</option>
+                                    {% else %}
+                                        <option value="" selected="selected">Неизвестный статус</option>
+                                    {% endif %}
+                                </select>
+                            </td>
+                            <td class="min_col">
+                                <input type="text" id="document_comment" class="admin_docs_comment" name="document_comment[{{ doc.id }}]" {{ doc.status in ['confirm', 'fail'] and not doc.reSent ? 'disabled' : ''}} value="{{ doc.comment ? doc.comment : ''}}">
+                            </td>
+                            <td class="min_col">
+                            </td>
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+            </table>
+            <input class="btn pull-right" type="submit" value="Сохранить">
+        </form>
+    {% endif %}
+
+
+    {% if confirm_docs_exist %}
+    <legend>{{ 'user_card_user_documents_checked'|trans }}:</legend>
+        <table class="table table-striped">
+            <tr>
+                <th>{{ 'user_card_user_document_name'|trans }}</th>
+                <th class="min_col">{{ 'user_card_user_document_ico'|trans }}</th>
+                <th class="min_col">{{ 'user_card_user_document_status'|trans }}</th>
+                <th class="min_col">{{ 'user_card_user_document_comment'|trans }}</th>
+                <th class="min_col"></th>
+            </tr>
+            {% for doc in user_docs %}
+                {% if doc.status in ['confirm'] and not doc.reSent %}
+                    {% if  doc.status == 'fail' %}
+                        <tr class="error upload_docs_container">
+                    {% elseif doc.status == 'confirm' %}
+                        <tr class="success upload_docs_container">
+                    {% endif %}
+                    <td>{{ ('user_card_'~doc.type)|trans }}</td>
+                    <td class="min_col">
+                        <a href="{{ doc.webPath }}" target="_blank" class="upload_docs">
+                            <img data-id="{{ doc.id }}" src="{{ doc.webPath|imagine_filter('image_small') }}" class="img-thumbnail" alt="">
+                        </a>
+                        <br>
+                    </td>
+                    <td class="min_col">
+                        {% if  doc.status == 'confirm' %}
+                            <input type="text"  disabled="disabled" value="Одобрено" style="margin-top: 12px">
+                        {% elseif doc.status == 'fail' %}
+                            <input type="text"  disabled="disabled" value="Отклонено" style="margin-top: 12px">
+                        {% endif %}
+                    </td>
+                    <td class="min_col">
+                        <input type="text" class="admin_docs_comment" disabled="disabled" value="{{ doc.comment ? doc.comment : ''}}">
+                    </td>
+                    <td class="min_col">
+                        {% if admin_delete_docs and doc.status == 'fail' %}
+                            <div class="btn pull-right upload_doc_image">Удалить</div>
+                        {% endif %}
+                    </td>
+                    </tr>
+                {% endif %}
+            {% endfor %}
+        </table>
+
+        {%  if confirmed_docs and not docs_for_check %}
+            <form id="mail_form" action="{{ path('admin_check_regions_user_card', { id :user.id }) }}" method="post">
+                <strong class="confirm_docs_email">Письмо пользователю о том что все документы одобренны </strong>
+                {% if user.confirmDocsIsSend %}
+                    <span class="text-success confirm_docs_email">Выслано</span>
+                {% endif %}
+
+                <input id="send_mail" type="text" name="confirm_docs_mail" value="0" style="display: none;">
+                <button id="send_mail_button" class="btn pull-right">
+                    <i class="fa fa-mail-forward"></i>
+                    {{ user.confirmDocsIsSend ? 'Выслать еще раз' : 'Выслать' }}
+                </button>
+            </form>
+            <hr>
+        {% endif %}
+    {% endif %}
+
+    {% if logs %}
+        <legend>{{ 'user_card_user_driving_package'|trans }}:</legend>
+        <table class="table table-striped">
+            <tr>
+                <th>{{ 'user_card_user_driving_condition_name'|trans }}</th>
+                <th class="min_col">{{ 'package_number'|trans }}</th>
+                <th class="min_col">{{ 'payment_date'|trans }}</th>
+                <th class="min_col">{{ 'payment_sum'|trans }}</th>
+                <th class="min_col">{{ 'package_moderator'|trans }}</th>
+                <th class="min_col">{{ 'payment_s_id'|trans }}</th>
+                <th class="min_col">{{ 'received_date'|trans }}</th>
+                <th class="min_col">{{ 'user_card_user_document_status'|trans }}</th>
+                <th class="min_col"></th>
+            </tr>
+            {% for log in logs %}
+                {% set status = log.package.status %}
+                {% set number = log.package.number %}
+                <form action="{{ path('admin_check_regions_user_card', { id :user.id }) }}" method="post">
+                    {% if status == 'received' or status == 'given_into_hands' %}
+                        <tr class="success">
+                    {% elseif status == 'sended' %}
+                        <tr class="error">
+                    {% else %}
+                        <tr>
+                    {% endif %}
+                        <td>
+                            {{ log.package.condition.name }}{% if not loop.last %}<br>{% endif %}
+                        </td>
+                        <td class="min_col">
+                            {{ number }}
+                        </td>
+                        <td class="min_col">
+                            {{ log.updatedAt|date('d.m.Y') }}
+                            {{ (log.promoKey ? '<br /><br />'~log.updatedAt|date('d.m.Y') : '' )|raw}}
+                        </td>
+                        <td class="min_col">
+                            {{ 'payments.paid'|trans({ '%sum%': log.sum }) }}
+                        </td>
+                        <td class="min_col">
+                            {% if log.package.moderator %}
+                                {{ log.package.moderator }}
+                            {% endif %}
+                        </td>
+                        <td class="min_col">
+                            <span class="pull-right">{{ log.sId ? '#'~log.sId : ''}}</span>
+                        </td>
+                        <td class="min_col">
+                            {{ log.package.receivedAt ? log.package.receivedAt|localizeddate : '---' }}
+                        </td>
+                        <td class="min_col">
+                            {% if status is defined and status not in ['sended', 'received', 'given_into_hands'] %}
+                            <select class="package_status" name="ticket_status[{{ number }}]" {{ confirmed_docs ? '' : 'disabled' }}>
+                                <option value="" selected="selected">Выберите статус</option>
+                                <option value="sended">Отправлены почтой</option>
+                                <option value="given_into_hands">Вручены в руки</option>
+                            </select>
+                            {% elseif status is defined %}
+                                {% if status == 'sended' %}
+                                    Выслан по почте
+                                {% endif %}
+                                {% if status == 'received' %}
+                                    Талоны получены
+                                {% endif %}
+                                {% if status == 'given_into_hands' %}
+                                    Вручен в руки
+                                {% endif %}
+                            {% endif %}
+                        </td>
+                        <td class="min_col">
+                            {% if confirmed_docs and (status == '' or status is null) %}
+                                <input class="btn pull-right" type="submit" value="Сохранить">
+                            {% endif %}
+                        </td>
+                    </tr>
+                </form>
+            {% endfor %}
+        </table>
+
+        <legend>{{ 'user_card_user_driving_package_tickets'|trans }}:</legend>
+        {% for log in logs %}
+            {% set status = log.package.status %}
+            {% set number = log.package.number %}
+            Условие вождения: <strong>{{ log.package.condition.name }}</strong> <br>
+            Номер пакета: <strong>{{ number }}</strong> <br>
+            <table class="table table-striped">
+                <tr>
+                    <th class="min_col">{{ 'ticket_driving_date'|trans }}</th>
+                    <th>{{ 'ticket_driving_instruktor_name'|trans }}</th>
+                    <th>{{ 'ticket_driving_comment'|trans }}</th>
+                    <th class="min_col">{{ 'ticket_driving_rating'|trans }}</th>
+                </tr>
+                {% for ticket in packages[number]['tickets'] %}
+                    {% if ticket.rating is not null %}
+                    <tr class="success">
+                    {% else %}
+                    <tr>
+                    {% endif %}
+                        <td class="min_col">
+                            {{ ticket.driveDate ? ticket.driveDate|localizeddate('long', 'none') : '---' }}
+                        </td>
+                        <td>
+                            {{ ticket.name ? ticket.name : '---' }}
+                        </td>
+                        <td>
+                            {{ ticket.comment ? ticket.comment  : '---' }}
+                        </td>
+                        <td class="min_col">
+                            {{ ticket.rating ? ticket.rating  : '---' }}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+        {% endfor %}
+    {% endif %}
+
+    <legend>{{ 'profile_additional_info'|trans }}:</legend>
+    <dl class="dl-horizontal">
+        {% if user.category %}
+            <dt>{{ 'profile_category'|trans }}:</dt>
+            <dd>{{ user.category.name }}</dd>
+        {% endif %}
+    </dl>
+
+    <legend>{{ 'profile_exams'|trans }}:</legend>
+    <table class="table table-striped">
+        <tr>
+            <th>{{ 'exam_subject'|trans }}</th>
+            <th class="min_col">{{ 'exam_pass_date'|trans }}</th>
+        </tr>
+        {% for subject in subjects %}
+        <tr class="{{ subject.is_passed ? 'success' : 'error' }}">
+            <td>{{ subject.object.title }}</td>
+            <td class="min_col">{{ subject.is_passed ? subject.passed_date|date('d.m.Y') : '--' }}</td>
+        </tr>
+        {% endfor %}
+        <tr class="{{ is_passed ? 'success' : 'error' }}">
+            <td>{{ 'final_exam'|trans }}</td>
+            <td class="min_col">{{ is_passed ? passed_date|date('d.m.Y') : '--' }}</td>
+        </tr>
+    </table>
+
+    <div class="form-actions">
+        <a class="btn pull-right" href="{{ path('admin_check_regions') }}"><i class="fa fa-arrow-left"></i> {{ 'admin.buttons.back_to_list'|trans }}</a>
+    </div>
+{% endblock content %}
+
+{% block js %}
+<script src="/assets/zeroclipboard/jquery.zeroclipboard.min.js"></script>
+<script>
+$(function() {
+    var copy = function(name) {
+        var spans = $('.copy_' + name + ' > span');
+        $('#copy_' + name)
+            .hover(function() {
+                spans.css('background', '#f0f0f0');
+            }, function() {
+                spans.css('background', 'transparent');
+            })
+            .on('copy', function(e) {
+                e.clipboardData.clearData();
+                e.clipboardData.setData('text/plain', $(this).data('content') + '');
+                e.preventDefault();
+            })
+        ;
+    };
+    $('.btn-copy').each(function() {
+        copy($(this).attr('id').substr(5));
+    });
+
+    $('#send_mail_button').on('click', function () {
+        $('#send_mail').val('1');
+        $('#mail_form').submit();
+    });
+    removeUpload();
+    function removeUpload() {
+        $('.upload_docs').on('click', '.upload_doc_image', function (e) {
+            e.preventDefault();
+            if (!confirm('Вы хотите удалить изображение документа?')) {
+                return;
+            }
+            var document = $(this).closest('.upload_docs_container');
+            var id = document.find('img').data('id');
+
+            $.post('{{ path('my_deleted_docs') }}', {id: id}, function () {
+                document.remove();
+            });
+        });
+    }
+});
+</script>
+{% endblock js %}

@@ -1,0 +1,45 @@
+<table id="owe_stage_table" class="table table-striped" {{ (user.oweStages|length) ? '' : 'style="display: none"' }}>
+    <tr>
+        <th class="text-right">Этап</th>
+        <th class="min_col text-right">Сумма</th>
+        <th class="min_col text-right">Начало</th>
+        <th class="min_col text-right">Конец</th>
+        <th class="min_col text-right">Статус</th>
+    </tr>
+    <tbody id="owe_stage_table_body">
+    {% if user.oweStages|length %}
+        {% for owe in user.oweStages %}
+            <tr>
+                <td class="text-right">{{ 'Должник этап №'~owe.numberStage }}</td>
+                <td class="text-right min_col">
+                    {{ owe.sum|number_format }} руб.
+                </td>
+                <td class="text-right min_col">
+                    {{- owe.start|date('d.m.Y') -}}
+                </td>
+                <td class="text-right {{ (owe.log ? 'text-success' : '') }} min_col">
+                    {% if owe.log %}
+                        {{ owe.log.updatedAt|date('d.m.Y') }}<br>
+                        {% if not owe.log.sId %}
+                            {{ 'payment_at_the_office'|trans }} :{{ payments_stage[owe.id]['moderator'] }}
+                        {% else %}
+                            #{{ owe.log.sId  }}
+                        {% endif %}
+                    {% else %}
+                        {{ owe.end|date('d.m.Y') }}
+                    {% endif %}
+                </td>
+                <td id="status_owe_stage_{{ owe.numberStage }}" class="min_col text-right text-{{ (owe.paid ? 'success' : 'error') }}">
+                    {% if owe.end < date() or owe.paid %}
+                        {{ (owe.paid ? 'Оплачен' : 'Не оплачен') }}
+                    {% elseif owe.end > date() and not owe.paid %}
+                        Текущий
+                    {% else %}
+                        Оплачен
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+    {% endif %}
+    </tbody>
+</table>

@@ -1,0 +1,116 @@
+{% extends "AppBundle::admin.html.twig" %}
+
+{% block content %}
+    <h1>Статистика регистраций</h1>
+    <hr>
+    <a id="filter_link" href="#"><i class="fa fa-caret-down"></i> Фильтр</a>
+    <div id="filter">
+        {{ form_start(filter_form) }}
+        {{ form_widget(filter_form) }}
+        <div class="form-actions">
+            <button type="submit" class="btn btn-success pull-right">
+                <i class="fa fa-filter"></i>
+                <span>{{ 'buttons.filter'|trans }}</span>
+            </button>
+        </div>
+        {{ form_end(filter_form) }}
+    </div>
+    <br>
+    <br>
+    <table class="table table-hover">
+        <tr>
+            <td>Зарегистрировано</td>
+            <td class="min_col text-right">{{ odata['all'] }} чел.</td>
+            <td class="min_col text-right"></td>
+        </tr>
+        <tr>
+            <td>Дубли с использованием одного телефона</td>
+            <td class="min_col text-right">{{ odata['dupl'] }} чел.</td>
+            <td class="min_col text-right"></td>
+        </tr>
+        <tr>
+            <td>Итого чистых регистраций</td>
+            <td class="min_col text-right">{{ odata['clear'] }} чел.</td>
+            <td class="min_col text-right">100%</td>
+        </tr>
+        <tr>
+            <td><b>Из них:</b></td>
+            <td class="min_col text-right"></td>
+            <td class="min_col text-right"></td>
+        </tr>
+        <tr>
+            <td>Зарегистрировались, но не подтвердили email</td>
+            <td class="min_col text-right">{{ odata['no_email'] }} чел.</td>
+            <td class="min_col text-right">{{ (odata['no_email']*100/odata['clear'])|round(1) }}%</td>
+        </tr>
+        <tr>
+            <td>Зарегистрировались и подтвердили email</td>
+            <td class="min_col text-right">{{ odata['email'] }} чел.</td>
+            <td class="min_col text-right">{{ (odata['email']*100/odata['clear'])|round(1) }}%</td>
+        </tr>
+        <tr>
+            <td>Сделали хоть какую-то оплату наличными</td>
+            <td class="min_col text-right">{{ odata['something'] }} чел.</td>
+            <td class="min_col text-right">{{ (odata['something']*100/odata['clear'])|round(1) }}%</td>
+        </tr>
+        <tr>
+            <td>Сделали первую оплату наличными</td>
+            <td class="min_col text-right">{{ odata['paid_1'] }} чел.</td>
+            <td class="min_col text-right">{{ (odata['paid_1']*100/odata['clear'])|round(1) }}%</td>
+        </tr>
+        <tr>
+            <td>Сделали первую оплату смешанную (промокод и наличные)</td>
+            <td class="min_col text-right">{{ odata['paid_1_mix'] }} чел.</td>
+            <td class="min_col text-right">{{ (odata['paid_1_mix']*100/odata['clear'])|round(1) }}%</td>
+        </tr>
+        <tr>
+            <td>Сделали первую оплату промокодом</td>
+            <td class="min_col text-right">{{ odata['paid_1_promo'] }} чел.</td>
+            <td class="min_col text-right">{{ (odata['paid_1_promo']*100/odata['clear'])|round(1) }}%</td>
+        </tr>
+        <tr>
+            <td>Сделали вторую оплату наличными</td>
+            <td class="min_col text-right">{{ odata['paid_2'] }} чел.</td>
+            <td class="min_col text-right">{{ (odata['paid_2']*100/odata['clear'])|round(1) }}%</td>
+        </tr>
+        <tr>
+            <td>Сделали вторую оплату смешанную (промокод и наличные)</td>
+            <td class="min_col text-right">{{ odata['paid_2_mix'] }} чел.</td>
+            <td class="min_col text-right">{{ (odata['paid_2_mix']*100/odata['clear'])|round(1) }}%</td>
+        </tr>
+        <tr>
+            <td>Сделали вторую оплату промокодом</td>
+            <td class="min_col text-right">{{ odata['paid_2_promo'] }} чел.</td>
+            <td class="min_col text-right">{{ (odata['paid_2_promo']*100/odata['clear'])|round(1) }}%</td>
+        </tr>
+        <tr>
+            <td>Сделали первую оплату в офисе</td>
+            <td class="min_col text-right">{{ odata['offline_1'] }} чел.</td>
+            <td class="min_col text-right">{{ (odata['offline_1']*100/odata['clear'])|round(1) }}%</td>
+        </tr>
+        <tr>
+            <td>Сделали вторую оплату в офисе</td>
+            <td class="min_col text-right">{{ odata['offline_2'] }} чел.</td>
+            <td class="min_col text-right">{{ (odata['offline_2']*100/odata['clear'])|round(1) }}%</td>
+        </tr>
+    </table>
+{% endblock content %}
+
+{% block js %}
+<script>
+$(function() {
+    {% if app.request.queryString == '' %}
+    $('#filter').hide();
+    {% else %}
+    $('#filter_default').hide();
+    {% endif %}
+    $('#filter_link').click(function() {
+        $('#filter').toggle();
+        {% if app.request.queryString == '' %}
+        $('#filter_default').toggle();
+        {% endif %}
+        return false;
+    });
+});
+</script>
+{% endblock js %}

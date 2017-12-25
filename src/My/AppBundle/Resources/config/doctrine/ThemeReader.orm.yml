@@ -1,0 +1,15 @@
+My\AppBundle\Entity\ThemeReader:
+        type: entity
+        table: themes_readers
+        id:
+            theme:
+                associationKey: true
+            reader:
+                associationKey: true
+        manyToOne:
+            theme:
+                targetEntity: My\AppBundle\Entity\Theme
+                inversedBy: readers
+            reader:
+                targetEntity: My\AppBundle\Entity\User
+                inversedBy: read_themes

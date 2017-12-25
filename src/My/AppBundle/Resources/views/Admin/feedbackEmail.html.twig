@@ -1,0 +1,22 @@
+{% extends "AppBundle::admin.html.twig" %}
+
+{% block content %}
+    <h3>{{ (app.request.get('_route') == 'admin_feedbackEmail_edit' ? 'admin.feedbackEmail_edit_title' : 'admin.feedbackEmail_add_title')|trans }}</h3>
+    <hr>
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+
+    <div class="form-actions">
+        <button type="submit" class="btn btn-success">
+            <i class="fa fa-download"></i>
+            <span>{{ 'admin.buttons.save'|trans }}</span>
+        </button>
+        {% if app.request.get('_route') == 'admin_feedbackEmail_edit' %}
+            <a href="{{ path('admin_feedbackEmail_delete', { id: feedbackEmail.id }) }}" class="btn btn-danger" onclick="return confirm('{{ 'you_sure'|trans }}')">
+                <i class="fa fa-trash-o"></i> <span>{{ 'admin.buttons.delete'|trans }}</span>
+            </a>
+        {% endif %}
+        <a class="btn pull-right" href="{{ path('admin_feedbackEmails') }}"><i class="fa fa-arrow-left"></i> {{ 'admin.buttons.back_to_list'|trans }}</a>
+    </div>
+    {{ form_end(form) }}
+{% endblock content %}

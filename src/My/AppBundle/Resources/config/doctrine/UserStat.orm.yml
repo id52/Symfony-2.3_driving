@@ -1,0 +1,65 @@
+My\AppBundle\Entity\UserStat:
+    type: entity
+    table: user_stat
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        reg_by:
+#           accepted values:
+#               api             => \My\AppBundle\Controller\ApiController::addUserAction
+#               offline         => \My\AppBundle\Controller\AdminController::addUserAction
+#               offline_simple  => \My\AppBundle\Controller\AdminController::addSimpleUserAction
+#               offline_old     => \My\AppBundle\Controller\Admin\UserController::addOldUserAction
+#               regular
+            type: string
+
+        reg_type:
+#           accepted values:
+#               unpaid
+#               paid_1
+#               paid_2
+            type: string
+
+        pay_1_type:
+#           accepted values:
+#               regular
+#               offline
+#               by_api
+#               promo
+#               promo_mixed     => regular payment with promo subtracted from amount
+            type: string
+            nullable: true
+
+        discount_1_type:
+#           accepted values:
+#               first
+            type: string
+            nullable: true
+
+        pay_2_type:
+#           accepted values:
+#               regular
+#               offline
+#               by_api
+#               promo
+#               promo_mixed
+            type: string
+            nullable: true
+
+        discount_2_type:           #\My\AppBundle\Controller\Admin\RegionController::itemAction
+#           accepted values:
+#               first
+#               between_first_second
+#               second
+#               after_second
+            type: string
+            nullable: true
+
+    oneToOne:
+        user:
+            targetEntity: User
+            inversedBy: user_stat
+

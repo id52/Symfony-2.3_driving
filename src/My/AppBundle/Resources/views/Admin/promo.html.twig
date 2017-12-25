@@ -1,0 +1,44 @@
+{% extends "AppBundle::admin.html.twig" %}
+
+{% block content %}
+    <h3>{{ (app.request.get('_route') == 'admin_promo_edit' ? 'admin.promo_edit_title' : 'admin.promo_add_title')|trans }}</h3>
+    <hr>
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+
+    <div class="form-actions">
+        <button type="submit" class="btn btn-success">
+            <i class="fa fa-download"></i>
+            <span>{{ 'admin.buttons.save'|trans }}</span>
+        </button>
+        {% if app.request.get('_route') == 'admin_promo_edit' %}
+            <a href="{{ path('admin_promo_delete', { id: promo.id }) }}" class="btn btn-danger" onclick="return confirm('{{ 'you_sure'|trans }}')">
+                <i class="fa fa-trash-o"></i> <span>{{ 'admin.buttons.delete'|trans }}</span>
+            </a>
+            <a class="btn btn-info" href="{{ path('admin_promo_key_export_csv', {promo:promo.id, type:"both"}) }}">
+                <i class="fa fa-external-link-square"></i> <span>Выгрузить активные купоны в CSV</span>
+            </a>
+            <a class="btn btn-info" href="{{ path('admin_promo_key_export_xls', {promo:promo.id, type:"both"}) }}">
+                <i class="fa fa-external-link-square"></i> <span>Выгрузить активные купоны в XLS</span>
+            </a>
+        {% endif %}
+        <a class="btn pull-right" href="{{ path('admin_promos') }}"><i class="fa fa-arrow-left"></i> {{ 'admin.buttons.back_to_list'|trans }}</a>
+    </div>
+    {{ form_end(form) }}
+{% endblock content %}
+
+{% block js %}
+<script>
+$(function () {
+    $('#promo_restricted').change(function() {
+        if ($('#promo_restricted').val() == 'keys') {
+            $('#promo_maxUsers').closest('.control-group').hide();
+            $('#promo_generateKeysCount').closest('.control-group').show();
+        } else {
+            $('#promo_generateKeysCount').closest('.control-group').hide();
+            $('#promo_maxUsers').closest('.control-group').show();
+        }
+    }).change();
+});
+</script>
+{% endblock js %}

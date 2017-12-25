@@ -1,0 +1,46 @@
+{% extends "AppBundle::layout_new.html.twig" %}
+
+{% block content %}
+    <nav class="path">
+        <a href="{{ path('homepage') }}">{{ 'titles.homepage'|trans }}</a>
+        » <strong>Покупка пакетов попыток</strong>
+    </nav>
+
+    <div class="mainContent">
+        {% include 'AppBundle::_paid2_counter.html.twig' %}
+        {% include 'AppBundle::_owe_stage_paid.html.twig' %}
+
+        <section>
+            <div class="title"><h1>Покупка пакетов попыток</h1></div>
+            {% if attemptPackages %}
+                <div class="paid">
+                    <div class="bg"></div>
+                    <table>
+                        <tr>
+                            <th class="w1 center">Название пакета</th>
+                            <th class="w2 center">Количество попыток</th>
+                            <th class="w3 center">Стоимость пакета</th>
+                            <th class="w4 center"></th>
+                        </tr>
+                        {% for attempt in attemptPackages %}
+                            <tr>
+                                <td class="first">{{ attempt.name }}</td>
+                                <td class="w1 center">{{ attempt.numberOfAttempts }}</td>
+                                <td class="w2 center">{{ attempt.cost }}</td>
+                                <td class="w3 center">
+                                    <div class="links">
+                                        <form action="" method="post">
+                                            <input type="hidden" name="ids" value="{{ attempt.id }}"/>
+                                            <input type="hidden" name="subject_id" value="{{ app.request.get('subject_id') }}"/>
+                                            <button class="bg-green pay-link" type="submit">Купить</button>
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            {% endif %}
+        </section>
+    </div>
+{% endblock content %}

@@ -1,0 +1,26 @@
+{% extends "AppBundle:Admin/SettingsNotifies:_settings_notifies_layout.html.twig" %}
+{% block settings_notifies_content %}
+    <fieldset>
+        <legend>{{ 'settings_notifies_info_attempts'|trans }}</legend>
+        {{ form_row(form.info_attempts_title) }}
+        {{ form_row(form.info_attempts_text, { attr: { class: 'ckeditor' }, help: 'settings_notifies_info_attempts_text_help' }) }}
+    </fieldset>
+
+    <fieldset>
+        <legend>{{ 'settings_notifies_attempts_buy'|trans }}</legend>
+        {{ form_row(form.attempts_buy_title) }}
+        {{ form_row(form.attempts_buy_text, { attr: { class: 'ckeditor' }, help: 'settings_notifies_attempts_buy_text_help' }) }}
+    </fieldset>
+
+    <fieldset>
+        <legend>{{ 'settings_notifies_attempts_reset_progress'|trans }}</legend>
+        {{ form_row(form.attempts_reset_progress_title) }}
+        {{ form_row(form.attempts_reset_progress_text, { attr: { class: 'ckeditor' } }) }}
+    </fieldset>
+
+    <fieldset>
+        <legend>{{ 'settings_notifies_attempts_buy'|trans }}</legend>
+        {{ form_row(form.second_attempt_title) }}
+        {{ form_row(form.second_attempt_text, { attr: { class: 'ckeditor' }, help: 'settings_notifies_second_attempt_text_help' }) }}
+    </fieldset>
+{% endblock %}

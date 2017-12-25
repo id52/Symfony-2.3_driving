@@ -1,0 +1,22 @@
+My\AppBundle\Entity\TriedEnters:
+    type: entity
+    table: tried_enters
+    repositoryClass: My\AppBundle\Repository\TriedEntersRepository
+    id:
+        user:
+            associationKey: true
+        promo_key:
+            associationKey: true
+    fields:
+        created:
+            type: datetime
+            gedmo:
+                timestampable:
+                    on: create
+    manyToOne:
+            user:
+                targetEntity: My\AppBundle\Entity\User
+                inversedBy: tried_enters
+            promo_key:
+                targetEntity: My\AppBundle\Entity\PromoKey
+                inversedBy: tried_enters

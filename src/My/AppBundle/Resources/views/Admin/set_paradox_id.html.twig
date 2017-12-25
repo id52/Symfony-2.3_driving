@@ -1,0 +1,16 @@
+{% extends "AppBundle::admin.html.twig" %}
+
+{% block content %}
+    <h3>Установите paradox ID</h3>
+    <hr>
+
+    {{ form_start(form) }}
+        {{ form_errors(form) }}
+        {{ form_widget(form) }}
+
+        <div class="form-actions">
+            <button type="submit" class="btn btn-success"><i class="fa fa-download"></i> {{ 'admin.buttons.set'|trans }}</button>
+            <a class="btn pull-right" href="{{ back_url }}"><i class="fa fa-arrow-left"></i> {{ 'admin.buttons.back_to_view'|trans }}</a>
+        </div>
+    {{ form_end(form) }}
+{% endblock content %}

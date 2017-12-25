@@ -1,0 +1,118 @@
+{% extends "AppBundle::admin.html.twig" %}
+{% trans_default_domain 'transfer_payment' %}
+
+{% block content %}
+    <h1>Перенос оплаты за вождение в Paradox</h1>
+    <hr>
+    <a id="filter_link" href="#"><i class="fa fa-caret-down"></i> Фильтр</a>
+    <div id="filter">
+        {{ form_start(filter_form) }}
+        {{ form_widget(filter_form) }}
+        <div class="form-actions">
+            <button type="submit" class="btn btn-success pull-right">
+                <i class="fa fa-filter"></i>
+                <span>Отфильтровать</span>
+            </button>
+        </div>
+        {{ form_end(filter_form) }}
+    </div>
+    <br>
+    {% if pagerfanta.currentPageResults|length %}
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th class="min_col">{{ 'createdAt'|trans }}</th>
+                    <th class="min_col">{{ 's_type'|trans }}</th>
+                    <th class="min_col">{{ 's_id'|trans }}</th>
+                    <th class="min_col">{{ 'condition_type'|trans }}</th>
+                    <th class="min_col">{{ 'package_number'|trans }}</th>
+                    <th class="min_col">{{ 'sum'|trans }}</th>
+                    <th class="min_col">{{ 'number_classes'|trans }}</th>
+                    <th class="min_col">{{ 'user_full_name'|trans }}</th>
+                    <th class="min_col">{{ 'code_listener'|trans }}</th>
+                    <th class="min_col">{{ 'region'|trans }}</th>
+                    <th class="min_col"></th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for data in pagerfanta.currentPageResults %}
+            {% set entity = data[0] %}
+            {% set tickets = data['tickets'] %}
+                <tr>
+                    <td class="min_col">
+                        {{ entity.createdAt|date("d.m.Y H:i") }}
+                    </td>
+                    <td class="min_col">
+                        {{ entity.getSType|trans }}
+                    </td>
+                    <td class="min_col">
+                        {{ entity.getSId }}
+                    </td>
+                    <td class="min_col">
+                        {{ (entity.package.condition.isPrimary ? 'Основной' : 'Дополнительный') }}
+                    </td>
+                    <td class="min_col">
+                        {{ entity.package.number }}
+                    </td>
+                    <td class="min_col">
+                        {{ entity.sum|number_format(0, ',' , ' ') }} руб.
+                    </td>
+                    <td class="min_col">
+                        {{ tickets|number_format }}
+                    </td>
+                    <td class="min_col">
+                        {{ entity.user.fullName }}
+                    </td>
+                    <td class="min_col">
+                        {{ entity.user.paradoxId }}
+                    </td>
+                    <td class="min_col">
+                        {{ entity.user.region }}
+                    </td>
+                    <td class="min_col">
+                         {% if not entity.user.getModerated %}
+                            <a href="{{ path('admin_precheck_user_view', { id: entity.user.id }) }}" class="text-success"><i class="fa fa-wheelchair-alt" title="Проверка ученика"></i></a>
+                         {% else %}
+                            <i class="fa fa-wheelchair muted" title="Проверка ученика"></i>
+                        {% endif %}
+                    </td>
+                    <td class="min_col">
+                        {% if entity.user.getModerated and not entity.user.getParadoxId %}
+                            <a href="{{ path('admin_paradox_user_view', { id: entity.user.id }) }}" class="text-success"><i class="fa fa-universal-access" title="Перенести ученика в Paradox"></i></a>
+                        {% else %}
+                            <i class="fa fa-universal-access muted" title="Перенести ученика в Paradox"></i>
+                        {% endif %}
+                    </td>
+                    <td class="min_col">
+                        {% if entity.user.getModerated and entity.user.getParadoxId %}
+                            <a href="{{ path('admin_item_transfer_payment_in_paradox', { log_id: entity.id }) }}" class="text-success"><i class="fa fa-share" title="Перенос платежа за вождение в Paradox"></i></a>
+                        {% else %}
+                            <i class="fa fa-share muted" title="Перенос платежа за вождение в Paradox"></i>
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <hr>
+
+        {% if pagerfanta.haveToPaginate %}
+            {{ pagerfanta(pagerfanta, 'twitter_bootstrap_translated', { prev_message: '←', next_message: '→' }) }}
+        {% endif %}
+        Всего: {{ pagerfanta.count }}, на сумму {{ all_sum|number_format(0, ',' , ' ') }} руб.
+    {% else %}
+        Нет Данных
+    {% endif %}
+{% endblock content %}
+
+{% block js %}
+<script>
+$(function() {
+    $('#filter').hide();
+    $('#filter_link').click(function() {
+        $('#filter').toggle();
+        return false;
+    });
+});
+</script>
+{% endblock js %}

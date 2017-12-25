@@ -1,0 +1,783 @@
+{% extends "AppBundle::admin.html.twig" %}
+
+{% block content %}
+    {% if user != app.user and user.enabled and not user.hasRole('ROLE_USER_PAID2') %}
+    <a href="{{ path('admin_pay_offline', { type: 'paradox', id: user.id }) }}" class="btn btn-h1 pull-right"><i class="fa fa-money"></i> Оплата в офисе</a>
+    {% endif %}
+    <a href="{{ path('admin_send_email_to', { type: 'paradox', id: user.id }) }}" class="btn btn-h1 pull-right"><i class="fa fa-envelope-o"></i> {{ 'admin.buttons.send_email'|trans }}</a>
+    <a href="{{ path('admin_paradox_user_lock', { state: user.locked ? 0 : 1, id: user.id }) }}" class="btn btn-h1 pull-right">{{ user.locked ? 'admin.buttons.unlock'|trans : 'admin.buttons.lock'|trans }}</a>
+    <h3>{{ 'admin.paradox_users'|trans }}</h3>
+    <hr>
+
+    {% if user.locked %}
+        <h4>Заблокирован</h4>
+    {% endif %}
+    {% if user.photo %}
+    <dl class="dl-horizontal">
+        <dt>{{ 'photo_photoFile'|trans }}:</dt><dd><img class="img-polaroid" src="{{ user.photoWebPath|imagine_filter('photo_small_new') }}?t={{ 'now'|date('U') }}" alt="" /></dd>
+    </dl>
+    {% endif %}
+
+    <legend>{{ 'profile_registr_data'|trans }}:</legend>
+    <dl class="dl-horizontal">
+        <dt>{{ 'profile_email'|trans }}:</dt>
+        <dd>{{ user.email }}</dd>
+        <dt>{{ 'profile_last_name'|trans }}:</dt>
+        <dd class="copy_row_with_btn copy_name">
+            <span>{{ user.lastName }}</span>
+            <button id="copy_name" class="btn btn-mini btn-copy" data-content="{{ user.lastName~' '~user.firstName~' '~user.patronymic }}">
+                <i class="fa fa-copy"></i>
+                {{ 'admin.buttons.copy'|trans }}
+            </button>
+        </dd>
+        <dt>{{ 'profile_first_name'|trans }}:</dt>
+        <dd class="copy_row copy_name">
+            <span>{{ user.firstName }}</span>
+        </dd>
+        <dt>{{ 'profile_patronymic'|trans }}:</dt>
+        <dd class="copy_row copy_name">
+            <span>{{ user.patronymic }}</span>
+        </dd>
+        <dt>{{ 'profile_region'|trans }}:</dt>
+        <dd>{{ user.region }}</dd>
+        <dt>{{ 'profile_full_name'|trans }}:</dt>
+        <dd>{{ user.lastName }} {{ user.firstName }} {{ user.patronymic }}</dd>
+    </dl>
+
+    <dl class="dl-horizontal">
+        {% if user.moderator is not empty %}
+            <dt>Модератор:</dt>
+            <dd>{{ user.moderator.lastName }} {{ user.moderator.firstName }}</dd>
+        {% endif %}
+    </dl>
+
+    {% if user.sex %}
+    <legend>{{ 'profile_passport_data'|trans }}:</legend>
+    <dl class="dl-horizontal">
+        <dt>{{ 'profile_sex'|trans }}:</dt>
+        <dd>{{ user.sex|trans }}</dd>
+        <dt>{{ 'profile_birthday'|trans }}:</dt>
+        <dd class="copy_row_with_btn copy_birthday">
+            <span>{{ user.birthday|date('d.m.Y') }}</span>
+            <button id="copy_birthday" class="btn btn-mini btn-copy" data-content="{{ user.birthday|date('d.m.Y') }}">
+                <i class="fa fa-copy"></i>
+                {{ 'admin.buttons.copy'|trans }}
+            </button>
+        </dd>
+        {% if user.foreignPassport %}
+        <dt>{{ 'profile_foreign_passport_number'|trans }}:</dt>
+        <dd class="copy_row_with_btn copy_foreign_passport_number">
+            <span>{{ user.foreignPassportNumber }}</span>
+            <button id="copy_foreign_passport_number" class="btn btn-mini btn-copy" data-content="{{ user.foreignPassportNumber }}">
+                <i class="fa fa-copy"></i>
+                {{ 'admin.buttons.copy'|trans }}
+            </button>
+        </dd>
+        {% else %}
+        {% set attrs = user.passportNumber|split(' ') %}
+        <dt>{{ 'profile_passport_number_ser'|trans }}:</dt>
+        <dd class="copy_row_with_btn copy_passport_number_ser">
+            <span>{{ attrs[0] }}</span>
+            <button id="copy_passport_number_ser" class="btn btn-mini btn-copy" data-content="{{ attrs[0] }}">
+                <i class="fa fa-copy"></i>
+                {{ 'admin.buttons.copy'|trans }}
+            </button>
+        </dd>
+        <dt>{{ 'profile_passport_number_num'|trans }}:</dt>
+        <dd class="copy_row_with_btn copy_passport_number_num">
+            <span>{{ attrs[1] }}</span>
+            <button id="copy_passport_number_num" class="btn btn-mini btn-copy" data-content="{{ attrs[1] }}">
+                <i class="fa fa-copy"></i>
+                {{ 'admin.buttons.copy'|trans }}
+            </button>
+        </dd>
+        {% endif %}
+        <dt>{{ 'profile_passport_rovd'|trans }}:</dt>
+        <dd class="copy_row_with_btn copy_passport_rovd">
+            <span>{{ user.passportRovd }}</span>
+            <button id="copy_passport_rovd" class="btn btn-mini btn-copy" data-content="{{ user.passportRovd }}">
+                <i class="fa fa-copy"></i>
+                {{ 'admin.buttons.copy'|trans }}
+            </button>
+        </dd>
+        <dt>{{ 'profile_passport_rovd_number'|trans }}:</dt>
+        <dd>{{ user.passportRovdNumber }}</dd>
+        <dt>{{ 'profile_passport_rovd_date'|trans }}:</dt>
+        <dd class="copy_row_with_btn copy_passport_rovd_date">
+            <span>{{ user.passportRovdDate|date('d.m.Y') }}</span>
+            <button id="copy_passport_rovd_date" class="btn btn-mini btn-copy" data-content="{{ user.passportRovdDate|date('d.m.Y') }}">
+                <i class="fa fa-copy"></i>
+                {{ 'admin.buttons.copy'|trans }}
+            </button>
+        </dd>
+
+        <dt>{{ 'profile_passport_data'|trans }}:</dt>
+        <dd>{{ (user.foreignPassport ? user.foreignPassportNumber : user.passportNumber) }} {{ user.passportRovd }} {{ user.passportRovdNumber }} {{ user.passportRovdNumber }} {{ user.passportRovdDate|date('d.m.Y') }}</dd>
+    </dl>
+    {% endif %}
+
+    {% if user.birthCountry or user.birthRegion or user.birthCity %}
+    <legend>{{ 'profile_birth_place'|trans }}:</legend>
+    <dl class="dl-horizontal">
+        <dt>{{ 'profile_birth_country'|trans }}:</dt>
+        <dd class="copy_row_with_btn copy_birth_country">
+            <span>{{ (user.birthCountry ? user.birthCountry : '&ndash;')|raw }}</span>
+            {% set attrs = [] %}
+            {% for prop in ['Country', 'Region', 'City'] %}
+                {% if attribute(user, 'birth'~prop) %}
+                    {% set attrs = attrs|merge([attribute(user, 'birth'~prop)]) %}
+                {% endif %}
+            {% endfor %}
+            <button id="copy_birth_country" class="btn btn-mini btn-copy" data-content="{{ attrs|join(', ') }}">
+                <i class="fa fa-copy"></i>
+                {{ 'admin.buttons.copy'|trans }}
+            </button>
+        </dd>
+        <dt>{{ 'profile_birth_region'|trans }}:</dt>
+        <dd class="copy_row copy_birth_country">
+            <span>{{ (user.birthRegion ? user.birthRegion : '&dash;')|raw }}</span>
+        </dd>
+        <dt>{{ 'profile_birth_city'|trans }}:</dt>
+        <dd class="copy_row copy_birth_country">
+            <span>{{ (user.birthCity ? user.birthCity : '&ndash;' )|raw }}</span>
+        </dd>
+        <dt>{{ 'profile_birth_place'|trans }}:</dt>
+        <dd class="copy_row copy_birth_country">
+            <span>{{ attrs|join(', ') }}</span>
+        </dd>
+    </dl>
+    {% endif %}
+
+    {% if user.registrationCountry and not user.notRegistration %}
+    <legend>{{ 'profile_registration_data'|trans }}:</legend>
+    <dl class="dl-horizontal">
+        <dt>{{ 'profile_registration_country'|trans }}:</dt>
+        <dd class="copy_row_with_btn copy_registration_data">
+            <span>{{ user.registrationCountry }}</span>
+            {% set attrs = [] %}
+            {% for prop in ['Country', 'Region', 'City', 'Street', 'House', 'Stroenie', 'Korpus', 'Apartament'] %}
+                {% if attribute(user, 'registration'~prop) %}
+                    {% set attrs = attrs|merge([attribute(user, 'registration'~prop)]) %}
+                {% endif %}
+            {% endfor %}
+            <button id="copy_registration_data" class="btn btn-mini btn-copy" data-content="{{ attrs|join(', ') }}">
+                <i class="fa fa-copy"></i>
+                {{ 'admin.buttons.copy'|trans }}
+            </button>
+        </dd>
+        <dt>{{ 'profile_registration_region'|trans }}:</dt>
+        <dd class="copy_row copy_registration_data">
+            <span>{{ user.registrationRegion }}</span>
+        </dd>
+        <dt>{{ 'profile_registration_city'|trans }}:</dt>
+        <dd class="copy_row copy_registration_data">
+            <span>{{ user.registrationCity }}</span>
+        </dd>
+        <dt>{{ 'profile_registration_street'|trans }}:</dt>
+        <dd class="copy_row copy_registration_data">
+            <span>{{ user.registrationStreet }}</span>
+        </dd>
+        <dt>{{ 'profile_registration_house'|trans }}:</dt>
+        <dd class="copy_row copy_registration_data">
+            <span>{{ user.registrationHouse }}</span>
+        </dd>
+        {% if user.registrationStroenie %}
+        <dt>{{ 'profile_registration_stroenie'|trans }}:</dt>
+        <dd class="copy_row copy_registration_data">
+            <span>{{ user.registrationStroenie }}</span>
+        </dd>
+        {% endif %}
+        {% if user.registrationKorpus %}
+        <dt>{{ 'profile_registration_korpus'|trans }}:</dt>
+        <dd class="copy_row copy_registration_data">
+            <span>{{ user.registrationKorpus }}</span>
+        </dd>
+        {% endif %}
+        {% if user.registrationApartament %}
+        <dt>{{ 'profile_registration_apartament'|trans }}:</dt>
+        <dd class="copy_row copy_registration_data">
+            <span>{{ user.registrationApartament }}</span>
+        </dd>
+        {% endif %}
+        <dt>{{ 'profile_registration_data'|trans }}:</dt>
+        <dd class="copy_row copy_registration_data">
+            <span>{{ attrs|join(', ') }}</span>
+        </dd>
+    </dl>
+    {% endif %}
+
+    {% if user.placeCountry and user.notRegistration %}
+    <legend>{{ 'profile_place_data'|trans }}:</legend>
+    <dl class="dl-horizontal">
+        <dt>{{ 'profile_place_country'|trans }}:</dt>
+        <dd class="copy_row_with_btn copy_place_data">
+            <span>{{ user.placeCountry }}</span>
+            {% set attrs = [] %}
+            {% for prop in ['Country', 'Region', 'City', 'Street', 'House', 'Stroenie', 'Korpus', 'Apartament'] %}
+                {% if attribute(user, 'place'~prop) %}
+                    {% set attrs = attrs|merge([attribute(user, 'place'~prop)]) %}
+                {% endif %}
+            {% endfor %}
+            <button id="copy_place_data" class="btn btn-mini btn-copy" data-content="{{ attrs|join(', ') }}">
+                <i class="fa fa-copy"></i>
+                {{ 'admin.buttons.copy'|trans }}
+            </button>
+        </dd>
+        <dt>{{ 'profile_place_region'|trans }}:</dt>
+        <dd class="copy_row copy_place_data">
+            <span>{{ user.placeRegion }}</span>
+        </dd>
+        <dt>{{ 'profile_place_city'|trans }}:</dt>
+        <dd class="copy_row copy_place_data">
+            <span>{{ user.placeCity }}</span>
+        </dd>
+        <dt>{{ 'profile_place_street'|trans }}:</dt>
+        <dd class="copy_row copy_place_data">
+            <span>{{ user.placeStreet }}</span>
+        </dd>
+        <dt>{{ 'profile_place_house'|trans }}:</dt>
+        <dd class="copy_row copy_place_data">
+            <span>{{ user.placeHouse }}</span>
+        </dd>
+        {% if user.placeStroenie %}
+        <dt>{{ 'profile_place_stroenie'|trans }}:</dt>
+        <dd class="copy_row copy_place_data">
+            <span>{{ user.placeStroenie }}</span>
+        </dd>
+        {% endif %}
+        {% if user.placeKorpus %}
+        <dt>{{ 'profile_place_korpus'|trans }}:</dt>
+        <dd class="copy_row copy_place_data">
+            <span>{{ user.placeKorpus }}</span>
+        </dd>
+        {% endif %}
+        {% if user.placeApartament %}
+        <dt>{{ 'profile_place_apartament'|trans }}:</dt>
+        <dd class="copy_row copy_place_data">
+            <span>{{ user.placeApartament }}</span>
+        </dd>
+        {% endif %}
+    </dl>
+    {% endif %}
+
+    {% if user.workPlace or user.workPosition %}
+    <legend>{{ 'profile_work'|trans }}:</legend>
+    <dl class="dl-horizontal">
+        {% if user.workPlace %}
+        <dt>{{ 'profile_work_place'|trans }}:</dt>
+        <dd class="copy_row_with_btn copy_work_place">
+            <span>{{ user.workPlace }}</span>
+            <button id="copy_work_place" class="btn btn-mini btn-copy" data-content="{{ user.workPlace }}">
+                <i class="fa fa-copy"></i>
+                {{ 'admin.buttons.copy'|trans }}
+            </button>
+        </dd>
+        {% endif %}
+        {% if user.workPosition %}
+        <dt>{{ 'profile_work_position'|trans }}:</dt>
+        <dd class="copy_row_with_btn copy_work_position">
+            <span>{{ user.workPosition }}</span>
+            <button id="copy_work_position" class="btn btn-mini btn-copy" data-content="{{ user.workPosition }}">
+                <i class="fa fa-copy"></i>
+                {{ 'admin.buttons.copy'|trans }}
+            </button>
+        </dd>
+        {% endif %}
+    </dl>
+    {% endif %}
+
+    {% if user.phoneMobile %}
+    <legend>{{ 'profile_phone_data'|trans }}:</legend>
+    <dl class="dl-horizontal">
+        {% if user.phoneHome %}
+        <dt>{{ 'profile_phone_home'|trans }}:</dt>
+        <dd>{{ user.phoneHome }}</dd>
+        {% endif %}
+        <dt>{{ 'profile_phone_mobile'|trans }}:</dt>
+        <dd class="copy_row_with_btn copy_phone_mobile">
+            <span>
+                +7 {{ user.phoneMobile }}
+                <span id="mobile_status">
+                    {% if 'confirmed' == user.phoneMobileStatus %}
+                    <span class="text-success">{{ 'mobile_status.confirmed'|trans }}</span>
+                    {% else %}
+                    <span class="text-error">{{ 'mobile_status.not_confirmed'|trans }}</span>
+                    {% endif %}
+                </span>
+            </span>
+            <button id="copy_phone_mobile" class="btn btn-mini btn-copy" data-content="+7 {{ user.phoneMobile }}">
+                <i class="fa fa-copy"></i>
+                {{ 'admin.buttons.copy'|trans }}
+            </button>
+        </dd>
+        {% if user.oldMobilePhones|length %}
+        <dt>{{ 'profile_old_mobile_phones'|trans }}:</dt>
+        <dd>
+            {% for phone in user.oldMobilePhones %}
+            +7 {{ phone.phone }} <span id="mobile_status"><span class="text-success">{{ 'mobile_status.confirmed'|trans }}</span></span><br>
+            {% endfor %}
+        </dd>
+        {% endif %}
+    </dl>
+    {% endif %}
+
+    {% if user.regionPlace %}
+        <legend>{{ 'profile_region_place'|trans }}:</legend>
+        <dl class="dl-horizontal">
+            <dt>{{ 'profile_region'|trans }}:</dt>
+            <dd>{{ user.region }}</dd>
+            <dt>{{ 'profile_region_place'|trans }}:</dt>
+            <dd>{{ user.regionPlace }}</dd>
+        </dl>
+    {% endif %}
+
+    <legend>{{ 'profile_additional_info'|trans }}:</legend>
+    <dl class="dl-horizontal">
+        {% if user.category %}
+            <dt>{{ 'profile_category'|trans }}:</dt>
+            <dd>{{ user.category.name }}</dd>
+        {% endif %}
+        {% if user.paradoxId %}
+            <dt>{{ 'profile_paradox_id'|trans }}:</dt>
+            <dd>{{ user.paradoxId }}</dd>
+            <dt>{{ 'profile_webgroup'|trans }}:</dt>
+            <dd>{{ user.webgroup }}</dd>
+        {% endif %}
+        <dt>{{ 'profile_support_dialogs'|trans }}:</dt>
+        <dd><a href="{{ path('admin_support_dialogs')~'?support_dialog[user_email]='~user.email }}">{{ user.supportDialogs|length }} шт.</a></dd>
+        {% if user.apiQuestionLog %}
+            <dt>В анкете ответил:</dt>
+            <dd>{{ ('api_radios.'~user.apiQuestionLog.radio)|trans|replace({ 'x': user.apiQuestionLog.months}) }}</dd>
+        {% endif %}
+        {% if user.byApi %}
+            <dt>Мед. справка:</dt>
+            <dd>{% if user.apiMedForm %} Есть{% else %} Нет{% endif %}</dd>
+            <dt>Договор:</dt>
+            <dd>{% if user.apiContractSign %} Есть{% else %} Нет{% endif %}</dd>
+        {% endif %}
+    </dl>
+
+    {% if payments %}
+    <legend>{{ 'profile_payments'|trans }}:</legend>
+    <table class="table table-striped">
+        <tr>
+            <th>{{ 'payment_services'|trans }}</th>
+            <th class="min_col">{{ 'payment_date'|trans }}</th>
+            <th class="min_col">{{ 'payment_sum'|trans }}</th>
+            <th class="min_col">{{ 'payment_s_id'|trans }}</th>
+        </tr>
+        {% for payment in payments %}
+        {% if payment.paid %}
+        <tr class="success">
+            <td class="first bg-check">
+                {% if payment.categories|length and not payment.driving_name %}
+                    Доступ к полному теоретическому курсу (без «Пакета документов ученика автошколы»)
+                {% endif %}
+                {% if payment.services|length and payment['required'] is defined and not payment.driving_name %}
+                    Доступ к полному теоретическому курсу (с «Пакетом документов ученика автошколы»)
+                {% else %}
+                    {% for service in payment.services %}
+                        {{ service.name }}
+                        {% if not loop.last %}<br>{% endif %}
+                    {% endfor %}
+                {% endif %}
+                {% if payment.driving_name %}
+                    {{ payment.driving_name~' '~(payment.driving_primary ? '(первичный пакет вождения)' : '(вторичный пакет вождения)') }}
+                {% endif %}
+                {% if payment.owe_stage %}
+                    Дополнительные административные расходы, связанные с переводом Вас на индивидуальный план обучения
+                {% endif %}
+            </td>
+            <td class="min_col">
+                {{ payment.updated_at|date('d.m.Y') }}
+                {{ (payment.promoKey ? '<br /><br />'~payment.updated_at|date('d.m.Y') : '' )|raw}}
+            </td>
+            <td class="min_col">
+                {{ 'payments.paid'|trans({ '%sum%': payment.sum }) }}
+                {% if auto_promo[payment.id] is defined %}
+                    {{ (payment.promoKey ? '<br /><br />Промокод '~auto_promo[payment.id]~' руб.' : '' )|raw}}
+                {% else %}
+                    {{ (payment.promoKey ? '<br /><br />Промокод '~payment.promoKey.discount~' руб.' : '' )|raw}}
+                {% endif %}
+            </td>
+            <td class="min_col">
+                <span class="pull-right">
+                    {% if payment.revert %}
+                        <span class="text-error">Платеж отменен</span>
+                    {% else %}
+                        {% if payment.moderator_name is defined %}
+                            {{ 'payment_at_the_office'|trans }}: {{ payment.moderator_name }}
+                        {% else %}
+                            {{ payment.s_id ? '#'~payment.s_id : ''}}
+                            {% if payment.promoKey %}
+                                <br /><br />
+                                <a href="{{ path('admin_promo_edit', {id: payment.promoKey.promo.id})}}">{{ payment.promoKey.hash }}</a>
+                            {% endif %}
+                        {% endif %}
+                    {% endif %}
+                </span>
+            </td>
+        </tr>
+        {% endif %}
+        {% endfor %}
+    </table>
+    {% endif %}
+
+    <legend>{{ 'profile_exams'|trans }}:</legend>
+    <table class="table table-striped">
+        <tr>
+            <th>{{ 'exam_subject'|trans }}</th>
+            <th class="min_col">{{ 'exam_pass_date'|trans }}</th>
+        </tr>
+        {% for subject in subjects %}
+        <tr class="{{ subject.is_passed ? 'success' : 'error' }}">
+            <td>{{ subject.object.title }}</td>
+            <td class="min_col">{{ subject.is_passed ? subject.passed_date|date('d.m.Y') : '--' }}</td>
+        </tr>
+        {% endfor %}
+        <tr class="{{ is_passed ? 'success' : 'error' }}">
+            <td>{{ 'final_exam'|trans }}</td>
+            <td class="min_col">{{ is_passed ? passed_date|date('d.m.Y') : '--' }}</td>
+        </tr>
+    </table>
+
+    <legend>Попытки сдачи экзаменов <button class='btn' id="exam_attempt_logs_button"><i class="fa fa-eye"></i> Показать</button> </legend>
+    <table class="table table-striped" id="exam_attempt_logs_table">
+            <tr>
+                <th class="min_col text-right">Дата и время</th>
+                <th class="min_col text-left">Статус</th>
+                <th class="min_col text-left">Сдал</th>
+                <th class="text-left">Предмет</th>
+                <th class="min_col text-right">Количество</th>
+            </tr>
+        <tbody>
+            {% for exam_attempt_log in exam_attempt_logs %}
+                {% if exam_attempt_log.amount < 0 %}
+                    {% set class, caption = 'error', 'Платная' %}
+                {% elseif exam_attempt_log.amount == 0 and not exam_attempt_log.isFree %}
+                    {% set class, caption = 'info', 'Сброс' %}
+                {% elseif exam_attempt_log.amount == 0 and exam_attempt_log.isFree %}
+                    {% set class, caption = 'default', 'Бесплатная' %}
+                {% elseif exam_attempt_log.amount > 0 %}
+                    {% set class, caption = 'success', 'Покупка' %}
+                {% endif %}
+
+                <tr class="{{ class }}">
+                    <td class="min_col text-right">{{ exam_attempt_log.createdAt|localizeddate('long', 'short') }}</td>
+                    <td class="min_col text-left">{{ caption }}</td>
+                    <td class="min_col text-left">
+                        {% if exam_attempt_log.amount <= 0 %}
+                            {{ exam_attempt_log.getIsPassed ? '+' : '-' }}
+                        {% endif %}
+                    </td>
+                    <td class="text-left">
+                        {% if exam_attempt_log.subject is defined and exam_attempt_log.subject is not empty %}
+                            {{ exam_attempt_log.subject }}
+                        {% elseif exam_attempt_log.finalExamLog is defined and exam_attempt_log.finalExamLog is not empty %}
+                            Финальный экзамен
+                        {% endif %}
+                    </td>
+                    <td class="min_col text-right">{{ exam_attempt_log.amount }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="4" class="text-right"><b>Количество оставшихся купленных попыток: {{ exam_attempts_sum }}</b></td>
+            </tr>
+            <tr>
+                <td colspan="4" class="text-right"><b>Количество попыток, оставшихся до сброса прогресса обучения
+                        - {{ exam_attempts_remain }} из {{ settings['attempts_to_reset'] }} попыток.</b></td>
+            </tr>
+        </tfoot>
+    </table>
+
+    <legend>{{ 'profile_owe_stage'|trans }}:</legend>
+    <div id="driving_paid_info">
+    {% if not user.oweStages|length and user.drivingPaidAt is not null %}
+        <div class="text-success">
+            <strong>Оплата практических занятий:</strong> {{ user.drivingPaidAt|date('d.m.Y') }}
+        </div>
+    {% endif %}
+    </div>
+    {% if user.oweStages|length or user.drivingPaidAt is null %}
+            {% include 'AppBundle:Admin:paradox_user_view_owe_table.html.twig' %}
+        {% if user.drivingPaidAt is null %}
+
+            <div id="owe_buttons">
+                {% if user.drivingPaidAt is null and user.oweStageEnd is null %}
+                    <button id="paid_driving" class="btn btn-success" >
+                        {{- 'profile_paid_driving'|trans -}}
+                    </button>
+                    <button id="owe_driving" class="btn btn-danger" >
+                        {{- 'profile_owe_driving'|trans -}}
+                    </button>
+                {% endif %}
+            </div>
+
+            {% if user.drivingPaidAt is null and user.oweStageEnd is null %}
+                <button id="pay_owe_stage" class="btn btn-success pull-right" style="display: none">Оплатить вождение</button>
+            {% elseif user.drivingPaidAt is null and last_stage.end > date() %}
+                <button id="pay_owe_stage" class="btn btn-success pull-right">Оплатить вождение</button>
+            {% elseif user.drivingPaidAt is null and last_stage.end < date() %}
+                <div><button id="owe_driving" class="btn btn-danger pull-right" style="margin-left: 4px">{{- 'profile_owe_driving'|trans -}}</button></div>
+                <button id="pay_owe_stage" class="btn btn-success pull-right" style="margin-bottom: 6px">Оплатить вождение</button>
+            {% endif %}
+
+            <dl class="dl-horizontal" id="info_current_owe_stage"
+                {% if not last_stage or last_stage.end < date() %}
+                    style="display: none"
+                {% endif %}
+            >
+                <dt id="number_owe_stage">
+                    Должник этап №{{ (last_stage.numberStage is defined ? last_stage.numberStage : 1) }}
+                </dt>
+                <dd class="timeleft" data-seconds-left="{{ last_stage.allSecondsLeft ?? 0 }}"></dd>
+            </dl>
+
+            <br style="clear: both">
+
+            <div id="block_select_paid_driving" class="control-group" style="display: none">
+                <label class="control-label" for="user_show_to">Дата оплаты</label>
+                <div class="controls">
+                    <div id="user_show_to" >
+                        <select id="select_driving_day" class="span2"></select>
+                        <select id="select_driving_month" class="span2" style="margin-left:10px"></select>
+                        <select id="select_driving_year" class="span2" style="margin-left:10px"></select>
+                    </div>
+                </div>
+                <button id="paid_driving_success_save" class="btn btn-success" >
+                    {{ 'profile_paid_driving_save'|trans }}
+                </button>
+            </div>
+            <div class="driving_paid_info"></div>
+        {% endif %}
+    {% endif %}
+
+    <div class="form-actions">
+        {% if not user.paradoxId %}
+        <a class="btn btn-success" href="{{ path('admin_paradox_user_set', { id: user.id }) }}"><i class="fa fa-download"></i> {{ 'admin.buttons.paradox_set'|trans }}</a>
+        <a href="{{ path('admin_paradox_to_precheck', { id: user.id }) }}" class="btn btn-danger"><i class="fa fa-undo"></i> {{ 'admin.buttons.to_precheck'|trans }}</a>
+        {% endif %}
+        {% if is_expired %}
+        <a class="btn" href="{{ path('admin_paradox_user_prolong', { id: user.id }) }}"><i class="fa fa-play"></i> Продлить на год</a>
+        {% endif %}
+        {% if not user.unsubscribedX %}
+        <a class="btn" href="{{ path('admin_paradox_user_unsubscribe_x', { id: user.id }) }}"><i class="fa fa-envelope-o"></i> Отписать от рассылок</a>
+        {% endif %}
+        <a class="btn pull-right" href="{{ path('admin_paradox_users') }}"><i class="fa fa-arrow-left"></i> {{ 'admin.buttons.back_to_list'|trans }}</a>
+    </div>
+{% endblock content %}
+
+{% block js %}
+<script src="/assets/zeroclipboard/jquery.zeroclipboard.min.js"></script>
+<script>
+$(function() {
+    var paidDrivingButton = $('#paid_driving');
+    var oweDrivingButton = $('#owe_driving');
+    var payOweSatgeButton = $('#pay_owe_stage');
+    var saveDrivingButton = $('#paid_driving_success_save');
+    var dirivngBlock = $('#block_select_paid_driving');
+    var selectDay = $('#select_driving_day');
+    var selectMonth = $('#select_driving_month');
+    var selectYear = $('#select_driving_year');
+
+    var exam_attempt_logs_table = $('#exam_attempt_logs_table');
+    var exam_attempt_logs_button = $('#exam_attempt_logs_button');
+    exam_attempt_logs_table.hide();
+    exam_attempt_logs_button.on('click', function(e) {
+        exam_attempt_logs_table.toggle(function() {
+            exam_attempt_logs_table.animate({
+            }, 500);
+        });
+    });
+
+    var copy = function(name) {
+        var spans = $('.copy_' + name + ' > span');
+        $('#copy_' + name)
+            .hover(function() {
+                spans.css('background', '#f0f0f0');
+            }, function() {
+                spans.css('background', 'transparent');
+            })
+            .on('copy', function(e) {
+                e.clipboardData.clearData();
+                e.clipboardData.setData('text/plain', $(this).data('content') + '');
+                e.preventDefault();
+            })
+        ;
+    };
+    $('.btn-copy').each(function() {
+        copy($(this).attr('id').substr(5));
+    });
+
+    {% if last_stage and last_stage.allSecondsLeft is defined %}
+        var countdownField = $('.timeleft');
+        countdownField.countdown({
+            until: countdownField.data('seconds-left'),
+            layout: '{dn} д. {hnn}:{mnn}:{snn}'
+        });
+        oweDrivingButton.closest('dl').remove();
+    {% endif %}
+
+    paidDrivingButton.on('click', function () {
+        var months = [
+            'янв.', 'февр.', 'марта', 'апр.', 'мая', 'июня', 'июля', 'авг.', 'сент.', 'окт.', 'нояб.', 'дек.'
+        ];
+        var date = new Date();
+
+        paidDrivingButton.closest('dl').remove();
+        dirivngBlock.show();
+
+        for (var i = 1; i <= 31; i++) {
+            selectDay.append('<option value="'+i+'">'+i+'</option>');
+        }
+        for (i = 0; i < months.length; i++) {
+            selectMonth.append('<option value="'+(i+1)+'">'+months[i]+'</option>');
+        }
+        for (i = 2010; i <= (date.getFullYear() + 1); i++) {
+            selectYear.append('<option value="'+(i)+'">'+i+'</option>');
+        }
+
+        $('#select_driving_day option[value='+date.getDate()+']').attr('selected', 'selected');
+        $('#select_driving_month option[value='+(date.getMonth() + 1)+']').attr('selected', 'selected');
+        $('#select_driving_year option[value='+date.getFullYear()+']').attr('selected', 'selected');
+    });
+
+    saveDrivingButton.on('click', function () {
+        dirivngBlock.hide();
+        var day = selectDay.val();
+        var month = selectMonth.val();
+        var year = selectYear.val();
+        $.ajax({
+            type: "GET",
+            url: "{{ path('admin_paradox_user_save_success_driving_paid') }}",
+            data: {
+                day: day,
+                month: month,
+                year: year,
+                user_id: {{ user.id }}
+            },
+            success: function(data) {
+                var info = $('.driving_paid_info');
+
+                if (data.result == 'success') {
+                    $('#info_current_owe_stage').remove();
+
+                    info.addClass('text-success');
+                    if (data.message) {
+                        info.html(data.message);
+                    }
+
+                    setTimeout(function () {
+                        info.html('');
+                        info.removeClass('text-success');
+                        var successText = '<div class="text-success"><strong>Оплата практических занятий: ' +
+                                '</strong>'+day+'.'+month+'.'+year+'.'+'</div>';
+
+                        $('#driving_paid_info').html(successText);
+                        $('#owe_buttons').remove();
+                    }, 3000);
+                } else {
+                    info.addClass('text-error');
+                    info.html(data.message);
+
+                    setTimeout(function () {
+                        info.html('');
+                        info.removeClass('text-error');
+                        dirivngBlock.show();
+                    }, 3000);
+                }
+            }
+        });
+    });
+
+    oweDrivingButton.on('click', function () {
+        $('#owe_buttons').find('button').attr('disabled', 'disabled');
+        oweDrivingButton.addClass('ajax-load');
+        $.ajax({
+            type: "GET",
+            url: "{{ path('admin_paradox_user_owe_driving_paid') }}",
+            data: {
+                day: selectDay.val(),
+                month: selectMonth.val(),
+                year: selectYear.val(),
+                user_id: {{ user.id }}
+            },
+            success: function(data) {
+                var info = $('.driving_paid_info');
+                if (data.result == 'success') {
+                    if (data.message) {
+                        info.addClass('text-success');
+                        info.html(data.message);
+
+                        setTimeout(function () {
+                            info.html('');
+                            info.removeClass('text-success');
+
+                            var countdownField = $('.timeleft');
+                            countdownField.closest('dl').show();
+                            $('#number_owe_stage').html('Должник этап №'+data.number);
+                            countdownField.countdown({
+                                until: data.seconds_left,
+                                layout: '{dn} {hnn}:{mnn}:{snn}'
+                            });
+                            oweDrivingButton.closest('div').remove();
+                            $('#owe_stage_table').replaceWith(data.html);
+                            payOweSatgeButton.show();
+                        }, 3000);
+
+                    } else {
+                        dirivngBlock.replaceWith('<dl class="dl-horizontal"><dt class="text-success">' +
+                                '{{ 'profile_paid_driving_success'|trans }}</dt></dl>');
+                    }
+                } else {
+                    info.addClass('text-error');
+                    if (data.message) {
+                        info.html(data.message);
+                    } else {
+                        info.html('Ошибка записи, попробуйте еще раз');
+                    }
+
+                    setTimeout(function () {
+                        info.html('');
+                        info.removeClass('text-error');
+
+                        $('#owe_buttons').find('button').removeAttr('disabled');
+                        oweDrivingButton.removeClass('ajax-load');
+                    }, 3000);
+                }
+            }
+        });
+    });
+
+    payOweSatgeButton.on('click', function () {
+        var sum = {{ offline_owe_sum }};
+        var successOwe = confirm('Вы действительно хотите отметить что {{ user.fullName }} оплатил просрочку в размере '
+                +sum+' руб');
+        if (successOwe) {
+            $('#owe_driving').attr('disabled', 'disabled');
+            $('#pay_owe_stage').attr('disabled', 'disabled');
+            $('#pay_owe_stage').addClass('ajax-load');
+            $.ajax({
+                type: "GET",
+                url: "{{ path('admin_paradox_user_paid_driving') }}",
+                data: {
+                    user_id: {{ user.id }}
+                },
+                success: function(data) {
+                    if (data.result = 'success') {
+                        $('#owe_stage_table').replaceWith(data.html);
+                        $('#number_owe_stage').closest('dl').remove();
+                        payOweSatgeButton.remove();
+                        $('#pay_owe_stage').removeClass('ajax-load');
+                        $('#owe_driving').removeAttr('disabled', 'disabled');
+                    }
+                    alert(data.message);
+                }
+            });
+        }
+    })
+});
+</script>
+{% endblock js %}

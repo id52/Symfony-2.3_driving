@@ -1,0 +1,124 @@
+{% extends "AppBundle::layout_new.html.twig" %}
+
+{% form_theme form 'AppBundle::form_new.html.twig' %}
+
+{% block start_content %}
+<div class="modal helper" id="helper">
+    {{ settings_notifies['promo_help_btn']|raw }}
+    <div class="bottom links">
+        <span class="link bg-green check-link btn-close">Спасибо, все понятно</span>
+    </div>
+    <span class="close"></span>
+</div>
+{% endblock start_content %}
+
+{% block content %}
+<nav class="path">
+    <a href="#">Главная</a>
+    » {{ 'purchase_of_products'|trans }}
+</nav>
+
+<section class="pay">
+    <div class="title">
+        <h1>{{ 'purchase_of_products_title'|trans }}</h1>
+    </div>
+
+    <div class="wid">
+        {{ text|raw }}
+
+        <div class="hold">
+            <h3>Доступ к теоретическому курсу:</h3>
+            <div class="label">Регион: <span>{{ app.user.region }}</span></div>
+            <div class="label">
+                Категория:
+                <span>
+                    {{ app.user.category }}
+                    {% if app.user.category.image %}
+                    <img src="{{ app.user.category.image.webPath|imagine_filter('category') }}" alt="">
+                    {% endif %}
+                </span>
+            </div>
+            {% if autoCreatePromo is not null %}
+            <div class="clearfix"></div>
+            <div id="promo_free">
+                <div class="promo_free_code"><span>{{ keyAutoCreatePromo }}</span> <a href="#">Копировать</a></div>
+                <div class="promo_free_text">Ваш промокод для <b>бесплатной</b> регистрации и входа</div>
+            </div>
+            {% endif %}
+            <div class="sum">
+                {% if discount > 0 %}
+                    <div class="price">Полная стоимость обучения: <del>Цена: {{ sum|number_format(0, ',', ' ') }} руб.</del></div>
+                    <div class="price">Акционное предложение: <strong>Цена: {{ max(sum - discount, 0)|number_format(0, ',', ' ') }} руб.</strong></div>
+                {% else %}
+                    <div class="price">Стоимость обучения: <strong>Цена: {{ sum|number_format(0, ',', ' ') }} руб.</strong></div>
+                {% endif %}
+                <div class="code">
+                    {# <a href="#helper" class="simplebox">Что такое<br>промокод?</a> #}
+                    <div class="input">
+                        <input type="hidden" id="initial_sum" value="{{ max(sum - discount, 0) }}" />
+                        <input id="promo_input" value="" type="text" placeholder="Введите промокод">
+                        <span class="submit"><input id="promo_btn" value="Активировать" type="button"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {{ form_start(form) }}
+            <div class="check">
+                {{ form_widget(form.access) }}
+                <label for="agree1">Я прочитал и согласен с <a href="{{ path('terms_and_conditions_show') }}" target="_blank">условиями догорова-оферты</a></label>
+            </div>
+
+            <div class="check">
+                {{ form_widget(form.privacy) }}
+                <label for="agree2">Я прочитал и согласен с <a href="{{ path('article_show', { id: 'privacy' }) }}" target="_blank">условиями конфиденциальности</a></label>
+            </div>
+
+            <div class="hr"></div>
+
+            <div class="total">
+                <input id="promo_key" type="hidden" value="" name="promo_key">
+                Итого: <span id="total_sum">{{ max(sum - discount, 0) }}</span> руб.
+                <span class="go">{{ 'buy_products'|trans }} <input value="" type="submit"></span>
+            </div>
+        {{ form_end(form) }}
+    </div>
+</section>
+{% endblock content %}
+
+{% block js %}
+<script>
+$(function() {
+    $('#promo_btn').click(function(e) {
+        e.preventDefault();
+
+        var key = $('#promo_input').val();
+        if (key) {
+            $.getJSON('{{ path('check_promo_key') }}', { key: key, type: 'site_access' }, function(data) {
+                if (data.success) {
+                    var initSum = parseInt($('#initial_sum').val());
+                    var sum = initSum - parseInt(data.discount);
+                    sum = Math.max(sum, 0);
+                    $('#total_sum').text(sum);
+                    $('#promo_key').val(key);
+                    var block = $('#promo_btn').closest('.code');
+                    block.addClass('success');
+                    if (parseInt(data.discount) > initSum) {
+                        block.html(data.message+' <strong>'+initSum+' руб.</strong>');
+                    } else {
+                        block.html(data.message+' <strong>'+data.discount+' руб.</strong>');
+                    }
+                } else  {
+                    js_alert(data.message);
+                }
+            });
+        }
+    });
+
+    $('a', '#promo_free').on('click', function(e) {
+        e.preventDefault();
+        $('#promo_input').val('{{ keyAutoCreatePromo }}');
+    });
+});
+</script>
+{% endblock js %}

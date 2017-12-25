@@ -1,0 +1,23 @@
+{% extends 'AppBundle::layout_new.html.twig' %}
+{% block content %}
+    <nav class="path">
+        <a href="{{ path('homepage') }}">{{ 'titles.homepage'|trans }}</a>
+        » <strong>{{ 'titles.feedback'|trans }}</strong>
+    </nav>
+    <div class="mainContent">
+        {% include 'AppBundle::_owe_stage_paid.html.twig' %}
+
+        <div class="left">
+            <div class="title">
+                <h1>{{ 'titles.terms_and_conditions'|trans }}</h1>
+            </div>
+        </div>
+
+        <div class="links">
+            <a class="bg-red" target="_blank" href="{{ path('my_print_terms_and_conditions_education_service') }}">Договор об оказании платных образовательных услуг</a><br><br>
+            <a class="bg-red" target="_blank" href="{{ path('my_print_terms_and_conditions_offer') }}">Договор-оферта</a><br><br>
+            <a class="bg-red" target="_blank" href="{{ path('my_print_terms_and_conditions_agreement_pers_data') }}">Согласие на обработку и передачу персональных данных</a><br>
+        </div>
+    </div>
+{% endblock content %}
+

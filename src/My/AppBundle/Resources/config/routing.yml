@@ -1,0 +1,302 @@
+homepage:
+    path:  /
+    defaults: { _controller: AppBundle:Default:index }
+
+entrance_by_link:
+    path:  /link_entrance/{token}
+    defaults: { _controller: AppBundle:Default:entranceByLink }
+
+get_calc_places:
+    path:  /calc/places/
+    defaults: { _controller: AppBundle:Admin/AjaxCalcData:getDrivingPlaces }
+
+get_calc_services:
+    path:  /calc/services/
+    defaults: { _controller: AppBundle:Admin/AjaxCalcData:getDrivingClassServices }
+
+get_calc_conditions:
+    path:  /calc/conditions/
+    defaults: { _controller: AppBundle:Admin/AjaxCalcData:getDrivingConditions }
+
+get_calc_price:
+    path:  /calc/price/
+    defaults: { _controller: AppBundle:Admin/AjaxCalcData:getDrivingConditionPrice }
+
+fos_user_profile_show:
+    path:  /
+    defaults: { _controller: AppBundle:Default:index }
+
+article_show:
+    path:  /article/{id}/
+    defaults: { _controller: AppBundle:Default:article }
+
+my_change_password:
+    path: /my/profile/change_password/
+    defaults: { _controller: AppBundle:My:changePassword}
+
+check_promo_key:
+    path: /check_promo_key/
+    defaults: { _controller: AppBundle:Default:checkPromoKey }
+
+my_profile:
+    path:  /my/profile/
+    defaults: { _controller: AppBundle:My:profile }
+
+my_profile_edit:
+    path:  /my/profile/edit/
+    defaults: { _controller: AppBundle:My:profileEdit }
+
+my_profile_photo_ajax:
+    path:  /my/profile/photo-ajax/
+    defaults: { _controller: AppBundle:My:profilePhotoAjax }
+
+my_profile_photo_update_ajax:
+    path:  /my/profile/photo-update-ajax/
+    defaults: { _controller: AppBundle:My:profilePhotoUpdateAjax }
+
+my_profile_photo_view_ajax:
+    path:  /my/profile/photo-view-ajax/
+    defaults: { _controller: AppBundle:My:profilePhotoViewAjax }
+
+my_profile_photo_edit_ajax:
+    path:  /my/profile/photo-edit-ajax/
+    defaults: { _controller: AppBundle:My:profilePhotoEditAjax }
+
+my_mobile_status_ajax:
+    path:  /my/mobile-status-ajax/
+    defaults: { _controller: AppBundle:My:mobileStatusAjax }
+
+my_mobile_confirm_ajax:
+    path:  /my/mobile-confirm-ajax/
+    defaults: { _controller: AppBundle:My:mobileConfirmAjax }
+
+my_notifies:
+    path:  /my/notifies/
+    defaults: { _controller: AppBundle:My:notifies }
+
+my_notify_read:
+    path:  /my/notifies/{id}/
+    defaults: { _controller: AppBundle:My:notifyRead }
+    requirements:
+        id: \d+
+
+my_payments:
+    path:  /my/payments/
+    defaults: { _controller: AppBundle:My:payments }
+
+my_payments_2:
+    path:  /my/payments/2/
+    defaults: { _controller: AppBundle:My:paymentsSecondPayment }
+
+my_payments_pay:
+    path:  /my/payments/pay/
+    defaults: { _controller: AppBundle:My:paymentsPay }
+
+my_prepare_owe_paid:
+    path:  /my/prepare-owe-paid/
+    defaults: { _controller: AppBundle:My:prepareOweStagePaid }
+
+my_choce_drive_condition:
+    path:  /my/choice_drive_condition/
+    defaults: { _controller: AppBundle:My:choiceDriverPayment }
+
+my_drivings_get_tickets:
+    path: /my/driving-{number}/
+    defaults: { _controller: AppBundle:My:driving }
+    requirements:
+        number: \d+
+
+my_drivings:
+    path: /my/driving/
+    defaults: { _controller: AppBundle:My:driving }
+
+my_ticket_save:
+    path: /my/ticket/save/
+    defaults: { _controller: AppBundle:My:saveTicketAjax }
+
+my_test:
+    path:  /my/test/
+    defaults: { _controller: AppBundle:My:test }
+
+my_test_next_question_ajax:
+    path:  /my/test/next-question-ajax/
+    defaults: { _controller: AppBundle:My:test, next: true }
+
+my_test_quit:
+    path:  /my/test/quit/
+    defaults: { _controller: AppBundle:My:testQuit }
+
+my_test_comment:
+    path:  /my/test/comment/
+    defaults: { _controller: AppBundle:My:testComment }
+
+my_test_continue:
+    path:  /my/test/continue/
+    defaults: { _controller: AppBundle:My:testContinue }
+
+my_test_knowledge:
+    path:  /my/test_knowledge/
+    defaults: { _controller: AppBundle:My:testKnowledge }
+
+my_test_knowledge_next_question_ajax:
+    path:  /my/test_knowlege/next-question-ajax/
+    defaults: { _controller: AppBundle:My:testKnowledge, next: true }
+
+my_test_knowledge_quit:
+    path:  /my/test_knowledge/quit/
+    defaults: { _controller: AppBundle:My:testKnowledgeQuit }
+
+my_test_knowledge_comment:
+    path:  /my/test_knowledge/comment/
+    defaults: { _controller: AppBundle:My:testKnowledgeComment }
+
+my_test_knowledge_continue:
+    path:  /my/test_knowledge/continue/
+    defaults: { _controller: AppBundle:My:testKnowledgeContinue }
+
+my_stat:
+    path:  /my/stat/
+    defaults: { _controller: AppBundle:My:stat }
+
+my_certificate:
+    path:  /my/certificate/
+    defaults: { _controller: AppBundle:My:pdf }
+
+my_unsubscribe_payment_1:
+    path: /unsubscribe_payment_1/{email}
+    defaults: { _controller: AppBundle:Default:unsubscribePayment1PreCheck }
+
+my_unsubscribe_payment_1_done:
+    path: /unsubscribe_payment_1_done/{email}
+    defaults: { _controller: AppBundle:Default:unsubscribePayment1 }
+
+my_unsubscribe_payment_2:
+    path: /unsubscribe_payment_2/{email}
+    defaults: { _controller: AppBundle:Default:unsubscribePayment2PreCheck }
+
+my_unsubscribe_payment_2_done:
+    path: /unsubscribe_payment_2_done/{email}
+    defaults: { _controller: AppBundle:Default:unsubscribePayment2 }
+
+my_read_discount_2_first:
+    path: /read_discount_2/first
+    defaults: { _controller: AppBundle:My:readDiscount2First }
+
+my_read_discount_2_second:
+    path: /read_discount_2/second
+    defaults: { _controller: AppBundle:My:readDiscount2Second }
+
+my_unsubscribe_mailing:
+    path: /unsubscribe_mailing/{email}
+    defaults: { _controller: AppBundle:Default:unsubscribeMailingPreCheck }
+
+my_unsubscribe_mailing_done:
+    path: /unsubscribe_mailing_done/{email}
+    defaults: { _controller: AppBundle:Default:unsubscribeMailing }
+
+my_unsubscribe_overdue:
+    path: /unsubscribe_overdue/{email}
+    defaults: { _controller: AppBundle:Default:unsubscribeOverduePreCheck }
+
+my_unsubscribe_overdue_done:
+    path: /unsubscribe_overdue_done/{email}
+    defaults: { _controller: AppBundle:Default:unsubscribeOverdue }
+
+
+my_feedback:
+    path:  /my/feedback/
+    defaults: { _controller: AppBundle:My:feedback }
+
+my_feedback_success:
+    path:  /my/feedback/success/
+    defaults: { _controller: AppBundle:My:feedbackSuccess }
+
+my_feedback_teacher:
+    path:  /my/feedback_teacher/
+    defaults: { _controller: AppBundle:My:feedbackTeacher }
+
+my_feedback_teacher_success:
+    path:  /my/feedback_teacher/success/
+    defaults: { _controller: AppBundle:My:feedbackTeacherSuccess }
+
+my_support_dialogs:
+    path:  /my/support/
+    defaults: { _controller: AppBundle:My:supportDialogs }
+
+my_support_dialog_show:
+    path:  /my/support/{id}/
+    defaults: { _controller: AppBundle:My:supportDialogShow }
+    requirements:
+        id: \d+
+
+my_support_new:
+    path:  /my/support/new/
+    defaults: { _controller: AppBundle:My:supportNew }
+
+my_pass:
+    path:  /my/pass/
+    defaults: { _controller: AppBundle:My:pass }
+
+my_med:
+    path:  /my/med/
+    defaults: { _controller: AppBundle:My:med }
+
+pay:
+    path:  /pay-{type}/
+    defaults: { _controller: AppBundle:Default:pay }
+    requirements:
+        type: psb|robokassa
+
+buy_attempts:
+    path: /my/attempts/
+    defaults: { _controller: AppBundle:My:buyAttempts }
+
+my_print:
+    path: /my/print/
+    defaults: { _controller: AppBundle:My:print }
+
+my_upload_docs:
+    path: /my/upload-docs-{type}/
+    defaults: { _controller: AppBundle:My:uploadDocs }
+
+my_deleted_docs:
+    path: /my/deleted-docs/
+    defaults: { _controller: AppBundle:My:deleteDocs }
+    requirements:
+         id: \d+
+
+my_terms_and_conditions:
+    path: /my/terms_and_conditions/
+    defaults: { _controller: AppBundle:My:termsAndConditions }
+#
+#my_print_terms_and_conditions_agreement_and_offer:
+#    path: /my/terms-and-conditions-agreement-and-offer/
+#    defaults: { _controller: AppBundle:My:printTermsAndConditionsAgreementAndOffer }
+
+my_print_terms_and_conditions_agreement:
+    path: /my/terms-and-conditions-agreement/
+    defaults: { _controller: AppBundle:My:printTermsAndConditionsAgreement }
+
+my_print_terms_and_conditions_agreement_pers_data:
+    path: /my/terms-and-conditions-agreement-pers-data/
+    defaults: { _controller: AppBundle:My:printTermsAndConditionsAgreementPersData }
+
+my_print_terms_and_conditions_offer:
+    path: /my/terms-and-conditions-offer/
+    defaults: { _controller: AppBundle:My:printTermsAndConditionsOffer }
+
+my_print_terms_and_conditions_education_service:
+    path: /my/terms-and-conditions-education-service/
+    defaults: { _controller: AppBundle:My:printTermsAndConditionsEducationService }
+
+my_print_terms_and_conditions_education_service_blank:
+    path: /my/terms-and-conditions-education-service-blank/
+    defaults: { _controller: AppBundle:My:printTermsAndConditionsEducationServiceBlank }
+
+my_treaty_on_non_disclosure:
+    path: /my/treaty-on-non-disclosure/
+    defaults: { _controller: AppBundle:My:treatyOnNonDisclosure }
+
+my_attemtps_package_stat:
+    path: /my/attemtps-package-stat/
+    defaults: { _controller: AppBundle:My:attemptsPackageStat}

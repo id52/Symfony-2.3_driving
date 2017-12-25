@@ -1,0 +1,19 @@
+{% extends "FOSUserBundle::layout.html.twig" %}
+
+{% block fos_user_content %}
+<nav class="path">
+    <a href="{{ path('homepage') }}">{{ 'titles.homepage'|trans }}</a>
+    » {{ title }}
+</nav>
+
+<section class="reg-info">
+    <div class="title"><h1>{{ title }}</h1></div>
+
+    <div class="wid">
+        {{ text|raw }}
+        <div class="bottom links">
+            <a class="bg-green go-link" href="{{ path('homepage') }}">{{ 'buttons.continue'|trans }}</a>
+        </div>
+    </div>
+</section>
+{% endblock fos_user_content %}

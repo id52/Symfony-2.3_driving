@@ -1,0 +1,28 @@
+My\AppBundle\Entity\RegionPlacePrice:
+    type: entity
+    table: region_place_prices
+    id:
+        category:
+            associationKey: true
+        place:
+            associationKey: true
+        condition:
+            associationKey: true
+        with_at:
+            type: boolean
+    fields:
+        active:
+            type: boolean
+        price:
+            type: integer
+            nullable: true
+    manyToOne:
+        category:
+            targetEntity: Category
+            inversedBy: place_prices
+        place:
+            targetEntity: RegionPlace
+            inversedBy: place_prices
+        condition:
+            targetEntity: DrivingConditions
+            inversedBy: region_prices

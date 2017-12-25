@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="{{ app.request.locale }}">
+<head>
+    <title>ДОГОВОР</title>
+    <meta charset="{{ _charset }}">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="content-type" content="text/html;charset=utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <link rel="stylesheet" href="{{ asset('v2/css/print.css') }}">
+
+</head>
+<body>
+
+
+<h1>ДОГОВОР № 111111</h1>
+Имя: {{ app.user.firstName }}<br>
+Фамилия: {{ app.user.lastName }}<br>
+Отчество: {{ app.user.patronymic }}<br>
+
+<h3>Паспортные данные</h3>
+{% if app.user.foreignPassport %}
+    Номер: {{ app.user.foreignPassportNumber }}<br>
+{% else %}
+    Номер: {{ app.user.passportNumber }}<br>
+{% endif %}
+Кем выдан: {{ app.user.passportRovd }}<br>
+Код  подразделения: {{ app.user.passportRovdNumber }}<br>
+Дата выдачи: {{ app.user.passportRovdDate|date('j / n / Y') }} г.<br>
+
+
+<script>
+    window.onload = function() {
+        window.print();
+    };
+</script>
+</body>
+</html>
